@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Subscribe extends Migration
 {
@@ -24,12 +25,24 @@ class Subscribe extends Migration
             ],
             'subTimestamp' => [
                 'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'createdAt' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
             ],
         ]);
         $this->forge->addPrimaryKey('subId');
         $this->forge->addForeignKey('userId', 'User', 'userId', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('creatorId', 'Creator', 'creatorId', 'CASCADE', 'CASCADE');
         $this->forge->createTable('Subscribe');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER SubscribeUpdatedAt BEFORE UPDATE ON Subscribe FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()

@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Donate extends Migration
 {
@@ -37,12 +38,24 @@ class Donate extends Migration
             ],
             'donateTimestamp' => [
                 'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'createdAt' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
             ],
         ]);
         $this->forge->addPrimaryKey('donateId');
         $this->forge->addForeignKey('userId', 'User', 'userId', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('creatorId', 'Creator', 'creatorId', 'CASCADE', 'CASCADE');
         $this->forge->createTable('Donate');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER DonateUpdatedAt BEFORE UPDATE ON Donate FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()

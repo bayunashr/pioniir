@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Content extends Migration
 {
@@ -22,14 +23,13 @@ class Content extends Migration
                 'type' => 'TEXT',
             ],
             'contentStatus' => [
-                'type' => 'INT',
-                'constraint' => 4,
-                'deafult' => 0,
+                'type' => 'ENUM',
+                'constraint' => ['draft', 'publish', 'archive'],
+                'default' => 'draft',
             ],
             'contentPrice' => [
                 'type' => 'INT',
                 'constraint' => 16,
-                'null' => true,
             ],
             'contentPreview' => [
                 'type' => 'VARCHAR',
@@ -46,10 +46,21 @@ class Content extends Migration
                 'constraint' => 16,
                 'default' => 0,
             ],
+            'createdAt' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
+            ],
         ]);
         $this->forge->addPrimaryKey('contentId');
         $this->forge->addForeignKey('creatorId', 'Creator', 'creatorId', 'CASCADE', 'CASCADE');
         $this->forge->createTable('Content');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER ContentUpdatedAt BEFORE UPDATE ON Content FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()

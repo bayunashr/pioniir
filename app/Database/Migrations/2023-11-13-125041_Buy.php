@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class Buy extends Migration
 {
@@ -24,12 +25,24 @@ class Buy extends Migration
             ],
             'buyTimestamp' => [
                 'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'createdAt' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
             ],
         ]);
         $this->forge->addPrimaryKey('buyId');
         $this->forge->addForeignKey('userId', 'User', 'userId', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('contentId', 'Content', 'contentId', 'CASCADE', 'CASCADE');
         $this->forge->createTable('Buy');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER BuyUpdatedAt BEFORE UPDATE ON Buy FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()

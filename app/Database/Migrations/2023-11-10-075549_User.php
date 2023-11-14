@@ -3,6 +3,7 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class User extends Migration
 {
@@ -35,9 +36,20 @@ class User extends Migration
                 'constraint' => ['active', 'ban'],
                 'default'    => 'active',
             ],
+            'createdAt' => [
+                'type' => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
+            ],
         ]);
         $this->forge->addPrimaryKey('userId');
         $this->forge->createTable('User');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER UserUpdatedAt BEFORE UPDATE ON User FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()

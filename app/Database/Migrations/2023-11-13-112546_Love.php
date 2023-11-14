@@ -3,14 +3,15 @@
 namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
-class Like extends Migration
+class Love extends Migration
 {
     public function up()
     {
-        // Create Tabel Like
+        // Create Tabel Love
         $this->forge->addField([
-            'likeId' => [
+            'loveId' => [
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
@@ -28,17 +29,28 @@ class Like extends Migration
                 'constraint' => 36,
                 'null' => true,
             ],
+            'createdAt' => [
+                'type'    => 'TIMESTAMP',
+                'default' => new RawSql('CURRENT_TIMESTAMP'),
+            ],
+            'updatedAt' => [
+                'type'    => 'TIMESTAMP',
+                'null'    => true,
+            ],
         ]);
-        $this->forge->addPrimaryKey('likeId');
+        $this->forge->addPrimaryKey('loveId');
         $this->forge->addForeignKey('userId', 'User', 'userId', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('contentId', 'Content', 'contentId', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('postId', 'Post', 'postId', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('Like');
+        $this->forge->createTable('Love');
+
+        // Create Trigger Updated At
+        $this->db->query("CREATE TRIGGER LoveUpdatedAt BEFORE UPDATE ON Love FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()
     {
-        // Drop Tabel Like
-        $this->forge->dropTable('Like');
+        // Drop Tabel Love
+        $this->forge->dropTable('Love');
     }
 }
