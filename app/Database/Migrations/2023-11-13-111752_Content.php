@@ -41,6 +41,11 @@ class Content extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
+            'contentLike' => [
+                'type' => 'INT',
+                'constraint' => 16,
+                'default' => 0,
+            ],
         ]);
         $this->forge->addPrimaryKey('contentId');
         $this->forge->addForeignKey('creatorId', 'Creator', 'creatorId', 'CASCADE', 'CASCADE');

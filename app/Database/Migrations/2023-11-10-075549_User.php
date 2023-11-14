@@ -31,9 +31,9 @@ class User extends Migration
                 'constraint' => 255,
             ],
             'userStatus' => [
-                'type' => 'INT',
-                'constraint' => 2,
-                'default' => 1,
+                'type'       => 'ENUM',
+                'constraint' => ['active', 'ban'],
+                'default'    => 'active',
             ],
         ]);
         $this->forge->addPrimaryKey('userId');
