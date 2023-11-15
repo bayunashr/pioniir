@@ -8,9 +8,9 @@
     <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
     <meta name="author" content="elemis">
     <title>Pioniir - Creator Homebase</title>
-    <link rel="shortcut icon" href="<?= base_url('') ?>front/img/pioniir.png">
-    <link rel="stylesheet" href="<?= base_url('') ?>front/css/plugins.css">
-    <link rel="stylesheet" href="<?= base_url('') ?>front/css/style.css">
+    <link rel="shortcut icon" href="<?= base_url('') ?>assets/front/img/pioniir.png">
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/plugins.css">
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/style.css">
 </head>
 
 <body>
@@ -21,12 +21,12 @@
                     <div class="navbar-collapse-wrapper bg-white d-flex flex-row flex-nowrap w-100 justify-content-between align-items-center py-3">
                         <div class="navbar-brand w-100">
                             <a href="">
-                                <img class="w-16" src="<?= base_url('') ?>front/img/Pioniir Text.png" alt="" />
+                                <img class="w-16" src="<?= base_url('') ?>assets/front/img/Pioniir Text.png" alt="" />
                             </a>
                         </div>
                         <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                             <div class="offcanvas-header d-lg-none">
-                                <a href=""><img class="w-16" src="<?= base_url('') ?>front/img/Pioniir Text white.png" alt="" /></a>
+                                <a href=""><img class="w-16" src="<?= base_url('') ?>assets/front/img/Pioniir Text white.png" alt="" /></a>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100"></div>
@@ -79,13 +79,13 @@
                 <!-- /.row -->
             </div>
             <!-- /.container -->
-            <figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url('') ?>front/img/Doodle Background.png" alt="" /></figure>
+            <figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url('') ?>assets/front/img/Doodle Background.png" alt="" /></figure>
             <!-- /section -->
             <section class="wrapper bg-light angled lower-end">
                 <div class="container py-14 py-md-16">
                     <div class="row gy-10 gy-md-13 gy-lg-0 align-items-center">
                         <div class="col-md-8 col-lg-5 d-flex position-relative mx-auto" data-cues="slideInDown" data-group="header">
-                            <div class="img-mask"><img src="<?= base_url('') ?>front/img/ilus 2.png" alt="" /></div>
+                            <div class="img-mask"><img src="<?= base_url('') ?>assets/front/img/ilus 2.png" alt="" /></div>
                         </div>
                         <!--/column -->
                         <div class="col-lg-6 offset-lg-1 col-xxl-5 text-center text-lg-start" data-cues="slideInDown" data-group="page-title" data-delay="600">
@@ -98,7 +98,7 @@
                     <!-- /.row -->
                     <div class="row mb-5">
                         <div class="col-md-10 col-xl-8 col-xxl-7 mx-auto text-center">
-                            <img src="<?= base_url('') ?>front/img/icons/lineal/list.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <img src="<?= base_url('') ?>assets/front/img/icons/lineal/list.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
                             <h2 class="display-4 mb-4 px-lg-14">Here are 3 working steps to organize our business projects.
                             </h2>
                         </div>
@@ -178,7 +178,7 @@
                     <div class="row gx-lg-8 gx-xl-0 align-items-center">
                         <div class="col-md-5 col-lg-5 col-xl-4 offset-xl-1 d-none d-md-flex position-relative align-self-end">
                             <div class="shape rounded-circle bg-pale-primary rellax w-21 h-21 d-md-none d-lg-block" data-rellax-speed="1" style="top: 7rem; left: 1rem"></div>
-                            <figure><img src="<?= base_url('') ?>front/img/photos/co1.png" srcset="<?= base_url('') ?>front/img/photos/co1@2x.png 2x" alt=""></figure>
+                            <figure><img src="<?= base_url('') ?>assets/front/img/photos/co1.png" srcset="<?= base_url('') ?>assets/front/img/photos/co1@2x.png 2x" alt=""></figure>
                         </div>
                         <!--/column -->
                         <div class="col-md-7 col-lg-6 col-xl-6 col-xxl-5 offset-xl-1">
@@ -245,7 +245,7 @@
                 <div class="container py-14 py-md-16">
                     <div class="row mb-3">
                         <div class="col-md-10 col-xl-9 col-xxl-7 mx-auto text-center">
-                            <img src="<?= base_url('') ?>front/img/icons/lineal/team.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <img src="<?= base_url('') ?>assets/front/img/icons/lineal/team.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
                             <h2 class="display-4 mb-3 px-lg-14">Save your time and money by choosing our professional team.
                             </h2>
                         </div>
@@ -262,7 +262,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te1.jpg" srcset="<?= base_url('') ?>front/img/avatars/te1@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te1.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te1@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Coriss Ambady</h4>
                                                     <div class="meta mb-2">Financial Analyst</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -284,7 +284,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te2.jpg" srcset="<?= base_url('') ?>front/img/avatars/te2@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te2.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te2@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Cory Zamora</h4>
                                                     <div class="meta mb-2">Marketing Specialist</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -306,7 +306,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te3.jpg" srcset="<?= base_url('') ?>front/img/avatars/te3@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te3.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te3@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Nikolas Brooten</h4>
                                                     <div class="meta mb-2">Sales Manager</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -328,7 +328,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te4.jpg" srcset="<?= base_url('') ?>front/img/avatars/te4@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te4.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te4@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Jackie Sanders</h4>
                                                     <div class="meta mb-2">Investment Planner</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -350,7 +350,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te5.jpg" srcset="<?= base_url('') ?>front/img/avatars/te5@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te5.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te5@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Laura Widerski</h4>
                                                     <div class="meta mb-2">Sales Specialist</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -372,7 +372,7 @@
                                         <div class="item-inner">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>front/img/avatars/te6.jpg" srcset="<?= base_url('') ?>front/img/avatars/te6@2x.jpg 2x" alt="" />
+                                                    <img class="rounded-circle w-15 mb-4" src="<?= base_url('') ?>assets/front/img/avatars/te6.jpg" srcset="<?= base_url('') ?>assets/front/img/avatars/te6@2x.jpg 2x" alt="" />
                                                     <h4 class="mb-1">Tina Geller</h4>
                                                     <div class="meta mb-2">Financial Analyst</div>
                                                     <p class="mb-2">Fermentum massa justo sit amet risus morbi leo.</p>
@@ -408,25 +408,25 @@
                         <div class="col-xl-10 mx-auto">
                             <div class="row align-items-center counter-wrapper gy-6 text-center">
                                 <div class="col-md-3">
-                                    <img src="<?= base_url('') ?>front/img/icons/lineal/check.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
+                                    <img src="<?= base_url('') ?>assets/front/img/icons/lineal/check.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
                                     <h3 class="counter">7518</h3>
                                     <p>Completed Projects</p>
                                 </div>
                                 <!--/column -->
                                 <div class="col-md-3">
-                                    <img src="<?= base_url('') ?>front/img/icons/lineal/user.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
+                                    <img src="<?= base_url('') ?>assets/front/img/icons/lineal/user.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
                                     <h3 class="counter">3472</h3>
                                     <p>Satisfied Customers</p>
                                 </div>
                                 <!--/column -->
                                 <div class="col-md-3">
-                                    <img src="<?= base_url('') ?>front/img/icons/lineal/briefcase-2.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
+                                    <img src="<?= base_url('') ?>assets/front/img/icons/lineal/briefcase-2.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
                                     <h3 class="counter">2184</h3>
                                     <p>Expert Employees</p>
                                 </div>
                                 <!--/column -->
                                 <div class="col-md-3">
-                                    <img src="<?= base_url('') ?>front/img/icons/lineal/award-2.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
+                                    <img src="<?= base_url('') ?>assets/front/img/icons/lineal/award-2.svg" class="svg-inject icon-svg icon-svg-lg text-primary mb-3" alt="" />
                                     <h3 class="counter">4523</h3>
                                     <p>Awards Won</p>
                                 </div>
@@ -446,11 +446,11 @@
                     <div class="row gx-md-8 gx-xl-12 gy-10 align-items-center">
                         <div class="col-md-8 col-lg-6 offset-lg-0 col-xl-5 offset-xl-1 position-relative">
                             <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1" style="top: -2rem; left: -1.4rem;"></div>
-                            <figure class="rounded"><img src="<?= base_url('') ?>front/img/photos/about4.jpg" srcset="<?= base_url('') ?>front/img/photos/about4@2x.jpg 2x" alt=""></figure>
+                            <figure class="rounded"><img src="<?= base_url('') ?>assets/front/img/photos/about4.jpg" srcset="<?= base_url('') ?>assets/front/img/photos/about4@2x.jpg 2x" alt=""></figure>
                         </div>
                         <!--/column -->
                         <div class="col-lg-6">
-                            <img src="<?= base_url('') ?>front/img/icons/lineal/telemarketer.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <img src="<?= base_url('') ?>assets/front/img/icons/lineal/telemarketer.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
                             <h2 class="display-4 mb-8">Convinced yet? Let's make something great together.</h2>
                             <div class="d-flex flex-row">
                                 <div>
@@ -493,7 +493,7 @@
                 <div class="container py-14 py-md-16 text-center">
                     <div class="row">
                         <div class="col-md-9 col-lg-7 col-xl-7 mx-auto text-center">
-                            <img src="<?= base_url('') ?>front/img/icons/lineal/puzzle-2.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
+                            <img src="<?= base_url('') ?>assets/front/img/icons/lineal/puzzle-2.svg" class="svg-inject icon-svg icon-svg-md mb-4" alt="" />
                             <h2 class="display-4 mb-3">Join Our Community</h2>
                             <p class="lead fs-lg mb-6 px-xl-10 px-xxl-15">We are trusted by over 5000+ clients. Join them by
                                 using our services and grow your business.</p>
@@ -541,7 +541,7 @@
             <div class="row gy-6 gy-lg-0">
                 <div class="col-lg-4">
                     <div class="widget">
-                        <img class="mb-4" src="<?= base_url('') ?>front/img/logo-light.png" srcset="<?= base_url('') ?>front/img/logo-light@2x.png 2x" alt="" />
+                        <img class="mb-4" src="<?= base_url('') ?>assets/front/img/logo-light.png" srcset="<?= base_url('') ?>assets/front/img/logo-light@2x.png 2x" alt="" />
                         <p class="mb-4">© 2023 Sandbox. All rights reserved.</p>
                         <nav class="nav social social-white">
                             <a href="#"><i class="uil uil-twitter"></i></a>
@@ -601,8 +601,8 @@
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
     </div>
-    <script src="<?= base_url('') ?>front/js/plugins.js"></script>
-    <script src="<?= base_url('') ?>front/js/theme.js"></script>
+    <script src="<?= base_url('') ?>assets/front/js/plugins.js"></script>
+    <script src="<?= base_url('') ?>assets/front/js/theme.js"></script>
 </body>
 
 </html>
