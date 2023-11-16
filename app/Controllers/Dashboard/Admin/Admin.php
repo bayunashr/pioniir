@@ -15,4 +15,9 @@ class Admin extends BaseController
     {
         return view('dashboard/admin/user');
     }
+
+    public function creator(): string
+    {
+        return view('dashboard/admin/creator');
+    }
 }

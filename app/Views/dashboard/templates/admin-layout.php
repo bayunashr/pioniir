@@ -28,7 +28,7 @@
     <!-- Stylesheets -->
     <!-- OneUI framework -->
     <link rel="stylesheet" id="css-main" href="<?= base_url('') ?>assets/dashboard/css/oneui.min.css">
-
+    <?= $this->renderSection('header-addons') ?>
     <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
     <!-- <link rel="stylesheet" id="css-theme" href="assets/dashboard/css/themes/amethyst.min.css"> -->
     <!-- END Stylesheets -->
@@ -81,7 +81,7 @@
 
         'sidebar-dark page-header-dark dark-mode'   Enable dark mode (light sidebar/header is not supported with dark mode)
     -->
-    <div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-boxed">
+    <div id="page-container" class="sidebar-o sidebar-mini sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-boxed">
       <!-- Side Overlay-->
       <aside id="side-overlay">
         <!-- Side Header -->
@@ -625,70 +625,70 @@
           <div class="content-side">
             <ul class="nav-main">
               <li class="nav-main-item">
-                <a class="nav-main-link active" href="<?= base_url('admin/dashboard') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'dashboard' ? 'active' : '' ?>" href="<?= base_url('admin/dashboard') ?>">
                   <i class="nav-main-link-icon si si-speedometer"></i>
                   <span class="nav-main-link-name">Dashboard</span>
                 </a>
               </li>
               <li class="nav-main-heading">Human Resources</li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/user') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'user' ? 'active' : '' ?>" href="<?= base_url('admin/user') ?>">
                   <i class="nav-main-link-icon si si-user"></i>
                   <span class="nav-main-link-name">User</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/creator') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'creator' ? 'active' : '' ?>" href="<?= base_url('admin/creator') ?>">
                   <i class="nav-main-link-icon si si-ghost"></i>
                   <span class="nav-main-link-name">Creator</span>
                 </a>
               </li>
               <li class="nav-main-heading">Content Resources</li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/content') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'content' ? 'active' : '' ?>" href="<?= base_url('admin/content') ?>">
                   <i class="nav-main-link-icon si si-trophy"></i>
                   <span class="nav-main-link-name">Content</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/post') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'post' ? 'active' : '' ?>" href="<?= base_url('admin/post') ?>">
                   <i class="nav-main-link-icon si si-notebook"></i>
                   <span class="nav-main-link-name">Post</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/comment') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'comment' ? 'active' : '' ?>" href="<?= base_url('admin/comment') ?>">
                   <i class="nav-main-link-icon si si-speech"></i>
                   <span class="nav-main-link-name">Comment</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/love') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'love' ? 'active' : '' ?>" href="<?= base_url('admin/love') ?>">
                   <i class="nav-main-link-icon si si-heart"></i>
                   <span class="nav-main-link-name">Love</span>
                 </a>
               </li>
               <li class="nav-main-heading">Transaction Resources</li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/donate') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'donate' ? 'active' : '' ?>" href="<?= base_url('admin/donate') ?>">
                   <i class="nav-main-link-icon si si-present"></i>
                   <span class="nav-main-link-name">Donate</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/subscribe') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'subscribe' ? 'active' : '' ?>" href="<?= base_url('admin/subscribe') ?>">
                   <i class="nav-main-link-icon si si-disc"></i>
                   <span class="nav-main-link-name">Subscribe</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/buy') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'buy' ? 'active' : '' ?>" href="<?= base_url('admin/buy') ?>">
                   <i class="nav-main-link-icon si si-bag"></i>
                   <span class="nav-main-link-name">Buy</span>
                 </a>
               </li>
               <li class="nav-main-item">
-                <a class="nav-main-link" href="<?= base_url('admin/milestone') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'milestone' ? 'active' : '' ?>" href="<?= base_url('admin/milestone') ?>">
                   <i class="nav-main-link-icon si si-rocket"></i>
                   <span class="nav-main-link-name">Milestone</span>
                 </a>
@@ -930,18 +930,9 @@
     </div>
     <!-- END Page Container -->
 
-    <!--
-        OneUI JS
+    <!-- JS Script -->
+    <?= $this->renderSection('footer-addons') ?>
+    <!-- END JS Script -->
 
-        Core libraries and functionality
-        webpack is putting everything together at assets/_js/main/app.js
-    -->
-    <script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
-
-    <!-- Page JS Plugins -->
-    <script src="<?= base_url('') ?>assets/dashboard/js/plugins/chart.js/chart.umd.js"></script>
-
-    <!-- Page JS Code -->
-    <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_pages_dashboard.min.js"></script>
   </body>
 </html>

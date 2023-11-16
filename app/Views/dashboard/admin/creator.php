@@ -20,10 +20,12 @@
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
-                    <th style="width: 20%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Name</th>
-                    <th class="d-none d-sm-table-cell" style="width: 35%;">Email</th>
-                    <th style="width: 10%;">Status</th>
+                    <th style="width: 10%;">Username</th>
+                    <th class="d-none d-sm-table-cell" style="width: 10%;">Alias</th>
+                    <th class="d-none d-sm-table-cell" style="width: 20%;">Tag</th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">Sub Price</th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">Description</th>
+                    <th style="width: 10%;">Balance</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,13 +33,19 @@
                     <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="click" data-bs-placement="top" title="36c2ade6-5c02-4fd7-8995-ac7fc95378b1">1</button></td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
                     <td class="d-none d-sm-table-cell fs-sm">
-                      David Fuller
+                      dvfuller
                     </td>
                     <td class="d-none d-sm-table-cell fs-sm">
-                      client1<span class="text-muted">@example.com</span>
+                      3D Designer, 3D Artist
                     </td>
-                    <td>
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Banned</span>
+                    <td class="d-none d-sm-table-cell fs-sm">
+                      50.000
+                    </td>
+                    <td class="d-none d-sm-table-cell fs-sm">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus explicabo doloribus consectetur sit assumenda ad in minus magni harum aliquid. Praesentium ut accusantium quo nihil rerum odio veritatis illum sed!
+                    </td>
+                    <td class="d-none d-sm-table-cell text-center">
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">1.500.000</span>
                     </td>
                   </tr>
                 </tbody>

@@ -201,3 +201,10 @@
           <!-- END Page Content -->
   </main>
 <?= $this->endsection() ?>
+
+<?= $this->section('footer-addons') ?>
+    <script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
+
+    <!-- Page JS Code -->
+    <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_pages_dashboard.min.js"></script>
+<?= $this->endsection() ?>
