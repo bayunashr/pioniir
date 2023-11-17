@@ -20,28 +20,20 @@
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
-                    <th style="width: 20%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 25%;">Name</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Avatar</th>
-                    <th style="width: 10%;">Status</th>
+                    <th style="width: 15%;">Username</th>
+                    <th class="d-none d-sm-table-cell" style="width: 20%;">Comment On</th>
+                    <th style="width: 60%;">Comment</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
-                    <td class="fw-semibold fs-sm">dvfuller</td>
-                    <td class="d-none d-sm-table-cell fs-sm">
-                      David Fuller
-                    </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
-                      client1<span class="text-muted">@example.com</span>
+                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Comment ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="fw-semibold fs-sm">johnkramer</td>
+                    <td class="d-none d-sm-table-cell text-center">
+                      <a href="<?= base_url('') ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Post - Hello Lad, I'm back!</span></a>
                     </td>
                     <td class="fs-sm">
-                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Avatar" data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url('') ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
-                    </td>
-                    <td>
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Banned</span>
+                      Glad youre back, hoping for new content in a few weeks!!!
                     </td>
                   </tr>
                 </tbody>

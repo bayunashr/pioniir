@@ -22,15 +22,16 @@
                     <th class="text-center" style="width: 5%;">NO</th>
                     <th style="width: 10%;">Username</th>
                     <th class="d-none d-sm-table-cell" style="width: 10%;">Alias</th>
-                    <th class="d-none d-sm-table-cell" style="width: 20%;">Tag</th>
+                    <th class="d-none d-sm-table-cell" style="width: 25%;">Tag</th>
                     <th class="d-none d-sm-table-cell" style="width: 15%;">Sub Price</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Description</th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">Description</th>
+                    <th class="d-none d-sm-table-cell" style="width: 10%;">Banner</th>
                     <th style="width: 10%;">Balance</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="tooltip" data-bs-trigger="click" data-bs-placement="top" title="36c2ade6-5c02-4fd7-8995-ac7fc95378b1">1</button></td>
+                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
                     <td class="d-none d-sm-table-cell fs-sm">
                       dvfuller
@@ -42,9 +43,12 @@
                       50.000
                     </td>
                     <td class="d-none d-sm-table-cell fs-sm">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus explicabo doloribus consectetur sit assumenda ad in minus magni harum aliquid. Praesentium ut accusantium quo nihil rerum odio veritatis illum sed!
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="left" title="Description" data-bs-content="This is example content. You can put a description or more info here."><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="fs-sm">
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Banner" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                    </td>
+                    <td class="fs-sm text-center">
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">1.500.000</span>
                     </td>
                   </tr>

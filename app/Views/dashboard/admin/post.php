@@ -20,28 +20,28 @@
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
-                    <th style="width: 20%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 25%;">Name</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Avatar</th>
-                    <th style="width: 10%;">Status</th>
+                    <th style="width: 25%;">Creator</th>
+                    <th style="width: 40%;">Title</th>
+                    <th class="d-none d-sm-table-cell" style="width: 10%;">Post</th>
+                    <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
+                    <th class="d-none d-sm-table-cell" style="width: 10%;">Like</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Post ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
-                    <td class="d-none d-sm-table-cell fs-sm">
-                      David Fuller
-                    </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
-                      client1<span class="text-muted">@example.com</span>
-                    </td>
                     <td class="fs-sm">
-                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Avatar" data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url('') ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                      Hello Lad, I'm Back!
                     </td>
-                    <td>
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Banned</span>
+                    <td class="d-none d-sm-table-cell fs-sm">
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Post" data-bs-content="<div><p class='lead'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et consequatur ab natus suscipit tenetur quas, magni, molestias saepe ratione cumque accusantium corporis necessitatibus quod ut explicabo nulla nihil, adipisci tempora?</p></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                    </td>
+                    <td class="d-none d-sm-table-cell text-center">
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Draft</span>
+                    </td>
+                    <td class="d-none d-sm-table-cell fs-sm">
+                      112
                     </td>
                   </tr>
                 </tbody>
