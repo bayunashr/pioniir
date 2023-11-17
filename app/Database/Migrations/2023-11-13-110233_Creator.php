@@ -43,6 +43,11 @@ class Creator extends Migration
                 'constraint' => 16,
                 'default' => 0,
             ],
+            'creatorBanner' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
             'createdAt' => [
                 'type'    => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),

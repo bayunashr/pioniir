@@ -19,6 +19,10 @@ class Post extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
+            'postTitle' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'postValue' => [
                 'type' => 'TEXT',
             ],

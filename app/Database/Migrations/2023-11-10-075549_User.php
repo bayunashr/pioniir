@@ -36,6 +36,11 @@ class User extends Migration
                 'constraint' => ['active', 'ban'],
                 'default'    => 'active',
             ],
+            'userAvatar' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
             'createdAt' => [
                 'type' => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),

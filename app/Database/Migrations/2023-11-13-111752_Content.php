@@ -19,6 +19,10 @@ class Content extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
+            'contentTitle' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+            ],
             'contentValue' => [
                 'type' => 'TEXT',
             ],
