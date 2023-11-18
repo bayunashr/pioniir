@@ -16,31 +16,33 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 25%;">Creator</th>
                     <th style="width: 40%;">Title</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Post</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Like</th>
+                    <th style="width: 10%;">Post</th>
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 10%;">Like</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Post ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                  <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
                     <td class="fs-sm">
                       Hello Lad, I'm Back!
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Post" data-bs-content="<div><p class='lead'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et consequatur ab natus suscipit tenetur quas, magni, molestias saepe ratione cumque accusantium corporis necessitatibus quod ut explicabo nulla nihil, adipisci tempora?</p></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="text-center">
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning">Draft</span>
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       112
                     </td>
                   </tr>

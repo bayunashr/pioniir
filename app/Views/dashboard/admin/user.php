@@ -16,29 +16,31 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 20%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 25%;">Name</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Avatar</th>
+                    <th style="width: 25%;">Name</th>
+                    <th style="width: 30%;">Email</th>
+                    <th style="width: 10%;">Avatar</th>
                     <th style="width: 10%;">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       David Fuller
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       client1<span class="text-muted">@example.com</span>
                     </td>
                     <td class="fs-sm">
-                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Avatar" data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url('') ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top" title="Avatar" data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url('') ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td>
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Banned</span>

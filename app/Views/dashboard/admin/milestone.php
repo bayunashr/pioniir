@@ -16,27 +16,29 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 15%;">Creator</th>
-                    <th class="d-none d-sm-table-cell"style="width: 20%;">Milestone</th>
+                    <th style="width: 20%;">Milestone</th>
                     <th style="width: 45%;">Progress</th>
-                    <th class="d-none d-sm-table-cell" style="width: 15%;">Status</th>
+                    <th style="width: 15%;">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Buy ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class=" fs-sm">
                       Upgrade RIG
                     </td>
                     <td class="fs-sm">
                       15.000 / 1.000.000
                     </td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="text-center">
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Publish</span>
                     </td>
                   </tr>

@@ -16,43 +16,45 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 10%;">Creator</th>
                     <th style="width: 40%;">Title</th>
-                    <th class="d-none d-sm-table-cell" style="width: 5%;">Content</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Status</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Price</th>
-                    <th class="d-none d-sm-table-cell" style="width: 5%;">Preview</th>
-                    <th class="d-none d-sm-table-cell" style="width: 5%;">Download</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Like</th>
+                    <th style="width: 5%;">Content</th>
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 10%;">Price</th>
+                    <th style="width: 5%;">Preview</th>
+                    <th style="width: 5%;">Download</th>
+                    <th style="width: 10%;">Like</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
                     <td class="fs-sm">
                       Dawnguard 3D Armor Set
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="bottom" title="Content" data-bs-content="<div><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''><br><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et consequatur ab natus suscipit tenetur quas, magni, molestias saepe ratione cumque accusantium corporis necessitatibus quod ut explicabo nulla nihil, adipisci tempora?</p></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="text-center">
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Publish</span>
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       20.000
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Preview Image" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="text-center">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Download Image" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       316
                     </td>
                   </tr>

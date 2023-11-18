@@ -16,33 +16,35 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 10%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Alias</th>
-                    <th class="d-none d-sm-table-cell" style="width: 25%;">Tag</th>
-                    <th class="d-none d-sm-table-cell" style="width: 15%;">Sub Price</th>
-                    <th class="d-none d-sm-table-cell" style="width: 15%;">Description</th>
-                    <th class="d-none d-sm-table-cell" style="width: 10%;">Banner</th>
+                    <th style="width: 10%;">Alias</th>
+                    <th style="width: 25%;">Tag</th>
+                    <th style="width: 15%;">Sub Price</th>
+                    <th style="width: 15%;">Description</th>
+                    <th style="width: 10%;">Banner</th>
                     <th style="width: 10%;">Balance</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Content ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                    <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">dvfuller</td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       dvfuller
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       3D Designer, 3D Artist
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       50.000
                     </td>
-                    <td class="d-none d-sm-table-cell fs-sm">
+                    <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="left" title="Description" data-bs-content="This is example content. You can put a description or more info here."><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td class="fs-sm">

@@ -16,20 +16,22 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+              <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
                     <th class="text-center" style="width: 5%;">NO</th>
+                    <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 20%;">Username</th>
-                    <th class="d-none d-sm-table-cell" style="width: 35%;">Love On</th>
-                    <th style="width: 50%;">Timestamp</th>
+                    <th style="width: 35%;">Love On</th>
+                    <th style="width: 20%;">Timestamp</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="text-center fs-sm"><button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="right" title="Love ID" data-bs-content="0e4d473a-851e-4b9d-a9a4-63aec3850f94">1</button></td>
+                  <td class="text-center fs-sm">1</td>
+                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
                     <td class="fw-semibold fs-sm">jognkramer</td>
-                    <td class="d-none d-sm-table-cell text-center">
+                    <td class="fs-sm">
                       <a href="<?= base_url('') ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Post - Hello Lad, I'm back!</span></a>
                     </td>
                     <td class="fs-sm">
