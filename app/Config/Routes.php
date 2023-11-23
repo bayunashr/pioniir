@@ -21,3 +21,9 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
     $routes->get('buy', 'Admin::buy');
     $routes->get('milestone', 'Admin::milestone');
 });
+
+// Creator Dashboard Routes
+$routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
+    $routes->get('/', 'Dashboard::index');
+    $routes->get('content', 'Content::index');
+});
