@@ -3,14 +3,19 @@
 namespace App\Controllers\Dashboard\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\DonateModel;
 
 class Admin extends BaseController
 {
-    public function index(): string
+    public function index()
     {
+        $donateModel = new DonateModel;
+
         $data = [
-            'title' => 'Dashboard - Pioniir Admin'
+            'title' => 'Dashboard - Pioniir Admin',
+            'donate' => $donateModel->countAllResults()
         ];
+
         return view('dashboard/admin/dashboard', $data);
     }
 
@@ -62,11 +67,15 @@ class Admin extends BaseController
         return view('dashboard/admin/love', $data);
     }
 
-    public function donate(): string
+    public function donate()
     {
+        $donateModel = new DonateModel;
+
         $data = [
-            'title' => 'Donate - Pioniir Admin'
+            'title' => 'Donate - Pioniir Admin',
+            'donate' => $donateModel->selectAll()
         ];
+
         return view('dashboard/admin/donate', $data);
     }
 
