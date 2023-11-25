@@ -1,67 +1,61 @@
-# CodeIgniter 4 Application Starter
+<br />
+<div align="center">
+  <a href="https://github.com/bayunashr/pioniir">
+    <img src="https://i.ibb.co/1KWfv9m/pioniir.png" alt="Logo" width="100" height="100">
+  </a>
 
-## What is CodeIgniter?
+  <h3 align="center">Pioniir</h3>
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+  <p align="center">
+    Fan-Based Funding Platform, Written With CodeIgniter 4
+    <br />
+  </p>
+</div>
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+<div align="center">
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![MIT License][license-shield]][license-url]
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+</div>
 
-## Installation & updates
+## Getting Started
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+To get a local copy up and running follow these simple example steps.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/bayunashr/pioniir.git && cd pioniir
+   ```
+2. Install dependency
+   ```sh
+   composer install
+   ```
+3. Clone `env.example` and rename to `.env`
+4. Adjust the `.env` as you need
+   ```env
+   CI_ENVIRONMENT = development
+   app.baseURL = 127.0.0.1
+   database.default.hostname = 127.0.0.1
+   database.default.database = pioniir
+   database.default.username = user
+   database.default.password = password
+   database.default.DBDriver = MySQLi
+   database.default.port = 3306
+   ```
+5. Run database migration and seed
+   ```sh
+   php spark run:migration-seed
+   ```
+6. Run the app, by default `php spark serve` run on port 8080
+   ```sh
+   php spark serve
+   ```
 
-## Setup
-
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
-
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> **Warning**
-> The end of life date for PHP 7.4 was November 28, 2022. If you are
-> still using PHP 7.4, you should upgrade immediately. The end of life date
-> for PHP 8.0 will be November 26, 2023.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+[contributors-shield]: https://img.shields.io/github/contributors/bayunashr/pioniir.svg?style=for-the-badge
+[contributors-url]: https://github.com/bayunashr/pioniir/graphs/contributors
+[stars-shield]: https://img.shields.io/github/stars/bayunashr/pioniir.svg?style=for-the-badge
+[stars-url]: https://github.com/bayunashr/pioniir/stargazers
+[license-shield]: https://img.shields.io/github/license/bayunashr/pioniir.svg?style=for-the-badge
+[license-url]: https://github.com/bayunashr/pioniir/blob/master/LICENSE.txt
