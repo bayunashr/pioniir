@@ -102,4 +102,12 @@ class Admin extends BaseController
         ];
         return view('dashboard/admin/milestone', $data);
     }
+
+    public function withdraw(): string
+    {
+        $data = [
+            'title' => 'Withdraw - Pioniir Admin'
+        ];
+        return view('dashboard/admin/withdraw', $data);
+    }
 }

@@ -625,7 +625,7 @@
           <div class="content-side">
             <ul class="nav-main">
               <li class="nav-main-item">
-                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'dashboard' ? 'active' : '' ?>" href="<?= base_url('admin/dashboard') ?>">
+                <a class="nav-main-link <?= current_url(true)->getSegment(1) == 'admin' && current_url(true)->getSegment(2) == '' ? 'active' : '' ?>" href="<?= base_url('admin') ?>">
                   <i class="nav-main-link-icon si si-speedometer"></i>
                   <span class="nav-main-link-name">Dashboard</span>
                 </a>
@@ -691,6 +691,12 @@
                 <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'milestone' ? 'active' : '' ?>" href="<?= base_url('admin/milestone') ?>">
                   <i class="nav-main-link-icon si si-rocket"></i>
                   <span class="nav-main-link-name">Milestone</span>
+                </a>
+              </li>
+              <li class="nav-main-item">
+                <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'withdraw' ? 'active' : '' ?>" href="<?= base_url('admin/withdraw') ?>">
+                  <i class="nav-main-link-icon si si-wallet"></i>
+                  <span class="nav-main-link-name">Withdraw</span>
                 </a>
               </li>
             </ul>

@@ -9,7 +9,7 @@ $routes->get('/', 'Home::index');
 
 // Super Routes
 $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], function ($routes) {
-    $routes->get('dashboard', 'Admin::index');
+    $routes->get('/', 'Admin::index');
     $routes->get('user', 'Admin::user');
     $routes->get('creator', 'Admin::creator');
     $routes->get('content', 'Admin::content');
@@ -20,6 +20,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
     $routes->get('subscribe', 'Admin::subscribe');
     $routes->get('buy', 'Admin::buy');
     $routes->get('milestone', 'Admin::milestone');
+    $routes->get('withdraw', 'Admin::withdraw');
 });
 
 // Creator Dashboard Routes
