@@ -28,5 +28,6 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
 // Creator Dashboard Routes
 $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
+    $routes->get('profile/creator', 'Profile::index');
     $routes->get('content', 'Content::index');
 });
