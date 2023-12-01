@@ -28,7 +28,7 @@ class Content extends Migration
             ],
             'contentStatus' => [
                 'type' => 'ENUM',
-                'constraint' => ['draft', 'publish', 'archive'],
+                'constraint' => ['draft', 'publish', 'archive', 'ban'],
                 'default' => 'draft',
             ],
             'contentPrice' => [

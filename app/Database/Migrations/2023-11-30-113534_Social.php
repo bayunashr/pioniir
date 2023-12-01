@@ -5,13 +5,13 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 use CodeIgniter\Database\RawSql;
 
-class Post extends Migration
+class Social extends Migration
 {
     public function up()
     {
-        // Create Tabel Post
+        // Create Tabel Social
         $this->forge->addField([
-            'postId' => [
+            'socialId' => [
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
@@ -19,22 +19,13 @@ class Post extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
-            'postTitle' => [
+            'socialMedia' => [
+                'type' => 'ENUM',
+                'constraint' => ['Facebook', 'Twitter', 'Instagram', 'Tiktok', 'Youtube', 'Twitch', 'Discord', 'Website'],
+            ],
+            'socialLink' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
-            ],
-            'postValue' => [
-                'type' => 'TEXT',
-            ],
-            'postStatus' => [
-                'type' => 'ENUM',
-                'constraint' => ['draft', 'publish', 'archive', 'ban'],
-                'default' => 'draft',
-            ],
-            'postLike' => [
-                'type' => 'INT',
-                'constraint' => 16,
-                'default' => 0,
             ],
             'createdAt' => [
                 'type'    => 'TIMESTAMP',
@@ -45,17 +36,17 @@ class Post extends Migration
                 'null'    => true,
             ],
         ]);
-        $this->forge->addPrimaryKey('postId');
+        $this->forge->addPrimaryKey('socialId');
         $this->forge->addForeignKey('creatorId', 'Creator', 'creatorId', 'CASCADE', 'CASCADE');
-        $this->forge->createTable('Post');
+        $this->forge->createTable('Social');
 
         // Create Trigger Updated At
-        $this->db->query("CREATE TRIGGER PostUpdatedAt BEFORE UPDATE ON Post FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
+        $this->db->query("CREATE TRIGGER SocialUpdatedAt BEFORE UPDATE ON Social FOR EACH ROW SET NEW.updatedAt = CURRENT_TIMESTAMP");
     }
 
     public function down()
     {
-        // Drop Tabel Post
-        $this->forge->dropTable('Post');
+        // Drop Tabel Social
+        $this->forge->dropTable('Social');
     }
 }

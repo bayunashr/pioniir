@@ -19,5 +19,7 @@ class GroupSeeder extends Seeder
         $this->call('MilestoneSeeder');
         $this->call('CommentSeeder');
         $this->call('WithdrawSeeder');
+        $this->call('SocialSeeder');
+        $this->call('AdminSeeder');
     }
 }
