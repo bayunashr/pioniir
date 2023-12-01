@@ -37,7 +37,7 @@
                             <ul class="navbar-nav flex-row align-items-center ms-auto">
                                 <li class="nav-item"><a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search"><i class="uil uil-search"></i></a></li>
                                 <li class="nav-item">
-                                    <a onMouseOver="this.style.background='#333F52'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='black'" href="" class=" btn btn-sm btn-outline-navy rounded-pill">Get Started</a>
+                                    <a onMouseOver="this.style.background='#333F52'; this.style.color='white'" onmouseout="this.style.background='white'; this.style.color='black'" href="<?=base_url('login')?>" class=" btn btn-sm btn-outline-navy rounded-pill">Get Started</a>
                                 </li>
                             </ul>
                             <!-- /.navbar-nav -->

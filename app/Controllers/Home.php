@@ -9,3 +9,5 @@ class Home extends BaseController
         return view('front/home');
     }
 }
+
+
