@@ -13,53 +13,45 @@
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">Manage Your Post</h3>
+                <h3 class="block-title">My Balance</h3>
             </div>
             <div class="block-content block-content-full">
-                <a href="<?= base_url('dashboard/post/add') ?>" class="btn btn-sm btn-outline-secondary mb-4"><i class="nav-main-link-icon fa fa-plus"></i> Add Post</a>
+                <p class="fw-bold h3">Rp. 1.000.000</p>
+                <button type="button" class="btn btn-sm btn-outline-secondary btn-sm push" data-bs-toggle="modal" data-bs-target="#modal-block-vcenter"><i class="nav-main-link-icon fa fa-wallet"></i> Tarik Saldo</button>
                 <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <p class="fw-bold h3 mt-4">Riwayat Penarikan</p>
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5%;">NO</th>
-                            <th>Title</th>
-                            <th>Like</th>
+                            <th>Tanggal</th>
+                            <th>Jumlah</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="text-center fs-sm">1</td>
-                            <td class="fw-semibold fs-sm">Introduction</td>
-                            <td class="fs-sm">12</td>
+                            <td class="fw-semibold fs-sm">21/11/2023</td>
+                            <td class="fs-sm">100000</td>
                             <td class="fs-sm">
-                                <!-- Pilih salah satu -->
                                 <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                                    <span class="badge bg-success"><i class="fa fa-check"></i> Success</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-info-circle"></i> Pending</span> &nbsp;
+                                    <span class="badge bg-danger"><i class="fa fa-exclamation-circle"></i> Fail</span>
                                 </h5>
-                            </td>
-                            <td class="fs-sm">
-                                <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center fs-sm">2</td>
-                            <td class="fw-semibold fs-sm">Apa Kabar?</td>
-                            <td class="fs-sm">12</td>
+                            <td class="fw-semibold fs-sm">19/09/2023</td>
+                            <td class="fs-sm">100000</td>
                             <td class="fs-sm">
                                 <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                                    <span class="badge bg-success"><i class="fa fa-check"></i> Success</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-info-circle"></i> Pending</span> &nbsp;
+                                    <span class="badge bg-danger"><i class="fa fa-exclamation-circle"></i> Fail</span>
                                 </h5>
-                            </td>
-                            <td class="fs-sm">
-                                <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -69,6 +61,38 @@
     </div>
     <!-- END Page Content -->
 </main>
+
+<div class="modal" id="modal-block-vcenter" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded block-transparent mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Tarik Saldo</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <form action="" method="post">
+                    <div class="block-content fs-sm">
+                        <div class="mb-4">
+                            <label class="form-label" for="jumlah">Jumlah Saldo</label>
+                            <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Saldo">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="pass">User Password</label>
+                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-end bg-body">
+                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?= $this->endsection() ?>
 
 <?= $this->section('footer-addons') ?>

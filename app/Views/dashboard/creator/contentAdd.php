@@ -36,6 +36,14 @@
                         <!-- CKEditor Container -->
                         <textarea id="js-ckeditor" name="postValue">Tulis sesuatu, masukkan gambar, sisipkan tautan.....</textarea>
                     </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="postStatus">Status</label>
+                        <select class="form-select" id="postStatus" name="postStatus">
+                            <option value="publish">Publish</option>
+                            <option value="draft">Draft</option>
+                            <option value="archive">Archive</option>
+                        </select>
+                    </div>
                 </form>
                 <button type="submit" class="btn btn-primary mt-2" data-bs-dismiss="modal">Submit</button>
             </div>

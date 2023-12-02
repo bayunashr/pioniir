@@ -93,6 +93,12 @@
             </li>
             <li class="nav-main-heading">Transaction</li>
             <li class="nav-main-item">
+              <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'balance' ? 'active' : '' ?>" href="<?= base_url('dashboard/balance') ?>">
+                <i class="nav-main-link-icon si si-wallet"></i>
+                <span class="nav-main-link-name">My Balance</span>
+              </a>
+            </li>
+            <li class="nav-main-item">
               <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'donate' ? 'active' : '' ?>" href="#">
                 <i class="nav-main-link-icon si si-present"></i>
                 <span class="nav-main-link-name">Donate</span>

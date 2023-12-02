@@ -36,9 +36,11 @@
               <td class="fs-sm">12</td>
               <td class="fs-sm">150000</td>
               <td class="fs-sm">
-                <!-- Pilih salah satu -->
-                <a href="#" class="btn btn-sm btn-success mb-4"><i class="nav-main-link-icon si si-pencil"></i> Publish</a> &nbsp;
-                <a href="#" class="btn btn-sm btn-warning mb-4"><i class="nav-main-link-icon si si-pencil"></i> Hide</a>
+                <h5>
+                  <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
+                  <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
+                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                </h5>
               </td>
               <td class="fs-sm">
                 <a href="<?= base_url('dashboard/content/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
@@ -51,9 +53,11 @@
               <td class="fs-sm">12</td>
               <td class="fs-sm">160000</td>
               <td class="fs-sm">
-                <!-- Pilih salah satu -->
-                <a href="#" class="btn btn-sm btn-success mb-4"><i class="nav-main-link-icon si si-pencil"></i> Publish</a> &nbsp;
-                <a href="#" class="btn btn-sm btn-warning mb-4"><i class="nav-main-link-icon si si-pencil"></i> Hide</a>
+                <h5>
+                  <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
+                  <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
+                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                </h5>
               </td>
               <td class="fs-sm">
                 <a href="<?= base_url('dashboard/content/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
