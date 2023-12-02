@@ -16,12 +16,12 @@
                 <form action="" method="post">
                     <div class="mb-4">
                         <label class="form-label" for="postTitle">Post Title</label>
-                        <input style="border-width: 0 0 1px 0; box-shadow:none;" type="text" class="form-control" id="postTitle" name="postTitle" placeholder="Title">
+                        <input style="border-width: 0 0 1px 0; box-shadow:none; border-radius:0;" type="text" class="form-control" id="postTitle" name="postTitle" placeholder="Title">
                     </div>
                     <div class="mb-4">
                         <label class="form-label" for="postValue">Post Content</label>
                         <!-- CKEditor Container -->
-                        <textarea id="js-ckeditor" name="postValue">Tulis sesuatu.....</textarea>
+                        <textarea id="js-ckeditor" name="postValue">Tulis sesuatu, masukkan gambar, sisipkan tautan.....</textarea>
                     </div>
                 </form>
                 <button type="submit" class="btn btn-primary mt-2" data-bs-dismiss="modal">Submit</button>

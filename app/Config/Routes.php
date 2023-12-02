@@ -30,7 +30,10 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
 $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('profile/creator', 'Profile::index');
+    // Content
     $routes->get('content', 'Content::index');
+    $routes->get('content/add', 'Content::add');
+    $routes->get('content/edit/(:any)', 'Content::edit/$1');
     // Post
     $routes->get('post', 'Post::index');
     $routes->get('post/add', 'Post::add');

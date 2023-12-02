@@ -18,7 +18,7 @@
             <div class="block-content block-content-full">
                 <a href="<?= base_url('dashboard/post/add') ?>" class="btn btn-sm btn-outline-secondary mb-4"><i class="nav-main-link-icon fa fa-plus"></i> Add Post</a>
                 <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
+                <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5%;">NO</th>
@@ -33,7 +33,11 @@
                             <td class="text-center fs-sm">1</td>
                             <td class="fw-semibold fs-sm">Introduction</td>
                             <td class="fs-sm">12</td>
-                            <td class="fs-sm">Status</td>
+                            <td class="fs-sm">
+                                <!-- Pilih salah satu -->
+                                <a href="#" class="btn btn-sm btn-success mb-4"><i class="nav-main-link-icon si si-pencil"></i> Publish</a> &nbsp;
+                                <a href="#" class="btn btn-sm btn-warning mb-4"><i class="nav-main-link-icon si si-pencil"></i> Hide</a>
+                            </td>
                             <td class="fs-sm">
                                 <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
                                 <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
@@ -43,7 +47,10 @@
                             <td class="text-center fs-sm">2</td>
                             <td class="fw-semibold fs-sm">Apa Kabar?</td>
                             <td class="fs-sm">12</td>
-                            <td class="fs-sm">Status</td>
+                            <td class="fs-sm">
+                                <a href="#" class="btn btn-sm btn-success mb-4"><i class="nav-main-link-icon si si-pencil"></i> Publish</a> &nbsp;
+                                <a href="#" class="btn btn-sm btn-warning mb-4"><i class="nav-main-link-icon si si-pencil"></i> Hide</a>
+                            </td>
                             <td class="fs-sm">
                                 <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
                                 <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
@@ -53,7 +60,6 @@
                 </table>
             </div>
         </div>
-        <!-- END Dynamic Table with Export Buttons -->
     </div>
     <!-- END Page Content -->
 </main>

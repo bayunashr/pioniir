@@ -32,7 +32,7 @@
                                     <div class="avatar mb-3">
                                         <img class="img-avatar img-avatar-thumb" src="<?= base_url('') ?>assets/dashboard/media/avatars/avatar10.jpg" alt="">
                                     </div>
-                                    <input type="file" class="form-control" id="profilePicture" name="profilePicture">
+                                    <input type="file" accept="image/*" class="form-control" id="profilePicture" name="profilePicture">
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label" for="banner">Banner</label>
@@ -40,7 +40,7 @@
                                         <img class="w-100" src="<?= base_url() ?>assets/front/img/Banner creator.png" alt="">
                                         <p class="mt-2">Banner resolution : 900 x 225 px</p>
                                     </div>
-                                    <input type="file" class="form-control" id="banner" name="banner">
+                                    <input type="file" accept="image/*" class="form-control" id="banner" name="banner">
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label" for="socmed">Social Media</label>

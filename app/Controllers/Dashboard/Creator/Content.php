@@ -13,4 +13,20 @@ class Content extends BaseController
         ];
         return view('dashboard/creator/content', $data);
     }
+
+    public function add()
+    {
+        $data = [
+            'title' => 'Dashboard - Pioniir Creator'
+        ];
+        return view('dashboard/creator/contentAdd', $data);
+    }
+
+    public function edit($id)
+    {
+        $data = [
+            'title' => 'Dashboard - Pioniir Creator'
+        ];
+        return view('dashboard/creator/contentEdit', $data);
+    }
 }
