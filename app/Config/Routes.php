@@ -31,6 +31,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     $routes->get('/', 'Dashboard::index');
     $routes->get('profile/creator', 'Profile::index');
     $routes->get('balance', 'Transaction::index');
+    $routes->get('donate', 'Donate::index');
     // Content
     $routes->get('content', 'Content::index');
     $routes->get('content/add', 'Content::add');
