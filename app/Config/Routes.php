@@ -32,12 +32,16 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     $routes->get('profile/creator', 'Profile::index');
     $routes->get('balance', 'Transaction::index');
     $routes->get('donate', 'Donate::index');
+    // Milestone
+    $routes->get('milestone', 'Milestone::index');
+    $routes->get('milestone/add', 'Milestone::add');
+    $routes->get('milestone/edit/(:segment)', 'Milestone::edit/$1');
     // Content
     $routes->get('content', 'Content::index');
     $routes->get('content/add', 'Content::add');
-    $routes->get('content/edit/(:any)', 'Content::edit/$1');
+    $routes->get('content/edit/(:segment)', 'Content::edit/$1');
     // Post
     $routes->get('post', 'Post::index');
     $routes->get('post/add', 'Post::add');
-    $routes->get('post/edit/(:any)', 'Post::edit/$1');
+    $routes->get('post/edit/(:segment)', 'Post::edit/$1');
 });

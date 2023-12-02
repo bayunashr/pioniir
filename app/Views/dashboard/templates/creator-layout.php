@@ -105,7 +105,7 @@
               </a>
             </li>
             <li class="nav-main-item">
-              <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'milestone' ? 'active' : '' ?>" href="#">
+              <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'milestone' ? 'active' : '' ?>" href="<?= base_url('dashboard/milestone') ?>">
                 <i class="nav-main-link-icon si si-rocket"></i>
                 <span class="nav-main-link-name">Milestone</span>
               </a>

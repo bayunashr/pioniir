@@ -13,45 +13,72 @@
     <div class="content">
         <div class="block block-rounded">
             <div class="block-header block-header-default">
-                <h3 class="block-title">My Balance</h3>
+                <h3 class="block-title">Milestone</h3>
             </div>
             <div class="block-content block-content-full">
-                <p class="fw-bold h3">Rp. 1.000.000</p>
-                <button type="button" class="btn btn-sm btn-outline-secondary btn-sm push" data-bs-toggle="modal" data-bs-target="#modal-block-vcenter"><i class="nav-main-link-icon fa fa-wallet"></i> Tarik Saldo</button>
-                <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-                <p class="fw-bold h3 mt-4">Withdraw History</p>
+                <!-- If (tidak ada milstone aktif) -->
+                <a href="<?= base_url('dashboard/milestone/add') ?>" class="btn btn-sm btn-outline-secondary mb-4"><i class="nav-main-link-icon fa fa-plus"></i> Add Milestone</a>
+                <!-- Else -->
+                <div class="row">
+                    <div class="col-12 col-sm-3">
+                        <span class="h5">Jumat Berbagi</span> <br>
+                        <span style="font-size: 13px;">500.000 terkumpul dari 1.000.000</span>
+                        <div class="progress push" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar bg-info" style="width: 63%;">
+                                <span class="fs-sm fw-semibold">63%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Else -->
+
+                <p class="fw-bold h3 mt-4">Milestone History</p>
                 <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5%;">NO</th>
-                            <th>Tanggal</th>
-                            <th>Jumlah</th>
+                            <th>Nama</th>
+                            <th>Balance</th>
+                            <th>Target</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td class="text-center fs-sm">1</td>
-                            <td class="fw-semibold fs-sm">21/11/2023</td>
-                            <td class="fs-sm">100000</td>
+                            <td class="fw-semibold fs-sm">Jumat berbagi</td>
+                            <td class="fs-sm">500.000</td>
+                            <td class="fs-sm">1.000.000</td>
                             <td class="fs-sm">
                                 <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Success</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-info-circle"></i> Pending</span> &nbsp;
-                                    <span class="badge bg-danger"><i class="fa fa-exclamation-circle"></i> Fail</span>
+                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span> &nbsp;
+                                    <span class="badge bg-danger"><i class="fa fa-times-circle"></i> Cancel</span>
                                 </h5>
+                            </td>
+                            <td class="fs-sm">
+                                <a href="<?= base_url('dashboard/milestone/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
+                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Cancel</a>
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center fs-sm">2</td>
-                            <td class="fw-semibold fs-sm">19/09/2023</td>
-                            <td class="fs-sm">100000</td>
+                            <td class="fw-semibold fs-sm">Buat Beli PC</td>
+                            <td class="fs-sm">10.000.000</td>
+                            <td class="fs-sm">10.000.000</td>
                             <td class="fs-sm">
                                 <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Success</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-info-circle"></i> Pending</span> &nbsp;
-                                    <span class="badge bg-danger"><i class="fa fa-exclamation-circle"></i> Fail</span>
+                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
+                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span> &nbsp;
+                                    <span class="badge bg-danger"><i class="fa fa-times-circle"></i> Cancel</span>
                                 </h5>
+                            </td>
+                            <td class="fs-sm">
+                                <a href="<?= base_url('dashboard/milestone/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
+                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Cancel</a>
                             </td>
                         </tr>
                     </tbody>
