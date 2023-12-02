@@ -1,12 +1,12 @@
 <?= $this->extend('dashboard/templates/creator-layout') ?>
 
 <?= $this->section('header-addons') ?>
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/select2/css/select2.min.css">
 <!-- Page JS Plugins CSS -->
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-<?= $this->endsection() ?>
+<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/select2/css/select2.min.css">
+<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <main id="main-container">
@@ -86,7 +86,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="tab-pane" id="btabs-static-profile" role="tabpanel" aria-labelledby="btabs-static-profile-tab" tabindex="0">
+                <div class="tab-pane mb-4" id="btabs-static-profile" role="tabpanel" aria-labelledby="btabs-static-profile-tab" tabindex="0">
                     <h4 class="fw-normal">Edit Subscription Price</h4>
                     <form action="" method="post" class="row">
                         <div class="col-sm-6 col-12">
@@ -97,47 +97,47 @@
                         <div class="col-sm-6 col-12"></div>
                     </form>
                     <h4 class="fw-normal mt-4">Data subscription</h4>
-                    <table class="table table-bordered table-striped table-vcenter js-dataTable-buttons">
+                    <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                         <thead>
                             <tr>
                                 <th class="text-center" style="width: 80px;">No</th>
                                 <th>Name</th>
-                                <th class="d-none d-sm-table-cell" style="width: 30%;">Email</th>
+                                <th class=" style=" width: 30%;">Email</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="text-center fs-sm">1</td>
                                 <td class="fw-semibold fs-sm">David Fuller</td>
-                                <td class="d-none d-sm-table-cell fs-sm">
+                                <td class="fs-sm">
                                     client1<span class="text-muted">@example.com</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-center fs-sm">2</td>
                                 <td class="fw-semibold fs-sm">Justin Hunt</td>
-                                <td class="d-none d-sm-table-cell fs-sm">
+                                <td class="fs-sm">
                                     client2<span class="text-muted">@example.com</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-center fs-sm">3</td>
                                 <td class="fw-semibold fs-sm">Scott Young</td>
-                                <td class="d-none d-sm-table-cell fs-sm">
+                                <td class="fs-sm">
                                     client3<span class="text-muted">@example.com</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-center fs-sm">4</td>
                                 <td class="fw-semibold fs-sm">Jose Parker</td>
-                                <td class="d-none d-sm-table-cell fs-sm">
+                                <td class="fs-sm">
                                     client4<span class="text-muted">@example.com</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="text-center fs-sm">5</td>
                                 <td class="fw-semibold fs-sm">Amanda Powell</td>
-                                <td class="d-none d-sm-table-cell fs-sm">
+                                <td class="fs-sm">
                                     client5<span class="text-muted">@example.com</span>
                                 </td>
                             </tr>
@@ -182,13 +182,9 @@
 
 <?= $this->section('footer-addons') ?>
 <script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/lib/jquery.min.js"></script>
-
-<!-- Page JS Code -->
-<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_pages_dashboard.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/select2/js/select2.full.min.js"></script>
 
 <!-- jQuery (required for DataTables plugin) -->
+<script src="<?= base_url('') ?>assets/dashboard/js/lib/jquery.min.js"></script>
 
 <!-- Page JS Plugins -->
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -202,6 +198,7 @@
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+<script src="<?= base_url('') ?>assets/dashboard/js/plugins/select2/js/select2.full.min.js"></script>
 
 <!-- Page JS Code -->
 <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>

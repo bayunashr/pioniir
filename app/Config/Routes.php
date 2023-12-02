@@ -31,4 +31,8 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     $routes->get('/', 'Dashboard::index');
     $routes->get('profile/creator', 'Profile::index');
     $routes->get('content', 'Content::index');
+    // Post
+    $routes->get('post', 'Post::index');
+    $routes->get('post/add', 'Post::add');
+    $routes->get('post/edit/(:any)', 'Post::edit/$1');
 });

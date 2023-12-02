@@ -80,7 +80,7 @@
             </li>
             <li class="nav-main-heading">Community</li>
             <li class="nav-main-item">
-              <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'post' ? 'active' : '' ?>" href="#">
+              <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'post' ? 'active' : '' ?>" href="<?= base_url('dashboard/post') ?>">
                 <i class="nav-main-link-icon si si-note"></i>
                 <span class="nav-main-link-name">Post</span>
               </a>
