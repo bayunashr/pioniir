@@ -23,6 +23,11 @@ class Subscribe extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
+            'subscribeStatus' => [
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'success'],
+                'default' => 'pending',
+            ],
             'subTimestamp' => [
                 'type' => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),

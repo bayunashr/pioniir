@@ -23,6 +23,11 @@ class Buy extends Migration
                 'type' => 'CHAR',
                 'constraint' => 36,
             ],
+            'buyStatus' => [
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'success'],
+                'default' => 'pending',
+            ],
             'buyTimestamp' => [
                 'type' => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),

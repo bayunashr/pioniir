@@ -36,6 +36,15 @@ class Donate extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
+            'donateDescription' => [
+                'type' => 'TEXT',
+                'null' => true,
+            ],
+            'donateStatus' => [
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'success'],
+                'default' => 'pending',
+            ],
             'donateTimestamp' => [
                 'type' => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),

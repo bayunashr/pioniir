@@ -30,6 +30,7 @@ class User extends Migration
             'userPassword' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
+                'null' => true,
             ],
             'userStatus' => [
                 'type'       => 'ENUM',
