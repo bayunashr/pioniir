@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Admin;
 
 use CodeIgniter\Model;
 
-class DonateModel extends Model
+class UserModel extends Model
 {
-    protected $table            = 'Donate';
-    protected $primaryKey       = 'donateId';
+    protected $table            = 'User';
+    protected $primaryKey       = 'userId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -40,10 +40,8 @@ class DonateModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Donate.*, User.userName AS user_username, Creator.creatorAlias AS creator_name')
-            ->join('User', 'User.userId = Donate.userId')
-            ->join('Creator', 'Creator.creatorId = Donate.creatorId')
-            ->orderBy('donateTimestamp', 'desc')
+        return $this->select('*')
+            ->orderBy('createdAt', 'desc')
             ->findAll();
     }
 }

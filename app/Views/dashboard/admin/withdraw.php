@@ -26,21 +26,28 @@
                             <th class="d-none" style="width: 15%;">ID</th>
                             <th style="width: 20%;">Creator</th>
                             <th style="width: 20%;">Amount</th>
-                            <th style="width: 40%;">Timestamp</th>
+                            <th style="width: 30%;">Timestamp</th>
+                            <th style="width: 10%;">Status</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <?php $no = 1; ?>
+                    <?php foreach ($wd as $data => $value): ?>
                         <tr>
-                            <td class="text-center fs-sm">1</td>
-                            <td class="d-none fw-semibold fs-sm">8deb35e1-b7d8-4408-b8bb-77f7363bdf8c</td>
-                            <td class="fw-semibold fs-sm">Joko Susilo</td>
+                            <td class="text-center fs-sm"><?= $no++; ?></td>
+                            <td class="d-none fw-semibold fs-sm"><?= $value['withdrawId'] ?></td>
+                            <td class="fw-semibold fs-sm"><?= $value['creator_name'] ?></td>
                             <td class="fs-sm">
-                                Rp. 100.000
+                                <?= format_rupiah($value['withdrawAmount']) ?>
                             </td>
                             <td class="fs-sm">
-                                29-10-2019
+                                <?= $value['withdrawTimestamp'] ?>
+                            </td>
+                            <td>
+                                <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"><?= $value['withdrawStatus'] ?></span>
                             </td>
                         </tr>
+                    <?php endforeach ?>
                     </tbody>
                 </table>
             </div>

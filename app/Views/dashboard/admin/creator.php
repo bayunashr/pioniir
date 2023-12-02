@@ -31,29 +31,32 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($creator as $data => $value): ?>
                   <tr>
-                    <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">dvfuller</td>
+                    <td class="text-center fs-sm"><?= $no++; ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['creatorId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['user_name'] ?></td>
                     <td class="fs-sm">
-                      dvfuller
+                      <?= $value['creatorAlias'] ?>
                     </td>
                     <td class="fs-sm">
-                      3D Designer, 3D Artist
+                      <?= $value['creatorTag'] ?>
                     </td>
                     <td class="fs-sm">
-                      50.000
+                      <?= format_rupiah($value['creatorSubPrice']) ?>
                     </td>
                     <td class="fs-sm">
-                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="left" title="Description" data-bs-content="This is example content. You can put a description or more info here."><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="left" title="Description" data-bs-content="<?= $value['creatorDescription'] ?>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Banner" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td class="fs-sm text-center">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">1.500.000</span>
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info"><?= $value['creatorBalance'] ?></span>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>

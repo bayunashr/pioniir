@@ -29,24 +29,27 @@
                     <th style="width: 5%;">Preview</th>
                     <th style="width: 5%;">Download</th>
                     <th style="width: 10%;">Like</th>
+                    <th style="width: 5%;">Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($content as $data => $value): ?>
                   <tr>
-                    <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">dvfuller</td>
+                    <td class="text-center fs-sm"><?= $no++; ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['contentId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['creator_name'] ?></td>
                     <td class="fs-sm">
-                      Dawnguard 3D Armor Set
+                      <?= $value['contentTitle'] ?>
                     </td>
                     <td class="fs-sm">
-                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="bottom" title="Content" data-bs-content="<div><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''><br><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et consequatur ab natus suscipit tenetur quas, magni, molestias saepe ratione cumque accusantium corporis necessitatibus quod ut explicabo nulla nihil, adipisci tempora?</p></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                      <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="bottom" title="Content" data-bs-content="<?= $value['contentValue'] ?>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td class="text-center">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">Publish</span>
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"><?= $value['contentStatus'] ?></span>
                     </td>
                     <td class="fs-sm">
-                      20.000
+                      <?= format_rupiah($value['contentPrice']) ?>
                     </td>
                     <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Preview Image" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
@@ -55,9 +58,15 @@
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Download Image" data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url('') ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td class="fs-sm">
-                      316
+                      <?= $value['contentLike'] ?>
+                    </td>
+                    <td>
+                      <a href="" class="btn btn-sm btn-alt-danger">
+                        <i class="fa fa-fw fa-ban"></i> Ban
+                      </a>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>

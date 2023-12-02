@@ -27,17 +27,20 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($buy as $data => $value): ?>
                   <tr>
-                    <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">johnkramer</td>
+                    <td class="text-center fs-sm"><?= $no++; ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['buyId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['user_name'] ?></td>
                     <td class="fs-sm">
-                      Qorin Halfhand Mockup
+                      <?= $value['content_title'] ?>
                     </td>
                     <td class="fs-sm">
-                      2023-11-17T10:34:38+00:00
+                      <?= $value['createdAt'] ?>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>

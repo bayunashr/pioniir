@@ -40,6 +40,14 @@ class CommentSeeder extends Seeder
                 'commentValue'    => 'God Job'
 
             ],
+            [
+                'commentId' => '8f23ff2d-2161-4b3e-bd69-fa896ffe0248', 
+                'userId'    => '38f0cdc9-7268-4b5b-aca9-b8adbefbbc70',
+                'contentId' => NULL,
+                'postId'    => '87dbbef1-3f84-4629-bb61-8f6625b59a6e',
+                'commentValue'    => 'Sebut namaku bang'
+
+            ],
             
         ];
 

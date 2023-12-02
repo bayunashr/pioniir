@@ -28,20 +28,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($miles as $data => $value): ?>
                   <tr>
-                    <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">dvfuller</td>
+                    <td class="text-center fs-sm"><?= $no++ ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['milestoneId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['creator_name'] ?></td>
                     <td class=" fs-sm">
-                      Upgrade RIG
+                      <?= $value['milestoneName'] ?>
                     </td>
                     <td class="fs-sm">
-                      15.000 / 1.000.000
+                      <?= format_rupiah($value['milestoneBalance']) ?> / <?= format_rupiah($value['milestoneTarget']) ?> (<?= format_persen_miles($value['milestoneBalance'], $value['milestoneTarget']) ?>)
                     </td>
                     <td class="text-center">
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Publish</span>
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info"><?= $value['milestoneStatus'] ?></span>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>

@@ -12,7 +12,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $user ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Total Pengguna</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/user' ?>">
                             <span>Lihat semua pengguna</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -35,7 +35,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $creator ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Total Kreator</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/creator' ?>">
                             <span>Lihat semua kreator</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/donate' ?>">
                             <span>Lihat semua donasi</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -81,7 +81,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $sub ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Subscribe Ditekan</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -90,7 +90,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/subscribe' ?>">
                             <span>Lihat semua subscriber</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -104,7 +104,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $buy ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Konten Dibeli</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -113,7 +113,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/buy' ?>">
                             <span>Lihat semua buyer</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -127,7 +127,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $content ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Konten Baru</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -136,7 +136,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/content' ?>">
                             <span>Lihat semua konten</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -150,7 +150,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $post ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Postingan Baru</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -159,7 +159,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/post' ?>">
                             <span>Lihat semua postingan</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -173,7 +173,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $comment ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Komentar Baru</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -182,7 +182,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/comment' ?>">
                             <span>Lihat semua komentar</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>
@@ -196,7 +196,7 @@
                     <div
                         class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
                         <dl class="mb-0">
-                            <dt class="fs-3 fw-bold">0</dt>
+                            <dt class="fs-3 fw-bold"><?= $love ?></dt>
                             <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Love Baru</dd>
                         </dl>
                         <div class="item item-rounded-lg bg-body-light">
@@ -205,7 +205,7 @@
                     </div>
                     <div class="bg-body-light rounded-bottom">
                         <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between"
-                            href="javascript:void(0)">
+                            href="<?= current_url().'/love' ?>">
                             <span>Lihat semua love</span>
                             <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
                         </a>

@@ -23,29 +23,38 @@
                     <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 20%;">Username</th>
                     <th style="width: 25%;">Name</th>
-                    <th style="width: 30%;">Email</th>
+                    <th style="width: 25%;">Email</th>
                     <th style="width: 10%;">Avatar</th>
                     <th style="width: 10%;">Status</th>
+                    <th style="width: 5%;">Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($user as $data => $value): ?>
                   <tr>
-                    <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">dvfuller</td>
+                    <td class="text-center fs-sm"><?= $no++; ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['userId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['userName'] ?></td>
                     <td class="fs-sm">
-                      David Fuller
+                      <?= $value['userFullName'] ?>
                     </td>
                     <td class="fs-sm">
-                      client1<span class="text-muted">@example.com</span>
+                      <?= $value['userEmail'] ?>
                     </td>
                     <td class="fs-sm">
                       <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top" title="Avatar" data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url('') ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                     </td>
                     <td>
-                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger">Banned</span>
+                      <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger"><?= $value['userStatus'] ?></span>
+                    </td>
+                    <td>
+                      <a href="" class="btn btn-sm btn-alt-danger">
+                        <i class="fa fa-fw fa-ban"></i> Ban
+                      </a>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>

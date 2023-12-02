@@ -27,17 +27,22 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($love as $data => $value): ?>
                   <tr>
-                  <td class="text-center fs-sm">1</td>
-                    <td class="d-none fw-semibold fs-sm">0e4d473a-851e-4b9d-a9a4-63aec3850f94</td>
-                    <td class="fw-semibold fs-sm">jognkramer</td>
+                  <td class="text-center fs-sm"><?= $no++; ?></td>
+                    <td class="d-none fw-semibold fs-sm"><?= $value['loveId'] ?></td>
+                    <td class="fw-semibold fs-sm"><?= $value['user_name'] ?></td>
                     <td class="fs-sm">
-                      <a href="<?= base_url('') ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">Post - Hello Lad, I'm back!</span></a>
+                      <a href="<?= base_url('') ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= (($value['content_title'] == '') ? "bg-info-light text-info" : "bg-success-light text-success") ?>">
+                        <?= ($value['content_title'] == '') ? "Post - ".$value['post_title'] : "Content - ".$value['content_title'] ?>
+                      </span></a>
                     </td>
                     <td class="fs-sm">
-                        2023-11-17T10:34:38+00:00
+                      <?= $value['createdAt'] ?>
                     </td>
                   </tr>
+                  <?php endforeach ?>
                 </tbody>
               </table>
             </div>
