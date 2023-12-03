@@ -26,11 +26,11 @@
                     <th class="text-center" style="width: 5%;">NO</th>
                     <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 25%;">Creator</th>
-                    <th style="width: 35%;">Title</th>
+                    <th style="width: 30%;">Title</th>
                     <th style="width: 10%;">Post</th>
                     <th style="width: 10%;">Status</th>
                     <th style="width: 10%;">Like</th>
-                    <th style="width: 5%;">Action</th>
+                    <th style="width: 10%;">Action</th>
                     <th>Tes Sweetalert</th>
                   </tr>
                 </thead>
@@ -53,13 +53,19 @@
                     <td class="fs-sm">
                       <?= $value['postLike'] ?>
                     </td>
-                    <td>
-                      <a href="<?= base_url('admin/ban/'.$value['postId']) ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
-                        <i class="fa fa-fw fa-ban"></i> Ban
-                      </a>
+                    <td class="text-center">
+                      <?php if($value['postStatus'] == 'ban') : ?>
+                        <button id="tombol" action-type="unban" post-id="<?= $value['postId'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                          <i class="fa fa-fw fa-ban"></i> Unban
+                        </button>
+                      <?php else : ?>
+                        <button id="tombol" action-type="ban" post-id="<?= $value['postId'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                          <i class="fa fa-fw fa-ban"></i> Ban
+                        </button>
+                      <?php endif ?>
                     </td>
                     <td>
-                      <button type="button" class="js-swal-confirm btn btn-alt-secondary push mb-2">
+                      <button id="tombol" data-id="" type="button" class="js-swal-confirm btn btn-alt-secondary push mb-2">
                         <i class="fa fa-check-square text-muted me-1"></i> iki gakenek
                       </button>
                     </td>
@@ -99,4 +105,42 @@
     <!-- Page JS Code -->
     <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
     <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
+
+    <script>
+    $(document).on('click', '#tombol', function() {
+        const idPost = this.getAttribute('post-id');
+        const action = this.getAttribute('action-type');
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, ban it!",
+            input: 'text',
+            inputPlaceholder: 'Enter your reason...',
+            inputAttributes: {
+                maxlength: 255,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'You need to enter a reason!';
+                }
+            }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const msg = Swal.getPopup().querySelector('input').value;
+
+            if (action == "ban"){
+              window.location.href = `<?= base_url('admin/ban/') ?>${idPost}?msg=${msg}`;
+            } else{
+              window.location.href = `<?= base_url('admin/unban/') ?>${idPost}?msg=${msg}`;
+            }
+          }
+        });
+    });
+</script>
 <?= $this->endSection() ?>

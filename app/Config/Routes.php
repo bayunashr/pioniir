@@ -24,6 +24,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
     $routes->get('milestone', 'Admin::milestone');
     $routes->get('withdraw', 'Admin::withdraw');
     $routes->get('ban/(:segment)', 'Admin::postBan/$1');
+    $routes->get('unban/(:segment)', 'Admin::postUnban/$1');
 });
 
 // Creator Dashboard Routes

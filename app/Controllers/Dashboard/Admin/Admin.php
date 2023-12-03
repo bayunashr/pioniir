@@ -10,10 +10,13 @@ use App\Models\Admin\CreatorModel;
 use App\Models\Admin\LoveModel;
 use App\Models\Admin\DonateModel;
 use App\Models\Admin\MilestoneModel;
+use App\Models\Admin\NotificationModel;
 use App\Models\Admin\PostModel;
 use App\Models\Admin\SubscribeModel;
 use App\Models\Admin\UserModel;
 use App\Models\Admin\WithdrawModel;
+
+use Ramsey\Uuid\Uuid;
 
 class Admin extends BaseController
 {
@@ -96,10 +99,49 @@ class Admin extends BaseController
     public function postBan($id)
     {
         $postModel = new PostModel();
+        $notificationModel = new NotificationModel();
 
-        $postModel->ban($id);
+        $msg = $this->request->getGet('msg');
 
-        redirect('admin');
+        $updateStatus = [
+            "postStatus" => "ban",
+        ];
+
+        $newNotification = [
+            "notificationId" => Uuid::uuid4(),
+            "postId" => $id,
+            "notificationType" => "bpost",
+            "notificationMessage" => $msg,
+        ];
+
+        $postModel->update($id, $updateStatus);
+        $notificationModel->insert($newNotification);
+
+        // redirect('admin');
+    }
+
+    public function postUnban($id)
+    {
+        $postModel = new PostModel();
+        $notificationModel = new NotificationModel();
+
+        $msg = $this->request->getGet('msg');
+
+        $updateStatus = [
+            "postStatus" => "archive",
+        ];
+
+        $newNotification = [
+            "notificationId" => Uuid::uuid4(),
+            "postId" => $id,
+            "notificationType" => "ubpost",
+            "notificationMessage" => $msg,
+        ];
+
+        $postModel->update($id, $updateStatus);
+        $notificationModel->insert($newNotification);
+
+        // redirect('admin');
     }
     
     public function comment(): string

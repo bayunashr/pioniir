@@ -2,18 +2,17 @@
 
 namespace App\Models\Admin;
 
-use App\Database\Migrations\Creator;
 use CodeIgniter\Model;
 
-class PostModel extends Model
+class NotificationModel extends Model
 {
-    protected $table            = 'Post';
-    protected $primaryKey       = 'postId';
+    protected $table            = 'Notification';
+    protected $primaryKey       = 'notificationId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['postId', 'creatorId', 'postTitle', 'postValue', 'postStatus', 'postLike'];
+    protected $allowedFields    = ['notificationId', 'userId', 'postId', 'contentId', 'commentId', 'subId', 'buyId', 'milestoneId', 'donateId', 'notificationType', 'notificationMessage'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,12 +37,5 @@ class PostModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function selectAll()
-    {
-        return $this->select('Post.*, Creator.creatorAlias AS creator_name, Creator.userId AS user_id')
-            ->join('Creator', 'Creator.creatorId = Post.creatorId')
-            ->orderBy('createdAt', 'desc')
-            ->findAll();
-    }
+    
 }
