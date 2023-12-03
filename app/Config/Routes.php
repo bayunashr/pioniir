@@ -7,7 +7,10 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Auth::index');
+$routes->post('/login/auth', 'Auth::loginAuth');
+$routes->get('/login/auth-google', 'Auth::authGoogle');
 $routes->get('/register', 'Auth::register');
+$routes->get('/logout', 'Auth::logout');
 $routes->get('/explore', 'Home::explore');
 
 // Super Routes
