@@ -90,6 +90,7 @@ class Admin extends BaseController
         $contentModel = new ContentModel();
         $postModel = new PostModel();
         $notificationModel = new NotificationModel();
+        $commentModel = new CommentModel();
 
         $msg = $this->request->getGet('msg');
         $type = $this->request->getGet('type');
@@ -113,6 +114,13 @@ class Admin extends BaseController
             $newNotification["contentId"] = $id;
             $newNotification["notificationType"] = "bcontent";
             $contentModel->update($id, $updateStatus);
+        } elseif($type == "comment"){
+            $updateStatus = [
+                "commentStatus" => "ban",
+            ];
+            $newNotification["commentId"] = $id;
+            $newNotification["notificationType"] = "bcomment";
+            $commentModel->update($id, $updateStatus);
         }
 
         $notificationModel->insert($newNotification);
@@ -125,6 +133,7 @@ class Admin extends BaseController
         $contentModel = new ContentModel();
         $postModel = new PostModel();
         $notificationModel = new NotificationModel();
+        $commentModel = new CommentModel();
 
         $msg = $this->request->getGet('msg');
         $type = $this->request->getGet('type');
@@ -148,6 +157,13 @@ class Admin extends BaseController
             $newNotification["contentId"] = $id;
             $newNotification["notificationType"] = "ubcontent";
             $contentModel->update($id, $updateStatus);
+        } elseif($type == "comment"){
+            $updateStatus = [
+                "commentStatus" => "publish",
+            ];
+            $newNotification["commentId"] = $id;
+            $newNotification["notificationType"] = "ubcomment";
+            $commentModel->update($id, $updateStatus);
         }
 
         $notificationModel->insert($newNotification);

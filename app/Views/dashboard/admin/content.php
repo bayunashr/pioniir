@@ -23,14 +23,14 @@
                     <th class="text-center" style="width: 5%;">NO</th>
                     <th class="d-none" style="width: 15%;">ID</th>
                     <th style="width: 10%;">Creator</th>
-                    <th style="width: 40%;">Title</th>
+                    <th style="width: 35%;">Title</th>
                     <th style="width: 5%;">Content</th>
                     <th style="width: 10%;">Status</th>
                     <th style="width: 10%;">Price</th>
                     <th style="width: 5%;">Preview</th>
                     <th style="width: 5%;">Download</th>
                     <th style="width: 10%;">Like</th>
-                    <th style="width: 5%;">Action</th>
+                    <th style="width: 10%;">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
                     <td class="fs-sm">
                       <?= $value['contentLike'] ?>
                     </td>
-                    <td>
+                    <td class="text-center">
                       <?php if($value['contentStatus'] == 'ban') : ?>
                         <button id="tombol" action-type="unban" data-type="content" content-id="<?= $value['contentId'] ?>" content-title="<?= $value['contentTitle'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
                           <i class="fa fa-fw fa-circle-notch"></i> Unban
