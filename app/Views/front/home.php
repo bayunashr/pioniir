@@ -21,12 +21,12 @@
                     <div class="navbar-collapse-wrapper bg-white d-flex flex-row flex-nowrap w-100 justify-content-between align-items-center py-3">
                         <div class="navbar-brand w-100">
                             <a href="">
-                                <img class="w-16" src="<?= base_url('') ?>assets/front/img/Pioniir Text.png" alt="" />
+                                <img class="w-16" src="<?= base_url('') ?>assets/front/img/PioniirDark.png" alt="" />
                             </a>
                         </div>
                         <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                             <div class="offcanvas-header d-lg-none">
-                                <a href=""><img class="w-16" src="<?= base_url('') ?>assets/front/img/Pioniir Text white.png" alt="" /></a>
+                                <a href=""><img class="w-16" src="<?= base_url('') ?>assets/front/img/PioniirWhite.png" alt="" /></a>
                                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100"></div>
