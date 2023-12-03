@@ -85,6 +85,76 @@ class Admin extends BaseController
         return view('dashboard/admin/content', $data);
     }
 
+    public function ban($id)
+    {
+        $contentModel = new ContentModel();
+        $postModel = new PostModel();
+        $notificationModel = new NotificationModel();
+
+        $msg = $this->request->getGet('msg');
+        $type = $this->request->getGet('type');
+
+        $newNotification = [
+            "notificationId" => Uuid::uuid4(),
+            "notificationMessage" => $msg,
+        ];
+
+        if($type == "post"){
+            $updateStatus = [
+                "postStatus" => "ban",
+            ];
+            $newNotification["postId"] = $id;
+            $newNotification["notificationType"] = "bpost";
+            $postModel->update($id, $updateStatus);
+        } elseif($type == "content"){
+            $updateStatus = [
+                "contentStatus" => "ban",
+            ];
+            $newNotification["contentId"] = $id;
+            $newNotification["notificationType"] = "bcontent";
+            $contentModel->update($id, $updateStatus);
+        }
+
+        $notificationModel->insert($newNotification);
+
+        return redirect('admin/'.$type);
+    }
+
+    public function unban($id)
+    {
+        $contentModel = new ContentModel();
+        $postModel = new PostModel();
+        $notificationModel = new NotificationModel();
+
+        $msg = $this->request->getGet('msg');
+        $type = $this->request->getGet('type');
+
+        $newNotification = [
+            "notificationId" => Uuid::uuid4(),
+            "notificationMessage" => $msg,
+        ];
+
+        if($type == "post"){
+            $updateStatus = [
+                "postStatus" => "archive",
+            ];
+            $newNotification["postId"] = $id;
+            $newNotification["notificationType"] = "ubpost";
+            $postModel->update($id, $updateStatus);
+        } elseif($type == "content"){
+            $updateStatus = [
+                "contentStatus" => "archive",
+            ];
+            $newNotification["contentId"] = $id;
+            $newNotification["notificationType"] = "ubcontent";
+            $contentModel->update($id, $updateStatus);
+        }
+
+        $notificationModel->insert($newNotification);
+
+        return redirect('admin/'.$type);
+    }
+
     public function post(): string
     {
         $postModel = new PostModel();
@@ -94,54 +164,6 @@ class Admin extends BaseController
             'post' => $postModel->selectAll()
         ];
         return view('dashboard/admin/post', $data);
-    }
-
-    public function postBan($id)
-    {
-        $postModel = new PostModel();
-        $notificationModel = new NotificationModel();
-
-        $msg = $this->request->getGet('msg');
-
-        $updateStatus = [
-            "postStatus" => "ban",
-        ];
-
-        $newNotification = [
-            "notificationId" => Uuid::uuid4(),
-            "postId" => $id,
-            "notificationType" => "bpost",
-            "notificationMessage" => $msg,
-        ];
-
-        $postModel->update($id, $updateStatus);
-        $notificationModel->insert($newNotification);
-
-        // redirect('admin');
-    }
-
-    public function postUnban($id)
-    {
-        $postModel = new PostModel();
-        $notificationModel = new NotificationModel();
-
-        $msg = $this->request->getGet('msg');
-
-        $updateStatus = [
-            "postStatus" => "archive",
-        ];
-
-        $newNotification = [
-            "notificationId" => Uuid::uuid4(),
-            "postId" => $id,
-            "notificationType" => "ubpost",
-            "notificationMessage" => $msg,
-        ];
-
-        $postModel->update($id, $updateStatus);
-        $notificationModel->insert($newNotification);
-
-        // redirect('admin');
     }
     
     public function comment(): string

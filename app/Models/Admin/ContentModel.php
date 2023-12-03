@@ -12,7 +12,7 @@ class ContentModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
     
     // Validation
     protected $validationRules      = [];

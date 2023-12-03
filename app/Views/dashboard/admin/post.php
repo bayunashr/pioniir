@@ -17,9 +17,6 @@
           <div class="block block-rounded">
             <div class="block-content block-content-full">
               <!-- DataTables init on table by adding .js-dataTable-buttons class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
-              <button type="button" class="js-swal-confirm btn btn-alt-secondary push mb-2">
-                <i class="fa fa-check-square text-muted me-1"></i> iki kenek
-              </button>
               <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
                 <thead>
                   <tr>
@@ -31,7 +28,6 @@
                     <th style="width: 10%;">Status</th>
                     <th style="width: 10%;">Like</th>
                     <th style="width: 10%;">Action</th>
-                    <th>Tes Sweetalert</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -55,19 +51,14 @@
                     </td>
                     <td class="text-center">
                       <?php if($value['postStatus'] == 'ban') : ?>
-                        <button id="tombol" action-type="unban" post-id="<?= $value['postId'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
-                          <i class="fa fa-fw fa-ban"></i> Unban
+                        <button id="tombol" action-type="unban" data-type="post" post-id="<?= $value['postId'] ?>" post-title="<?= $value['postTitle'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                          <i class="fa fa-fw fa-circle-notch"></i> Unban
                         </button>
                       <?php else : ?>
-                        <button id="tombol" action-type="ban" post-id="<?= $value['postId'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                        <button id="tombol" action-type="ban" data-type="post" post-id="<?= $value['postId'] ?>" post-title="<?= $value['postTitle'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
                           <i class="fa fa-fw fa-ban"></i> Ban
                         </button>
                       <?php endif ?>
-                    </td>
-                    <td>
-                      <button id="tombol" data-id="" type="button" class="js-swal-confirm btn btn-alt-secondary push mb-2">
-                        <i class="fa fa-check-square text-muted me-1"></i> iki gakenek
-                      </button>
                     </td>
                   </tr>
                   <?php endforeach ?>
@@ -108,18 +99,26 @@
 
     <script>
     $(document).on('click', '#tombol', function() {
-        const idPost = this.getAttribute('post-id');
+        const id = this.getAttribute('post-id');
+        const title = this.getAttribute('post-title');
         const action = this.getAttribute('action-type');
+        const type = this.getAttribute('data-type');
+        var customTitle;
+        if (action == "ban"){
+          customTitle = "Ban ";
+        }else{
+          customTitle = "Unban ";
+        }
         Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            title: customTitle+title+"?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, ban it!",
+            confirmButtonText: "Woiya!",
+            cancelButtonText: "Ga Dulu!",
             input: 'text',
-            inputPlaceholder: 'Enter your reason...',
+            inputPlaceholder: 'Masukkan alasan disini',
             inputAttributes: {
                 maxlength: 255,
                 autocapitalize: 'off',
@@ -135,12 +134,12 @@
             const msg = Swal.getPopup().querySelector('input').value;
 
             if (action == "ban"){
-              window.location.href = `<?= base_url('admin/ban/') ?>${idPost}?msg=${msg}`;
+              window.location.href = `<?= base_url('admin/ban/') ?>${id}?type=${type}&msg=${msg}`;
             } else{
-              window.location.href = `<?= base_url('admin/unban/') ?>${idPost}?msg=${msg}`;
+              window.location.href = `<?= base_url('admin/unban/') ?>${id}?type=${type}&msg=${msg}`;
             }
           }
         });
     });
-</script>
+    </script>
 <?= $this->endSection() ?>
