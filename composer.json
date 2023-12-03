@@ -12,6 +12,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
+        "google/apiclient": "^2.15.0",
         "ramsey/uuid": "^4.7"
     },
     "require-dev": {
