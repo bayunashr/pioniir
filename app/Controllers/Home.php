@@ -8,6 +8,10 @@ class Home extends BaseController
     {
         return view('front/home');
     }
+
+    public function explore(){
+        return view('front/explore');
+    }
 }
 
 

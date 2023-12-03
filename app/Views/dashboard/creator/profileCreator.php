@@ -37,7 +37,7 @@
                                 <div class="mb-4">
                                     <label class="form-label" for="banner">Banner</label>
                                     <div class="banner mb-3">
-                                        <img class="w-100" src="<?= base_url() ?>assets/front/img/Banner creator.png" alt="">
+                                        <img class="w-100" src="<?= base_url() ?>assets/front/img/BannerCreator.png" alt="">
                                         <p class="mt-2">Banner resolution : 900 x 225 px</p>
                                     </div>
                                     <input type="file" accept="image/*" class="form-control" id="banner" name="banner">

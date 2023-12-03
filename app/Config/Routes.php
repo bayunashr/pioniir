@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Auth::index');
 $routes->get('/register', 'Auth::register');
+$routes->get('/explore', 'Home::explore');
 
 // Super Routes
 $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], function ($routes) {
