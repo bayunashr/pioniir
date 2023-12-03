@@ -32,6 +32,11 @@ class Comment extends Migration
             'commentValue' => [
                 'type' => 'TEXT',
             ],
+            'commentStatus' => [
+                'type' => 'ENUM',
+                'constraint' => ['publish', 'ban'],
+                'default' => 'publish',
+            ],
             'createdAt' => [
                 'type'    => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
