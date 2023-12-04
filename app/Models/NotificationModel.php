@@ -38,4 +38,12 @@ class NotificationModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
     
+    public function selectById($id)
+    {
+        return $this->select('Notification.*, User.userName AS user_name')
+            ->join('User', 'User.userId = Notification.userId')
+            ->orderBy('createdAt', 'desc')
+            ->where('Notification.userId', $id)
+            ->first();
+    }
 }

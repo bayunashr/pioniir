@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\NotificationModel;
 use Google_Client;
 use Ramsey\Uuid\Uuid;
 
@@ -12,7 +13,7 @@ class Auth extends BaseController
 
     function __construct() {
         $this->userModel = new UserModel;
-
+        $this->notificationModel = new NotificationModel;
         $this->client = new Google_Client();
         $this->client->setClientId(getenv('GOOGLE_CLIENT_ID'));
         $this->client->setClientSecret(getenv('GOOGLE_CLIENT_SECRET'));
@@ -41,7 +42,8 @@ class Auth extends BaseController
             if ($userData['userPassword'] === null) {
                 session()->setFlashData('error', 'Akun Ini Hanya Diijinkan Login Menggunakan Google');
             }elseif($userData['userStatus'] === 'ban') {
-                session()->setFlashData('error', 'User dibanned');
+                $notif = $this->notificationModel->selectById($userData['userId']);
+                session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
                 return redirect('login');
                 exit;
             }elseif (password_verify($this->request->getPost('password'), $userData['userPassword'])) {
@@ -82,7 +84,8 @@ class Auth extends BaseController
                 $this->userModel->insert($user);
                 $userData = $user;
             }elseif($userData['userStatus'] === 'ban') {
-                session()->setFlashData('error', 'User dibanned');
+                $notif = $this->notificationModel->selectById($userData['userId']);
+                session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
                 return redirect('login');
                 exit;
             }
