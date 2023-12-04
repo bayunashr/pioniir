@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ContentModel extends Model
+class MilestoneModel extends Model
 {
-    protected $table            = 'Content';
-    protected $primaryKey       = 'contentId';
+    protected $table            = 'Milestone';
+    protected $primaryKey       = 'milestoneId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
-    
+    protected $allowedFields    = [];
+
     // Validation
     protected $validationRules      = [];
     protected $validationMessages   = [];
@@ -22,8 +22,8 @@ class ContentModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Content.*, Creator.creatorAlias AS creator_name')
-            ->join('Creator', 'Content.creatorId = Creator.creatorId')
+        return $this->select('Milestone.*, Creator.creatorAlias AS creator_name')
+            ->join('Creator', 'Creator.creatorId = Milestone.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

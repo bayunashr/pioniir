@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class WithdrawModel extends Model
+class CreatorModel extends Model
 {
-    protected $table            = 'Withdraw';
-    protected $primaryKey       = 'withdrawId';
+    protected $table            = 'Creator';
+    protected $primaryKey       = 'creatorId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -22,8 +22,8 @@ class WithdrawModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Withdraw.*, Creator.creatorAlias AS creator_name')
-            ->join('Creator', 'Creator.creatorId = Withdraw.creatorId')
+        return $this->select('Creator.*, User.userName AS user_name')
+            ->join('User', 'Creator.userId = User.userId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class SubscribeModel extends Model
+class ContentModel extends Model
 {
-    protected $table            = 'Subscribe';
-    protected $primaryKey       = 'subscribeId';
+    protected $table            = 'Content';
+    protected $primaryKey       = 'contentId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
-
+    protected $allowedFields    = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
+    
     // Validation
     protected $validationRules      = [];
     protected $validationMessages   = [];
@@ -22,9 +22,8 @@ class SubscribeModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Subscribe.*, User.userName AS user_name, Creator.creatorAlias AS creator_name')
-            ->join('User', 'User.userId = Subscribe.userId')
-            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+        return $this->select('Content.*, Creator.creatorAlias AS creator_name')
+            ->join('Creator', 'Content.creatorId = Creator.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

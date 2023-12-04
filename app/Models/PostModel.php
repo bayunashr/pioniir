@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use App\Database\Migrations\Creator;
 use CodeIgniter\Model;

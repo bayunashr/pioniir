@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class MilestoneModel extends Model
+class LoveModel extends Model
 {
-    protected $table            = 'Milestone';
-    protected $primaryKey       = 'milestoneId';
+    protected $table            = 'Love';
+    protected $primaryKey       = 'loveId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -22,8 +22,10 @@ class MilestoneModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Milestone.*, Creator.creatorAlias AS creator_name')
-            ->join('Creator', 'Creator.creatorId = Milestone.creatorId')
+        return $this->select('Love.*, User.userName AS user_name, Content.contentTitle AS content_title, Post.postTitle AS post_title')
+            ->join('User', 'User.userId = Love.userId')
+            ->join('Content', 'Content.contentId = Love.contentId', 'left')
+            ->join('Post', 'Post.postId = Love.postId', 'left')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

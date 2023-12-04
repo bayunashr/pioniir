@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class LoveModel extends Model
+class WithdrawModel extends Model
 {
-    protected $table            = 'Love';
-    protected $primaryKey       = 'loveId';
+    protected $table            = 'Withdraw';
+    protected $primaryKey       = 'withdrawId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -22,10 +22,8 @@ class LoveModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Love.*, User.userName AS user_name, Content.contentTitle AS content_title, Post.postTitle AS post_title')
-            ->join('User', 'User.userId = Love.userId')
-            ->join('Content', 'Content.contentId = Love.contentId', 'left')
-            ->join('Post', 'Post.postId = Love.postId', 'left')
+        return $this->select('Withdraw.*, Creator.creatorAlias AS creator_name')
+            ->join('Creator', 'Creator.creatorId = Withdraw.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

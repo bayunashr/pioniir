@@ -3,13 +3,13 @@
 namespace App\Controllers\Dashboard\Creator;
 
 use App\Controllers\BaseController;
-use App\Models\Admin\BuyModel;
-use App\Models\Admin\DonateModel;
-use App\Models\Admin\SubscribeModel;
-use App\Models\Admin\ContentModel;
-use App\Models\Admin\PostModel;
-use App\Models\Admin\UserModel;
-use App\Models\Admin\CreatorModel;
+use App\Models\BuyModel;
+use App\Models\DonateModel;
+use App\Models\SubscribeModel;
+use App\Models\ContentModel;
+use App\Models\PostModel;
+use App\Models\UserModel;
+use App\Models\CreatorModel;
 
 class Dashboard extends BaseController
 {

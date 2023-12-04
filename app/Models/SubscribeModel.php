@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CreatorModel extends Model
+class SubscribeModel extends Model
 {
-    protected $table            = 'Creator';
-    protected $primaryKey       = 'creatorId';
+    protected $table            = 'Subscribe';
+    protected $primaryKey       = 'subscribeId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
@@ -22,8 +22,9 @@ class CreatorModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Creator.*, User.userName AS user_name')
-            ->join('User', 'Creator.userId = User.userId')
+        return $this->select('Subscribe.*, User.userName AS user_name, Creator.creatorAlias AS creator_name')
+            ->join('User', 'User.userId = Subscribe.userId')
+            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }

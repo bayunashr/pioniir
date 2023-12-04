@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Admin\UserModel;
+use App\Models\UserModel;
 use Google_Client;
 use Ramsey\Uuid\Uuid;
 

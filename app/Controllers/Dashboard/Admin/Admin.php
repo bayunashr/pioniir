@@ -3,18 +3,18 @@
 namespace App\Controllers\Dashboard\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\Admin\BuyModel;
-use App\Models\Admin\CommentModel;
-use App\Models\Admin\ContentModel;
-use App\Models\Admin\CreatorModel;
-use App\Models\Admin\LoveModel;
-use App\Models\Admin\DonateModel;
-use App\Models\Admin\MilestoneModel;
-use App\Models\Admin\NotificationModel;
-use App\Models\Admin\PostModel;
-use App\Models\Admin\SubscribeModel;
-use App\Models\Admin\UserModel;
-use App\Models\Admin\WithdrawModel;
+use App\Models\BuyModel;
+use App\Models\CommentModel;
+use App\Models\ContentModel;
+use App\Models\CreatorModel;
+use App\Models\LoveModel;
+use App\Models\DonateModel;
+use App\Models\MilestoneModel;
+use App\Models\NotificationModel;
+use App\Models\PostModel;
+use App\Models\SubscribeModel;
+use App\Models\UserModel;
+use App\Models\WithdrawModel;
 
 use Ramsey\Uuid\Uuid;
 
