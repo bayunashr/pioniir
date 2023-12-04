@@ -9,76 +9,74 @@
 
 <?= $this->section('content') ?>
 <main id="main-container">
-    <!-- Page Content -->
-    <div class="content">
-        <div class="block block-rounded">
-            <div class="block-header block-header-default">
-                <h3 class="block-title">Donation</h3>
-            </div>
-            <div class="block-content block-content-full">
-                <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
-                    <thead>
-                        <tr>
-                            <th class="text-center" style="width: 5%;">NO</th>
-                            <th>Nama</th>
-                            <th>Jumlah</th>
-                            <th>Tanggal</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center fs-sm">1</td>
-                            <td class="fw-semibold fs-sm">Aku anak Mama</td>
-                            <td class="fs-sm">10000</td>
-                            <td class="fs-sm">21/10/2023</td>
-                            <td class="fs-sm">Halo Bang</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center fs-sm">2</td>
-                            <td class="fw-semibold fs-sm">Bambang</td>
-                            <td class="fs-sm">10000</td>
-                            <td class="fs-sm">21/09/2023</td>
-                            <td class="fs-sm">Absen Bang</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- END Page Content -->
+   <!-- Page Content -->
+   <div class="content">
+      <div class="block block-rounded">
+         <div class="block-header block-header-default">
+            <h3 class="block-title">Donation</h3>
+         </div>
+         <div class="block-content block-content-full">
+            <table class="table table-bordered table-striped table-vcenter js-dataTable-responsive">
+               <thead>
+                  <tr>
+                     <th class="text-center" style="width: 5%;">NO</th>
+                     <th class="d-none" style="width: 15%;">ID</th>
+                     <th>Nama</th>
+                     <th>Jumlah</th>
+                     <th>Tanggal</th>
+                     <th>Description</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <?php $no = 1; ?>
+                  <?php foreach ($donate as $data => $value): ?>
+                  <tr>
+                     <td class="text-center fs-sm"><?= $no++ ?></td>
+                     <td class="d-none fw-semibold fs-sm"><?= $value['donateId'] ?></td>
+                     <td class="fw-semibold fs-sm"><?= $value['donateName'] ?></td>
+                     <td class="fs-sm"><?= format_rupiah($value['donateAmount']) ?></td>
+                     <td class="fs-sm"><?= format_date($value['donateTimestamp'])  ?></td>
+                     <td class="fs-sm"><?= $value['donateDescription'] ?></td>
+                  </tr>
+                  <?php endforeach;?>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+   <!-- END Page Content -->
 </main>
 
 <div class="modal" id="modal-block-vcenter" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="block block-rounded block-transparent mb-0">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title">Tarik Saldo</h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-fw fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <form action="" method="post">
-                    <div class="block-content fs-sm">
-                        <div class="mb-4">
-                            <label class="form-label" for="jumlah">Jumlah Saldo</label>
-                            <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Saldo">
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label" for="pass">User Password</label>
-                            <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="block-content block-content-full text-end bg-body">
-                        <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Submit</button>
-                    </div>
-                </form>
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="block block-rounded block-transparent mb-0">
+            <div class="block-header block-header-default">
+               <h3 class="block-title">Tarik Saldo</h3>
+               <div class="block-options">
+                  <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                     <i class="fa fa-fw fa-times"></i>
+                  </button>
+               </div>
             </div>
-        </div>
-    </div>
+            <form action="" method="post">
+               <div class="block-content fs-sm">
+                  <div class="mb-4">
+                     <label class="form-label" for="jumlah">Jumlah Saldo</label>
+                     <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Saldo">
+                  </div>
+                  <div class="mb-4">
+                     <label class="form-label" for="pass">User Password</label>
+                     <input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
+                  </div>
+               </div>
+               <div class="block-content block-content-full text-end bg-body">
+                  <button type="submit" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Submit</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>
 <?= $this->endsection() ?>
 
