@@ -15,8 +15,16 @@ function format_persen_miles($nilai, $target) {
     return strval(($nilai/$target)*100)."%";
 }
 
+function format_persen_miles_creator($nilai, $target) {
+    return intval(($nilai/$target)*100);
+}
+
 function format_waktu_lampau($time){
     $now = new DateTime();
     $past = new DateTime($time);
     return $now->diff($past)->format('%i');
+}
+
+function format_date($waktu_awal)  {
+    return date('H:i:s d F Y', strtotime($waktu_awal));
 }

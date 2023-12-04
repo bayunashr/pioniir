@@ -34,7 +34,7 @@ class Milestone extends Migration
             ],
             'milestoneStatus' => [
                 'type' => 'ENUM',
-                'constraint' => ['draft', 'publish', 'archive'],
+                'constraint' => ['draft', 'publish', 'archive','ended'],
                 'default' => 'draft',
             ],
             'createdAt' => [

@@ -41,7 +41,10 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     // Milestone
     $routes->get('milestone', 'Milestone::index');
     $routes->get('milestone/add', 'Milestone::add');
+    $routes->post('milestone/add', 'Milestone::add');
     $routes->get('milestone/edit/(:segment)', 'Milestone::edit/$1');
+    $routes->post('milestone/edit/(:segment)', 'Milestone::edit/$1');
+    $routes->get('milestone/ended/(:segment)', 'Milestone::ended/$1');
     // Content
     $routes->get('content', 'Content::index');
     $routes->get('content/add', 'Content::add');
