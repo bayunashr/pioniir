@@ -44,6 +44,7 @@ class Post extends BaseController
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             $this->postModel->insert($data);
+            session()->setFlashData('success', 'Berhasil Menambah Data Post');
             return redirect()->to(base_url('dashboard/post'));
         } else {
             $data = [
@@ -66,6 +67,7 @@ class Post extends BaseController
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             $this->postModel->update($id, $data);
+            session()->setFlashData('success', 'Berhasil Mengubah Data Post');
             return redirect()->to(base_url('dashboard/post'));
         } else {
             $data = [
@@ -81,6 +83,7 @@ class Post extends BaseController
     public function destroy($id)
     {
         $this->postModel->delete($id);
+        session()->setFlashData('success', 'Berhasil Menghapus Data Post');
         return redirect()->to(base_url('dashboard/post'));
     }
 }
