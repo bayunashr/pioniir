@@ -40,6 +40,10 @@ class Auth extends BaseController
         if ($userData) {
             if ($userData['userPassword'] === null) {
                 session()->setFlashData('error', 'Akun Ini Hanya Diijinkan Login Menggunakan Google');
+            }elseif($userData['userStatus'] === 'ban') {
+                session()->setFlashData('error', 'User dibanned');
+                return redirect('login');
+                exit;
             }elseif (password_verify($this->request->getPost('password'), $userData['userPassword'])) {
                 session()->set([
                     'loginUser'     => true,
@@ -78,7 +82,7 @@ class Auth extends BaseController
                 $this->userModel->insert($user);
                 $userData = $user;
             }elseif($userData['userStatus'] === 'ban') {
-                session()->setFlashData('error', 'User Di Banned!');
+                session()->setFlashData('error', 'User dibanned');
                 return redirect('login');
                 exit;
             }
