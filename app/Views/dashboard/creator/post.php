@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -29,39 +30,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center fs-sm">1</td>
-                            <td class="fw-semibold fs-sm">Introduction</td>
-                            <td class="fs-sm">12</td>
-                            <td class="fs-sm">
-                                <!-- Pilih salah satu -->
-                                <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
-                                </h5>
-                            </td>
-                            <td class="fs-sm">
-                                <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center fs-sm">2</td>
-                            <td class="fw-semibold fs-sm">Apa Kabar?</td>
-                            <td class="fs-sm">12</td>
-                            <td class="fs-sm">
-                                <h5>
-                                    <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                                    <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
-                                </h5>
-                            </td>
-                            <td class="fs-sm">
-                                <a href="<?= base_url('dashboard/post/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
-                            </td>
-                        </tr>
+                        <?php $no = 1; ?>
+                        <?php foreach ($post as $data) : ?>
+                            <tr>
+                                <td class="text-center fs-sm"><?= $no++ ?></td>
+                                <td class="fw-semibold fs-sm"><?= $data['postTitle'] ?></td>
+                                <td class="fs-sm"><?= $data['postLike'] ?></td>
+                                <td class="fs-sm">
+                                    <h5>
+                                        <?php if ($data['postStatus'] == 'publish') : ?>
+                                            <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span>
+                                        <?php elseif ($data['postStatus'] == 'draft') : ?>
+                                            <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span>
+                                        <?php else : ?>
+                                            <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                                        <?php endif ?>
+                                    </h5>
+                                </td>
+                                <td class="fs-sm">
+                                    <a href="<?= base_url('dashboard/post/edit/' . $data['postId']) ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
+                                    <btn id="tombol" post-id="<?= $data['postId'] ?>" class="btn btn-sm btn-danger mb-4 js-swal-confirm"><i class="nav-main-link-icon si si-trash"></i> Delete</btn>
+                                </td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>
@@ -89,7 +80,28 @@
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+<script src="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Page JS Code -->
 <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
+<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
+<script>
+    $(document).on('click', '#tombol', function() {
+        const id = this.getAttribute('post-id');
+        Swal.fire({
+            title: "Apakah ingin menghapus data ini?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iya!",
+            cancelButtonText: "Ga Dulu!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const msg = Swal.getPopup().querySelector('input').value;
+                window.location.href = `<?= base_url('dashboard/post/delete/') ?>${id}`;
+            }
+        });
+    });
+</script>
 <?= $this->endsection() ?>

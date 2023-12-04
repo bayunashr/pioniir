@@ -49,5 +49,8 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     // Post
     $routes->get('post', 'Post::index');
     $routes->get('post/add', 'Post::add');
+    $routes->post('post/add', 'Post::add');
     $routes->get('post/edit/(:segment)', 'Post::edit/$1');
+    $routes->post('post/edit/(:segment)', 'Post::edit/$1');
+    $routes->get('post/delete/(:segment)', 'Post::destroy/$1');
 });
