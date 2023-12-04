@@ -27,7 +27,7 @@
                     <div class="navbar-collapse-wrapper bg-white d-flex flex-row flex-nowrap w-100 justify-content-between align-items-center py-sm-3">
                         <div class="navbar-brand w-100">
                             <a href="<?= base_url() ?>">
-                                <img class="w-15" src="<?= base_url('') ?>assets/front/img/PioniirDark.png" alt="" />
+                                <img class="w-15" src="<?= base_url('') ?>assets/front/img/pioniirdark.png" alt="" />
                             </a>
                         </div>
                         <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start"></div>

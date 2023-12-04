@@ -20,7 +20,7 @@
             <div class="container pt-15 pb-21 pt-md-16 pb-md-21 text-center">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h1 class="display-1 mb-3 text-white"><a href="<?= base_url() ?>"><img class="w-20" src="<?= base_url('') ?>assets/front/img/pioniirDark.png" alt=""></a></h1>
+                        <h1 class="display-1 mb-3 text-white"><a href="<?= base_url() ?>"><img class="w-20" src="<?= base_url('') ?>assets/front/img/pioniirdark.png" alt=""></a></h1>
                         <!-- /nav -->
                     </div>
                     <!-- /column -->

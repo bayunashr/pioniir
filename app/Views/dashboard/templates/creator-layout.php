@@ -45,7 +45,7 @@
                <span class="smini-visible">
                   <i class="fa fa-circle-notch text-primary"></i>
                </span>
-               <span class="smini-hide fs-5 tracking-wider row"><img class="col-sm-6 col-4" src="<?= base_url('') ?>assets/front/img/pioniirWhite.png" alt=""></span>
+               <span class="smini-hide fs-5 tracking-wider row"><img class="col-sm-6 col-4" src="<?= base_url('') ?>assets/front/img/pioniirwhite.png" alt=""></span>
             </a>
             <!-- END Logo -->
 

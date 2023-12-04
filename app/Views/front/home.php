@@ -17,7 +17,7 @@
     <!-- /.row -->
 </div>
 <!-- /.container -->
-<figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url('') ?>assets/front/img/DoodleBackground.png" alt="" /></figure>
+<figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url('') ?>assets/front/img/doodlebackground.png" alt="" /></figure>
 <!-- /section -->
 <section class="wrapper bg-light">
     <div class="container py-14 py-md-16">
