@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
     <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -49,9 +50,15 @@
                       <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger"><?= $value['userStatus'] ?></span>
                     </td>
                     <td>
-                      <a href="" class="btn btn-sm btn-alt-danger">
-                        <i class="fa fa-fw fa-ban"></i> Ban
-                      </a>
+                      <?php if($value['userStatus'] == 'ban') : ?>
+                        <button id="tombol" action-type="unban" data-type="user" user-id="<?= $value['userId'] ?>" user-name="<?= $value['userName'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                          <i class="fa fa-fw fa-circle-notch"></i> Unban
+                        </button>
+                      <?php else : ?>
+                        <button id="tombol" action-type="ban" data-type="user" user-id="<?= $value['userId'] ?>" user-name="<?= $value['userName'] ?>" class="btn btn-sm btn-alt-danger js-swal-confirm">
+                          <i class="fa fa-fw fa-ban"></i> Ban
+                        </button>
+                      <?php endif ?>
                     </td>
                   </tr>
                   <?php endforeach ?>
@@ -84,7 +91,56 @@
     <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
     <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
     <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+    <script src="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
     <!-- Page JS Code -->
     <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
+    <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
+
+    <script>
+    $(document).on('click', '#tombol', function() {
+        const id = this.getAttribute('user-id');
+        const name = this.getAttribute('user-name');
+        const action = this.getAttribute('action-type');
+        const type = this.getAttribute('data-type');
+        var customTitle;
+        if (action == "ban"){
+          customTitle = "Ban ";
+        }else{
+          customTitle = "Unban ";
+        }
+        Swal.fire({
+            title: customTitle+name+"?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Woiya!",
+            cancelButtonText: "Ga Dulu!",
+            input: 'text',
+            inputPlaceholder: 'Masukin alasan disini',
+            inputAttributes: {
+                maxlength: 255,
+                autocapitalize: 'off',
+                autocorrect: 'off'
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Masukin alasannya!';
+                }
+            }
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const msg = Swal.getPopup().querySelector('input').value;
+
+            if (action == "ban"){
+              window.location.href = `<?= base_url('admin/ban/') ?>${id}?type=${type}&msg=${msg}`;
+            } else{
+              window.location.href = `<?= base_url('admin/unban/') ?>${id}?type=${type}&msg=${msg}`;
+            }
+          }
+        });
+    });
+    </script>
+
 <?= $this->endSection() ?>

@@ -130,7 +130,7 @@
             confirmButtonText: "Woiya!",
             cancelButtonText: "Ga Dulu!",
             input: 'text',
-            inputPlaceholder: 'Masukkan alasan disini',
+            inputPlaceholder: 'Masukin alasan disini',
             inputAttributes: {
                 maxlength: 255,
                 autocapitalize: 'off',
@@ -138,7 +138,7 @@
             },
             inputValidator: (value) => {
                 if (!value) {
-                    return 'You need to enter a reason!';
+                    return 'Masukin alasannya!';
                 }
             }
         }).then((result) => {
