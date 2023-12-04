@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use App\Models\NotificationModel;
 use Ramsey\Uuid\Uuid;
 
 class Post extends BaseController
@@ -16,6 +17,7 @@ class Post extends BaseController
         $this->userModel = new UserModel();
         $this->creatorModel = new CreatorModel();
         $this->postModel = new PostModel();
+        $this->notifModel = new NotificationModel();
         $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
     }
@@ -24,7 +26,8 @@ class Post extends BaseController
     {
         $data = [
             'title' => 'Dashboard - Pioniir Creator',
-            'post' => $this->postModel->selectAll()
+            'post' => $this->postModel->selectAll(),
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
         ];
         return view('dashboard/creator/post', $data);
     }
@@ -38,12 +41,14 @@ class Post extends BaseController
                 'postTitle' => $this->request->getPost('postTitle'),
                 'postValue' => $this->request->getPost('postValue'),
                 'postStatus' => $this->request->getPost('postStatus'),
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             $this->postModel->insert($data);
             return redirect()->to(base_url('dashboard/post'));
         } else {
             $data = [
-                'title' => 'Dashboard - Pioniir Creator'
+                'title' => 'Dashboard - Pioniir Creator',
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             return view('dashboard/creator/postAdd', $data);
         }
@@ -58,13 +63,15 @@ class Post extends BaseController
                 'postTitle' => $this->request->getPost('postTitle'),
                 'postValue' => $this->request->getPost('postValue'),
                 'postStatus' => $this->request->getPost('postStatus'),
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             $this->postModel->update($id, $data);
             return redirect()->to(base_url('dashboard/post'));
         } else {
             $data = [
                 'title' => 'Dashboard - Pioniir Creator',
-                'post' => $this->postModel->find($id)
+                'post' => $this->postModel->find($id),
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             return view('dashboard/creator/postEdit', $data);
         }
