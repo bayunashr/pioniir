@@ -44,7 +44,7 @@
                                         <!-- IF already creator -->
                                         <li class="nav-item"><a class="dropdown-item" href="#">Dashboard</a></li>
                                         <!-- Else -->
-                                        <li class="nav-item"><a class="dropdown-item" href="#">Jadi Creator</a></li>
+                                        <li class="nav-item"><a class="dropdown-item" href="<?= base_url('register/creator') ?>">Jadi Creator</a></li>
                                         <li class="nav-item"><a class="dropdown-item" href="#">Profile</a></li>
                                         <li class="nav-item"><a class="dropdown-item" href="#">Logout</a></li>
                                     </ul>

@@ -12,6 +12,10 @@ class Home extends BaseController
     public function explore(){
         return view('front/explore');
     }
+
+    public function registerCreator(){
+        return view('front/regCreator');
+    }
 }
 
 

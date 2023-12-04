@@ -2,7 +2,11 @@
 
 <?= $this->section('content') ?>
 <div class="container pt-10 pt-md-10 text-center">
-    <div class="swiper-container mb-10" data-margin="10" data-nav="true" data-dots="false" data-items-xl="8" data-items-md="7" data-items-xs="3">
+    <div class="input-group input-group-sm mb-4">
+        <input id="textInputExample" type="text" class="form-control" placeholder="Search" aria-describedby="button-addon2">
+        <button class="btn btn-navy" type="button" id="button-addon2">Search</button>
+    </div>
+    <div class="swiper-container mb-4" data-margin="10" data-nav="false" data-dots="false" data-items-xl="8" data-items-md="7" data-items-xs="3">
         <div class="swiper">
             <div class="swiper-wrapper p-2">
                 <div class="swiper-slide w-auto"><a class="text-white fw-bold btn btn-sm btn-navy" href="#">All</a></div>
@@ -87,5 +91,23 @@
             </div>
         </div>
     </div>
+    <nav class="d-flex mt-8 justify-content-center" aria-label="pagination">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true"><i class="uil uil-arrow-left"></i></span>
+                </a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true"><i class="uil uil-arrow-right"></i></span>
+                </a>
+            </li>
+        </ul>
+        <!-- /.pagination -->
+    </nav>
 </div>
 <?= $this->endsection() ?>
