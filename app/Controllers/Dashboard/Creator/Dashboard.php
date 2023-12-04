@@ -10,6 +10,7 @@ use App\Models\ContentModel;
 use App\Models\PostModel;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use App\Models\NotificationModel;
 
 class Dashboard extends BaseController
 {
@@ -23,6 +24,7 @@ class Dashboard extends BaseController
         $postModel      = new PostModel();
         $userModel      = new UserModel;
         $creatorModel   = new CreatorModel;
+        $notifModel     = new NotificationModel;
 
         $userData       = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $creatorData    = $creatorModel->where('userId', $userData['userId'])->first();
@@ -34,6 +36,7 @@ class Dashboard extends BaseController
             'sub'       => $subscribeModel->where('creatorId', $creatorData['creatorId'])->where('subscribeStatus', 'success')->countAllResults(),
             'content'   => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
             'post'      => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'notif'     => $notifModel->selectAllById($creatorData['userId']),
         ];
 
         return view('dashboard/creator/dashboard', $data);

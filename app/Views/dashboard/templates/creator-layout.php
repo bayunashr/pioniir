@@ -167,72 +167,84 @@
                         <h5 class="dropdown-header text-uppercase">Notifications</h5>
                      </div>
                      <ul class="nav-items mb-0">
+                        <?php foreach ($notif as $data => $value): ?>
+                        <?php
+                           switch($value->notificationType){
+                              case "bcontent":
+                                 $icon = "fa-circle-xmark text-danger";
+                                 $title = "Kontenmu Terblokir!";
+                                 $text = "Konten ".'"'.$value->content_title.'"'." diblokir karena ".$value->notificationMessage;
+                                 break;
+                              case "ubcontent":
+                                 $icon = "fa-circle-check text-success";
+                                 $title = "Kontenmu Terbuka!";
+                                 $text = "Konten ".'"'.$value->content_title.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 break;
+                              case "bpost":
+                                 $icon = "fa-circle-xmark text-danger";
+                                 $title = "Postinganmu Terblokir!";
+                                 $text = "Post ".'"'.$value->post_title.'"'." diblokir karena ".$value->notificationMessage;
+                                 break;
+                              case "ubpost":
+                                 $icon = "fa-circle-check text-success";
+                                 $title = "Postinganmu Terbuka!";
+                                 $text = "Post ".'"'.$value->post_title.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 break;
+                              case "bcomment":
+                                 $icon = "fa-circle-xmark text-danger";
+                                 $title = "Komentarmu Terblokir!";
+                                 $text = "Komentar ".'"'.$value->comment_value.'"'." diblokir karena ".$value->notificationMessage;
+                                 break;
+                              case "ubcomment":
+                                 $icon = "fa-circle-check text-success";
+                                 $title = "Komentarmu Terbuka!";
+                                 $text = "Komentar ".'"'.$value->comment_value.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 break;
+                              case "buser":
+                                 $icon = "fa-circle-xmark text-danger";
+                                 $title = "Akunmu Terblokir!";
+                                 $text = "Akun ".'"'.$value->user_name.'"'." diblokir karena ".$value->notificationMessage;
+                                 break;
+                              case "ubuser":
+                                 $icon = "fa-circle-check text-success";
+                                 $title = "Akunmu Terbuka!";
+                                 $text = "Akun ".'"'.$value->user_name.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 break;
+                              case "ndonate":
+                                 $icon = "fa-money-bill-1 text-success";
+                                 $title = "Donasi Diterima!";
+                                 $text = "Kamu menerima ".format_rupiah($value->donate_amount)." dari ".'"'.$value->donatur_name.'"';
+                                 break;
+                              case "nsubscribe":
+                                 $icon = "fa-compact-disc text-primary";
+                                 $title = "Supporter Baru!";
+                                 $text = '"'.$value->subscriber_name.'"'." mulai mengikuti";
+                                 break;
+                              case "nbuy":
+                                 $icon = "fa-bag-shopping text-warning";
+                                 $title = "Kontenmu Terjual!";
+                                 $text = '"'.$value->buyer_name.'"'." membeli ".'"'.$value->content_buy_title.'"';
+                                 break;
+                              case "nmilestone":
+                                 $icon = "fa-rocket text-info";
+                                 $title = "Milestone Tercapai!";
+                                 $text = '"'.$value->miles_name.'"'." sudah mencapai batasnya";
+                                 break;
+                           }
+                        ?>
                         <li>
                            <a class="text-dark d-flex py-2" href="javascript:void(0)">
                               <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-check-circle text-success"></i>
+                                 <i class="fa fa-fw <?= $icon ?>"></i>
                               </div>
                               <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">You have a new follower</div>
-                                 <span class="fw-medium text-muted">15 min ago</span>
+                                 <div class="fw-semibold"><?= $title ?></div>
+                                 <span class="fw-medium"><?= $text ?></span><br>
+                                 <span class="fw-medium text-muted"><?= format_waktu_lampau($value->createdAt) ?></span>
                               </div>
                            </a>
                         </li>
-                        <li>
-                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                              <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                              </div>
-                              <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">1 new sale, keep it up</div>
-                                 <span class="fw-medium text-muted">22 min ago</span>
-                              </div>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                              <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-times-circle text-danger"></i>
-                              </div>
-                              <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">Update failed, restart server</div>
-                                 <span class="fw-medium text-muted">26 min ago</span>
-                              </div>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                              <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-plus-circle text-primary"></i>
-                              </div>
-                              <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">2 new sales, keep it up</div>
-                                 <span class="fw-medium text-muted">33 min ago</span>
-                              </div>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                              <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-user-plus text-success"></i>
-                              </div>
-                              <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">You have a new subscriber</div>
-                                 <span class="fw-medium text-muted">41 min ago</span>
-                              </div>
-                           </a>
-                        </li>
-                        <li>
-                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                              <div class="flex-shrink-0 me-2 ms-3">
-                                 <i class="fa fa-fw fa-check-circle text-success"></i>
-                              </div>
-                              <div class="flex-grow-1 pe-2">
-                                 <div class="fw-semibold">You have a new follower</div>
-                                 <span class="fw-medium text-muted">42 min ago</span>
-                              </div>
-                           </a>
-                        </li>
+                        <?php endforeach ?>
                      </ul>
                      <div class="p-2 border-top text-center">
                         <a class="d-inline-block fw-medium" href="javascript:void(0)">

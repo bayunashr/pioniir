@@ -27,4 +27,13 @@ class ContentModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+
+    public function selectOneByContentId($id)
+    {
+        return $this->select('Content.*, User.userId AS user_id')
+        ->join('Creator', 'Creator.creatorId = Content.creatorId')
+        ->join('User', 'User.userId = Creator.userId')
+        ->where('Content.contentId', $id)
+        ->first();
+    }
 }

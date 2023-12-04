@@ -29,4 +29,12 @@ class CommentModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+
+    public function selectOneByCommentId($id)
+    {
+        return $this->select('Comment.*, User.userId AS user_id')
+        ->join('User', 'User.userId = Comment.userId')
+        ->where('Comment.commentId', $id)
+        ->first();
+    }
 }

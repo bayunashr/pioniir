@@ -42,7 +42,7 @@ class Auth extends BaseController
             if ($userData['userPassword'] === null) {
                 session()->setFlashData('error', 'Akun Ini Hanya Diijinkan Login Menggunakan Google');
             }elseif($userData['userStatus'] === 'ban') {
-                $notif = $this->notificationModel->selectById($userData['userId']);
+                $notif = $this->notificationModel->selectOneById($userData['userId']);
                 session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
                 return redirect('login');
                 exit;
@@ -84,7 +84,7 @@ class Auth extends BaseController
                 $this->userModel->insert($user);
                 $userData = $user;
             }elseif($userData['userStatus'] === 'ban') {
-                $notif = $this->notificationModel->selectById($userData['userId']);
+                $notif = $this->notificationModel->selectOneById($userData['userId']);
                 session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
                 return redirect('login');
                 exit;

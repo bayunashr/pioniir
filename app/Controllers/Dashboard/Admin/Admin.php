@@ -105,6 +105,8 @@ class Admin extends BaseController
             $updateStatus = [
                 "postStatus" => "ban",
             ];
+            $post = $postModel->selectOneByPostId($id);
+            $newNotification["userId"] = $post['user_id'];
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "bpost";
             $postModel->update($id, $updateStatus);
@@ -112,13 +114,17 @@ class Admin extends BaseController
             $updateStatus = [
                 "contentStatus" => "ban",
             ];
+            $content = $contentModel->selectOneByContentId($id);
             $newNotification["contentId"] = $id;
+            $newNotification["userId"] = $content['user_id'];
             $newNotification["notificationType"] = "bcontent";
             $contentModel->update($id, $updateStatus);
         } elseif($type == "comment"){
             $updateStatus = [
                 "commentStatus" => "ban",
             ];
+            $comment = $commentModel->selectOneByCommentId($id);
+            $newNotification["userId"] = $comment['user_id'];
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "bcomment";
             $commentModel->update($id, $updateStatus);

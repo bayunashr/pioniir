@@ -46,4 +46,13 @@ class PostModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+
+    public function selectOneByPostId($id)
+    {
+        return $this->select('Post.*, User.userId AS user_id')
+        ->join('Creator', 'Creator.creatorId = Post.creatorId')
+        ->join('User', 'User.userId = Creator.userId')
+        ->where('Post.postId', $id)
+        ->first();
+    }
 }

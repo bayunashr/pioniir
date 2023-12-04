@@ -14,3 +14,9 @@ function format_hari_sub($date) {
 function format_persen_miles($nilai, $target) {
     return strval(($nilai/$target)*100)."%";
 }
+
+function format_waktu_lampau($time){
+    $now = new DateTime();
+    $past = new DateTime($time);
+    return $now->diff($past)->format('%i');
+}
