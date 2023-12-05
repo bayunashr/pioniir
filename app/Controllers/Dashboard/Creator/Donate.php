@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\DonateModel;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use App\Models\NotificationModel;
 
 class Donate extends BaseController
 {
@@ -14,6 +15,7 @@ class Donate extends BaseController
         $donateModel    = new DonateModel;
         $userModel      = new UserModel;
         $creatorModel   = new CreatorModel;
+        $notifModel     = new NotificationModel();
 
         $userData       = $userModel->where('userEmail', session()->get('userEmail'))
                         ->where('userName', session()->get('userName'))->first();
@@ -21,7 +23,8 @@ class Donate extends BaseController
 
         $data = [
             'title'     => 'Dashboard - Pioniir Creator',
-            'donate'    => $donateModel->where('creatorId', $creatorData['creatorId'])->where('donateStatus', 'success')->orderBy('donateTimestamp', 'DESC')->findAll()
+            'donate'    => $donateModel->where('creatorId', $creatorData['creatorId'])->where('donateStatus', 'success')->orderBy('donateTimestamp', 'DESC')->findAll(),
+            'notif'     => $notifModel->selectAllById($creatorData['userId']),
         ];
 
         return view('dashboard/creator/donate', $data);

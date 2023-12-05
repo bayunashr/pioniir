@@ -6,17 +6,19 @@ use App\Controllers\BaseController;
 use App\Models\MilestoneModel;
 use App\Models\CreatorModel;
 use App\Models\UserModel;
+use App\Models\NotificationModel;
 
 use Ramsey\Uuid\Uuid;
 
 class Milestone extends BaseController
 {
-    protected $milestoneModel, $userModel, $creatorModel,$userData, $creatorData, $cekPublish;
+    protected $milestoneModel, $userModel, $creatorModel,$userData, $creatorData, $cekPublish, $notifModel;
 
     function __construct() {
         $this->milestoneModel = new MilestoneModel;
         $this->userModel      = new UserModel;
         $this->creatorModel   = new CreatorModel;
+        $this->notifModel     = new NotificationModel();
         $this->userData       = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData    = $this->creatorModel->where('userId', $this->userData['userId'])->first();
         $this->cekPublish     = $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->where('milestoneStatus', 'publish')->countAllResults();
@@ -27,7 +29,8 @@ class Milestone extends BaseController
         $data = [
             'title'         => 'Milestone - Pioniir Creator',
             'miles'         => $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->orderBy("FIELD(milestoneStatus, 'publish', 'draft', 'archive', 'ended')", '', false)->findAll(),
-            'milespublish'  => $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->where('milestoneStatus', 'publish')->findAll()
+            'milespublish'  => $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->where('milestoneStatus', 'publish')->findAll(),
+            'notif'         => $this->notifModel->selectAllById($this->creatorData['userId']),
         ];
         return view('dashboard/creator/milestone', $data);
     }
@@ -53,7 +56,8 @@ class Milestone extends BaseController
             }
         } else {
             $data = [
-                'title' => 'Milestone - Pioniir Creator'
+                'title' => 'Milestone - Pioniir Creator',
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             return view('dashboard/creator/milestoneAdd', $data);
         }
@@ -89,7 +93,8 @@ class Milestone extends BaseController
         } else {
             $data = [
                 'title' => 'Milestone - Pioniir Creator',
-                'miles' => $miles
+                'miles' => $miles,
+                'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             ];
             return view('dashboard/creator/milestoneEdit', $data);
         }       

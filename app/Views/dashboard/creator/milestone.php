@@ -36,6 +36,7 @@
                <thead>
                   <tr>
                      <th class="text-center" style="width: 5%;">NO</th>
+                     <th class="d-none" style="width: 15%;">ID</th>
                      <th>Nama</th>
                      <th>Balance</th>
                      <th>Target</th>
@@ -48,6 +49,7 @@
                   <?php foreach ($miles as $data => $value): ?>
                   <tr>
                      <td class="text-center fs-sm"><?= $no++ ?></td>
+                     <td class="d-none fw-semibold fs-sm"><?= $value['milestoneId'] ?></td>
                      <td class="fw-semibold fs-sm"><?= $value['milestoneName'] ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['milestoneBalance']) ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['milestoneTarget']) ?></td>

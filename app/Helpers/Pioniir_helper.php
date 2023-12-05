@@ -16,7 +16,9 @@ function format_persen_miles($nilai, $target) {
 }
 
 function format_persen_miles_creator($nilai, $target) {
-    return intval(($nilai/$target)*100);
+    $percentage = intval(($nilai / $target) * 100);
+    $formatted_percentage = min($percentage, 100);
+    return $formatted_percentage;
 }
 
 function format_waktu_lampau($time){

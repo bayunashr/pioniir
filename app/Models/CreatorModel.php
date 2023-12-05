@@ -12,7 +12,7 @@ class CreatorModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['userId', 'creatorAlias', 'creatorTag', 'creatorDescription', 'creatorSubPrice', 'creatorBalance', 'creatorBanner'];
 
     // Validation
     protected $validationRules      = [];

@@ -53,7 +53,7 @@ class Auth extends BaseController
                     'userFullName'  => $userData['userFullName'],
                     'userEmail'     => $userData['userEmail']
                 ]);
-                return redirect();
+                return redirect()->to(base_url());
                 exit;
             }else{
                 session()->setFlashData('error', 'Password Salah');

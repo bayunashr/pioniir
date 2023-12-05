@@ -1,12 +1,33 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\UserModel;
+use App\Models\CreatorModel;
 
 class Home extends BaseController
 {
-    public function index(): string
+    protected $userData, $creatorData, $userModel, $creatorModel;
+    function __construct()
     {
-        return view('front/home');
+        $this->userModel = new UserModel();
+        $this->creatorModel = new CreatorModel();
+        if (session()->has('userEmail')) {
+            $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
+            $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->findAll();
+        }else{
+            $this->userData['userId'] = 0;
+        }
+        
+    }
+
+    public function index()
+    {
+        $data = [
+            'creator' => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'  => $this->userData
+        ];
+        var_dump($data['creator']);
+        return view('front/home',$data);
     }
 
     public function explore(){
@@ -17,5 +38,3 @@ class Home extends BaseController
         return view('front/regCreator');
     }
 }
-
-

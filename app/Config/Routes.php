@@ -38,8 +38,12 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     $routes->get('profile/creator', 'Profile::index');
     $routes->post('profile/social/add', 'Profile::socialAdd');
     $routes->get('profile/social/delete/(:segment)', 'Profile::socialDelete/$1');
-    $routes->get('balance', 'Transaction::index');
     $routes->get('donate', 'Donate::index');
+
+    // Balance
+    $routes->get('balance', 'Transaction::index');
+    $routes->post('balance/withdraw', 'Transaction::withdraw');
+
     // Milestone
     $routes->get('milestone', 'Milestone::index');
     $routes->get('milestone/add', 'Milestone::add');
