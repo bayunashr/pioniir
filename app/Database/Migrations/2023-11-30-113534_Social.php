@@ -21,7 +21,7 @@ class Social extends Migration
             ],
             'socialMedia' => [
                 'type' => 'ENUM',
-                'constraint' => ['Facebook', 'Twitter', 'Instagram', 'Tiktok', 'Youtube', 'Twitch', 'Discord', 'Website'],
+                'constraint' => ['facebook', 'twitter', 'instagram', 'tiktok', 'youtube', 'twitch', 'discord', 'website'],
             ],
             'socialLink' => [
                 'type' => 'VARCHAR',

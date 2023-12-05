@@ -11,7 +11,7 @@ use Ramsey\Uuid\Uuid;
 
 class Post extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $postModel;
+    protected $userData, $creatorData, $userModel, $creatorModel, $postModel, $notifModel;
     function __construct()
     {
         $this->userModel = new UserModel();

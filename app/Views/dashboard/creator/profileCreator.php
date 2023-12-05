@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
 <link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/select2/css/select2.min.css">
+<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -44,16 +45,14 @@
                                 </div>
                                 <div class="mb-4">
                                     <label class="form-label" for="socmed">Social Media</label>
-                                    <div class="input-group mb-2">
-                                        <input type="text" readonly class="form-control form-control-alt" value="facebook.com/lorem">
-                                        <a href="#" class="btn btn-info"><i class="si si-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger"><i class="si si-trash"></i></a>
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <input type="text" readonly class="form-control form-control-alt" value="instagram.com/lorem">
-                                        <a href="#" class="btn btn-info"><i class="si si-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger"><i class="si si-trash"></i></a>
-                                    </div>
+                                    <?php foreach ($social as $data) : ?>
+                                        <div class="input-group mb-2">
+                                            <div class="p-2 bg-primary-lighter"><i style="width: 16px;" class="<?= ($data['socialMedia'] == 'website') ? 'fa fa-globe' : 'fab fa-' . $data['socialMedia'] ?>"></i></div>
+                                            <input type="text" readonly class="form-control form-control-alt" value="<?= $data['socialLink'] ?>">
+                                            <a href="#" class="btn btn-info"><i class="si si-pencil"></i></a>
+                                            <btn id="tombol" social-id="<?= $data['socialId'] ?>" class="btn btn-danger"><i class="si si-trash"></i></btn>
+                                        </div>
+                                    <?php endforeach ?>
                                     <div class="mb-4 mt-3">
                                         <button type="button" class="btn btn-outline-secondary btn-sm push" data-bs-toggle="modal" data-bs-target="#modal-block-vcenter"><i class="nav-main-link-icon fa fa-plus"></i> Add links</button>
                                     </div>
@@ -163,11 +162,24 @@
                         </button>
                     </div>
                 </div>
-                <form action="" method="post">
+                <form action="<?= base_url('dashboard/profile/social/add') ?>" method="post">
                     <div class="block-content fs-sm">
                         <div class="mb-4">
                             <label class="form-label" for="socmed">Social URL</label>
-                            <input type="text" class="form-control" id="socmed" name="socmed" placeholder="Social Media link">
+                            <input type="text" class="form-control" id="socmed" name="socialLink" placeholder="Social Media link">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label" for="socmed">Type</label>
+                            <select name="socialMedia" id="">
+                                <option value="facebook">Facebook</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="tiktok">Tiktok</option>
+                                <option value="youtube">Youtube</option>
+                                <option value="twitch">Twitch</option>
+                                <option value="discord">Discord</option>
+                                <option value="website">Website</option>
+                            </select>
                         </div>
                     </div>
                     <div class="block-content block-content-full text-end bg-body">
@@ -199,11 +211,29 @@
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
 <script src="<?= base_url('') ?>assets/dashboard/js/plugins/select2/js/select2.full.min.js"></script>
+<script src="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Page JS Code -->
 <script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
+<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
 <!-- Page JS Helpers (Select2) -->
 <script>
     One.helpersOnLoad(['jq-select2', ]);
+    $(document).on('click', '#tombol', function() {
+        const id = this.getAttribute('social-id');
+        Swal.fire({
+            title: "Apakah ingin menghapus data ini?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Iya!",
+            cancelButtonText: "Ga Dulu!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = `<?= base_url('dashboard/profile/social/delete/') ?>${id}`;
+            }
+        });
+    });
 </script>
 <?= $this->endsection() ?>

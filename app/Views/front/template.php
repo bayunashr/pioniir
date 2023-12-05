@@ -46,7 +46,7 @@
                                         <!-- Else -->
                                         <li class="nav-item"><a class="dropdown-item" href="<?= base_url('register/creator') ?>">Jadi Creator</a></li>
                                         <li class="nav-item"><a class="dropdown-item" href="#">Profile</a></li>
-                                        <li class="nav-item"><a class="dropdown-item" href="#">Logout</a></li>
+                                        <li class="nav-item"><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
                                     </ul>
                                 </li>
                                 <!-- Else -->
