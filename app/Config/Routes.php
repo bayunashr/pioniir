@@ -14,11 +14,13 @@ $routes->get('/register/creator', 'Home::registerCreator');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/explore', 'Home::explore');
 
+// Super Routes Login
+$routes->get('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login');
+$routes->post('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login');
+
 // Super Routes
-$routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], function ($routes) {
+$routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filter' => 'authadmin'],function ($routes) {
     $routes->get('/', 'Admin::index');
-    $routes->get('login', 'Admin::login');
-    $routes->post('login', 'Admin::login');
     $routes->get('logout', 'Admin::logout');
     $routes->get('user', 'Admin::user');
     $routes->get('creator', 'Admin::creator');
