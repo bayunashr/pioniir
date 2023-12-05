@@ -162,6 +162,8 @@ class Admin extends BaseController
             $updateStatus = [
                 "postStatus" => "archive",
             ];
+            $post = $postModel->selectOneByPostId($id);
+            $newNotification["userId"] = $post['user_id'];
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "ubpost";
             $postModel->update($id, $updateStatus);
@@ -169,6 +171,8 @@ class Admin extends BaseController
             $updateStatus = [
                 "contentStatus" => "archive",
             ];
+            $content = $contentModel->selectOneByContentId($id);
+            $newNotification["userId"] = $content['user_id'];
             $newNotification["contentId"] = $id;
             $newNotification["notificationType"] = "ubcontent";
             $contentModel->update($id, $updateStatus);
@@ -176,6 +180,8 @@ class Admin extends BaseController
             $updateStatus = [
                 "commentStatus" => "publish",
             ];
+            $comment = $commentModel->selectOneByCommentId($id);
+            $newNotification["userId"] = $comment['user_id'];
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "ubcomment";
             $commentModel->update($id, $updateStatus);
