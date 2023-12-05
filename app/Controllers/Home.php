@@ -26,7 +26,6 @@ class Home extends BaseController
             'creator' => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
             'user'  => $this->userData
         ];
-        var_dump($data['creator']);
         return view('front/home',$data);
     }
 
