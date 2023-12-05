@@ -170,7 +170,7 @@
                         </div>
                         <div class="mb-4">
                             <label class="form-label" for="socmed">Type</label>
-                            <select name="socialMedia" id="">
+                            <select class="form-control" name="socialMedia" id="">
                                 <option value="facebook">Facebook</option>
                                 <option value="twitter">Twitter</option>
                                 <option value="instagram">Instagram</option>
@@ -219,6 +219,14 @@
 <!-- Page JS Helpers (Select2) -->
 <script>
     One.helpersOnLoad(['jq-select2', ]);
+    <?php if (session()->getFlashdata('success')) : ?>
+        var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
+        Swal.fire({
+            title: "Good job!",
+            text: pesan,
+            icon: "success"
+        });
+    <?php endif; ?>
     $(document).on('click', '#tombol', function() {
         const id = this.getAttribute('social-id');
         Swal.fire({

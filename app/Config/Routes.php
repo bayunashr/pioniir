@@ -36,7 +36,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], func
 $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
     $routes->get('profile/creator', 'Profile::index');
-    $routes->get('profile/social/add', 'Profile::socialAdd');
+    $routes->post('profile/social/add', 'Profile::socialAdd');
     $routes->get('profile/social/delete/(:segment)', 'Profile::socialDelete/$1');
     $routes->get('balance', 'Transaction::index');
     $routes->get('donate', 'Donate::index');

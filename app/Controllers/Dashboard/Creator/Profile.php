@@ -7,6 +7,7 @@ use App\Models\NotificationModel;
 use App\Models\CreatorModel;
 use App\Models\UserModel;
 use App\Models\SocialModel;
+use Ramsey\Uuid\Uuid;
 
 class Profile extends BaseController
 {
@@ -35,5 +36,20 @@ class Profile extends BaseController
     {
         $this->socialModel->delete($id);
         return redirect()->to('dashboard/profile/creator');
+    }
+
+    public function socialAdd()
+    {
+        $data = [
+            'socialId' => Uuid::uuid4(),
+            'creatorId' => $this->creatorData['creatorId'],
+            'socialMedia' => $this->request->getPost('socialMedia'),
+            'socialLink' => $this->request->getPost('socialLink'),
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+        ];
+        // var_dump($data); exit;
+        $this->socialModel->insert($data);
+        session()->setFlashData('success', 'Berhasil Menambah Data Post');
+        return redirect()->to(base_url('dashboard/profile/creator'));
     }
 }
