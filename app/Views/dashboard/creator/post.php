@@ -42,6 +42,8 @@
                            <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span>
                            <?php elseif ($data['postStatus'] == 'draft') : ?>
                            <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span>
+                           <?php elseif ($data['postStatus'] == 'ban') : ?>
+                           <span class="badge bg-danger"><i class="fa fa-ban"></i> Ban</span>
                            <?php else : ?>
                            <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
                            <?php endif ?>

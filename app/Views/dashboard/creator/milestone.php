@@ -61,6 +61,8 @@
                            <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span>
                            <?php elseif ($value['milestoneStatus'] === 'ended' ) : ?>
                            <span class="badge bg-danger"><i class="fa fa-times-circle"></i> Ended</span>
+                           <?php else : ?>
+                           <span class="badge bg-danger"><i class="fa fa-ban"></i> Ban</span>
                            <?php endif; ?>
                         </h5>
                      </td>

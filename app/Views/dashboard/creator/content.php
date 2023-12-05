@@ -39,7 +39,8 @@
                 <h5>
                   <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
                   <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span> &nbsp;
+                  <span class="badge bg-danger"><i class="fa fa-ban"></i> Ban</span>
                 </h5>
               </td>
               <td class="fs-sm">
