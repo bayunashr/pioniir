@@ -26,7 +26,7 @@ class Post extends BaseController
     {
         $data = [
             'title' => 'Dashboard - Pioniir Creator',
-            'post' => $this->postModel->selectAll(),
+            'post' => $this->postModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
         ];
         return view('dashboard/creator/post', $data);

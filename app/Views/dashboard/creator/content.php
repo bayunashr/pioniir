@@ -30,41 +30,32 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="text-center fs-sm">1</td>
-              <td class="fw-semibold fs-sm">Podcast 1</td>
-              <td class="fs-sm">12</td>
-              <td class="fs-sm">150000</td>
-              <td class="fs-sm">
-                <h5>
-                  <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                  <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span> &nbsp;
-                  <span class="badge bg-danger"><i class="fa fa-ban"></i> Ban</span>
-                </h5>
-              </td>
-              <td class="fs-sm">
-                <a href="<?= base_url('dashboard/content/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-center fs-sm">2</td>
-              <td class="fw-semibold fs-sm">Podcast 2</td>
-              <td class="fs-sm">12</td>
-              <td class="fs-sm">160000</td>
-              <td class="fs-sm">
-                <h5>
-                  <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span> &nbsp;
-                  <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span> &nbsp;
-                  <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
-                </h5>
-              </td>
-              <td class="fs-sm">
-                <a href="<?= base_url('dashboard/content/edit/1') ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
-                <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
-              </td>
-            </tr>
+            <?php $no = 1 ?>
+            <?php foreach ($content as $data) : ?>
+              <tr>
+                <td class="text-center fs-sm"><?= $no++ ?></td>
+                <td class="fw-semibold fs-sm"><?= $data['contentTitle'] ?></td>
+                <td class="fs-sm"><?= $data['contentLike'] ?></td>
+                <td class="fs-sm"><?= $data['contentPrice'] ?></td>
+                <td class="fs-sm">
+                  <h5>
+                    <?php if ($data['contentStatus'] == 'publish') : ?>
+                      <span class="badge bg-success"><i class="fa fa-check"></i> Publish</span>
+                    <?php elseif ($data['contentStatus'] == 'draft') : ?>
+                      <span class="badge bg-info"><i class="fa fa-pencil"></i> Draft</span>
+                    <?php elseif ($data['contentStatus'] == 'ban') : ?>
+                      <span class="badge bg-danger"><i class="fa fa-ban"></i> Ban</span>
+                    <?php else : ?>
+                      <span class="badge bg-info"><i class="fa fa-exclamation-circle"></i> Archive</span>
+                    <?php endif ?>
+                  </h5>
+                </td>
+                <td class="fs-sm">
+                  <a href="<?= base_url('dashboard/content/edit/'.$data['contentId']) ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
+                  <a href="#" class="btn btn-sm btn-danger mb-4"><i class="nav-main-link-icon si si-trash"></i> Delete</a>
+                </td>
+              </tr>
+            <?php endforeach ?>
           </tbody>
         </table>
       </div>
