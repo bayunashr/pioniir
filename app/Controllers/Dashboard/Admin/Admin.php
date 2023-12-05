@@ -15,84 +15,111 @@ use App\Models\PostModel;
 use App\Models\SubscribeModel;
 use App\Models\UserModel;
 use App\Models\WithdrawModel;
+use App\Models\AdminModel;
 
 use Ramsey\Uuid\Uuid;
 
 class Admin extends BaseController
 {
+    protected $adminModel, $userModel, $creatorModel, $postModel, $contentModel, $commentModel, $loveModel, $subscribeModel, $buyModel, $milestoneModel, $donateModel, $withdrawModel, $notificationModel;
+    function __construct()
+    {
+        $this->userModel = new UserModel();
+        $this->adminModel = new AdminModel();
+        $this->creatorModel = new CreatorModel();
+        $this->postModel = new PostModel();
+        $this->contentModel = new ContentModel();
+        $this->commentModel = new CommentModel();
+        $this->loveModel = new LoveModel();
+        $this->subscribeModel = new SubscribeModel();
+        $this->buyModel = new BuyModel();
+        $this->milestoneModel = new MilestoneModel();
+        $this->donateModel = new DonateModel();
+        $this->withdrawModel = new WithdrawModel();
+        $this->notificationModel = new NotificationModel();
+    }
+
     public function index()
     {
-        $donateModel = new DonateModel;
-        $userModel = new UserModel();
-        $creatorModel = new CreatorModel();
-        $contentModel = new ContentModel();
-        $postModel = new PostModel();
-        $commentModel = new CommentModel();
-        $loveModel = new LoveModel();
-        $subscribeModel = new SubscribeModel();
-        $buyModel = new BuyModel();
-        $milestoneModel = new MilestoneModel();
-        $withdrawModel = new WithdrawModel();
-
         $data = [
             'title' => 'Dashboard - Pioniir Admin',
-            'donate' => $donateModel->countAllResults(),
-            'user' => $userModel->countAllResults(),
-            'creator' => $creatorModel->countAllResults(),
-            'content' => $contentModel->countAllResults(),
-            'post' => $postModel->countAllResults(),
-            'comment' => $commentModel->countAllResults(),
-            'love' => $loveModel->countAllResults(),
-            'sub' => $subscribeModel->countAllResults(),
-            'buy' => $buyModel->countAllResults(),
-            'miles' => $milestoneModel->countAllResults(),
-            'wd' => $withdrawModel->countAllResults()
+            'donate' => $this->donateModel->countAllResults(),
+            'user' => $this->userModel->countAllResults(),
+            'creator' => $this->creatorModel->countAllResults(),
+            'content' => $this->contentModel->countAllResults(),
+            'post' => $this->postModel->countAllResults(),
+            'comment' => $this->commentModel->countAllResults(),
+            'love' => $this->loveModel->countAllResults(),
+            'sub' => $this->subscribeModel->countAllResults(),
+            'buy' => $this->buyModel->countAllResults(),
+            'miles' => $this->milestoneModel->countAllResults(),
+            'wd' => $this->withdrawModel->countAllResults()
         ];
 
         return view('dashboard/admin/dashboard', $data);
     }
 
+    public function login()
+    {
+        if($this->request->getPost()){
+            $adminData = $this->adminModel->where('adminEmail', "admin@pioniir.com")->first();
+
+            if (password_verify($this->request->getPost('password'), $adminData['adminPassword'])){
+                session()->set([
+                    'loginAdmin'    => true,
+                    'adminName'      => $adminData['adminName'],
+                ]);
+                return redirect('admin');
+                exit;
+            } else{
+                session()->setFlashData('error', 'Password Salah');
+            }
+            
+            return redirect('admin/login');
+        }else{
+            $data = [
+                "title" => "Login - Pioniir Admin",
+            ];
+            return view('dashboard/admin/login', $data);
+        }
+    }
+
+    public function logout()
+    {
+        session()->remove('loginAdmin');
+        session()->remove('adminName');
+        return redirect('admin/login');
+    }
+
     public function user(): string
     {
-        $userModel = new UserModel();
-
         $data = [
             'title' => 'User - Pioniir Admin',
-            'user' => $userModel->selectAll()
+            'user' => $this->userModel->selectAll()
         ];
         return view('dashboard/admin/user', $data);
     }
 
     public function creator(): string
     {
-        $creatorModel = new CreatorModel();
-
         $data = [
             'title' => 'Creator - Pioniir Admin',
-            'creator' => $creatorModel->selectAll()
+            'creator' => $this->creatorModel->selectAll()
         ];
         return view('dashboard/admin/creator', $data);
     }
 
     public function content(): string
     {
-        $contentModel = new ContentModel();
-
         $data = [
             'title' => 'Content - Pioniir Admin',
-            'content' => $contentModel->selectAll()
+            'content' => $this->contentModel->selectAll()
         ];
         return view('dashboard/admin/content', $data);
     }
 
     public function ban($id)
     {
-        $contentModel = new ContentModel();
-        $postModel = new PostModel();
-        $notificationModel = new NotificationModel();
-        $commentModel = new CommentModel();
-        $userModel = new userModel();
-
         $msg = $this->request->getGet('msg');
         $type = $this->request->getGet('type');
 
@@ -105,51 +132,45 @@ class Admin extends BaseController
             $updateStatus = [
                 "postStatus" => "ban",
             ];
-            $post = $postModel->selectOneByPostId($id);
+            $post = $this->postModel->selectOneByPostId($id);
             $newNotification["userId"] = $post['user_id'];
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "bpost";
-            $postModel->update($id, $updateStatus);
+            $this->postModel->update($id, $updateStatus);
         } elseif($type == "content"){
             $updateStatus = [
                 "contentStatus" => "ban",
             ];
-            $content = $contentModel->selectOneByContentId($id);
+            $content = $this->contentModel->selectOneByContentId($id);
             $newNotification["contentId"] = $id;
             $newNotification["userId"] = $content['user_id'];
             $newNotification["notificationType"] = "bcontent";
-            $contentModel->update($id, $updateStatus);
+            $this->contentModel->update($id, $updateStatus);
         } elseif($type == "comment"){
             $updateStatus = [
                 "commentStatus" => "ban",
             ];
-            $comment = $commentModel->selectOneByCommentId($id);
+            $comment = $this->commentModel->selectOneByCommentId($id);
             $newNotification["userId"] = $comment['user_id'];
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "bcomment";
-            $commentModel->update($id, $updateStatus);
+            $this->commentModel->update($id, $updateStatus);
         } elseif($type == "user"){
             $updateStatus = [
                 "userStatus" => "ban",
             ];
             $newNotification["userId"] = $id;
             $newNotification["notificationType"] = "buser";
-            $userModel->update($id, $updateStatus);
+            $this->userModel->update($id, $updateStatus);
         }
 
-        $notificationModel->insert($newNotification);
+        $this->notificationModel->insert($newNotification);
 
         return redirect('admin/'.$type);
     }
 
     public function unban($id)
     {
-        $contentModel = new ContentModel();
-        $postModel = new PostModel();
-        $notificationModel = new NotificationModel();
-        $commentModel = new CommentModel();
-        $userModel = new userModel();
-
         $msg = $this->request->getGet('msg');
         $type = $this->request->getGet('type');
 
@@ -162,83 +183,75 @@ class Admin extends BaseController
             $updateStatus = [
                 "postStatus" => "archive",
             ];
-            $post = $postModel->selectOneByPostId($id);
+            $post = $this->postModel->selectOneByPostId($id);
             $newNotification["userId"] = $post['user_id'];
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "ubpost";
-            $postModel->update($id, $updateStatus);
+            $this->postModel->update($id, $updateStatus);
         } elseif($type == "content"){
             $updateStatus = [
                 "contentStatus" => "archive",
             ];
-            $content = $contentModel->selectOneByContentId($id);
+            $content = $this->contentModel->selectOneByContentId($id);
             $newNotification["userId"] = $content['user_id'];
             $newNotification["contentId"] = $id;
             $newNotification["notificationType"] = "ubcontent";
-            $contentModel->update($id, $updateStatus);
+            $this->contentModel->update($id, $updateStatus);
         } elseif($type == "comment"){
             $updateStatus = [
                 "commentStatus" => "publish",
             ];
-            $comment = $commentModel->selectOneByCommentId($id);
+            $comment = $this->commentModel->selectOneByCommentId($id);
             $newNotification["userId"] = $comment['user_id'];
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "ubcomment";
-            $commentModel->update($id, $updateStatus);
+            $this->commentModel->update($id, $updateStatus);
         } elseif($type == "user"){
             $updateStatus = [
                 "userStatus" => "active",
             ];
             $newNotification["userId"] = $id;
             $newNotification["notificationType"] = "ubuser";
-            $userModel->update($id, $updateStatus);
+            $this->userModel->update($id, $updateStatus);
         }
 
-        $notificationModel->insert($newNotification);
+        $this->notificationModel->insert($newNotification);
 
         return redirect('admin/'.$type);
     }
 
     public function post(): string
     {
-        $postModel = new PostModel();
-
         $data = [
             'title' => 'Post - Pioniir Admin',
-            'post' => $postModel->selectAll()
+            'post' => $this->postModel->selectAll()
         ];
         return view('dashboard/admin/post', $data);
     }
     
     public function comment(): string
     {
-        $commentModel = new CommentModel();
-
         $data = [
             'title' => 'Comment - Pioniir Admin',
-            'comment' => $commentModel->selectAll()
+            'comment' => $this->commentModel->selectAll()
         ];
         return view('dashboard/admin/comment', $data);
     }
 
     public function love(): string
     {
-        $loveModel = new LoveModel();
-
         $data = [
             'title' => 'Love - Pioniir Admin',
-            'love' => $loveModel->selectAll()
+            'love' => $this->loveModel->selectAll()
         ];
         return view('dashboard/admin/love', $data);
     }
 
     public function donate()
     {
-        $donateModel = new DonateModel;
-
         $data = [
             'title' => 'Donate - Pioniir Admin',
-            'donate' => $donateModel->selectAll()
+            'donate' => $this->donateModel->selectAll()
         ];
 
         return view('dashboard/admin/donate', $data);
@@ -246,44 +259,36 @@ class Admin extends BaseController
 
     public function subscribe(): string
     {
-        $subscribeModel = new SubscribeModel();
-
         $data = [
             'title' => 'Subscribe - Pioniir Admin',
-            'sub' => $subscribeModel->selectAll()
+            'sub' => $this->subscribeModel->selectAll()
         ];
         return view('dashboard/admin/subscribe', $data);
     }
 
     public function buy(): string
     {
-        $buyModel = new BuyModel();
-
         $data = [
             'title' => 'Buy - Pioniir Admin',
-            'buy' => $buyModel->selectAll()
+            'buy' => $this->buyModel->selectAll()
         ];
         return view('dashboard/admin/buy', $data);
     }
 
     public function milestone(): string
     {
-        $milestoneModel = new MilestoneModel();
-
         $data = [
             'title' => 'Milestone - Pioniir Admin',
-            'miles' => $milestoneModel->selectAll()
+            'miles' => $this->milestoneModel->selectAll()
         ];
         return view('dashboard/admin/milestone', $data);
     }
 
     public function withdraw(): string
     {
-        $withdrawModel = new WithdrawModel();
-
         $data = [
             'title' => 'Withdraw - Pioniir Admin',
-            'wd' => $withdrawModel->selectAll()
+            'wd' => $this->withdrawModel->selectAll()
         ];
         return view('dashboard/admin/withdraw', $data);
     }

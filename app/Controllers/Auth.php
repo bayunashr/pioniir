@@ -8,7 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class Auth extends BaseController
 {
-    protected $userModel;
+    protected $userModel, $notificationModel;
     protected $client;
 
     function __construct() {

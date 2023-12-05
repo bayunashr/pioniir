@@ -17,6 +17,9 @@ $routes->get('/explore', 'Home::explore');
 // Super Routes
 $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin'], function ($routes) {
     $routes->get('/', 'Admin::index');
+    $routes->get('login', 'Admin::login');
+    $routes->post('login', 'Admin::login');
+    $routes->get('logout', 'Admin::logout');
     $routes->get('user', 'Admin::user');
     $routes->get('creator', 'Admin::creator');
     $routes->get('content', 'Admin::content');
