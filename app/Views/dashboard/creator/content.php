@@ -35,7 +35,7 @@
                   <?php foreach ($content as $data) : ?>
                   <tr>
                      <td class="text-center fs-sm"><?= $no++ ?></td>
-                     <td class="fw-semibold fs-sm"><?= $data['contentTitle'] ?></td>
+                     <td class="fw-semibold fs-sm"><?= esc($data['contentTitle']) ?></td>
                      <td class="fs-sm"><?= $data['contentLike'] ?></td>
                      <td class="fs-sm"><?= format_rupiah($data['contentPrice']) ?></td>
                      <td class="fs-sm">

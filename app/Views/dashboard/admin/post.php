@@ -2,10 +2,10 @@
 
 <?= $this->section('header-addons') ?>
 <!-- Page JS Plugins CSS -->
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -36,9 +36,9 @@
                   <tr>
                      <td class="text-center fs-sm"><?= $no++ ?></td>
                      <td class="d-none fw-semibold fs-sm"><?= $value['postId'] ?></td>
-                     <td class="fw-semibold fs-sm"><?= $value['creator_name'] ?></td>
+                     <td class="fw-semibold fs-sm"><?= esc($value['creator_name']) ?></td>
                      <td class="fs-sm">
-                        <?= $value['postTitle'] ?>
+                        <?= esc($value['postTitle']) ?>
                      </td>
                      <td class="fs-sm">
                         <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Post" data-bs-content='<?= $value['postValue'] ?>'><i class="nav-main-link-icon si si-magnifier-add"></i></button>
@@ -74,30 +74,43 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('footer-addons') ?>
-<script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/oneui.app.min.js"></script>
 
 <!-- jQuery (required for DataTables plugin) -->
-<script src="<?= base_url('') ?>assets/dashboard/js/lib/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/lib/jquery.min.js"></script>
 
 <!-- Page JS Plugins -->
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Page JS Code -->
-<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
 
 <script>
+function escapeHtml(text) {
+   const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+   };
+   return text.replace(/[&<>"']/g, function(m) {
+      return map[m];
+   });
+}
+
 $(document).on('click', '#tombol', function() {
    const id = this.getAttribute('post-id');
    const title = this.getAttribute('post-title');
@@ -110,7 +123,7 @@ $(document).on('click', '#tombol', function() {
       customTitle = "Unban ";
    }
    Swal.fire({
-      title: customTitle + title + "?",
+      title: customTitle + escapeHtml(title) + "?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",

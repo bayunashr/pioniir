@@ -8,10 +8,10 @@
    <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
    <meta name="author" content="elemis">
    <title>Pioniir - Creator Homebase</title>
-   <link rel="shortcut icon" href="<?= base_url('') ?>assets/front/img/pioniir.png">
-   <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/plugins.css">
-   <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/style.css">
-   <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/colors/aqua.css">
+   <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/colors/aqua.css">
    <style>
    .language-select .dropdown-menu {
       left: -50% !important;
@@ -27,7 +27,7 @@
                <div class="navbar-collapse-wrapper bg-white d-flex flex-row flex-nowrap w-100 justify-content-between align-items-center py-sm-3">
                   <div class="navbar-brand w-100">
                      <a href="<?= base_url() ?>">
-                        <img class="w-15" src="<?= base_url('') ?>assets/front/img/pioniirdark.png" alt="" />
+                        <img class="w-15" src="<?= base_url() ?>assets/front/img/pioniirdark.png" alt="" />
                      </a>
                   </div>
                   <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start"></div>
@@ -38,7 +38,7 @@
                         <?php if (session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) : ?>
                         <li class="nav-item dropdown language-select">
                            <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <img class="avatar w-8" src="<?= base_url('') ?>assets/dashboard/media/avatars/avatar10.jpg" alt="" />
+                              <img class="avatar w-8" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="" />
                            </a>
                            <ul class="dropdown-menu">
                               <?php if(count($creator) == 1) : ?>
@@ -79,7 +79,7 @@
          <div class="row gy-6 gy-lg-0">
             <div class="col-lg-4">
                <div class="widget">
-                  <img class="mb-4" src="<?= base_url('') ?>assets/front/img/logo-light.png" srcset="<?= base_url('') ?>assets/front/img/logo-light@2x.png 2x" alt="" />
+                  <img class="mb-4" src="<?= base_url() ?>assets/front/img/logo-light.png" srcset="<?= base_url() ?>assets/front/img/logo-light@2x.png 2x" alt="" />
                   <p class="mb-4">© 2023 Sandbox. All rights reserved.</p>
                   <nav class="nav social social-white">
                      <a href="#"><i class="uil uil-twitter"></i></a>
@@ -134,8 +134,8 @@
       </div>
       <!-- /.container -->
    </footer>
-   <script src="<?= base_url('') ?>assets/front/js/plugins.js"></script>
-   <script src="<?= base_url('') ?>assets/front/js/theme.js"></script>
+   <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
+   <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
 </body>
 
 </html>

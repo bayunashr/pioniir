@@ -92,24 +92,6 @@
 <script>
 One.helpersOnLoad(['js-ckeditor']);
 
-// Sweet Alert
-<?php if (session()->getFlashdata('success')) : ?>
-var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
-Swal.fire({
-   title: "Good job!",
-   text: pesan,
-   icon: "success"
-});
-<?php endif; ?>
-<?php if(session()->getFlashdata('error')) : ?>
-var pesan = <?= json_encode(session()->getFlashdata('error')) ?>;
-Swal.fire({
-   title: "Oops...",
-   text: pesan,
-   icon: "error"
-});
-<?php endif; ?>
-
 // Crop Banner
 const contentPreview = document.getElementById('contentPreview');
 const gambar = document.getElementById('gambar');

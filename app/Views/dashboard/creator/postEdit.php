@@ -46,8 +46,8 @@
 <?= $this->endsection() ?>
 
 <?= $this->section('footer-addons') ?>
-<script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/ckeditor/ckeditor.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/oneui.app.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/ckeditor/ckeditor.js"></script>
 <!-- Page JS Code -->
 <script>
 One.helpersOnLoad(['js-ckeditor']);

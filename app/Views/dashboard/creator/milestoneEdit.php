@@ -44,7 +44,7 @@
 <?= $this->endsection() ?>
 
 <?= $this->section('footer-addons') ?>
-<script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/oneui.app.min.js"></script>
 <script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 <script>
 <?php if(session()->getFlashdata('alert')) : ?>

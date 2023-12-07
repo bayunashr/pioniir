@@ -8,9 +8,9 @@
    <meta name="keywords" content="bootstrap 5, business, corporate, creative, gulp, marketing, minimal, modern, multipurpose, one page, responsive, saas, sass, seo, startup, html5 template, site template">
    <meta name="author" content="elemis">
    <title>Pioniir - Creator Homebase</title>
-   <link rel="shortcut icon" href="<?= base_url('') ?>assets/front/img/pioniir.png">
-   <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/plugins.css">
-   <link rel="stylesheet" href="<?= base_url('') ?>assets/front/css/style.css">
+   <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
          <div class="container pt-15 pb-21 pt-md-16 pb-md-21 text-center">
             <div class="row">
                <div class="col-lg-8 mx-auto">
-                  <h1 class="display-1 mb-3 text-white"><a href="<?= base_url() ?>"><img class="w-10" src="<?= base_url('') ?>assets/front/img/pioniir.png" alt=""></a> Sign In</h1>
+                  <h1 class="display-1 mb-3 text-white"><a href="<?= base_url() ?>"><img class="w-10" src="<?= base_url() ?>assets/front/img/pioniir.png" alt=""></a> Sign In</h1>
                   <!-- /nav -->
                </div>
                <!-- /column -->
@@ -91,8 +91,8 @@
    </div>
    <?php endif;?>
    <!-- /.content-wrapper -->
-   <script src="<?= base_url('') ?>assets/front/js/plugins.js"></script>
-   <script src="<?= base_url('') ?>assets/front/js/theme.js"></script>
+   <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
+   <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
 </body>
 
 </html>

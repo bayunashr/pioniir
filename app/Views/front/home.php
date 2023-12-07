@@ -17,13 +17,13 @@
    <!-- /.row -->
 </div>
 <!-- /.container -->
-<figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url('') ?>assets/front/img/doodlebackground.png" alt="" /></figure>
+<figure data-cues="slideInDown" class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url() ?>assets/front/img/doodlebackground.png" alt="" /></figure>
 <!-- /section -->
 <section class="wrapper bg-light">
    <div class="container py-14 py-md-16">
       <div class="row gy-10 gy-md-13 gy-lg-0 align-items-center mb-16">
          <div class="col-md-8 col-lg-5 d-flex position-relative mx-auto" data-cues="slideInDown" data-group="header">
-            <div class="img-mask"><img src="<?= base_url('') ?>assets/front/img/ilus2.png" alt="" /></div>
+            <div class="img-mask"><img src="<?= base_url() ?>assets/front/img/ilus2.png" alt="" /></div>
          </div>
          <!--/column -->
          <div class="col-lg-6 offset-lg-1 col-xxl-5 text-center text-lg-start" data-cues="slideInDown" data-group="page-title" data-delay="600">
@@ -46,7 +46,7 @@
                   <div class="swiper-wrapper">
                      <div class="swiper-slide">
                         <article>
-                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url('') ?>assets/front/img/photos/b4.jpg" alt="" /></a>
+                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url() ?>assets/front/img/photos/b4.jpg" alt="" /></a>
                               <figcaption>
                                  <h5 class="from-top mb-0">See More</h5>
                               </figcaption>
@@ -66,7 +66,7 @@
                      <!--/.swiper-slide -->
                      <div class="swiper-slide">
                         <article>
-                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url('') ?>assets/front/img/photos/b5.jpg" alt="" /></a>
+                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url() ?>assets/front/img/photos/b5.jpg" alt="" /></a>
                               <figcaption>
                                  <h5 class="from-top mb-0">See More</h5>
                               </figcaption>
@@ -86,7 +86,7 @@
                      <!--/.swiper-slide -->
                      <div class="swiper-slide">
                         <article>
-                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url('') ?>assets/front/img/photos/b6.jpg" alt="" /></a>
+                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url() ?>assets/front/img/photos/b6.jpg" alt="" /></a>
                               <figcaption>
                                  <h5 class="from-top mb-0">See More</h5>
                               </figcaption>
@@ -105,7 +105,7 @@
                      <!--/.swiper-slide -->
                      <div class="swiper-slide">
                         <article>
-                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url('') ?>assets/front/img/photos/b7.jpg" alt="" /></a>
+                           <figure class="overlay overlay-1 hover-scale rounded mb-5"><a href="#"> <img src="<?= base_url() ?>assets/front/img/photos/b7.jpg" alt="" /></a>
                               <figcaption>
                                  <h5 class="from-top mb-0">See More</h5>
                               </figcaption>

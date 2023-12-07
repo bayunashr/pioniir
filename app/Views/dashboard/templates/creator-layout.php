@@ -139,13 +139,13 @@
                <div class="dropdown d-inline-block ms-2">
                   <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      <img class="rounded-circle" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
-                     <span class="d-none d-sm-inline-block ms-2"><?= $creator['creatorAlias'] ?></span>
+                     <span class="d-none d-sm-inline-block ms-2"><?= esc($creator['creatorAlias']) ?></span>
                      <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
                      <div class="p-3 text-center bg-body-light border-bottom rounded-top">
                         <img class="img-avatar img-avatar48 img-avatar-thumb" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="">
-                        <p class="mt-2 mb-0 fw-medium"><?= $user['userFullName'] ?></p>
+                        <p class="mt-2 mb-0 fw-medium"><?= esc($user['userFullName']) ?></p>
                      </div>
                      <div class="p-2">
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="<?= base_url('logout') ?>">
@@ -173,62 +173,62 @@
                               case "bcontent":
                                  $icon = "fa-circle-xmark text-danger";
                                  $title = "Kontenmu Terblokir!";
-                                 $text = "Konten ".'"'.$value->content_title.'"'." diblokir karena ".$value->notificationMessage;
+                                 $text = "Konten ".'"'.esc($value->content_title).'"'." diblokir karena ".esc($value->notificationMessage);
                                  break;
                               case "ubcontent":
                                  $icon = "fa-circle-check text-success";
                                  $title = "Kontenmu Terbuka!";
-                                 $text = "Konten ".'"'.$value->content_title.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 $text = "Konten ".'"'.esc($value->content_title).'"'." dibuka kembali karena ".esc($value->notificationMessage);
                                  break;
                               case "bpost":
                                  $icon = "fa-circle-xmark text-danger";
                                  $title = "Postinganmu Terblokir!";
-                                 $text = "Post ".'"'.$value->post_title.'"'." diblokir karena ".$value->notificationMessage;
+                                 $text = "Post ".'"'.esc($value->post_title).'"'." diblokir karena ".esc($value->notificationMessage);
                                  break;
                               case "ubpost":
                                  $icon = "fa-circle-check text-success";
                                  $title = "Postinganmu Terbuka!";
-                                 $text = "Post ".'"'.$value->post_title.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 $text = "Post ".'"'.esc($value->post_title).'"'." dibuka kembali karena ".esc($value->notificationMessage);
                                  break;
                               case "bcomment":
                                  $icon = "fa-circle-xmark text-danger";
                                  $title = "Komentarmu Terblokir!";
-                                 $text = "Komentar ".'"'.$value->comment_value.'"'." diblokir karena ".$value->notificationMessage;
+                                 $text = "Komentar ".'"'.esc($value->comment_value).'"'." diblokir karena ".esc($value->notificationMessage);
                                  break;
                               case "ubcomment":
                                  $icon = "fa-circle-check text-success";
                                  $title = "Komentarmu Terbuka!";
-                                 $text = "Komentar ".'"'.$value->comment_value.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 $text = "Komentar ".'"'.esc($value->comment_value).'"'." dibuka kembali karena ".esc($value->notificationMessage);
                                  break;
                               case "buser":
                                  $icon = "fa-circle-xmark text-danger";
                                  $title = "Akunmu Terblokir!";
-                                 $text = "Akun ".'"'.$value->user_name.'"'." diblokir karena ".$value->notificationMessage;
+                                 $text = "Akun ".'"'.esc($value->user_name).'"'." diblokir karena ".esc($value->notificationMessage);
                                  break;
                               case "ubuser":
                                  $icon = "fa-circle-check text-success";
                                  $title = "Akunmu Terbuka!";
-                                 $text = "Akun ".'"'.$value->user_name.'"'." dibuka kembali karena ".$value->notificationMessage;
+                                 $text = "Akun ".'"'.esc($value->user_name).'"'." dibuka kembali karena ".esc($value->notificationMessage);
                                  break;
                               case "ndonate":
                                  $icon = "fa-money-bill-1 text-success";
                                  $title = "Donasi Diterima!";
-                                 $text = "Kamu menerima ".format_rupiah($value->donate_amount)." dari ".'"'.$value->donatur_name.'"';
+                                 $text = "Kamu menerima ".format_rupiah($value->donate_amount)." dari ".'"'.esc($value->donatur_name).'"';
                                  break;
                               case "nsubscribe":
                                  $icon = "fa-compact-disc text-primary";
                                  $title = "Supporter Baru!";
-                                 $text = '"'.$value->subscriber_name.'"'." mulai mengikuti";
+                                 $text = '"'.esc($value->subscriber_name).'"'." mulai mengikuti";
                                  break;
                               case "nbuy":
                                  $icon = "fa-bag-shopping text-warning";
                                  $title = "Kontenmu Terjual!";
-                                 $text = '"'.$value->buyer_name.'"'." membeli ".'"'.$value->content_buy_title.'"';
+                                 $text = '"'.esc($value->buyer_name).'"'." membeli ".'"'.esc($value->content_buy_title).'"';
                                  break;
                               case "nmilestone":
                                  $icon = "fa-rocket text-info";
                                  $title = "Milestone Tercapai!";
-                                 $text = '"'.$value->miles_name.'"'." sudah mencapai batasnya";
+                                 $text = '"'.esc($value->miles_name).'"'." sudah mencapai batasnya";
                                  break;
                            }
                         ?>

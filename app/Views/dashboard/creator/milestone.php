@@ -2,10 +2,10 @@
 
 <?= $this->section('header-addons') ?>
 <!-- Page JS Plugins CSS -->
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
-<link rel="stylesheet" href="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -21,7 +21,7 @@
             <?php if (count($milespublish) == 1) :?>
             <div class="row">
                <div class="col-12 col-sm-3">
-                  <span class="h5"><?= $milespublish[0]['milestoneName'] ?></span> <br>
+                  <span class="h5"><?= esc($milespublish[0]['milestoneName']) ?></span> <br>
                   <span style="font-size: 13px;"><?= format_rupiah($milespublish[0]['milestoneBalance']) ?> terkumpul dari <?= format_rupiah($milespublish[0]['milestoneTarget']) ?> </span>
                   <div class="progress push" role="progressbar" aria-valuenow="<?= format_persen_miles_creator($milespublish[0]['milestoneBalance'], $milespublish[0]['milestoneTarget']) ?>" aria-valuemin="0" aria-valuemax="100">
                      <div class="progress-bar bg-info" style="width: <?= format_persen_miles_creator($milespublish[0]['milestoneBalance'], $milespublish[0]['milestoneTarget']) ?>%;">
@@ -48,7 +48,7 @@
                   <?php foreach ($miles as $data => $value): ?>
                   <tr>
                      <td class="text-center fs-sm"><?= $no++ ?></td>
-                     <td class="fw-semibold fs-sm"><?= $value['milestoneName'] ?></td>
+                     <td class="fw-semibold fs-sm"><?= esc($value['milestoneName']) ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['milestoneBalance']) ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['milestoneTarget']) ?></td>
                      <td class="fs-sm">
@@ -84,27 +84,27 @@
 <?= $this->endsection() ?>
 
 <?= $this->section('footer-addons') ?>
-<script src="<?= base_url('') ?>assets/dashboard/js/oneui.app.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/oneui.app.min.js"></script>
 
 <!-- jQuery (required for DataTables plugin) -->
-<script src="<?= base_url('') ?>assets/dashboard/js/lib/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/lib/jquery.min.js"></script>
 
 <!-- Page JS Plugins -->
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
-<script src="<?= base_url('') ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/dataTables.buttons.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-jszip/jszip.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/buttons.print.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons/buttons.html5.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
 
 <!-- Page JS Code -->
-<script src="<?= base_url('') ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/pages/be_tables_datatables.min.js"></script>
 
 <script>
 <?php if(session()->getFlashdata('success')) : ?>
