@@ -40,10 +40,15 @@ $routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filt
 // Creator Dashboard Routes
 $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
     $routes->get('/', 'Dashboard::index');
+
+    // Creator
     $routes->get('profile/creator', 'Profile::index');
+    $routes->post('profile/creator', 'Profile::index');
+    $routes->post('profile/creator/profile-picture', 'Profile::profilePicture');
+    $routes->post('profile/creator/change-banner', 'Profile::banner');
     $routes->post('profile/social/add', 'Profile::socialAdd');
+    $routes->post('profile/social/edit', 'Profile::socialEdit');
     $routes->get('profile/social/delete/(:segment)', 'Profile::socialDelete/$1');
-    $routes->get('donate', 'Donate::index');
 
     // Balance
     $routes->get('balance', 'Transaction::index');
@@ -67,4 +72,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator']
     $routes->get('post/edit/(:segment)', 'Post::edit/$1');
     $routes->post('post/edit/(:segment)', 'Post::edit/$1');
     $routes->get('post/delete/(:segment)', 'Post::destroy/$1');
+
+    // Donate
+    $routes->get('donate', 'Donate::index');
 });

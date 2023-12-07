@@ -28,4 +28,14 @@ class SubscribeModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+
+    public function selectAllById($creatorId)
+    {
+        return $this->select('Subscribe.*, User.userFullName AS name_user, User.userEmail AS email_user')
+            ->where('Subscribe.creatorId', $creatorId)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->join('User', 'User.userId = Subscribe.userId')
+            ->orderBy('subTimestamp', 'desc')
+            ->findAll();
+    }
 }
