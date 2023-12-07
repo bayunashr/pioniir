@@ -37,6 +37,8 @@ class Dashboard extends BaseController
             'content'   => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
             'post'      => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
             'notif'     => $notifModel->selectAllById($creatorData['userId']),
+            'user'      => $userData,
+            'creator'   => $creatorData,
         ];
 
         return view('dashboard/creator/dashboard', $data);

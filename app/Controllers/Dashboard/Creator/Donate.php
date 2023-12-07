@@ -25,6 +25,8 @@ class Donate extends BaseController
             'title'     => 'Dashboard - Pioniir Creator',
             'donate'    => $donateModel->where('creatorId', $creatorData['creatorId'])->where('donateStatus', 'success')->orderBy('donateTimestamp', 'DESC')->findAll(),
             'notif'     => $notifModel->selectAllById($creatorData['userId']),
+            'user'      => $userData,
+            'creator'   => $creatorData,
         ];
 
         return view('dashboard/creator/donate', $data);

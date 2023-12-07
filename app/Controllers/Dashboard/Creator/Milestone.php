@@ -31,6 +31,8 @@ class Milestone extends BaseController
             'miles'         => $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->orderBy("FIELD(milestoneStatus, 'publish', 'draft', 'archive', 'ended')", '', false)->findAll(),
             'milespublish'  => $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->where('milestoneStatus', 'publish')->findAll(),
             'notif'         => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'user'          => $this->userData,
+            'creator'       => $this->creatorData,
         ];
         return view('dashboard/creator/milestone', $data);
     }
@@ -58,6 +60,8 @@ class Milestone extends BaseController
             $data = [
                 'title' => 'Milestone - Pioniir Creator',
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+                'user'      => $this->userData,
+                'creator'   => $this->creatorData,
             ];
             return view('dashboard/creator/milestoneAdd', $data);
         }
@@ -95,6 +99,8 @@ class Milestone extends BaseController
                 'title' => 'Milestone - Pioniir Creator',
                 'miles' => $miles,
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+                'user'  => $this->userData,
+                'creator' => $this->creatorData,
             ];
             return view('dashboard/creator/milestoneEdit', $data);
         }       

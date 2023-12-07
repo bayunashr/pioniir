@@ -28,6 +28,8 @@ class Post extends BaseController
             'title' => 'Dashboard - Pioniir Creator',
             'post' => $this->postModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
         ];
         return view('dashboard/creator/post', $data);
     }
@@ -50,6 +52,8 @@ class Post extends BaseController
             $data = [
                 'title' => 'Dashboard - Pioniir Creator',
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+                'user'      => $this->userData,
+                'creator'   => $this->creatorData,
             ];
             return view('dashboard/creator/postAdd', $data);
         }
@@ -74,6 +78,8 @@ class Post extends BaseController
                 'title' => 'Dashboard - Pioniir Creator',
                 'post' => $this->postModel->find($id),
                 'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+                'user'      => $this->userData,
+                'creator'   => $this->creatorData,
             ];
             return view('dashboard/creator/postEdit', $data);
         }

@@ -25,10 +25,11 @@ class Transaction extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Balance - Pioniir Creator',
-            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
-            'creator'  => $this->creatorData,
-            'withdraw'=> $this->withdrawModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
+            'title'     => 'Balance - Pioniir Creator',
+            'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
+            'withdraw'  => $this->withdrawModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
         ];
         return view('dashboard/creator/balance', $data);
     }

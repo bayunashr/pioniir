@@ -21,14 +21,14 @@
 
    <!-- Icons -->
    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
-   <link rel="shortcut icon" href="<?= base_url('') ?>assets/front/img/pioniir.png">
-   <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url('') ?>assets/front/img/pioniir.png">
-   <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url('') ?>assets/front/img/pioniir.png">
+   <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="<?= base_url() ?>assets/front/img/pioniir.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>assets/front/img/pioniir.png">
    <!-- END Icons -->
 
    <!-- Stylesheets -->
    <!-- OneUI framework -->
-   <link rel="stylesheet" id="css-main" href="<?= base_url('') ?>assets/dashboard/css/oneui.min.css">
+   <link rel="stylesheet" id="css-main" href="<?= base_url() ?>assets/dashboard/css/oneui.min.css">
    <?= $this->renderSection('header-addons') ?>
    <!-- You can include a specific file from css/themes/ folder to alter the default color theme of the template. eg: -->
    <!-- <link rel="stylesheet" id="css-theme" href="assets/dashboard/css/themes/amethyst.min.css"> -->
@@ -45,7 +45,7 @@
                <span class="smini-visible">
                   <i class="fa fa-circle-notch text-primary"></i>
                </span>
-               <span class="smini-hide fs-5 tracking-wider row"><img class="col-sm-6 col-4" src="<?= base_url('') ?>assets/front/img/pioniirwhite.png" alt=""></span>
+               <span class="smini-hide fs-5 tracking-wider row"><img class="col-sm-6 col-4" src="<?= base_url() ?>assets/front/img/pioniirwhite.png" alt=""></span>
             </a>
             <!-- END Logo -->
 
@@ -138,14 +138,14 @@
                <!-- User Dropdown -->
                <div class="dropdown d-inline-block ms-2">
                   <button type="button" class="btn btn-sm btn-alt-secondary d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <img class="rounded-circle" src="<?= base_url('') ?>assets/dashboard/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
-                     <span class="d-none d-sm-inline-block ms-2"><?= session()->get('userName') ?></span>
+                     <img class="rounded-circle" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
+                     <span class="d-none d-sm-inline-block ms-2"><?= $creator['creatorAlias'] ?></span>
                      <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block opacity-50 ms-1 mt-1"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0 border-0" aria-labelledby="page-header-user-dropdown">
                      <div class="p-3 text-center bg-body-light border-bottom rounded-top">
-                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="<?= base_url('') ?>assets/dashboard/media/avatars/avatar10.jpg" alt="">
-                        <p class="mt-2 mb-0 fw-medium"><?= session()->get('userFullName') ?></p>
+                        <img class="img-avatar img-avatar48 img-avatar-thumb" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="">
+                        <p class="mt-2 mb-0 fw-medium"><?= $user['userFullName'] ?></p>
                      </div>
                      <div class="p-2">
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="<?= base_url('logout') ?>">

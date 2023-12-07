@@ -27,7 +27,9 @@ class Content extends BaseController
         $data = [
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             'content' => $this-> contentModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
-            'title' => 'Dashboard - Pioniir Creator'
+            'title' => 'Dashboard - Pioniir Creator',
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
         ];
         return view('dashboard/creator/content', $data);
     }
@@ -36,7 +38,9 @@ class Content extends BaseController
     {
         $data = [
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
-            'title' => 'Dashboard - Pioniir Creator'
+            'title' => 'Dashboard - Pioniir Creator',
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
         ];
         return view('dashboard/creator/contentAdd', $data);
     }
@@ -45,7 +49,9 @@ class Content extends BaseController
     {
         $data = [
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
-            'title' => 'Dashboard - Pioniir Creator'
+            'title' => 'Dashboard - Pioniir Creator',
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
         ];
         return view('dashboard/creator/contentEdit', $data);
     }
