@@ -50,8 +50,10 @@
                         </h5>
                      </td>
                      <td class="fs-sm">
+                        <?php if ($data['postStatus'] != 'ban' ) : ?>
                         <a href="<?= base_url('dashboard/post/edit/' . $data['postId']) ?>" class="btn btn-sm btn-info mb-4"><i class="nav-main-link-icon si si-pencil"></i> Edit</a> &nbsp;
                         <btn id="tombol" post-id="<?= $data['postId'] ?>" class="btn btn-sm btn-danger mb-4 js-swal-confirm"><i class="nav-main-link-icon si si-trash"></i> Delete</btn>
+                        <?php endif; ?>
                      </td>
                   </tr>
                   <?php endforeach ?>

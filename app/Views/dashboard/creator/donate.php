@@ -20,7 +20,6 @@
                <thead>
                   <tr>
                      <th class="text-center" style="width: 5%;">NO</th>
-                     <th class="d-none" style="width: 15%;">ID</th>
                      <th>Nama</th>
                      <th>Jumlah</th>
                      <th>Tanggal</th>
@@ -32,7 +31,6 @@
                   <?php foreach ($donate as $data => $value): ?>
                   <tr>
                      <td class="text-center fs-sm"><?= $no++ ?></td>
-                     <td class="d-none fw-semibold fs-sm"><?= $value['donateId'] ?></td>
                      <td class="fw-semibold fs-sm"><?= $value['donateName'] ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['donateAmount']) ?></td>
                      <td class="fs-sm"><?= format_date($value['donateTimestamp'])  ?></td>
