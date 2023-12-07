@@ -44,9 +44,7 @@ class Transaction extends BaseController
             'withdrawAmount' => $this->request->getPost('jumlah') + ($this->request->getPost('jumlah') * 0.03),
         ];
 
-
-        if ($this->creatorData['creatorBalance'] < $dataInsert['withdrawAmount']) {
-            print_r("Saldo tidak mencukupi");
+        if ($this->creatorData['creatorBalance'] < $dataInsert['withdrawAmount'] || $this->request->getPost('jumlah') <= 0) {
             session()->setFlashData('error', 'Gagal Menarik Saldo, Saldo Tidak Mencukupi');
             return redirect()->to(base_url('dashboard/balance'));
             exit();
