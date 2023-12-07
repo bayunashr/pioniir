@@ -50,11 +50,11 @@ class Milestone extends BaseController
             if($this->request->getPost('milestoneStatus') == 'publish' && $this->cekPublish == 1){
                 session()->setFlashData('alert', 'Hanya 1 Milestone Yang Dapat Di Publish');
                 session()->setFlashdata('old_input', $this->request->getPost());
-                return redirect()->to(base_url().'dashboard/milestone/add');
+                return redirect()->to(base_url('dashboard/milestone/add'));
             }else{
                 $this->milestoneModel->insert($data);
                 session()->setFlashData('success', 'Berhasil Menambah Milestone');
-                return redirect()->to(base_url().'dashboard/milestone');
+                return redirect()->to(base_url('dashboard/milestone'));
             }
         } else {
             $data = [
@@ -73,7 +73,7 @@ class Milestone extends BaseController
         $getAllStatus = $this->milestoneModel->where('creatorId', $this->creatorData['creatorId'])->where('milestoneStatus', 'publish')->whereNotIn('milestoneId', [$id])->countAllResults();
 
         if ($miles['milestoneStatus'] === 'ended') {
-            return redirect()->to(base_url().'dashboard/milestone');
+            return redirect()->to(base_url('dashboard/milestone'));
             exit();
         }
 
@@ -88,11 +88,11 @@ class Milestone extends BaseController
             if($this->request->getPost('milestoneStatus') == 'publish' && $getAllStatus == 1){
                 session()->setFlashData('alert', 'Hanya 1 Milestone Yang Dapat Di Publish');
                 session()->setFlashdata('old_input', $this->request->getPost());
-                return redirect()->to(base_url().'dashboard/milestone/edit/'.$id);
+                return redirect()->to(base_url('dashboard/milestone/edit/'.$id));
             }else{
                 $this->milestoneModel->update($id, $data);
                 session()->setFlashData('success', 'Berhasil Mengubah Milestone');
-                return redirect()->to(base_url().'dashboard/milestone');
+                return redirect()->to(base_url('dashboard/milestone'));
             }
         } else {
             $data = [
@@ -112,6 +112,6 @@ class Milestone extends BaseController
         ];
         $this->milestoneModel->update($id, $update);
         session()->setFlashData('success', 'Berhasil Menyelesaikan Milestone');
-        return redirect()->to(base_url().'dashboard/milestone');
+        return redirect()->to(base_url('dashboard/milestone'));
     }
 }

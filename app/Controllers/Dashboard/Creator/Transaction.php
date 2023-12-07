@@ -48,7 +48,7 @@ class Transaction extends BaseController
         if ($this->creatorData['creatorBalance'] < $dataInsert['withdrawAmount']) {
             print_r("Saldo tidak mencukupi");
             session()->setFlashData('error', 'Gagal Menarik Saldo, Saldo Tidak Mencukupi');
-            return redirect()->to(base_url().'dashboard/balance');
+            return redirect()->to(base_url('dashboard/balance'));
             exit();
         }
 
@@ -80,11 +80,11 @@ class Transaction extends BaseController
         if ($response === false) {
             curl_close($ch);
             session()->setFlashData('error', 'Gagal Meminta Penarikan Saldo');
-            return redirect()->to(base_url().'dashboard/balance');
+            return redirect()->to(base_url('dashboard/balance'));
         } else {
             curl_close($ch);
             session()->setFlashData('alert', 'Berhasil Menarik Saldo, Silahkan Cek Email Anda');
-            return redirect()->to(base_url().'dashboard/balance');
+            return redirect()->to(base_url('dashboard/balance'));
         }
     }
 }

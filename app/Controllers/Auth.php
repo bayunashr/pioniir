@@ -44,7 +44,7 @@ class Auth extends BaseController
             }elseif($userData['userStatus'] === 'ban') {
                 $notif = $this->notificationModel->selectOneById($userData['userId']);
                 session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
-                return redirect('login');
+                return redirect()->to(base_url('login'));
                 exit;
             }elseif (password_verify($this->request->getPost('password'), $userData['userPassword'])) {
                 session()->set([
@@ -62,7 +62,7 @@ class Auth extends BaseController
             session()->setFlashData('error', 'Akun Tidak Ditemukan / Belum Terdaftar');
         }
         
-        return redirect('login');
+        return redirect()->to(base_url('login'));
     }
 
     public function authGoogle() {
@@ -86,7 +86,7 @@ class Auth extends BaseController
             }elseif($userData['userStatus'] === 'ban') {
                 $notif = $this->notificationModel->selectOneById($userData['userId']);
                 session()->setFlashData('error', 'User '.$notif['user_name']." dibanned karena ".$notif['notificationMessage']);
-                return redirect('login');
+                return redirect()->to(base_url('login'));
                 exit;
             }
 

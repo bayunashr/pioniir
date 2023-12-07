@@ -69,13 +69,13 @@ class Admin extends BaseController
                     'loginAdmin'    => true,
                     'adminName'      => $adminData['adminName'],
                 ]);
-                return redirect('admin');
+                return redirect()->to(base_url('admin'));
                 exit;
             } else{
                 session()->setFlashData('error', 'Password Salah');
             }
-            
-            return redirect('admin/login');
+
+            return redirect()->to(base_url('admin/login'));
         }else{
             $data = [
                 "title" => "Login - Pioniir Admin",
@@ -166,7 +166,7 @@ class Admin extends BaseController
 
         $this->notificationModel->insert($newNotification);
 
-        return redirect('admin/'.$type);
+        return redirect()->to(base_url('admin/'.$type));
     }
 
     public function unban($id)
@@ -217,7 +217,7 @@ class Admin extends BaseController
 
         $this->notificationModel->insert($newNotification);
 
-        return redirect('admin/'.$type);
+        return redirect()->to(base_url('admin/'.$type));
     }
 
     public function post(): string
