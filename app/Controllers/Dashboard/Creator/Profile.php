@@ -154,14 +154,13 @@ class Profile extends BaseController
             return $this->response->setJSON(['success' => false, 'message' => $validationResult]);
         } else {
             if($creatorBanner) {
-                $pathToOriginalFile = '../public/assets/uploads/banner/';
+                $folderPath = '../public/assets/uploads/banner/';
                 if (!empty($this->creatorData['creatorBanner'])) {
-                    $pathToOriginalFile .= $this->creatorData['creatorBanner'];
-                    if (file_exists($pathToOriginalFile)) {
-                        unlink($pathToOriginalFile);
+                    $folderPath .= $this->creatorData['creatorBanner'];
+                    if (file_exists($folderPath)) {
+                        unlink($folderPath);
                     }
                 }
-                $folderPath = "../public/assets/uploads/banner/";
                 $image_parts = explode(";base64,", $creatorBanner);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_type = $image_type_aux[1];
