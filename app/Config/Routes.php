@@ -5,20 +5,35 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::index');
-$routes->get('/login', 'Auth::index');
-$routes->post('/login/auth', 'Auth::loginAuth');
-$routes->get('/login/auth-google', 'Auth::authGoogle');
-$routes->get('/register', 'Auth::register');
-$routes->post('/register/auth', 'Auth::registerAuth');
-$routes->get('/register/creator', 'Home::registerCreator');
-$routes->post('/register/creator', 'Home::registerCreator');
-$routes->get('/logout', 'Auth::logout');
-$routes->get('/explore', 'Home::explore');
+$routes->group('/', function($routes) {
+    $routes->get('', 'Home::index');
+    $routes->get('explore', 'Home::explore');
+
+    // Login User
+    $routes->group('login', ['filter' => 'loginfront'], function($routes) {
+        $routes->get('', 'Auth::index');
+        $routes->post('auth', 'Auth::loginAuth');
+        $routes->get('auth-google', 'Auth::authGoogle');
+    });
+
+    // Register User
+    $routes->group('register', ['filter' => 'loginfront'], function($routes) {
+        $routes->get('', 'Auth::register');
+        $routes->post('auth', 'Auth::registerAuth');
+    });
+
+    // Register Creator
+    $routes->group('register/creator', ['filter' => 'userFilter'], function($routes) {
+        $routes->get('', 'Home::registerCreator');
+        $routes->post('', 'Home::registerCreator');
+    });
+
+    $routes->get('logout', 'Auth::logout');
+});
 
 // Super Routes Login
-$routes->get('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login');
-$routes->post('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login');
+$routes->get('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login', ['filter' => 'loginadmin']);
+$routes->post('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login', ['filter' => 'loginadmin']);
 
 // Super Routes
 $routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filter' => 'authadmin'],function ($routes) {
@@ -39,47 +54,59 @@ $routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filt
     $routes->get('unban/(:segment)', 'Admin::unban/$1');
 });
 
-// Creator Dashboard Routes
-$routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator'], function ($routes) {
+// Creator Routes
+$routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator', 'filter' => 'creatorfilter'], function ($routes) {
+    // Creator Dashboard
     $routes->get('/', 'Dashboard::index');
 
-    // Creator
-    $routes->get('profile/creator', 'Profile::index');
-    $routes->post('profile/creator', 'Profile::index');
-    $routes->post('profile/creator/profile-picture', 'Profile::profilePicture');
-    $routes->post('profile/creator/change-banner', 'Profile::banner');
-    $routes->post('profile/social/add', 'Profile::socialAdd');
-    $routes->post('profile/social/edit', 'Profile::socialEdit');
-    $routes->get('profile/social/delete/(:segment)', 'Profile::socialDelete/$1');
+    // Creator Profile
+    $routes->group('profile/creator', function ($routes) {
+        $routes->get('/', 'Profile::index');
+        $routes->post('/', 'Profile::index');
+        $routes->post('profile-picture', 'Profile::profilePicture');
+        $routes->post('change-banner', 'Profile::banner');
+        $routes->post('social/add', 'Profile::socialAdd');
+        $routes->post('social/edit', 'Profile::socialEdit');
+        $routes->get('social/delete/(:segment)', 'Profile::socialDelete/$1');
+    });
 
-    // Balance
-    $routes->get('balance', 'Transaction::index');
-    $routes->post('balance/withdraw', 'Transaction::withdraw');
+    // Creator Balance
+    $routes->group('balance', function ($routes) {
+        $routes->get('/', 'Transaction::index');
+        $routes->post('withdraw', 'Transaction::withdraw');
+    });
 
-    // Milestone
-    $routes->get('milestone', 'Milestone::index');
-    $routes->get('milestone/add', 'Milestone::add');
-    $routes->post('milestone/add', 'Milestone::add');
-    $routes->get('milestone/edit/(:segment)', 'Milestone::edit/$1');
-    $routes->post('milestone/edit/(:segment)', 'Milestone::edit/$1');
-    $routes->get('milestone/ended/(:segment)', 'Milestone::ended/$1');
+    // Creator Milestone
+    $routes->group('milestone', function ($routes) {
+        $routes->get('/', 'Milestone::index');
+        $routes->get('add', 'Milestone::add');
+        $routes->post('add', 'Milestone::add');
+        $routes->get('edit/(:segment)', 'Milestone::edit/$1');
+        $routes->post('edit/(:segment)', 'Milestone::edit/$1');
+        $routes->get('ended/(:segment)', 'Milestone::ended/$1');
+    });
 
-    // Content
-    $routes->get('content', 'Content::index');
-    $routes->get('content/add', 'Content::add');
-    $routes->post('content/add', 'Content::add');
-    $routes->get('content/edit/(:segment)', 'Content::edit/$1');
-    $routes->post('content/edit/(:segment)', 'Content::edit/$1');
-    $routes->get('content/delete/(:segment)', 'Content::destroy/$1');
+    // Creator Content
+    $routes->group('content', function ($routes) {
+        $routes->get('/', 'Content::index');
+        $routes->get('add', 'Content::add');
+        $routes->post('add', 'Content::add');
+        $routes->get('edit/(:segment)', 'Content::edit/$1');
+        $routes->post('edit/(:segment)', 'Content::edit/$1');
+        $routes->get('delete/(:segment)', 'Content::destroy/$1');
+    });
 
-    // Post
-    $routes->get('post', 'Post::index');
-    $routes->get('post/add', 'Post::add');
-    $routes->post('post/add', 'Post::add');
-    $routes->get('post/edit/(:segment)', 'Post::edit/$1');
-    $routes->post('post/edit/(:segment)', 'Post::edit/$1');
-    $routes->get('post/delete/(:segment)', 'Post::destroy/$1');
+    // Creator Post
+    $routes->group('post', function ($routes) {
+        $routes->get('/', 'Post::index');
+        $routes->get('add', 'Post::add');
+        $routes->post('add', 'Post::add');
+        $routes->get('edit/(:segment)', 'Post::edit/$1');
+        $routes->post('edit/(:segment)', 'Post::edit/$1');
+        $routes->get('delete/(:segment)', 'Post::destroy/$1');
+    });
 
-    // Donate
+    // Creator Donate
     $routes->get('donate', 'Donate::index');
+
 });

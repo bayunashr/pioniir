@@ -25,7 +25,18 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
-        'authadmin'     => \App\Filters\LoginAdminFilter::class
+        'authadmin'     => \App\Filters\AdminFilter::class,
+        'loginadmin'    => \App\Filters\LoginAdminFilter::class,
+        'authfront'     => \App\Filters\FrontFilter::class,
+        'loginfront'    => \App\Filters\LoginFrontFilter::class,
+        'creatorfilter' => [
+            \App\Filters\FrontFilter::class,
+            \App\Filters\CreatorFilter::class,
+        ],
+        'userFilter' => [
+            \App\Filters\FrontFilter::class,
+            \App\Filters\UserFilter::class,
+        ],
     ];
 
     /**

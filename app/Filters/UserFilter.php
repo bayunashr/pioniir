@@ -5,8 +5,10 @@ namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\UserModel;
+use App\Models\CreatorModel;
 
-class LoginAdminFilter implements FilterInterface
+class UserFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,8 +27,13 @@ class LoginAdminFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if(session()->get('loginAdmin')){
-            return redirect()->to(base_url('admin')); 
+        $userModel    = new UserModel();
+        $creatorModel = new CreatorModel();
+        $userData     = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
+        $creatorData  = $creatorModel->where('userId', $userData['userId'])->findAll();
+
+        if ($creatorData) {
+            return redirect()->to(base_url('dashboard'));
         }
     }
 

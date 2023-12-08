@@ -88,7 +88,7 @@ class Admin extends BaseController
     {
         session()->remove('loginAdmin');
         session()->remove('adminName');
-        return redirect('admin/login');
+        return redirect()->to(base_url('admin/login'));
     }
 
     public function user(): string

@@ -29,6 +29,8 @@ class Dashboard extends BaseController
         $userData       = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $creatorData    = $creatorModel->where('userId', $userData['userId'])->first();
 
+        
+
         $data = [
             'title'     => 'Dashboard - Pioniir Creator',
             'buy'       => $buyModel->getCountBuyCreator($creatorData['creatorId']),
