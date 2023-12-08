@@ -125,6 +125,15 @@ function escapeHtml(text) {
    });
 }
 
+<?php if (session()->getFlashdata('success')) : ?>
+var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
+Swal.fire({
+   title: "Good job!",
+   text: pesan,
+   icon: "success"
+});
+<?php endif; ?>
+
 $(document).on('click', '#tombol', function() {
    const id = this.getAttribute('content-id');
    const title = this.getAttribute('content-title');

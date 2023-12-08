@@ -96,6 +96,15 @@
 <script src="<?= base_url() ?>assets/dashboard/js/pages/be_comp_dialogs.min.js"></script>
 
 <script>
+<?php if (session()->getFlashdata('success')) : ?>
+var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
+Swal.fire({
+   title: "Good job!",
+   text: pesan,
+   icon: "success"
+});
+<?php endif; ?>
+
 $(document).on('click', '#tombol', function() {
    const id = this.getAttribute('comment-id');
    const value = this.getAttribute('comment-value');

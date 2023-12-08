@@ -137,6 +137,7 @@ class Admin extends BaseController
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "bpost";
             $this->postModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil banned postingan.');
         } elseif($type == "content"){
             $updateStatus = [
                 "contentStatus" => "ban",
@@ -146,6 +147,7 @@ class Admin extends BaseController
             $newNotification["userId"] = $content['user_id'];
             $newNotification["notificationType"] = "bcontent";
             $this->contentModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil banned konten.');
         } elseif($type == "comment"){
             $updateStatus = [
                 "commentStatus" => "ban",
@@ -155,6 +157,7 @@ class Admin extends BaseController
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "bcomment";
             $this->commentModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil banned komentar.');
         } elseif($type == "user"){
             $updateStatus = [
                 "userStatus" => "ban",
@@ -162,6 +165,7 @@ class Admin extends BaseController
             $newNotification["userId"] = $id;
             $newNotification["notificationType"] = "buser";
             $this->userModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil banned user.');
         }
 
         $this->notificationModel->insert($newNotification);
@@ -188,6 +192,7 @@ class Admin extends BaseController
             $newNotification["postId"] = $id;
             $newNotification["notificationType"] = "ubpost";
             $this->postModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil unban postingan.');
         } elseif($type == "content"){
             $updateStatus = [
                 "contentStatus" => "archive",
@@ -197,6 +202,7 @@ class Admin extends BaseController
             $newNotification["contentId"] = $id;
             $newNotification["notificationType"] = "ubcontent";
             $this->contentModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil unban konten.');
         } elseif($type == "comment"){
             $updateStatus = [
                 "commentStatus" => "publish",
@@ -206,6 +212,7 @@ class Admin extends BaseController
             $newNotification["commentId"] = $id;
             $newNotification["notificationType"] = "ubcomment";
             $this->commentModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil unban komentar.');
         } elseif($type == "user"){
             $updateStatus = [
                 "userStatus" => "active",
@@ -213,6 +220,7 @@ class Admin extends BaseController
             $newNotification["userId"] = $id;
             $newNotification["notificationType"] = "ubuser";
             $this->userModel->update($id, $updateStatus);
+            session()->setFlashData('success', 'Berhasil unban user.');
         }
 
         $this->notificationModel->insert($newNotification);
