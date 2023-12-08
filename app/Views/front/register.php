@@ -11,6 +11,7 @@
    <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -38,26 +39,31 @@
                      <div class="card-body p-8 p-sm-11 text-center">
                         <h2 class="mb-3 text-start">Sign up to Pioniir</h2>
                         <p class="lead mb-6 text-start">Registration takes less than a minute.</p>
-                        <form class="text-start mb-3">
+                        <form action="<?= base_url('register/auth')?>" class="text-start mb-3" method="POST">
                            <div class="form-floating mb-4">
-                              <input type="text" class="form-control" placeholder="Username" id="username">
+                              <input type="text" class="form-control" placeholder="Username" id="username" name="username" value="<?= session()->has('old_input') ? session('old_input')['username'] : null ?>" required>
                               <label for="username">Username</label>
                            </div>
                            <div class="form-floating mb-4">
-                              <input type="email" class="form-control" placeholder="Email" id="email">
+                              <input type="text" class="form-control" placeholder="Full Name" id="fullname" name="fullname" required value="<?= session()->has('old_input') ? session('old_input')['fullname'] : null ?>">
+                              <label for="username">Full Name</label>
+                           </div>
+                           <div class="form-floating mb-4">
+                              <input type="email" class="form-control" placeholder="Email" id="email" name="email" required value="<?= session()->has('old_input') ? session('old_input')['email'] : null ?>">
                               <label for="email">Email</label>
                            </div>
                            <div class="form-floating password-field mb-4">
-                              <input type="password" class="form-control" placeholder="Password" id="password">
+                              <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
                               <span class="password-toggle"><i class="uil uil-eye"></i></span>
                               <label for="password">Password</label>
                            </div>
                            <div class="form-floating password-field mb-4">
-                              <input type="password" class="form-control" placeholder="Confirm Password" id="passwordConfirm">
+                              <input type="password" class="form-control" placeholder="Confirm Password" id="passwordConfirm" name="passwordConfirm" required>
                               <span class="password-toggle"><i class="uil uil-eye"></i></span>
                               <label for="passwordConfirm">Confirm Password</label>
                            </div>
-                           <a class="btn btn-navy rounded-pill btn-login w-100 mb-2">Sign Up</a>
+                           <button type="submit" class="btn btn-navy rounded-pill btn-login w-100 mb-2">Sign Up</button>
+                           <a href="<?= $link ?>" class="btn rounded-pill w-100 mb-2 btn-outline-danger"><i class="uil uil-google"></i> &nbsp; Sign Up With Gmail</a>
                         </form>
                         <!-- /form -->
                         <p class="mb-0">Already have an account? <a href="<?= base_url('login') ?>" class="hover link-navy">Sign in</a></p>
@@ -77,6 +83,26 @@
    <!-- /.content-wrapper -->
    <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
    <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
+   <script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+   <script>
+   <?php if(session()->getFlashdata('success')) : ?>
+   var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
+   Swal.fire({
+      title: "Good job!",
+      text: pesan,
+      icon: "success"
+   });
+   <?php endif; ?>
+   <?php if(session()->getFlashdata('error') || session()->getFlashdata('validation')) : ?>
+   var pesan = <?= session()->getFlashdata('error') ? json_encode(session()->getFlashdata('error')) : json_encode(current(session()->getFlashdata('validation')))?>;
+   Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: pesan,
+   });
+   <?php endif; ?>
+   </script>
 </body>
 
 </html>

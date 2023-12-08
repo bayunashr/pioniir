@@ -11,6 +11,7 @@
    <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -46,11 +47,11 @@
                         <p class="lead mb-6 text-start">Fill your email or username and password to sign in.</p>
                         <form action="<?=base_url('login/auth')?>" method="POST" class="text-start mb-3">
                            <div class="form-floating mb-4">
-                              <input type="email" class="form-control" placeholder="Email" id="loginEmail" name="identitas">
+                              <input type="email" class="form-control" placeholder="Email" id="loginEmail" name="identitas" value="<?= session()->has('old_input') ? session('old_input')['identitas'] : null ?>" required>
                               <label for="loginEmail">Email</label>
                            </div>
                            <div class="form-floating password-field mb-4">
-                              <input type="password" class="form-control" placeholder="Password" id="loginPassword" name="password">
+                              <input type="password" class="form-control" placeholder="Password" id="loginPassword" name="password" required>
                               <span class="password-toggle"><i class="uil uil-eye"></i></span>
                               <label for="loginPassword">Password</label>
                            </div>
@@ -73,26 +74,28 @@
       </section>
       <!-- /section -->
    </div>
-   <?php if (session()->getFlashdata('error')):?>
-   <div class="modal fade modal-popup" id="modal-02" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-sm">
-         <div class="modal-content text-center">
-            <div class="modal-body">
-               <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-               <div class="row">
-                  <div class="col-md-12">
-                     <h1 class="fs-100 text-danger"><i class="uil uil-times"></i></h1>
-                  </div>
-               </div>
-               <h3 class="text-danger"><?= session()->getFlashdata('error') ?></h3>
-            </div>
-         </div>
-      </div>
-   </div>
-   <?php endif;?>
    <!-- /.content-wrapper -->
    <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
    <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
+   <script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+   <script>
+   <?php if(session()->getFlashdata('success')) : ?>
+   var pesan = <?= json_encode(session()->getFlashdata('success')) ?>;
+   Swal.fire({
+      title: "Good job!",
+      text: pesan,
+      icon: "success"
+   });
+   <?php endif; ?>
+   <?php if(session()->getFlashdata('error')) : ?>
+   var pesan = <?= json_encode(session()->getFlashdata('error'))?>;
+   Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: pesan,
+   });
+   <?php endif; ?>
+   </script>
 </body>
 
 </html>

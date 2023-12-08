@@ -8,8 +8,7 @@ use Ramsey\Uuid\Uuid;
 
 class Auth extends BaseController
 {
-    protected $userModel, $notificationModel;
-    protected $client;
+    protected $userModel, $notificationModel, $client, $imageDefault;
 
     function __construct() {
         $this->userModel = new UserModel;
@@ -20,19 +19,23 @@ class Auth extends BaseController
         $this->client->setRedirectUri(base_url()."login/auth-google");
         $this->client->addScope('email');
         $this->client->addScope('profile');
+        $this->imageDefault = array('1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg');
     }
 
     public function index()
     {
         $data = [
-            'link'     => $this->client->createAuthUrl(),
+            'link'  => $this->client->createAuthUrl(),
         ];
         return view('front/login', $data);
     }
 
     public function register()
     {
-        return view('front/register');
+        $data = [
+            'link'  => $this->client->createAuthUrl(),
+        ];
+        return view('front/register',$data);
     }
 
     public function loginAuth() {
@@ -56,6 +59,7 @@ class Auth extends BaseController
                 return redirect()->to(base_url());
                 exit;
             }else{
+                session()->setFlashdata('old_input', $this->request->getPost());  
                 session()->setFlashData('error', 'Password Salah');
             }
         }else{
@@ -79,7 +83,8 @@ class Auth extends BaseController
                     'userId'        => Uuid::uuid4(),
                     'userName'      => strtolower(str_replace(' ', '', $data['name'])),
                     'userFullName'  => $data['name'],
-                    'userEmail'     => $data['email']
+                    'userEmail'     => $data['email'],
+                    'userAvatar'    => $this->imageDefault[array_rand($this->imageDefault)],
                 ];
                 $this->userModel->insert($user);
                 $userData = $user;
@@ -99,6 +104,39 @@ class Auth extends BaseController
 
             return redirect()->to(base_url());
         }
+    }
+
+    public function registerAuth() {
+        $user = [
+            'userId'        => Uuid::uuid4(),
+            'userName'      => strtolower(str_replace(' ', '', $this->request->getPost('username'))),
+            'userFullName'  => $this->request->getPost('fullname'),
+            'userEmail'     => $this->request->getPost('email'),
+            'userPassword'  => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'userAvatar'    => $this->imageDefault[array_rand($this->imageDefault)],
+        ];
+
+        if (strlen($this->request->getPost('password')) >= 8) {
+            if ($this->request->getPost('password') === $this->request->getPost('passwordConfirm')) {
+                $insert = $this->userModel->insert($user);
+                if ($insert) {
+                    session()->setFlashData('success', 'Registrasi Berhasil, Silahkan Login');
+                    return redirect()->to(base_url('login'));
+                    exit(); 
+                }else{
+                    session()->setFlashdata('old_input', $this->request->getPost());  
+                    session()->setFlashData('validation',$this->userModel->errors());
+                }
+            }else{
+                session()->setFlashdata('old_input', $this->request->getPost());
+                session()->setFlashData('error', "Konfirmasi Password Tidak Sesuai");
+            }
+        }else{
+            session()->setFlashdata('old_input', $this->request->getPost());
+            session()->setFlashData('error', "Password Minimal 8 Karakter");
+        }
+        
+        return redirect()->to(base_url('register')); 
     }
 
     public function logout() {
