@@ -125,7 +125,7 @@ class Admin extends BaseController
 
         $newNotification = [
             "notificationId" => Uuid::uuid4(),
-            "notificationMessage" => $msg,
+            "notificationMessage" => strtolower($msg),
         ];
 
         if($type == "post"){
@@ -176,7 +176,7 @@ class Admin extends BaseController
 
         $newNotification = [
             "notificationId" => Uuid::uuid4(),
-            "notificationMessage" => $msg,
+            "notificationMessage" => strtolower($msg),
         ];
 
         if($type == "post"){
