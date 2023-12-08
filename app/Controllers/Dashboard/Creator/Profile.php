@@ -100,11 +100,14 @@ class Profile extends BaseController
             if($file = $this->request->getFile('userAvatar')) {
                 if ($file->isValid() && ! $file->hasMoved()) {
                     // Hapus Gambar Sebelumnya
+                    $foto_default = array('1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg');
                     $pathToOriginalFile = '../public/assets/uploads/photo_profile/';
                     if (!empty($this->userData['userAvatar'])) {
                         $pathToOriginalFile .= $this->userData['userAvatar'];
                         if (file_exists($pathToOriginalFile)) {
-                            unlink($pathToOriginalFile);
+                            if (!in_array($this->userData['userAvatar'], $foto_default)) {
+                                unlink($pathToOriginalFile);
+                            }
                         }
                     }
                     $name = $file->getName();
@@ -156,11 +159,12 @@ class Profile extends BaseController
             if($creatorBanner) {
                 $folderPath = '../public/assets/uploads/banner/';
                 if (!empty($this->creatorData['creatorBanner'])) {
-                    $folderPath .= $this->creatorData['creatorBanner'];
-                    if (file_exists($folderPath)) {
-                        unlink($folderPath);
+                    $filePath = $folderPath . $this->creatorData['creatorBanner'];
+                    if (file_exists($filePath) && $this->creatorData['creatorBanner'] !== 'bannercreator.png') {
+                        unlink($filePath);
                     }
                 }
+
                 $image_parts = explode(";base64,", $creatorBanner);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_type = $image_type_aux[1];
