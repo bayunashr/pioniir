@@ -3,6 +3,7 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use Ramsey\Uuid\Uuid;
 
 class Home extends BaseController
 {
@@ -20,11 +21,10 @@ class Home extends BaseController
         
     }
 
-    public function index()
-    {
+    public function index(){
         $data = [
-            'creator' => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
-            'user'  => $this->userData
+            'creator'   => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'      => $this->userData,
         ];
         return view('front/home',$data);
     }
@@ -34,6 +34,28 @@ class Home extends BaseController
     }
 
     public function registerCreator(){
-        return view('front/regCreator');
+        $options = ['Animation','Art','Blogging','Comics And Cartoons','Commissions','Cosplay','Dance And Theatre','Design','Drawing And Painting','Education','Food And Drink','Fundraising','Gaming','Health And Fitness','Lifestyle','Money','Music','News','Photography','Podcast','Science And Tech','Social','Software','Streaming','Translator','Video And Film','Writing'];
+        if ($this->request->getPost()) {
+            $data = [
+                'creatorId'         => Uuid::uuid4(),
+                'userId'            => $this->userData['userId'],
+                'creatorAlias'      => $this->request->getPost('creatorAlias'),
+                'creatorTag'        => $this->request->getPost('creatorTag'),
+                'creatorDescription'=> $this->request->getPost('creatorDescription'),
+                'creatorBanner'     => 'bannercreator.png'
+            ];
+            $insert = $this->creatorModel->insert($data);
+            if ($insert) {
+                session()->setFlashData('success', 'Registrasi Creator Berhasil, Enjoy');
+                return redirect()->to(base_url('dashboard/profile/creator'));
+            }else{
+                session()->setFlashdata('old_input', $this->request->getPost());  
+                session()->setFlashData('validation',$this->creatorModel->errors());
+                return redirect()->to(base_url('register/creator')); 
+            }
+        }else{
+            $data['option'] = $options;
+            return view('front/regCreator',$data);
+        }
     }
 }

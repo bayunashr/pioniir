@@ -12,6 +12,7 @@ $routes->get('/login/auth-google', 'Auth::authGoogle');
 $routes->get('/register', 'Auth::register');
 $routes->post('/register/auth', 'Auth::registerAuth');
 $routes->get('/register/creator', 'Home::registerCreator');
+$routes->post('/register/creator', 'Home::registerCreator');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/explore', 'Home::explore');
 

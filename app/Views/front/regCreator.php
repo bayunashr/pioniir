@@ -11,6 +11,7 @@
    <link rel="shortcut icon" href="<?= base_url() ?>assets/front/img/pioniir.png">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body>
@@ -42,25 +43,26 @@
                            <div class="px-5 py-8 p-sm-10 p-md-11 p-lg-13">
                               <h2 class="mb-3 text-start">Become a Creator</h2>
                               <p class="lead mb-6 text-start">Gabung, Jadilah Creator!</p>
-                              <form class="text-start mb-3">
+                              <form class="text-start mb-3" action="<?= base_url('register/creator')?>" method="POST">
                                  <div class="form-floating mb-4">
-                                    <input type="text" class="form-control" placeholder="Creator Alias (A.K.A)" id="alias">
+                                    <input type="text" class="form-control" placeholder="Creator Alias (A.K.A)" id="alias" required name="creatorAlias">
                                     <label for="alias">Creator Alias (A.K.A)</label>
                                  </div>
                                  <div class="form-select-wrapper mb-4">
-                                    <select class="form-select">
+                                    <select class="form-select" name="creatorTag">
                                        <option hidden selected>Creator Tag</option>
-                                       <option value="1">One</option>
-                                       <option value="2">Two</option>
-                                       <option value="3">Three</option>
+                                       <?php foreach ($option as $value) : ?>
+                                       <?php $selected = (session()->has('old_input') && session('old_input')['creatorTag'] === strtolower($value)) ? 'selected' : ''; ?>
+                                       <option value="<?= strtolower($value) ?>" <?= $selected ?>><?= $value ?></option>
+                                       <?php endforeach; ?>
                                     </select>
                                     <p class="fs-13 mt-2 px-2 text-aqua fw-bold">Tenang! Tag bisa kamu ubah atau tambah nanti</p>
                                  </div>
                                  <div class="form-floating mb-4">
-                                    <textarea id="textareaExample" class="form-control" placeholder="Textarea" style="height: 150px" required></textarea>
+                                    <textarea id="textareaExample" class="form-control" placeholder="Textarea" style="height: 150px" required name="creatorDescription"><?= session()->has('old_input') ? session('old_input')['creatorDescription'] : null ?></textarea>
                                     <label for="textareaExample">Creator Description</label>
                                  </div>
-                                 <a class="btn btn-navy rounded-pill btn-login w-100 mb-2">Gabung Sekarang!</a>
+                                 <button type="submit" class="btn btn-navy rounded-pill btn-login w-100 mb-2">Gabung Sekarang!</button>
                               </form>
                            </div>
                            <!--/div -->
@@ -82,6 +84,17 @@
    <!-- /.content-wrapper -->
    <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
    <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
+   <script src="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+   <script>
+   <?php if(session()->getFlashdata('error') || session()->getFlashdata('validation')) : ?>
+   var pesan = <?= session()->getFlashdata('error') ? json_encode(session()->getFlashdata('error')) : json_encode(current(session()->getFlashdata('validation')))?>;
+   Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: pesan,
+   });
+   <?php endif; ?>
+   </script>
 </body>
 
 </html>

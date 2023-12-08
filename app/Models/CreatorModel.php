@@ -15,7 +15,15 @@ class CreatorModel extends Model
     protected $allowedFields    = ['userId', 'creatorAlias', 'creatorTag', 'creatorDescription', 'creatorSubPrice', 'creatorBalance', 'creatorBanner'];
 
     // Validation
-    protected $validationRules      = [];
+    protected $validationRules = [
+        'creatorAlias'     => [
+            'rules' => 'required|is_unique[Creator.creatorAlias]',
+            'errors' => [
+                'required' => 'Alias wajib diisi.',
+                'is_unique' => 'Alias sudah digunakan.'
+            ]
+        ]
+    ];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
