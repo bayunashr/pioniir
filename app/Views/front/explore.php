@@ -41,7 +41,9 @@
          <div class="text-center my-5">
             <h1 class="my-5 fs-100"><i class=""></i>Oops!</h1>
             <h3>No results found</h3>
-            "<?= esc(request()->getGet('search')) ?>"
+            <?php if (!empty(request()->getGet('search'))) :?>
+            <p class="overflow-hidden text-break">"<?= esc(request()->getGet('search')) ?>"</p>
+            <?php endif?>
          </div>
          <?php endif;?>
       </div>
