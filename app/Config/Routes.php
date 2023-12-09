@@ -35,6 +35,7 @@ $routes->group('/', function($routes) {
 // Super Routes Login
 $routes->get('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login', ['filter' => 'loginadmin']);
 $routes->post('admin/login', '\App\Controllers\Dashboard\Admin\Admin::login', ['filter' => 'loginadmin']);
+$routes->post('withdraw/xendit/webhook', '\App\Controllers\WebhookController::webhookXendit');
 
 // Super Routes
 $routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filter' => 'authadmin'],function ($routes) {

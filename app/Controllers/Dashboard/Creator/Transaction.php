@@ -29,7 +29,7 @@ class Transaction extends BaseController
             'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
             'user'      => $this->userData,
             'creator'   => $this->creatorData,
-            'withdraw'  => $this->withdrawModel->where('creatorId', $this->creatorData['creatorId'])->findAll(),
+            'withdraw'  => $this->withdrawModel->where('creatorId', $this->creatorData['creatorId'])->orderBy('withdrawTimestamp', 'desc')->findAll(),
         ];
         return view('dashboard/creator/balance', $data);
     }

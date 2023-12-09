@@ -76,8 +76,8 @@
                <div class="block-content fs-sm">
                   <div class="mb-4">
                      <label class="form-label" for="jumlah">Jumlah</label>
-                     <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah">
-                     <span>Biaya admin sebesar 3%</span>
+                     <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="Minimal Rp 10.000" min="10000">
+                     <span>Biaya admin sebesar 3% setiap penarikan</span>
                   </div>
                </div>
                <div class="block-content block-content-full text-end bg-body">
