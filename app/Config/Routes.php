@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->group('/', function($routes) {
     $routes->get('', 'Home::index');
     $routes->get('explore', 'Home::explore');
+    $routes->get('explore/(:any)', 'Home::explore/$1');
 
     // Login User
     $routes->group('login', ['filter' => 'loginfront'], function($routes) {
