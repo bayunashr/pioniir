@@ -14,7 +14,7 @@ class Home extends BaseController
         $this->creatorModel = new CreatorModel();
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
-            $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->findAll();
+            $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
         }else{
             $this->userData['userId'] = 0;
             $this->creatorData['creatorId'] = 0;
