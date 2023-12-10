@@ -29,14 +29,33 @@ class Dashboard extends BaseController
         $userData       = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $creatorData    = $creatorModel->where('userId', $userData['userId'])->first();
 
+        $day            = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         $month          = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $year           = idate('Y');
-        $chartDataSub      = [];
+        $dayMonthMap    = [];
+        $currentMonth   = idate('m');
+        $currentYear    = idate('Y');
+        $currentDayMonth = idate('t');
+
         for ($i = 0; $i < sizeof($month); $i++) {
-            $temp = $subscribeModel->CountAllByMonthAndId($creatorData['creatorId'], $i + 1, $year);
-            $chartDataSub[$month[$i]] = $temp;
+            $dayMonthMap[$month[$i]] = idate('t', mktime(0, 0, 0, $i + 1, 1, 2023));
         }
-        $chartDataSub = array_values($chartDataSub);
+        $dayMonthMap = array_values($dayMonthMap);
+
+        // Daily Chart
+        $chartDataSubD = [];
+        for ($i = 0; $i < $currentDayMonth; $i++) {
+            $temp = $subscribeModel->CountAllByDayAndId($creatorData['creatorId'], $i + 1, $currentMonth, $currentYear);
+            $chartDataSubD[$i] = $temp;
+        }
+        $chartDataSubD = array_values($chartDataSubD);
+
+        // Monthly Chart
+        $chartDataSubM = [];
+        for ($i = 0; $i < sizeof($month); $i++) {
+            $temp = $subscribeModel->CountAllByMonthAndId($creatorData['creatorId'], $i + 1, $currentYear);
+            $chartDataSubM[$month[$i]] = $temp;
+        }
+        $chartDataSubM = array_values($chartDataSubM);
 
         $data = [
             'title'     => 'Dashboard - Pioniir Creator',
@@ -49,7 +68,9 @@ class Dashboard extends BaseController
             'user'      => $userData,
             'creator'   => $creatorData,
             'chartMonth' => $month,
-            'chartDataSub' => $chartDataSub,
+            'currentDayMonth' => $currentDayMonth,
+            'chartDataSubM' => $chartDataSubM,
+            'chartDataSubD' => $chartDataSubD,
         ];
 
         return view('dashboard/creator/dashboard', $data);

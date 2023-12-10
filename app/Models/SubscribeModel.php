@@ -12,7 +12,7 @@ class SubscribeModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['userId','creatorId','subscribeStatus'];
+    protected $allowedFields    = ['userId', 'creatorId', 'subscribeStatus'];
 
     // Validation
     protected $validationRules      = [];
@@ -42,6 +42,15 @@ class SubscribeModel extends Model
     public function CountAllByMonthAndId($id, $month, $year)
     {
         return $this->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
+    }
+
+    public function CountAllByDayAndId($id, $day, $month, $year)
+    {
+        return $this->where('DAY(createdAt)', $day)
+            ->where('MONTH(createdAt)', $month)
             ->where('YEAR(createdAt)', $year)
             ->where('creatorId', $id)
             ->countAllResults();

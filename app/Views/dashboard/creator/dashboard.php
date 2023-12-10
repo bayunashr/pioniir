@@ -117,17 +117,37 @@
             <!-- Lines Chart -->
             <div class="block block-rounded">
                <div class="block-header block-header-default">
-                  <h3 class="block-title">Subscriber Overview</h3>
+                  <h3 class="block-title">Monthly Subscriber Overview</h3>
                   <div class="block-options">
-                     <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
-                        <i class="si si-refresh"></i>
+                     <button type="button" class="btn-block-option" id="toggle-chart">
+                        <i class="si si-refresh"></i> Toggle View
                      </button>
                   </div>
                </div>
                <div class="block-content block-content-full text-center">
                   <div class="py-3" style="height: 360px">
                      <!-- Lines Chart Container -->
-                     <canvas id="chartSub"></canvas>
+                     <canvas id="chartSubM"></canvas>
+                  </div>
+               </div>
+            </div>
+            <!-- END Lines Chart -->
+         </div>
+         <div class="col-xl-6">
+            <!-- Lines Chart -->
+            <div class="block block-rounded">
+               <div class="block-header block-header-default">
+                  <h3 class="block-title">Daily Subscriber Overview</h3>
+                  <div class="block-options">
+                     <button type="button" class="btn-block-option" id="toggle-chart">
+                        <i class="si si-refresh"></i> Toggle View
+                     </button>
+                  </div>
+               </div>
+               <div class="block-content block-content-full text-center">
+                  <div class="py-3" style="height: 360px">
+                     <!-- Lines Chart Container -->
+                     <canvas id="chartSubD"></canvas>
                   </div>
                </div>
             </div>
@@ -162,10 +182,10 @@
       Chart.defaults.plugins.tooltip.radius = 3;
       Chart.defaults.plugins.legend.labels.boxWidth = 15;
 
-      const chartDataSub = {
+      const chartDataSubM = {
          labels: <?= json_encode($chartMonth) ?>,
          datasets: [{
-            label: 'Total Subscriber',
+            label: 'Subscriber',
             fill: true,
             backgroundColor: 'rgba(0, 0, 0, .1)',
             borderColor: 'rgba(0, 0, 0, .3)',
@@ -173,13 +193,13 @@
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-            data: <?= json_encode($chartDataSub) ?>
+            data: <?= json_encode($chartDataSubM) ?>
          }]
       };
 
-      const chartConfigSub = {
+      const chartConfigSubM = {
          type: 'line',
-         data: chartDataSub,
+         data: chartDataSubM,
          options: {
             responsive: true,
             maintainAspectRatio: false,
@@ -195,8 +215,48 @@
          },
       };
 
-      const ctx = document.getElementById('chartSub');
-      const chartSub = new Chart(ctx, chartConfigSub);
+      let t = [];
+      for (let i = 1; i <= <?= $currentDayMonth ?>; i++) {
+         t[i] = i;
+      }
+
+      const chartDataSubD = {
+         labels: t,
+         datasets: [{
+            label: 'Subscriber',
+            fill: true,
+            backgroundColor: 'rgba(0, 0, 0, .1)',
+            borderColor: 'rgba(0, 0, 0, .3)',
+            pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+            data: <?= json_encode($chartDataSubD) ?>
+         }]
+      };
+
+      const chartConfigSubD = {
+         type: 'line',
+         data: chartDataSubD,
+         options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            tension: .4,
+            scales: {
+               y: {
+                  type: 'linear',
+                  ticks: {
+                     stepSize: 1,
+                  },
+               },
+            },
+         },
+      };
+
+      const ctxM = document.getElementById('chartSubM');
+      const ctxD = document.getElementById('chartSubD');
+      const chartSubM = new Chart(ctxM, chartConfigSubM);
+      const chartSubD = new Chart(ctxD, chartConfigSubD);
    });
 </script>
 <?= $this->endsection() ?>
