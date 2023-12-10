@@ -162,23 +162,8 @@
       Chart.defaults.plugins.tooltip.radius = 3;
       Chart.defaults.plugins.legend.labels.boxWidth = 15;
 
-      const MONTHS = [
-         'January',
-         'February',
-         'March',
-         'April',
-         'May',
-         'June',
-         'July',
-         'August',
-         'September',
-         'October',
-         'November',
-         'December'
-      ];
-
       const chartDataSub = {
-         labels: MONTHS,
+         labels: <?= json_encode($chartMonth) ?>,
          datasets: [{
             label: 'Total Subscriber',
             fill: true,
@@ -198,7 +183,15 @@
          options: {
             responsive: true,
             maintainAspectRatio: false,
-            tension: .4
+            tension: .4,
+            scales: {
+               y: {
+                  type: 'linear',
+                  ticks: {
+                     stepSize: 1,
+                  },
+               },
+            },
          },
       };
 

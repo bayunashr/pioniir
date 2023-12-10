@@ -48,6 +48,7 @@ class Dashboard extends BaseController
             'notif'     => $notifModel->selectAllById($creatorData['userId']),
             'user'      => $userData,
             'creator'   => $creatorData,
+            'chartMonth' => $month,
             'chartDataSub' => $chartDataSub,
         ];
 
