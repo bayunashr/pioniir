@@ -7,12 +7,12 @@ use CodeIgniter\Model;
 class SubscribeModel extends Model
 {
     protected $table            = 'Subscribe';
-    protected $primaryKey       = 'subscribeId';
+    protected $primaryKey       = 'subId';
     protected $useAutoIncrement = false;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['userId','creatorId','subscribeStatus'];
 
     // Validation
     protected $validationRules      = [];

@@ -12,7 +12,7 @@ class DonateModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['userId','creatorId','donateName','donateAmount','donateDescription', 'donateStatus'];
 
     // Validation
     protected $validationRules      = [];

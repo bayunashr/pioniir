@@ -12,7 +12,7 @@ class BuyModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['userId','contentId','buyStatus'];
 
     // Validation
     protected $validationRules      = [];
@@ -29,11 +29,22 @@ class BuyModel extends Model
             ->findAll();
     }
 
+    public function selectById($buyId)
+    {
+        return $this->select('Buy.*, Creator.creatorId AS creatorId, Content.contentTitle AS content_title')
+            ->where('buyId', $buyId)
+            ->join('Content', 'Content.contentId = Buy.contentId')
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
+            ->orderBy('createdAt', 'desc')
+            ->first();
+    }
+
     public function getCountBuyCreator($creatorId) {
         return $this->select('Buy.buyId, Buy.userId AS buyerId, Buy.contentId, Content.creatorId, Creator.userId AS creatorUserId')
             ->join('Content', 'Buy.contentId = Content.contentId')
             ->join('Creator', 'Content.creatorId = Creator.creatorId')
             ->where('Creator.creatorId', $creatorId)
+            ->where('Buy.buyStatus', 'success')
             ->countAllResults();
     }
 }
