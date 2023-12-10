@@ -33,6 +33,19 @@ class Home extends BaseController
     public function explore($tag = null){
         
         $options = ['Animation','Art','Blogging','Comics And Cartoons','Commissions','Cosplay','Dance And Theatre','Design','Drawing And Painting','Education','Food And Drink','Fundraising','Gaming','Health And Fitness','Lifestyle','Money','Music','News','Photography','Podcast','Science And Tech','Social','Software','Streaming','Translator','Video And Film','Writing'];
+        
+        $tagExist = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->findAll();
+        $filteredOptions = [];
+        foreach ($tagExist as $creator) {
+            if (!empty($creator['creatorTag'])) {
+                $tagsArray = array_map('trim', explode(',', $creator['creatorTag']));
+                $filtered = array_intersect($options, $tagsArray);
+                if (!empty($filtered)) {
+                    $filteredOptions = array_merge($filteredOptions, array_values($filtered));
+                } 
+            }
+        }
+        
         if ($tag === null && $this->request->getGet('search')) {
             $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->like('creatorAlias', $this->request->getGet('search'))->findAll();
         }elseif ($tag && $this->request->getGet('search')) {
@@ -43,12 +56,11 @@ class Home extends BaseController
             $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->like('creatorTag', $tag)->findAll();
         }
 
-
         $data = [
             'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
             'user'          => $this->userData,
             'creatorList'   => $creatorList,
-            'options'       => $options
+            'options'       => $filteredOptions
         ];
         return view('front/explore',$data);
     }
