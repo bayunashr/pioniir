@@ -38,4 +38,12 @@ class SubscribeModel extends Model
             ->orderBy('subTimestamp', 'desc')
             ->findAll();
     }
+
+    public function CountAllByMonthAndId($id, $month, $year)
+    {
+        return $this->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
+    }
 }

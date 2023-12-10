@@ -29,7 +29,14 @@ class Dashboard extends BaseController
         $userData       = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $creatorData    = $creatorModel->where('userId', $userData['userId'])->first();
 
-        
+        $month          = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $year           = idate('Y');
+        $chartDataSub      = [];
+        for ($i = 0; $i < sizeof($month); $i++) {
+            $temp = $subscribeModel->CountAllByMonthAndId($creatorData['creatorId'], $i + 1, $year);
+            $chartDataSub[$month[$i]] = $temp;
+        }
+        $chartDataSub = array_values($chartDataSub);
 
         $data = [
             'title'     => 'Dashboard - Pioniir Creator',
@@ -41,6 +48,7 @@ class Dashboard extends BaseController
             'notif'     => $notifModel->selectAllById($creatorData['userId']),
             'user'      => $userData,
             'creator'   => $creatorData,
+            'chartDataSub' => $chartDataSub,
         ];
 
         return view('dashboard/creator/dashboard', $data);

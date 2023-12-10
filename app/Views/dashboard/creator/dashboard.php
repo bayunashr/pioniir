@@ -112,6 +112,28 @@
             <!-- END Conversion Rate-->
          </div>
       </div>
+      <div class="row">
+         <div class="col-xl-6">
+            <!-- Lines Chart -->
+            <div class="block block-rounded">
+               <div class="block-header block-header-default">
+                  <h3 class="block-title">Subscriber Overview</h3>
+                  <div class="block-options">
+                     <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                        <i class="si si-refresh"></i>
+                     </button>
+                  </div>
+               </div>
+               <div class="block-content block-content-full text-center">
+                  <div class="py-3" style="height: 360px">
+                     <!-- Lines Chart Container -->
+                     <canvas id="chartSub"></canvas>
+                  </div>
+               </div>
+            </div>
+            <!-- END Lines Chart -->
+         </div>
+      </div>
       <!-- END Overview -->
    </div>
    <!-- END Page Content -->
@@ -120,7 +142,68 @@
 
 <?= $this->section('footer-addons') ?>
 <script src="<?= base_url() ?>assets/dashboard/js/oneui.app.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/chart.js/chart.umd.js"></script>
 
 <!-- Page JS Code -->
 <script src="<?= base_url() ?>assets/dashboard/js/pages/be_pages_dashboard.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/pages/be_comp_charts.min.js"></script>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function() {
+
+      Chart.defaults.color = '#818d96';
+      Chart.defaults.font.weight = '600';
+      Chart.defaults.scale.grid.color = "rgba(0, 0, 0, .05)";
+      Chart.defaults.scale.grid.zeroLineColor = "rgba(0, 0, 0, .1)";
+      Chart.defaults.scale.beginAtZero = true;
+      Chart.defaults.elements.line.borderWidth = 2;
+      Chart.defaults.elements.point.radius = 4;
+      Chart.defaults.elements.point.hoverRadius = 6;
+      Chart.defaults.plugins.tooltip.radius = 3;
+      Chart.defaults.plugins.legend.labels.boxWidth = 15;
+
+      const MONTHS = [
+         'January',
+         'February',
+         'March',
+         'April',
+         'May',
+         'June',
+         'July',
+         'August',
+         'September',
+         'October',
+         'November',
+         'December'
+      ];
+
+      const chartDataSub = {
+         labels: MONTHS,
+         datasets: [{
+            label: 'Total Subscriber',
+            fill: true,
+            backgroundColor: 'rgba(0, 0, 0, .1)',
+            borderColor: 'rgba(0, 0, 0, .3)',
+            pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+            data: <?= json_encode($chartDataSub) ?>
+         }]
+      };
+
+      const chartConfigSub = {
+         type: 'line',
+         data: chartDataSub,
+         options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            tension: .4
+         },
+      };
+
+      const ctx = document.getElementById('chartSub');
+      const chartSub = new Chart(ctx, chartConfigSub);
+   });
+</script>
 <?= $this->endsection() ?>
