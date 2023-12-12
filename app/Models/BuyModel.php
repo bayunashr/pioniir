@@ -29,6 +29,16 @@ class BuyModel extends Model
             ->findAll();
     }
 
+    public function selectByCreatorId($creatorId)
+    {
+        return $this->select('Buy.*, User.userName, User.userEmail,, Content.contentTitle')
+        ->join('Content', 'Content.contentId = Buy.contentId')
+        ->join('Creator', 'Creator.creatorId = Content.creatorId')
+        ->join('User', 'User.userId = Buy.userId')
+        ->where(['Creator.creatorId' => $creatorId, 'buyStatus' => 'success'])
+        ->findAll();
+    }
+
     public function selectById($buyId)
     {
         return $this->select('Buy.*, Creator.creatorId AS creatorId, Content.contentTitle AS content_title')

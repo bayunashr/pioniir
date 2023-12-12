@@ -6,18 +6,20 @@ use App\Controllers\BaseController;
 use App\Models\ContentModel;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use App\Models\BuyModel;
 use App\Models\NotificationModel;
 use Ramsey\Uuid\Uuid;
 
 class Content extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $notifModel;
+    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $notifModel, $buyModel;
     function __construct()
     {
         $this->userModel = new UserModel();
         $this->creatorModel = new CreatorModel();
         $this->contentModel = new ContentModel();
         $this->notifModel = new NotificationModel();
+        $this->buyModel = new BuyModel();
         $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
     }
@@ -30,6 +32,7 @@ class Content extends BaseController
             'title'     => 'Dashboard - Pioniir Creator',
             'user'      => $this->userData,
             'creator'   => $this->creatorData,
+            'buy'       => $this->buyModel->selectByCreatorId($this->creatorData['creatorId'])
         ];
         return view('dashboard/creator/content', $data);
     }
