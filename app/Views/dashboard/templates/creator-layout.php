@@ -112,13 +112,13 @@
                   </li>
                   <li class="nav-main-heading">Report</li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link <?= current_url(true)->getSegment(3) == 'community' ? 'active' : '' ?>" href="<?= base_url('dashboard/report/community') ?>">
+                     <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'community') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/community') ?>">
                         <i class="nav-main-link-icon si si-bar-chart"></i>
                         <span class="nav-main-link-name">Community</span>
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link <?= current_url(true)->getSegment(3) == 'finance' ? 'active' : '' ?>" href="<?= base_url('dashboard/report/finance') ?>">
+                     <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'finance') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/finance') ?>">
                         <i class="nav-main-link-icon si si-pie-chart"></i>
                         <span class="nav-main-link-name">Finance</span>
                      </a>
