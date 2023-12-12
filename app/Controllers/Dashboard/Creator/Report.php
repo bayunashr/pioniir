@@ -12,7 +12,7 @@ use App\Models\UserModel;
 use App\Models\CreatorModel;
 use App\Models\NotificationModel;
 
-class Reports extends BaseController
+class Report extends BaseController
 {
     protected $userData, $creatorData, $userModel, $creatorModel, $postModel, $notifModel;
     function __construct()
@@ -25,7 +25,7 @@ class Reports extends BaseController
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
     }
 
-    public function communities()
+    public function community()
     {
         $data = [
             'title' => 'Communities Report - Pioniir Creator',
@@ -33,10 +33,10 @@ class Reports extends BaseController
             'creator'   => $this->creatorData,
             'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
         ];
-        return view('dashboard/creator/reports/communities', $data);
+        return view('dashboard/creator/communityReport', $data);
     }
 
-    public function finances()
+    public function finance()
     {
         $data = [
             'title' => 'Finances Report - Pioniir Creator',
@@ -44,6 +44,6 @@ class Reports extends BaseController
             'creator'   => $this->creatorData,
             'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
         ];
-        return view('dashboard/creator/reports/finances', $data);
+        return view('dashboard/creator/financeReport', $data);
     }
 }

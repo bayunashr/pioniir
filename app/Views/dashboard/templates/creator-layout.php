@@ -73,24 +73,6 @@
                      </a>
                   </li>
                   <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu <?= current_url(true)->getSegment(2) == 'reports' ? 'active' : '' ?>" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                        <i class="nav-main-link-icon si si-bar-chart"></i>
-                        <span class="nav-main-link-name">Reports</span>
-                     </a>
-                     <ul class="nav-main-submenu">
-                        <li class="nav-main-item">
-                        <a class="nav-main-link" href="<?= base_url('dashboard/reports/communities') ?>">
-                           <span class="nav-main-link-name">Communities</span>
-                        </a>
-                        </li>
-                        <li class="nav-main-item">
-                        <a class="nav-main-link" href="<?= base_url('dashboard/reports/finances') ?>">
-                           <span class="nav-main-link-name">Finances</span>
-                        </a>
-                        </li>
-                     </ul>
-                  </li>
-                  <li class="nav-main-item">
                      <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'profile' && current_url(true)->getSegment(3) == 'creator' ? 'active' : '' ?>" href="<?= base_url('dashboard/profile/creator') ?>">
                         <i class="nav-main-link-icon si si-pencil"></i>
                         <span class="nav-main-link-name">Edit Page & Subs</span>
@@ -126,6 +108,19 @@
                      <a class="nav-main-link <?= current_url(true)->getSegment(2) == 'milestone' ? 'active' : '' ?>" href="<?= base_url('dashboard/milestone') ?>">
                         <i class="nav-main-link-icon si si-rocket"></i>
                         <span class="nav-main-link-name">Milestone</span>
+                     </a>
+                  </li>
+                  <li class="nav-main-heading">Report</li>
+                  <li class="nav-main-item">
+                     <a class="nav-main-link <?= current_url(true)->getSegment(3) == 'community' ? 'active' : '' ?>" href="<?= base_url('dashboard/report/community') ?>">
+                        <i class="nav-main-link-icon si si-bar-chart"></i>
+                        <span class="nav-main-link-name">Community</span>
+                     </a>
+                  </li>
+                  <li class="nav-main-item">
+                     <a class="nav-main-link <?= current_url(true)->getSegment(3) == 'finance' ? 'active' : '' ?>" href="<?= base_url('dashboard/report/finance') ?>">
+                        <i class="nav-main-link-icon si si-pie-chart"></i>
+                        <span class="nav-main-link-name">Finance</span>
                      </a>
                   </li>
                </ul>
