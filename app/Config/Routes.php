@@ -109,6 +109,12 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator',
         $routes->get('delete/(:segment)', 'Post::destroy/$1');
     });
 
+    // Creator Post
+    $routes->group('reports', function ($routes) {
+        $routes->get('communities', 'Reports::communities');
+        $routes->get('finances', 'Reports::finances');
+    });
+
     // Creator Donate
     $routes->get('donate', 'Donate::index');
 
