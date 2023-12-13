@@ -5,31 +5,32 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->group('/', function($routes) {
+$routes->group('/', function ($routes) {
     $routes->get('', 'Home::index');
     $routes->get('explore', 'Home::explore');
     $routes->get('explore/(:any)', 'Home::explore/$1');
-
+    
     // Login User
-    $routes->group('login', ['filter' => 'loginfront'], function($routes) {
+    $routes->group('login', ['filter' => 'loginfront'], function ($routes) {
         $routes->get('', 'Auth::index');
         $routes->post('auth', 'Auth::loginAuth');
         $routes->get('auth-google', 'Auth::authGoogle');
     });
 
     // Register User
-    $routes->group('register', ['filter' => 'loginfront'], function($routes) {
+    $routes->group('register', ['filter' => 'loginfront'], function ($routes) {
         $routes->get('', 'Auth::register');
         $routes->post('auth', 'Auth::registerAuth');
     });
 
     // Register Creator
-    $routes->group('register/creator', ['filter' => 'userFilter'], function($routes) {
+    $routes->group('register/creator', ['filter' => 'userFilter'], function ($routes) {
         $routes->get('', 'Home::registerCreator');
         $routes->post('', 'Home::registerCreator');
     });
-
+    
     $routes->get('logout', 'Auth::logout');
+    $routes->get('creator/(:any)', 'Home::profilPage/$1');
 });
 
 // Super Routes Login
@@ -39,7 +40,7 @@ $routes->post('withdraw/xendit/webhook', '\App\Controllers\WebhookController::we
 $routes->post('midtrans/webhook', '\App\Controllers\WebhookController::webhookMidtrans');
 
 // Super Routes
-$routes->group('admin' ,['namespace' => 'App\Controllers\Dashboard\Admin', 'filter' => 'authadmin'],function ($routes) {
+$routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin', 'filter' => 'authadmin'], function ($routes) {
     $routes->get('/', 'Admin::index');
     $routes->get('logout', 'Admin::logout');
     $routes->get('user', 'Admin::user');
@@ -117,5 +118,4 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator',
 
     // Creator Donate
     $routes->get('donate', 'Donate::index');
-
 });

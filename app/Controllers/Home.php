@@ -90,4 +90,8 @@ class Home extends BaseController
             return view('front/regCreator',$data);
         }
     }
+
+    public function profilPage($userName){
+        return view('front/profilPage');
+    }
 }
