@@ -28,6 +28,11 @@
          color: white !important;
          border: 0 !important;
       }
+
+      .blur-img {
+         backdrop-filter: blur(10px);
+         background-color: transparent;
+      }
    </style>
 </head>
 
@@ -100,6 +105,7 @@
    </footer>
    <script src="<?= base_url() ?>assets/front/js/plugins.js"></script>
    <script src="<?= base_url() ?>assets/front/js/theme.js"></script>
+   <?= $this->renderSection('js') ?>
 </body>
 
 </html>

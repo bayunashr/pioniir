@@ -26,7 +26,7 @@
                 <h4 class="fw-bolder mt-3">JohnDoe</h4>
                 <h4 class="mt-n1 fs-15"><i class="uil uil-users-alt"></i> 285 Subscriber</h4>
                 <div class="meta mb-2 fs-12">Tag 1 | Tag 2 | Tag 3</div>
-                <div class="btn w-100 btn-green btn-sm rounded-pill mb-3 d-block d-sm-none"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</div>
+                <div class="btn w-100 btn-green btn-sm rounded-pill mb-3 d-block d-sm-none" data-bs-toggle="modal" data-bs-target="#modal-subs"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</div>
                 <p>Creator Description dolor sit amet consectetur adipisicing elit. Exercitationem veritatis nulla,
                     rerum nisi porro delectus magnam atque ullam amet vel modi ex reprehenderit iste, consectetur omnis ab a quaerat numquam.</p>
                 <nav class="nav social justify-content-center">
@@ -106,4 +106,26 @@
 </div>
 <!--/.modal -->
 
+<div class="modal fade" id="modal-buy" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-body px-sm-10 px-6 py-5">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <img style="width: 80%;" src="<?= base_url() ?>assets/front/img/ilus2.png" alt="" />
+                <p class="fs-18 text-navy">Content Title</p>
+                <p class="fs-20 text-navy mt-n4"><span class="fw-bolder">Rp. 200.000</span></p>
+                <p class="meta">Beli dan nikmati konten dari creator yang anda suka!</p>
+                <a href="#" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Beli</a>
+            </div>
+            <!--/.modal-content -->
+        </div>
+        <!--/.modal-body -->
+    </div>
+    <!--/.modal-dialog -->
+</div>
+<!--/.modal -->
+
+<?= $this->endsection() ?>
+
+<?= $this->section('js') ?>
 <?= $this->endsection() ?>
