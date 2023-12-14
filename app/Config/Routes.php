@@ -31,6 +31,8 @@ $routes->group('/', function ($routes) {
     
     $routes->get('logout', 'Auth::logout');
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
+    $routes->get('post/(:any)', 'Home::profilPost/$1');
+    $routes->get('content/(:any)', 'Home::profilContent/$1');
 });
 
 // Super Routes Login

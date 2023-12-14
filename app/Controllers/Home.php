@@ -92,6 +92,23 @@ class Home extends BaseController
     }
 
     public function profilPage($userName){
-        return view('front/profilPage');
+        $data = [
+            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+        ];
+        return view('front/homeProfile',$data);
+    }
+
+    public function profilPost($userName){
+        $data = [
+            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+        ];
+        return view('front/postProfile',$data);
+    }
+
+    public function profilContent($userName){
+        $data = [
+            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+        ];
+        return view('front/contentProfile',$data);
     }
 }

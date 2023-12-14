@@ -16,6 +16,18 @@
       .language-select .dropdown-menu {
          left: -50% !important;
       }
+
+      .creator-nav {
+         background-color: white;
+         color: #333F52;
+         border: 1px solid #333F52;
+      }
+
+      .creator-nav-active {
+         background-color: #333F52 !important;
+         color: white !important;
+         border: 0 !important;
+      }
    </style>
 </head>
 
@@ -64,11 +76,11 @@
                <!-- /.navbar-collapse-wrapper -->
             </div>
             <!-- /.container -->
-            <?php if (current_url(true)->getSegment(1) == 'creator') : ?>
+            <?php if (current_url(true)->getSegment(1) == 'creator' || current_url(true)->getSegment(1) == 'post' || current_url(true)->getSegment(1) == 'content') : ?>
                <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
-                  <a href="#" style="margin-right: 3px; height: 40px; background-color: #333F52; color: white; border: 0;" class="btn btn-sm rounded">Home</a>
-                  <a href="#" style="margin-right: 3px; height: 40px; background-color: white; color: #333F52; border: 1px solid #333F52;" class="btn btn-sm rounded">Post</a>
-                  <a href="#" style="height: 40px; background-color: white; color: #333F52; border: 1px solid #333F52;" class="btn btn-sm rounded">Content</a>
+                  <a href="<?= base_url('creator/' . $creator[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'creator' ? 'creator-nav-active' : 'creator-nav' ?>">Home</a>
+                  <a href="<?= base_url('post/' . $creator[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'post' ? 'creator-nav-active' : 'creator-nav' ?>">Post</a>
+                  <a href="<?= base_url('content/' . $creator[0]['creatorAlias']) ?>" style="height: 40px;" class="btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'content' ? 'creator-nav-active' : 'creator-nav' ?>">Content</a>
                </div>
             <?php endif ?>
          </nav>
