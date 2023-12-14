@@ -13,7 +13,7 @@ class ContentModel extends Model
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
-    
+
     // Validation
     protected $validationRules      = [];
     protected $validationMessages   = [];
@@ -31,9 +31,26 @@ class ContentModel extends Model
     public function selectOneByContentId($id)
     {
         return $this->select('Content.*, User.userId AS user_id')
-        ->join('Creator', 'Creator.creatorId = Content.creatorId')
-        ->join('User', 'User.userId = Creator.userId')
-        ->where('Content.contentId', $id)
-        ->first();
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
+            ->join('User', 'User.userId = Creator.userId')
+            ->where('Content.contentId', $id)
+            ->first();
+    }
+
+    public function countAllPerMonth($id, $month, $year)
+    {
+        return $this->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
+    }
+
+    public function countAllPerDay($id, $day, $month, $year)
+    {
+        return $this->where('DAY(createdAt)', $day)
+            ->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
     }
 }

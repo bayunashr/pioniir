@@ -50,9 +50,26 @@ class PostModel extends Model
     public function selectOneByPostId($id)
     {
         return $this->select('Post.*, User.userId AS user_id')
-        ->join('Creator', 'Creator.creatorId = Post.creatorId')
-        ->join('User', 'User.userId = Creator.userId')
-        ->where('Post.postId', $id)
-        ->first();
+            ->join('Creator', 'Creator.creatorId = Post.creatorId')
+            ->join('User', 'User.userId = Creator.userId')
+            ->where('Post.postId', $id)
+            ->first();
+    }
+
+    public function countAllPerMonth($id, $month, $year)
+    {
+        return $this->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
+    }
+
+    public function countAllPerDay($id, $day, $month, $year)
+    {
+        return $this->where('DAY(createdAt)', $day)
+            ->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->countAllResults();
     }
 }
