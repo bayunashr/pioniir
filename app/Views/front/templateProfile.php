@@ -30,15 +30,19 @@
             <p><?= esc($creator[0]['creatorDescription']) ?></p>
             <nav class="nav social justify-content-center">
                <?php foreach ($sosmed as $key => $value) : ?>
-               <a href="https://<?= $value['socialLink'] ?>"><img src="<?= base_url() ?>assets/front/img/icons/social/<?= $value['socialMedia'] ?>.svg" alt="<?= $value['socialMedia'] ?>"></a>
+               <a
+                  href="https://<?= ($value['socialMedia'] == 'facebook') ? 'facebook.com/' : (($value['socialMedia'] == 'twitter') ? 'twitter.com/' : (($value['socialMedia'] == 'instagram') ? 'instagram.com/' : (($value['socialMedia'] == 'tiktok') ? 'tiktok.com/' : (($value['socialMedia'] == 'youtube') ? 'youtube.com/' : (($value['socialMedia'] == 'twitch') ? 'twitch.tv/' : (($value['socialMedia'] == 'discord') ? 'discord.com/' : '')))))); ?><?= $value['socialLink'] ?>"><img
+                     src="<?= base_url() ?>assets/front/img/icons/social/<?= $value['socialMedia'] ?>.svg" alt="<?= $value['socialMedia'] ?>"></a>
                <?php endforeach ;?>
             </nav>
          </div>
          <div class="bg-white rounded mt-5 py-3 px-5">
             <!-- If tidak ada milestone -->
+            <?php if(empty($milestone)) : ?>
             <h4 class="fw-bolder mt-3"><i class="uil uil-comment-alt-heart"></i> Support</h4>
             <p>Bergabung dalam kreativitas! Dukung <?= esc($creator[0]['creatorAlias']) ?> untuk konten inspiratif.</p>
             <!-- Else -->
+            <?php else:?>
             <h4 class="fw-bolder mt-3"><i class="uil uil-rocket"></i> Milestone</h4>
             <ul class="progress-list mt-3">
                <li>
@@ -47,7 +51,7 @@
                   <p class="fs-12 mt-1"><span class="fw-bold"><?= format_rupiah($milestone['milestoneBalance']) ?></span> terkumpul dari <?= format_rupiah($milestone['milestoneTarget']) ?></p>
                </li>
             </ul>
-            <!-- End if -->
+            <?php endif;?>
             <div class="btn w-100 btn-green btn-sm rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#modal-donate">Donate</div>
          </div>
       </aside>

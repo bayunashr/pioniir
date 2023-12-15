@@ -142,7 +142,7 @@
                   </button>
                </div>
             </div>
-            <form action="<?= base_url('dashboard/profile/social/add') ?>" method="post">
+            <form action="<?= base_url('dashboard/profile/creator/social/add') ?>" method="post">
                <div class="block-content fs-sm">
                   <div class="mb-4">
                      <label class="form-label" for="socmed">Type</label>
@@ -183,7 +183,7 @@
                   </button>
                </div>
             </div>
-            <form action="<?= base_url('dashboard/profile/social/edit') ?>" method="post">
+            <form action="<?= base_url('dashboard/profile/creator/social/edit') ?>" method="post">
                <div class="block-content fs-sm">
                   <div class="mb-4">
                      <label class="form-label" for="socmed">Type</label>
@@ -388,7 +388,7 @@ $(document).on('click', '#tombol', function() {
       cancelButtonText: "Ga Dulu!",
    }).then((result) => {
       if (result.isConfirmed) {
-         window.location.href = `<?= base_url('dashboard/profile/social/delete/') ?>${id}`;
+         window.location.href = `<?= base_url('dashboard/profile/creator/social/delete/') ?>${id}`;
       }
    });
 });

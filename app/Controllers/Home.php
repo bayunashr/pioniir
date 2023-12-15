@@ -44,36 +44,41 @@ class Home extends BaseController
 
     public function explore($tag = null){
         
-        $options = ['Animation','Art','Blogging','Comics And Cartoons','Commissions','Cosplay','Dance And Theatre','Design','Drawing And Painting','Education','Food And Drink','Fundraising','Gaming','Health And Fitness','Lifestyle','Money','Music','News','Photography','Podcast','Science And Tech','Social','Software','Streaming','Translator','Video And Film','Writing'];
-        
+        $arrayOption = ['Animation','Art','Blogging','Comics And Cartoons','Commissions','Cosplay','Dance And Theatre','Design','Drawing And Painting','Education','Food And Drink','Fundraising','Gaming','Health And Fitness','Lifestyle','Money','Music','News','Photography','Podcast','Science And Tech','Social','Software','Streaming','Translator','Video And Film','Writing'];
+        $options = array_map('strtolower', $arrayOption);
         $tagExist = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->findAll();
-        $filteredOptions = [];
+        $uniqueTags = [];
+
         foreach ($tagExist as $creator) {
             if (!empty($creator['creatorTag'])) {
                 $tagsArray = array_map('trim', explode(',', $creator['creatorTag']));
-                $filtered = array_intersect($options, $tagsArray);
-                if (!empty($filtered)) {
-                    $filteredOptions = array_merge($filteredOptions, array_values($filtered));
-                } 
+
+                foreach ($tagsArray as $tags) {
+                    if (!in_array($tags, $uniqueTags) && in_array($tags, $options)) {
+                        $uniqueTags[] = $tags;
+                    }
+                }
             }
         }
-        
-        if ($tag === null && $this->request->getGet('search')) {
-            $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->like('creatorAlias', $this->request->getGet('search'))->findAll();
-        }elseif ($tag && $this->request->getGet('search')) {
-            $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->like('creatorTag', $tag)->like('creatorAlias', $this->request->getGet('search'))->findAll();
-        }elseif ($tag === null) {
-            $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->findAll();
-        }else{
-            $creatorList = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->like('creatorTag', $tag)->findAll();
+        sort($uniqueTags);
+
+        $query = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']]);
+        if ($tag !== null) {
+            $query->like('creatorTag', $tag);
         }
+        if ($this->request->getGet('search')) {
+            $query->like('creatorAlias', $this->request->getGet('search'));
+        }
+
+        $creatorList = $query->findAll();
 
         $data = [
             'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
             'user'          => $this->userData,
             'creatorList'   => $creatorList,
-            'options'       => $filteredOptions
+            'options'       => $uniqueTags,
         ];
+
         return view('front/explore',$data);
     }
 
@@ -136,11 +141,9 @@ class Home extends BaseController
             'content'   => $this->contentModel->getContentByAlias($userName)
         ];
 
-         //$coba = $this->milestoneModel->getMilesByAlias($userName);
-        //echo json_encode($data['content']);
         return view('front/contentProfile',$data);
     }
-
+    
     public function userProfile($user){
         $data = [
             'creator'   => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
@@ -148,4 +151,5 @@ class Home extends BaseController
         ];
         return view('front/userProfile',$data);
     }
+    
 }
