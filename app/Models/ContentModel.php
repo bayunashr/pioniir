@@ -37,7 +37,8 @@ class ContentModel extends Model
             ->first();
     }
 
-    public function getContentByAlias($alias) {
+    public function getContentByAlias($alias)
+    {
         return $this->select('Content.*')
             ->where('Creator.creatorAlias', $alias)
             ->where('Content.contentStatus', 'publish')
@@ -61,5 +62,13 @@ class ContentModel extends Model
             ->where('YEAR(createdAt)', $year)
             ->where('creatorId', $id)
             ->countAllResults();
+    }
+
+    public function getTopLoves($id)
+    {
+        return $this->select('Content.contentTitle, Content.contentLike, Content.contentStatus')
+            ->where('Content.creatorId', $id)
+            ->orderBy('Content.contentLike', 'DESC')
+            ->findAll(10);
     }
 }

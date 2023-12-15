@@ -33,6 +33,8 @@ class Report extends BaseController
 
     public function content()
     {
+        // Data for Chart
+
         $currentYearContentData = [];
         for ($i = 0; $i < sizeof($this->month); $i++) {
             $temp = $this->contentModel->countAllPerMonth($this->creatorData['creatorId'], $i + 1, $this->currentYear);
@@ -57,6 +59,10 @@ class Report extends BaseController
             $lastMonthContentData[$i] = $temp;
         }
 
+        // Data for 10 Top Likes
+
+        $topLoved = $this->contentModel->getTopLoves($this->creatorData['creatorId']);
+
         $data = [
             'title' => 'Content Report - Pioniir Creator',
             'user'      => $this->userData,
@@ -67,6 +73,7 @@ class Report extends BaseController
             'lastYearContentData' => $lastYearContentData,
             'currentMonthContentData' => $currentMonthContentData,
             'lastMonthContentData' => $lastMonthContentData,
+            'topLoved' => $topLoved,
         ];
         return view('dashboard/creator/contentReport', $data);
     }

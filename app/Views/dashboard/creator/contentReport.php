@@ -10,14 +10,14 @@
                         Content
                     </h1>
                     <h2 class="fs-base lh-base fw-medium text-muted mb-0">
-                        Tons of informational report to showcase your contents.
+                        Tons of informational report about your contents.
                     </h2>
                 </div>
             </div>
         </div>
     </div>
     <!-- Page Content -->
-    <div class="content">
+    <div class="content mb-4">
         <!-- Overview -->
         <div class="row item-push">
             <div class="col-xl-6">
@@ -56,28 +56,24 @@
                 <!-- Top Products -->
                 <div class="block block-rounded h-100 mb-0">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Liked Content</h3>
+                        <h3 class="block-title">Top Loved Content</h3>
                     </div>
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
                             <tbody>
-                                <tr>
-                                    <td class="text-center" style="width: 100px;">
-                                        <a class="fw-semibold" href="be_pages_ecom_product_edit.html">PID.965</a>
-                                    </td>
-                                    <td>
-                                        <a href="be_pages_ecom_product_edit.html">Diablo III</a>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell text-center">
-                                        <div class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php foreach ($topLoved as $key => $value) : ?>
+                                    <tr>
+                                        <td>
+                                            <a href="be_pages_ecom_product_edit.html"><?= $value['contentTitle'] ?></a>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-danger"><?= $value['contentStatus'] ?></span>
+                                        </td>
+                                        <td class="fw-semibold">
+                                            <i class="text-danger fa fa-heart"></i> <?= $value['contentLike'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -99,6 +95,9 @@
                                     </td>
                                     <td>
                                         <a href="be_pages_ecom_product_edit.html">Diablo III</a>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-success">Delivered</span>
                                     </td>
                                     <td class="d-none d-sm-table-cell text-center">
                                         <div class="text-warning">
