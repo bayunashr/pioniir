@@ -33,6 +33,7 @@ $routes->group('/', function ($routes) {
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
     $routes->get('post/(:any)', 'Home::profilPost/$1');
     $routes->get('content/(:any)', 'Home::profilContent/$1');
+    $routes->get('user/profile/(:any)', 'Home::userProfile/$1');
 });
 
 // Super Routes Login

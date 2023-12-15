@@ -64,7 +64,7 @@
                                     <li class="nav-item"><a class="dropdown-item" href="<?= base_url('register/creator') ?>">Jadi Creator</a>
                                     </li>
                                  <?php endif; ?>
-                                 <li class="nav-item"><a class="dropdown-item" href="#">Profile</a></li>
+                                 <li class="nav-item"><a class="dropdown-item" href="<?= base_url('user/profile/'.session()->get('userName')) ?>">Profile</a></li>
                                  <li class="nav-item"><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
                               </ul>
                            </li>

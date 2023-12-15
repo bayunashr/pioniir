@@ -140,4 +140,12 @@ class Home extends BaseController
         //echo json_encode($data['content']);
         return view('front/contentProfile',$data);
     }
+
+    public function userProfile($user){
+        $data = [
+            'creator'   => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'      => $this->userData,
+        ];
+        return view('front/userProfile',$data);
+    }
 }
