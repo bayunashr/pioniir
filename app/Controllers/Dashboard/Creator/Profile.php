@@ -36,8 +36,11 @@ class Profile extends BaseController
                     session()->setFlashData('error', 'Gagal Mengubah Harga Subscription');
                 }
             }else{
+                if ($this->request->getPost('old_alias') != $this->request->getPost('alias')) {
+                    $data['creatorAlias'] = str_replace(' ', '', $this->request->getPost('alias'));
+                }
+
                 $data = [
-                    'creatorAlias'      => str_replace(' ', '', $this->request->getPost('alias')),
                     'creatorDescription'=> $this->request->getPost('description'),
                     'creatorTag'        => implode(',', $this->request->getPost('creatorTag'))
                 ];

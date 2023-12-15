@@ -111,40 +111,42 @@
                      </a>
                   </li>
                   <li class="nav-main-heading">Report</li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'content' || current_url(true)->getSegment(3) == 'post') ? 'active' : '' ?>" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                  <li class="nav-main-item <?= ((current_url(true)->getSegment(2) == 'report') && (service('uri')->getTotalSegments() >= 3 && ((current_url(true)->getSegment(3) == 'content') || current_url(true)->getSegment(3) == 'post')))  ? 'open' : '' ?>">
+                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon si si-trophy"></i>
                         <span class="nav-main-link-name">Works</span>
                      </a>
                      <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'content') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/content') ?>">
+                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3 && current_url(true)->getSegment(3) == 'content')) ? 'active' : '' ?>" href="<?= base_url('dashboard/report/content') ?>">
                               <span class="nav-main-link-name">Content</span>
                            </a>
                         </li>
                         <li class="nav-main-item">
-                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'post') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/post') ?>">
+                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3 && current_url(true)->getSegment(3) == 'post')) ? 'active' : '' ?>" href="<?= base_url('dashboard/report/post') ?>">
                               <span class="nav-main-link-name">Post</span>
                            </a>
                         </li>
+
                      </ul>
                   </li>
-                  <li class="nav-main-item">
-                     <a class="nav-main-link nav-main-link-submenu <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'subscribe' || current_url(true)->getSegment(3) == 'donate') ? 'active' : '' ?>" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                  <li class="nav-main-item <?= ((current_url(true)->getSegment(2) == 'report') && (service('uri')->getTotalSegments() >= 3 && ((current_url(true)->getSegment(3) == 'subscribe') || current_url(true)->getSegment(3) == 'donate')))  ? 'open' : '' ?>">
+                     <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                         <i class="nav-main-link-icon si si-bar-chart"></i>
                         <span class="nav-main-link-name">Communities</span>
                      </a>
                      <ul class="nav-main-submenu">
                         <li class="nav-main-item">
-                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'subscribe') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/subscribe') ?>">
+                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3 && current_url(true)->getSegment(3) == 'subscribe')) ? 'active' : '' ?>" href="<?= base_url('dashboard/report/subscribe') ?>">
                               <span class="nav-main-link-name">Subscribe</span>
                            </a>
                         </li>
                         <li class="nav-main-item">
-                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3) && current_url(true)->getSegment(3) == 'donate') ? 'active' : '' ?>" href="<?= base_url('dashboard/report/donate') ?>">
+                           <a class="nav-main-link <?= ((service('uri')->getTotalSegments() >= 3 && current_url(true)->getSegment(3) == 'donate')) ? 'active' : '' ?>" href="<?= base_url('dashboard/report/donate') ?>">
                               <span class="nav-main-link-name">Donate</span>
                            </a>
                         </li>
+
                      </ul>
                   </li>
                </ul>
@@ -205,7 +207,7 @@
                      </div>
                      <ul class="nav-items mb-0">
                         <?php foreach ($notif as $data => $value) : ?>
-                           <?php
+                        <?php
                            switch ($value->notificationType) {
                               case "bcontent":
                                  $icon = "fa-circle-xmark text-danger";
@@ -269,18 +271,18 @@
                                  break;
                            }
                            ?>
-                           <li>
-                              <a class="text-dark d-flex py-2" href="javascript:void(0)">
-                                 <div class="flex-shrink-0 me-2 ms-3">
-                                    <i class="fa fa-fw <?= $icon ?>"></i>
-                                 </div>
-                                 <div class="flex-grow-1 pe-2">
-                                    <div class="fw-semibold"><?= $title ?></div>
-                                    <span class="fw-medium"><?= $text ?></span><br>
-                                    <span class="fw-medium text-muted"><?= format_waktu_lampau($value->createdAt) ?></span>
-                                 </div>
-                              </a>
-                           </li>
+                        <li>
+                           <a class="text-dark d-flex py-2" href="javascript:void(0)">
+                              <div class="flex-shrink-0 me-2 ms-3">
+                                 <i class="fa fa-fw <?= $icon ?>"></i>
+                              </div>
+                              <div class="flex-grow-1 pe-2">
+                                 <div class="fw-semibold"><?= $title ?></div>
+                                 <span class="fw-medium"><?= $text ?></span><br>
+                                 <span class="fw-medium text-muted"><?= format_waktu_lampau($value->createdAt) ?></span>
+                              </div>
+                           </a>
+                        </li>
                         <?php endforeach ?>
                      </ul>
                      <div class="p-2 border-top text-center">
