@@ -12,7 +12,7 @@ class BuyModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['userId','contentId','buyStatus'];
+    protected $allowedFields    = ['userId', 'contentId', 'buyStatus'];
 
     // Validation
     protected $validationRules      = [];
@@ -32,11 +32,11 @@ class BuyModel extends Model
     public function selectByCreatorId($creatorId)
     {
         return $this->select('Buy.*, User.userName, User.userEmail,, Content.contentTitle')
-        ->join('Content', 'Content.contentId = Buy.contentId')
-        ->join('Creator', 'Creator.creatorId = Content.creatorId')
-        ->join('User', 'User.userId = Buy.userId')
-        ->where(['Creator.creatorId' => $creatorId, 'buyStatus' => 'success'])
-        ->findAll();
+            ->join('Content', 'Content.contentId = Buy.contentId')
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
+            ->join('User', 'User.userId = Buy.userId')
+            ->where(['Creator.creatorId' => $creatorId, 'buyStatus' => 'success'])
+            ->findAll();
     }
 
     public function selectById($buyId)
@@ -49,11 +49,23 @@ class BuyModel extends Model
             ->first();
     }
 
-    public function getCountBuyCreator($creatorId) {
+    public function getCountBuyCreator($creatorId)
+    {
         return $this->select('Buy.buyId, Buy.userId AS buyerId, Buy.contentId, Content.creatorId, Creator.userId AS creatorUserId')
             ->join('Content', 'Buy.contentId = Content.contentId')
             ->join('Creator', 'Content.creatorId = Creator.creatorId')
             ->where('Creator.creatorId', $creatorId)
+            ->where('Buy.buyStatus', 'success')
+            ->countAllResults();
+    }
+
+    // return jumlah content yang dibeli berdasarkan creator dan kontennya
+    public function getCountBuyCreatorContent($creatorId, $contentId)
+    {
+        return $this->join('Content', 'Buy.contentId = Content.contentId')
+            ->join('Creator', 'Content.creatorId = Creator.creatorId')
+            ->where('Creator.creatorId', $creatorId)
+            ->where('Buy.contentId', $contentId)
             ->where('Buy.buyStatus', 'success')
             ->countAllResults();
     }

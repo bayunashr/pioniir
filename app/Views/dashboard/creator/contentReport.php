@@ -24,7 +24,7 @@
                 <!-- Lines Chart -->
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Monthly Content Frequency</h3>
+                        <h3 class="block-title">Monthly Upload Frequency</h3>
                     </div>
                     <div class="block-content block-content-full text-center">
                         <div class="py-3" style="height: 360px">
@@ -39,7 +39,7 @@
                 <!-- Lines Chart -->
                 <div class="block block-rounded">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Yearly Content Frequency</h3>
+                        <h3 class="block-title">Yearly Upload Frequency</h3>
                     </div>
                     <div class="block-content block-content-full text-center">
                         <div class="py-3" style="height: 360px">
@@ -56,7 +56,7 @@
                 <!-- Top Products -->
                 <div class="block block-rounded h-100 mb-0">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Loved Content</h3>
+                        <h3 class="block-title">Top Loved</h3>
                     </div>
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
@@ -84,31 +84,21 @@
                 <!-- Top Products -->
                 <div class="block block-rounded h-100 mb-0">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Purchased Content</h3>
+                        <h3 class="block-title">Top Purchased</h3>
                     </div>
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
                             <tbody>
-                                <tr>
-                                    <td class="text-center" style="width: 100px;">
-                                        <a class="fw-semibold" href="be_pages_ecom_product_edit.html">PID.965</a>
-                                    </td>
-                                    <td>
-                                        <a href="be_pages_ecom_product_edit.html">Diablo III</a>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-success">Delivered</span>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell text-center">
-                                        <div class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php foreach ($topPurchased as $key => $value) : ?>
+                                    <tr>
+                                        <td>
+                                            <a href="be_pages_ecom_product_edit.html"><?= $key ?></a>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-warning">Sold <?= $value ?> Copies</span>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>

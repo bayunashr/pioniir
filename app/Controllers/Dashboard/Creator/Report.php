@@ -14,7 +14,7 @@ use App\Models\NotificationModel;
 
 class Report extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
+    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $buyModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
     protected $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     function __construct()
@@ -23,6 +23,7 @@ class Report extends BaseController
         $this->creatorModel = new CreatorModel();
         $this->contentModel = new ContentModel();
         $this->postModel = new PostModel();
+        $this->buyModel = new BuyModel();
         $this->notifModel = new NotificationModel();
         $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
@@ -61,7 +62,30 @@ class Report extends BaseController
 
         // Data for 10 Top Likes
 
-        $topLoved = $this->contentModel->getTopLoves($this->creatorData['creatorId']);
+        $topLoved = $this->contentModel->getTopLoved($this->creatorData['creatorId']);
+
+        // jumlah dibeli
+        //isi($this->buyModel->getCountBuyCreatorContent($this->creatorData['creatorId'], '83f31b3b-1a47-41a7-a315-44d55360a771'););
+
+        // semua konten
+        $allContentByCreator = $this->contentModel->getContentByCreatorId($this->creatorData['creatorId']);
+        //isi($allContentByCreator);
+
+        // jumlah konten
+        $contentCountByCreator = $this->contentModel->countContentByCreatorId($this->creatorData['creatorId']);
+        //isi($contentCountByCreator);
+
+        // key-value judul konten => jumlah dibeli
+        // kondisi loop sampai jumlah konten
+        $purchased = [];
+        for ($i = 0; $i < $contentCountByCreator; $i++) {
+            $purchased[$allContentByCreator[$i]['contentTitle']] = $this->buyModel->getCountBuyCreatorContent($this->creatorData['creatorId'], $allContentByCreator[$i]['contentId']);
+        }
+        arsort($purchased);
+        $topPurchased = array_slice($purchased, 0, 5);
+        // arrsort gawe ngurut paling gede
+        // slice gawe motong
+        //isi($purchased);
 
         $data = [
             'title' => 'Content Report - Pioniir Creator',
@@ -74,6 +98,7 @@ class Report extends BaseController
             'currentMonthContentData' => $currentMonthContentData,
             'lastMonthContentData' => $lastMonthContentData,
             'topLoved' => $topLoved,
+            'topPurchased' => $topPurchased,
         ];
         return view('dashboard/creator/contentReport', $data);
     }

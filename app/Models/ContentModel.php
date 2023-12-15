@@ -64,11 +64,25 @@ class ContentModel extends Model
             ->countAllResults();
     }
 
-    public function getTopLoves($id)
+    public function getTopLoved($id)
     {
         return $this->select('Content.contentTitle, Content.contentLike, Content.contentStatus')
             ->where('Content.creatorId', $id)
             ->orderBy('Content.contentLike', 'DESC')
             ->findAll(10);
+    }
+
+    public function getContentByCreatorId($id)
+    {
+        return $this->select('Content.contentId, Content.contentTitle, Content.contentStatus')
+            ->where('Creator.creatorId', $id)
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
+            ->findAll();
+    }
+
+    public function countContentByCreatorId($id)
+    {
+        return $this->where('Content.creatorId', $id)
+            ->countAllResults();
     }
 }
