@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'ahmadhalim@gmail.com',
                 'userPassword'  => '$2a$12$G3L734KFl92IrEpBuWkMzOH53fpC35axI3V8gWnXnK6JctzqWDDcO',
                 'userStatus'    => 'active',
-                'userAvatar'    => 'avatar1.png',
+                'userAvatar'    => '1.jpg',
             ],
             [
                 'userId'        => '132937b3-af6e-4a76-8402-b83142295cbb',
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'johnsmith@gmail.com',
                 'userPassword'  => '$2a$12$G3L734KFl92IrEpBuWkMzOH53fpC35axI3V8gWnXnK6JctzqWDDcO',
                 'userStatus'    => 'active',
-                'userAvatar'    => 'avatar1.png',
+                'userAvatar'    => '1.jpg',
             ],
             [
                 'userId'        => '38f0cdc9-7268-4b5b-aca9-b8adbefbbc70',
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'robertbrown@gmail.com',
                 'userPassword'  => '$2a$12$G3L734KFl92IrEpBuWkMzOH53fpC35axI3V8gWnXnK6JctzqWDDcO',
                 'userStatus'    => 'active',
-                'userAvatar'    => 'avatar1.png',
+                'userAvatar'    => '1.jpg',
             ],
             [
                 'userId'        => '222c20fa-5f71-4fe6-8400-a2f7294bc81e',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'rudiahmad@gmail.com',
                 'userPassword'  => '$2a$12$G3L734KFl92IrEpBuWkMzOH53fpC35axI3V8gWnXnK6JctzqWDDcO',
                 'userStatus'    => 'active',
-                'userAvatar'    => 'avatar1.png',
+                'userAvatar'    => '1.jpg',
             ],
             [
                 'userId'        => '8cf4acff-66e6-4ef6-94c9-49c243cbd3c9',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'jonesahay@gmail.com',
                 'userPassword'  => '$2a$12$G3L734KFl92IrEpBuWkMzOH53fpC35axI3V8gWnXnK6JctzqWDDcO',
                 'userStatus'    => 'ban',
-                'userAvatar'    => 'avatar1.png',
+                'userAvatar'    => '1.jpg',
             ],
             [
                 'userId'        => '0a8c0a27-9664-4afe-bd9f-b5f08062aeeb',

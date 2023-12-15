@@ -28,4 +28,15 @@ class DonateModel extends Model
             ->orderBy('donateTimestamp', 'desc')
             ->findAll();
     }
+
+    public function getDonateByAlias($alias)
+    {
+        return $this->select('Donate.donateName, Donate.donateAmount, Donate.donateTimestamp, User.userAvatar')
+            ->where('Donate.donateStatus', 'success')
+            ->where('Creator.creatorAlias', $alias)
+            ->join('User', 'User.userId = Donate.userId', 'left ')
+            ->join('Creator', 'Creator.creatorId = Donate.creatorId')
+            ->orderBy('donateTimestamp', 'desc')
+            ->findAll();
+    }
 }

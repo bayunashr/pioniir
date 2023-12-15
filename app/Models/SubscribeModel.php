@@ -55,4 +55,12 @@ class SubscribeModel extends Model
             ->where('creatorId', $id)
             ->countAllResults();
     }
+
+    public function CountSubscribeByAlias($alias) {
+        return $this->select('Subscribe.*, Creator.creatorAlias AS alias')
+            ->where('Creator.creatorAlias', $alias)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+            ->countAllResults();
+    }
 }

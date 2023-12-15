@@ -28,17 +28,6 @@ class PostModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
-
     public function selectAll()
     {
         return $this->select('Post.*, Creator.creatorAlias AS creator_name, Creator.userId AS user_id')
@@ -71,5 +60,13 @@ class PostModel extends Model
             ->where('YEAR(createdAt)', $year)
             ->where('creatorId', $id)
             ->countAllResults();
+    }
+
+    public function getPostByAlias($alias) {
+        return $this->select('Post.*, Creator.creatorAlias AS alias')
+            ->where('Creator.creatorAlias', $alias)
+            ->where('Post.postStatus', 'publish')
+            ->join('Creator', 'Creator.creatorId = Post.creatorId')
+            ->findAll();
     }
 }

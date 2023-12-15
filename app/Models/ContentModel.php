@@ -37,6 +37,15 @@ class ContentModel extends Model
             ->first();
     }
 
+    public function getContentByAlias($alias) {
+        return $this->select('Content.*')
+            ->where('Creator.creatorAlias', $alias)
+            ->where('Content.contentStatus', 'publish')
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
+            ->orderBy('Content.contentPrice', 'ASC')
+            ->findAll();
+    }
+
     public function countAllPerMonth($id, $month, $year)
     {
         return $this->where('MONTH(createdAt)', $month)

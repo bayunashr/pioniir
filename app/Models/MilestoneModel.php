@@ -27,4 +27,11 @@ class MilestoneModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+    public function getMilesByAlias($alias) {
+        return $this->select('Milestone.milestoneName, Milestone.milestoneBalance, Milestone.milestoneTarget,')
+            ->where('Creator.creatorAlias', $alias)
+            ->where('Milestone.milestoneStatus', 'publish')
+            ->join('Creator', 'Creator.creatorId = Milestone.creatorId')
+            ->first();
+    }
 }

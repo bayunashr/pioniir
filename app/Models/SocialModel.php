@@ -28,4 +28,11 @@ class SocialModel extends Model
             ->where('Social.creatorId',$id)
             ->findAll();
     }
+
+    public function getSocialByAlias($alias) {
+        return $this->select('Social.socialMedia, Social.socialLink')
+            ->where('Creator.creatorAlias', $alias)
+            ->join('Creator', 'Creator.creatorId = Social.creatorId')
+            ->findAll();
+    }
 }

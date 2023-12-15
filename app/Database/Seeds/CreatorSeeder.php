@@ -17,7 +17,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'Halo, Saya adalah seorang Streamer,Anime,Gamers',
                 'creatorSubPrice'   => '100000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '16251304-60d5-4ae2-b52e-12fc6a18c7a9',
@@ -27,7 +27,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'Halo, Saya adalah seorang Actor,Musisi,Gamers',
                 'creatorSubPrice'   => '75000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '5346f8aa-b430-428b-aaa4-3738a1f24fe2',
@@ -37,7 +37,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'Halo, Saya adalah seorang Dancer,Musisi,Streamer',
                 'creatorSubPrice'   => '125000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '1fc022b8-42bf-44ad-8013-f4059bd9d2ec',
@@ -47,7 +47,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'good movie',
                 'creatorSubPrice'   => '12000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '3eb74ee1-fc68-4f5d-9dfe-8cb31b628f21',
@@ -57,7 +57,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'sejarah terlengkap',
                 'creatorSubPrice'   => '19000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '44135a41-d63e-437a-92cb-a9ece6b4c320',
@@ -67,7 +67,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'digital design',
                 'creatorSubPrice'   => '125000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ],
             [
                 'creatorId'         => '7e752972-cde0-4caa-a11b-6f287dd1cf52',
@@ -77,7 +77,7 @@ class CreatorSeeder extends Seeder
                 'creatorDescription'=> 'landscape',
                 'creatorSubPrice'   => '45000',
                 'creatorBalance'    => '0',
-                'creatorBanner'     => 'banner1.png',    
+                'creatorBanner'     => 'bannercreator.png',    
             ]
         ];
     

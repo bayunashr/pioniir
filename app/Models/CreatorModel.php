@@ -35,4 +35,11 @@ class CreatorModel extends Model
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
+
+    public function getCreatorByAlias($alias) {
+        return $this->select('Creator.*, User.userAvatar')
+            ->where('Creator.creatorAlias', $alias)
+            ->join('User', 'User.userId = Creator.userId')
+            ->findAll();
+    }
 }

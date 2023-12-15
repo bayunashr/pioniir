@@ -30,3 +30,16 @@ function format_waktu_lampau($time){
 function format_date($waktu_awal)  {
     return date('H:i:s d F Y', strtotime($waktu_awal));
 }
+
+function potongString($kalimat) {
+    if (strlen($kalimat) <= 15) {
+        return $kalimat;
+    } else {
+        $potongan = substr($kalimat, 0, 15);
+        $lastSpacePos = strrpos($potongan, ' ');
+        if ($lastSpacePos !== false) {
+            $potongan = substr($potongan, 0, $lastSpacePos);
+        }
+        return $potongan . '...';
+    }
+}

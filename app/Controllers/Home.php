@@ -3,15 +3,27 @@
 namespace App\Controllers;
 use App\Models\UserModel;
 use App\Models\CreatorModel;
+use App\Models\SubscribeModel;
+use App\Models\SocialModel;
+use App\Models\MilestoneModel;
+use App\Models\DonateModel;
+use App\Models\PostModel;
+use App\Models\ContentModel;
 use Ramsey\Uuid\Uuid;
 
 class Home extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel;
-    function __construct()
-    {
-        $this->userModel = new UserModel();
-        $this->creatorModel = new CreatorModel();
+    protected $userData, $creatorData, $userModel, $creatorModel, $subsModel, $socialModel, $milestoneModel, $donateModel, $postModel, $contentModel;
+    function __construct(){
+        $this->userModel      = new UserModel();
+        $this->creatorModel   = new CreatorModel();
+        $this->subsModel      = new SubscribeModel();
+        $this->socialModel    = new SocialModel();
+        $this->milestoneModel = new MilestoneModel();
+        $this->donateModel    = new DonateModel();
+        $this->postModel      = new PostModel();
+        $this->contentModel   = new ContentModel();
+
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
             $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
@@ -71,7 +83,7 @@ class Home extends BaseController
             $data = [
                 'creatorId'         => Uuid::uuid4(),
                 'userId'            => $this->userData['userId'],
-                'creatorAlias'      => $this->request->getPost('creatorAlias'),
+                'creatorAlias'      => str_replace(' ', '', $this->request->getPost('creatorAlias')),
                 'creatorTag'        => $this->request->getPost('creatorTag'),
                 'creatorDescription'=> $this->request->getPost('creatorDescription'),
                 'creatorBanner'     => 'bannercreator.png'
@@ -93,22 +105,39 @@ class Home extends BaseController
 
     public function profilPage($userName){
         $data = [
-            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
+            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
+            'donate'    => $this->donateModel->getDonateByAlias($userName)
         ];
+        
         return view('front/homeProfile',$data);
     }
 
     public function profilPost($userName){
         $data = [
-            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
+            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
+            'post'      => $this->postModel->getPostByAlias($userName)
         ];
+
         return view('front/postProfile',$data);
     }
 
     public function profilContent($userName){
         $data = [
-            'creator' => $this->creatorModel->where('creatorAlias', $userName)->findAll()
+            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
+            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
+            'content'   => $this->contentModel->getContentByAlias($userName)
         ];
+
+         //$coba = $this->milestoneModel->getMilesByAlias($userName);
+        //echo json_encode($data['content']);
         return view('front/contentProfile',$data);
     }
 }
