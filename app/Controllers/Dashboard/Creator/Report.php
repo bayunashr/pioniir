@@ -31,7 +31,7 @@ class Report extends BaseController
         $this->totalDayOnCurrentMonth = idate('t');
     }
 
-    public function community()
+    public function content()
     {
         $currentYearContentData = [];
         for ($i = 0; $i < sizeof($this->month); $i++) {
@@ -57,6 +57,22 @@ class Report extends BaseController
             $lastMonthContentData[$i] = $temp;
         }
 
+        $data = [
+            'title' => 'Content Report - Pioniir Creator',
+            'user'      => $this->userData,
+            'creator'   => $this->creatorData,
+            'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'month' => $this->month,
+            'currentYearContentData' => $currentYearContentData,
+            'lastYearContentData' => $lastYearContentData,
+            'currentMonthContentData' => $currentMonthContentData,
+            'lastMonthContentData' => $lastMonthContentData,
+        ];
+        return view('dashboard/creator/contentReport', $data);
+    }
+
+    public function post()
+    {
         $currentYearPostData = [];
         for ($i = 0; $i < sizeof($this->month); $i++) {
             $temp = $this->postModel->countAllPerMonth($this->creatorData['creatorId'], $i + 1, $this->currentYear);
@@ -82,31 +98,24 @@ class Report extends BaseController
         }
 
         $data = [
-            'title' => 'Communities Report - Pioniir Creator',
+            'title' => 'Post Report - Pioniir Creator',
             'user'      => $this->userData,
             'creator'   => $this->creatorData,
             'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
             'month' => $this->month,
-            'currentYearContentData' => $currentYearContentData,
-            'lastYearContentData' => $lastYearContentData,
-            'currentMonthContentData' => $currentMonthContentData,
-            'lastMonthContentData' => $lastMonthContentData,
             'currentYearPostData' => $currentYearPostData,
             'lastYearPostData' => $lastYearPostData,
             'currentMonthPostData' => $currentMonthPostData,
             'lastMonthPostData' => $lastMonthPostData,
         ];
-        return view('dashboard/creator/communityReport', $data);
+        return view('dashboard/creator/postReport', $data);
     }
 
-    public function finance()
+    public function subscribe()
     {
-        $data = [
-            'title' => 'Finances Report - Pioniir Creator',
-            'user'      => $this->userData,
-            'creator'   => $this->creatorData,
-            'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
-        ];
-        return view('dashboard/creator/financeReport', $data);
+    }
+
+    public function donate()
+    {
     }
 }

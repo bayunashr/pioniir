@@ -9,7 +9,7 @@ $routes->group('/', function ($routes) {
     $routes->get('', 'Home::index');
     $routes->get('explore', 'Home::explore');
     $routes->get('explore/(:any)', 'Home::explore/$1');
-    
+
     // Login User
     $routes->group('login', ['filter' => 'loginfront'], function ($routes) {
         $routes->get('', 'Auth::index');
@@ -28,7 +28,7 @@ $routes->group('/', function ($routes) {
         $routes->get('', 'Home::registerCreator');
         $routes->post('', 'Home::registerCreator');
     });
-    
+
     $routes->get('logout', 'Auth::logout');
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
     $routes->get('post/(:any)', 'Home::profilPost/$1');
@@ -115,8 +115,10 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator',
 
     // Creator Report
     $routes->group('report', function ($routes) {
-        $routes->get('community', 'Report::community');
-        $routes->get('finance', 'Report::finance');
+        $routes->get('content', 'Report::content');
+        $routes->get('post', 'Report::post');
+        $routes->get('subscribe', 'Report::subscribe');
+        $routes->get('donate', 'Report::donate');
     });
 
     // Creator Donate
