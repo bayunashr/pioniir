@@ -27,11 +27,11 @@ class Home extends BaseController
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
             $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
+            $this->creatorData['creatorId'] = ($this->creatorData == null) ? '00000000-00000000-00000000-00000000' : $this->creatorData['creatorId'];
         }else{
             $this->userData['userId'] = 0;
             $this->creatorData['creatorId'] = 0;
-        }
-        
+        }     
     }
 
     public function index(){
@@ -62,7 +62,7 @@ class Home extends BaseController
         }
         sort($uniqueTags);
 
-        $query = $this->creatorModel->getCreatorWithoudId($this->creatorData['creatorId']);
+        $query = $this->creatorModel->getCreatorWithoudId();
         if ($tag !== null) {
             $query->like('creatorTag', $tag);
         }
@@ -109,24 +109,33 @@ class Home extends BaseController
     }
 
     public function profilPage($userName){
+
         $data = [
-            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
-            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
-            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
-            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
-            'donate'    => $this->donateModel->getDonateByAlias($userName)
+            'user'          => $this->userData,
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'creatorData'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'          => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'        => $this->socialModel->getSocialByAlias($userName),
+            'milestone'     => $this->milestoneModel->getMilesByAlias($userName),
+            'donate'        => $this->donateModel->getDonateByAlias($userName),
+            'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId'])
         ];
+
+        //echo json_encode($data['ceksubs']);
         
         return view('front/homeProfile',$data);
     }
 
     public function profilPost($userName){
         $data = [
-            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
-            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
-            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
-            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
-            'post'      => $this->postModel->getPostByAlias($userName)
+            'user'          => $this->userData,
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'creatorData'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'          => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'        => $this->socialModel->getSocialByAlias($userName),
+            'milestone'     => $this->milestoneModel->getMilesByAlias($userName),
+            'post'          => $this->postModel->getPostByAlias($userName),
+            'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId'])
         ];
 
         return view('front/postProfile',$data);
@@ -134,11 +143,14 @@ class Home extends BaseController
 
     public function profilContent($userName){
         $data = [
-            'creator'   => $this->creatorModel->getCreatorByAlias($userName),
-            'subs'      => $this->subsModel->CountSubscribeByAlias($userName),
-            'sosmed'    => $this->socialModel->getSocialByAlias($userName),
-            'milestone' => $this->milestoneModel->getMilesByAlias($userName),
-            'content'   => $this->contentModel->getContentByAlias($userName)
+            'user'          => $this->userData,
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'creatorData'   => $this->creatorModel->getCreatorByAlias($userName),
+            'subs'          => $this->subsModel->CountSubscribeByAlias($userName),
+            'sosmed'        => $this->socialModel->getSocialByAlias($userName),
+            'milestone'     => $this->milestoneModel->getMilesByAlias($userName),
+            'content'       => $this->contentModel->getContentByAlias($userName),
+            'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId'])
         ];
 
         return view('front/contentProfile',$data);
@@ -146,8 +158,8 @@ class Home extends BaseController
     
     public function userProfile($user){
         $data = [
-            'creator'   => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
-            'user'      => $this->userData,
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'          => $this->userData,
         ];
         return view('front/userProfile',$data);
     }

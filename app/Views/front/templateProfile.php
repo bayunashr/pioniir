@@ -5,14 +5,18 @@
 <div class="container">
    <div class="row flex-column-reverse flex-lg-row mt-8 mt-lg-6">
       <div class="col-lg-9 order-lg-2 ">
-         <img class="rounded w-100 d-none d-md-block" src="<?= base_url() ?>assets/uploads/banner/<?= $creator[0]['creatorBanner'] ?>" alt="">
+         <img class="rounded w-100 d-none d-md-block" src="<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>" alt="">
          <div class="mt-4 d-flex justify-content-between">
             <div class="d-none d-md-block">
-               <a href="<?= base_url('creator/' . $creator[0]['creatorAlias']) ?>" style="margin-right: 3px;" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'creator' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Home</a>
-               <a href="<?= base_url('post/' . $creator[0]['creatorAlias']) ?>" style="margin-right: 3px;" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'post' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Post</a>
-               <a href="<?= base_url('content/' . $creator[0]['creatorAlias']) ?>" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'content' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Content</a>
+               <a href="<?= base_url('creator/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px;" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'creator' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Home</a>
+               <a href="<?= base_url('post/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px;" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'post' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Post</a>
+               <a href="<?= base_url('content/' . $creatorData[0]['creatorAlias']) ?>" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'content' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Content</a>
             </div>
+            <?php if(count($ceksubs) >= 1):?>
+            <div class="btn btn-sm btn-outline-secondary rounded d-none d-md-block"><i class="uil uil-user-check"></i> &nbsp; Disubscribe (<?= hitungSelisihHari($ceksubs[0]['subTimestamp']) ?> Days Left)</div>
+            <?php else: ?>
             <div class="btn btn-sm btn-green rounded d-none d-md-block" data-bs-toggle="modal" data-bs-target="#modal-subs"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</div>
+            <?php endif ?>
          </div>
          <div class="bg-white rounded p-5 mt-4">
             <?= $this->renderSection('pages') ?>
@@ -20,14 +24,18 @@
       </div>
       <!-- /column -->
       <aside class="col-lg-3">
-         <div class="wrapper rounded-top d-block d-sm-none" style="height: 120px;background-image:url('<?= base_url() ?>assets/uploads/banner/<?= $creator[0]['creatorBanner'] ?>');background-position: center;background-size: cover;"></div>
+         <div class="wrapper rounded-top d-block d-sm-none" style="height: 120px;background-image:url('<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>');background-position: center;background-size: cover;"></div>
          <div class="bg-white rounded-bottom p-5 text-center">
-            <img class="rounded-circle w-15" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $creator[0]['userAvatar'] ?>" alt="" />
-            <h4 class="fw-bolder mt-3"><?= $creator[0]['creatorAlias'] ?></h4>
+            <img class="rounded-circle w-15" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $creatorData[0]['userAvatar'] ?>" alt="" />
+            <h4 class="fw-bolder mt-3"><?= $creatorData[0]['creatorAlias'] ?></h4>
             <h4 class="mt-n1 fs-15"><i class="uil uil-users-alt"></i> <?= $subs ?> Subscriber</h4>
-            <div class="meta mb-2 fs-12"><?= str_replace(",", " | ", $creator[0]['creatorTag'])  ?></div>
+            <div class="meta mb-2 fs-12"><?= str_replace(",", " | ", $creatorData[0]['creatorTag'])  ?></div>
+            <?php if(count($ceksubs) >= 1):?>
+            <div class="btn w-100 btn-outline-secondary btn-sm rounded-pill mb-3 d-block d-sm-none"><i class="uil uil-user-check"></i> &nbsp; Disubscribe (<?= hitungSelisihHari($ceksubs[0]['subTimestamp']) ?> Days Left)</div>
+            <?php else: ?>
             <div class="btn w-100 btn-green btn-sm rounded-pill mb-3 d-block d-sm-none" data-bs-toggle="modal" data-bs-target="#modal-subs"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</div>
-            <p><?= esc($creator[0]['creatorDescription']) ?></p>
+            <?php endif ?>
+            <p><?= esc($creatorData[0]['creatorDescription']) ?></p>
             <nav class="nav social justify-content-center">
                <?php foreach ($sosmed as $key => $value) : ?>
                <a
@@ -40,7 +48,7 @@
             <!-- If tidak ada milestone -->
             <?php if(empty($milestone)) : ?>
             <h4 class="fw-bolder mt-3"><i class="uil uil-comment-alt-heart"></i> Support</h4>
-            <p>Bergabung dalam kreativitas! Dukung <?= esc($creator[0]['creatorAlias']) ?> untuk konten inspiratif.</p>
+            <p>Bergabung dalam kreativitas! Dukung <?= esc($creatorData[0]['creatorAlias']) ?> untuk konten inspiratif.</p>
             <!-- Else -->
             <?php else:?>
             <h4 class="fw-bolder mt-3"><i class="uil uil-rocket"></i> Milestone</h4>
@@ -91,19 +99,21 @@
       <div class="modal-content text-center">
          <div class="modal-body px-sm-10 px-6 py-5">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <img class="rounded-circle w-15 mb-4" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $creator[0]['userAvatar'] ?>" alt="" />
-            <p class="fs-18 text-navy"><?= esc($creator[0]['creatorAlias']) ?></p>
-            <p class="fs-20 text-navy mt-n4"><span class="fw-bolder"><?= format_rupiah($creator[0]['creatorSubPrice']) ?></span>/Bln</p>
+            <img class="rounded-circle w-15 mb-4" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $creatorData[0]['userAvatar'] ?>" alt="" />
+            <p class="fs-18 text-navy"><?= esc($creatorData[0]['creatorAlias']) ?></p>
+            <p class="fs-20 text-navy mt-n4"><span class="fw-bolder"><?= format_rupiah($creatorData[0]['creatorSubPrice']) ?></span>/Bln</p>
             <p class="meta">Subscribe akan memberikan akses konten eksklusif selama 30 hari</p>
-            <a href="#" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</a>
+            <?php if (!(session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail'))) : ?>
+            <a href="<?= base_url('login') ?>" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</a>
+            <?php else: ?>
+            <input type="hidden" name="creatorId" id="creatorId" value="<?= $creatorData[0]['creatorId'] ?>">
+            <input type="hidden" name="userId" id="userId" value="<?= $user['userId'] ?>">
+            <button class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2" id="tombolSubs"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</button>
+            <?php endif ?>
          </div>
-         <!--/.modal-content -->
       </div>
-      <!--/.modal-body -->
    </div>
-   <!--/.modal-dialog -->
 </div>
-<!--/.modal -->
 
 <div class="modal fade" id="modal-buy" tabindex="-1">
    <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -116,15 +126,48 @@
             <p class="meta">Beli dan nikmati konten dari creator yang anda suka!</p>
             <a href="#" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Beli</a>
          </div>
-         <!--/.modal-content -->
       </div>
-      <!--/.modal-body -->
    </div>
-   <!--/.modal-dialog -->
 </div>
-<!--/.modal -->
 
 <?= $this->endsection() ?>
 
 <?= $this->section('js') ?>
+<script src="<?= base_url() ?>assets/dashboard/js/lib/jquery.min.js"></script>
+<script>
+$(document).on('click', '#tombolSubs', function() {
+   const idCreator = document.getElementById('creatorId').value;;
+   const idUser = document.getElementById('userId').value;
+
+   fetch('/subscribe', {
+         method: 'POST',
+         body: JSON.stringify({
+            creatorId: idCreator,
+            userId: idUser
+         })
+      })
+      .then(response => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
+         }
+         return response.json();
+      })
+      .then(data => {
+         const reloadPage = () => location.reload();
+
+         if (data && data.snapToken) {
+            const snapConfig = {
+               onSuccess: reloadPage,
+               onPending: reloadPage,
+               onError: reloadPage,
+               onClose: reloadPage
+            };
+
+            window.snap.pay(data.snapToken, snapConfig);
+         } else {
+            console.error('Tidak ada token Snap yang diterima dari server');
+         }
+      });
+});
+</script>
 <?= $this->endsection() ?>

@@ -50,6 +50,18 @@ function potongString($kalimat)
     }
 }
 
+function hitungSelisihHari($subscriptionDate) {
+   // Ubah string tanggal menjadi objek DateTime
+   $subscriptionDateTime = new DateTime($subscriptionDate);
+   $currentDateTime = new DateTime();
+
+   // Hitung selisih antara tanggal saat ini dan tanggal langganan
+   $diff = $currentDateTime->diff($subscriptionDateTime);
+
+   // Mengembalikan sisa hari dalam bentuk bilangan bulat
+   return (30 - $diff->days);
+}
+
 function isi($data)
 {
     echo '<pre>';

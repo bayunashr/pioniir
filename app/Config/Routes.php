@@ -34,6 +34,9 @@ $routes->group('/', function ($routes) {
     $routes->get('post/(:any)', 'Home::profilPost/$1');
     $routes->get('content/(:any)', 'Home::profilContent/$1');
     $routes->get('user/profile/(:any)', 'Home::userProfile/$1');
+
+    //Perlu filter
+    $routes->post('subscribe', 'Midtrans::subscribe');
 });
 
 // Super Routes Login

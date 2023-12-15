@@ -63,4 +63,14 @@ class SubscribeModel extends Model
             ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
             ->countAllResults();
     }
+
+    public function getStatusSubscribe($alias,$userId) {
+        return $this->select('Subscribe.*, Creator.creatorAlias AS alias')
+            ->where('Creator.creatorAlias', $alias)
+            ->where('Subscribe.userId', $userId)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->where("DATEDIFF(NOW(), Subscribe.subTimestamp) <= 30")
+            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+            ->findAll();
+    }
 }

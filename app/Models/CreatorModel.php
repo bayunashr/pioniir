@@ -36,9 +36,8 @@ class CreatorModel extends Model
             ->findAll();
     }
 
-    public function getCreatorWithoudId($id) {
+    public function getCreatorWithoudId() {
         return $this->select('Creator.*, User.userAvatar')
-            ->whereNotIn('creatorId', [$id])
             ->join('User', 'User.userId = Creator.userId');
     }
 
