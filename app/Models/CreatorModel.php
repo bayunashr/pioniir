@@ -36,6 +36,12 @@ class CreatorModel extends Model
             ->findAll();
     }
 
+    public function getCreatorWithoudId($id) {
+        return $this->select('Creator.*, User.userAvatar')
+            ->whereNotIn('creatorId', [$id])
+            ->join('User', 'User.userId = Creator.userId');
+    }
+
     public function getCreatorByAlias($alias) {
         return $this->select('Creator.*, User.userAvatar')
             ->where('Creator.creatorAlias', $alias)

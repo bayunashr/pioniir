@@ -66,6 +66,7 @@
                         <div class="mb-4">
                            <label class="form-label" for="alias">Alias</label>
                            <input type="text" class="form-control" id="alias" name="alias" placeholder="Creator Alias" value="<?= $creator['creatorAlias'] ?>" required>
+                           <input type="hidden" class="form-control" id="alias" name="old_alias" placeholder="Creator Alias" value="<?= $creator['creatorAlias'] ?>" required>
                         </div>
                         <div class="mb-4">
                            <label class="form-label" for="description">Description</label>
@@ -303,12 +304,12 @@ Swal.fire({
    icon: "success"
 });
 <?php endif; ?>
-<?php if(session()->getFlashdata('error')) : ?>
-var pesan = <?= json_encode(session()->getFlashdata('error')) ?>;
+<?php if(session()->getFlashdata('error') || session()->getFlashdata('validation')) : ?>
+var pesan = <?= session()->getFlashdata('error') ? json_encode(session()->getFlashdata('error')) : json_encode(current(session()->getFlashdata('validation')))?>;
 Swal.fire({
+   icon: "error",
    title: "Oops...",
    text: pesan,
-   icon: "error"
 });
 <?php endif; ?>
 

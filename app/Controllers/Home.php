@@ -62,7 +62,7 @@ class Home extends BaseController
         }
         sort($uniqueTags);
 
-        $query = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']]);
+        $query = $this->creatorModel->getCreatorWithoudId($this->creatorData['creatorId']);
         if ($tag !== null) {
             $query->like('creatorTag', $tag);
         }

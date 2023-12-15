@@ -28,9 +28,9 @@
          <?php foreach ($creatorList as $key => $value): ?>
          <div class="col-md-6 col-xl-3 mt-5">
             <a href="<?= base_url('creator/'.$value['creatorAlias']) ?>" class="card shadow-lg lift">
-               <div class="wrapper rounded-top" style="height: 120px;background-image:url('<?= base_url() ?>assets/front/img/bannercreator.png');background-position: center;background-size: cover;"></div>
+               <div class="wrapper rounded-top" style="height: 120px;background-image:url('<?= base_url() ?>assets/uploads/banner/<?= $value['creatorBanner'] ?>');background-position: center;background-size: cover;"></div>
                <div class="card-body px-4 py-4">
-                  <img class="rounded-circle w-13 mb-4" src="<?= base_url() ?>assets/uploads/photo_profile/1.jpg" alt="" />
+                  <img class="rounded-circle w-13 mb-4" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $value['userAvatar'] ?>" alt="" />
                   <h5 class="mb-1"><?= esc($value['creatorAlias']) ?></h5>
                   <div class="meta mb-2 fs-12"><?= str_replace(",", " | ", $value['creatorTag'])  ?></div>
                </div>
