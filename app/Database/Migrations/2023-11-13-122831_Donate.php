@@ -18,6 +18,7 @@ class Donate extends Migration
             'userId' => [
                 'type' => 'CHAR',
                 'constraint' => 36,
+                'null' => true,
             ],
             'creatorId' => [
                 'type' => 'CHAR',

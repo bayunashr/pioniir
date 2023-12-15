@@ -35,6 +35,8 @@ $routes->group('/', function ($routes) {
     $routes->get('content/(:any)', 'Home::profilContent/$1');
     $routes->get('user/profile/(:any)', 'Home::userProfile/$1');
 
+    $routes->post('donate', 'Midtrans::donate');
+
     //Perlu filter
     $routes->post('subscribe', 'Midtrans::subscribe');
 });

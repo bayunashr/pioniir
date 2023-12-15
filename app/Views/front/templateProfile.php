@@ -73,17 +73,19 @@
          <div class="modal-body px-sm-10 px-6 py-5">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <img style="width: 80%;" src="<?= base_url() ?>assets/front/img/ilus1.png" alt="" />
-            <form action="" method="post" class="text-start mb-3">
+            <form method="post" id="formDonasi" class="text-start mb-3">
                <div class="mb-3">
-                  <input type="text" class="form-control form-control-sm" placeholder="Name" id="name" name="donateName">
+                  <input type="hidden" class="form-control form-control-sm" id="userId" name="userId" value="<?= $user['userId'] ?>">
+                  <input type="hidden" class="form-control form-control-sm" id="creaatorId" name="creatorId" value="<?= $creatorData[0]['creatorId'] ?>">
+                  <input type="text" class="form-control form-control-sm" placeholder="Name" id="donateName" name="donateName" required>
                </div>
                <div class="mb-3">
-                  <input type="number" class="form-control form-control-sm" placeholder="Jumlah" id="jumlah" name="donateAmount" required>
+                  <input type="number" class="form-control form-control-sm" placeholder="Jumlah" id="donateAmount" name="donateAmount" required>
                </div>
                <div class="mb-3">
-                  <textarea id="deskripsi" class="form-control form-control-sm" placeholder="Deskripsi" style="height: 150px" name="donateDescription"></textarea>
+                  <textarea id="donateDescription" class="form-control form-control-sm" placeholder="Deskripsi" style="height: 150px" name="donateDescription"></textarea>
                </div>
-               <a class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Donate</a>
+               <button type="submit" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Donate</button>
             </form>
          </div>
          <!--/.modal-content -->
@@ -135,6 +137,40 @@
 <?= $this->section('js') ?>
 <script src="<?= base_url() ?>assets/dashboard/js/lib/jquery.min.js"></script>
 <script>
+// Donate
+document.getElementById('formDonasi').addEventListener('submit', function(event) {
+   event.preventDefault();
+   const formData = new FormData(this);
+
+   fetch('/donate', {
+         method: 'POST',
+         body: formData
+      })
+      .then(response => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
+         }
+         return response.json();
+      })
+      .then(data => {
+         const reloadPage = () => location.reload();
+
+         if (data && data.snapToken) {
+            const snapConfig = {
+               onSuccess: reloadPage,
+               onPending: reloadPage,
+               onError: reloadPage,
+               onClose: reloadPage
+            };
+
+            window.snap.pay(data.snapToken, snapConfig);
+         } else {
+            console.error('Tidak ada token Snap yang diterima dari server');
+         }
+      });
+});
+
+// Subscribe
 $(document).on('click', '#tombolSubs', function() {
    const idCreator = document.getElementById('creatorId').value;;
    const idUser = document.getElementById('userId').value;
