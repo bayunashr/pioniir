@@ -20,6 +20,59 @@
     <div class="content mb-4">
         <!-- Overview -->
         <div class="row item-push">
+            <div class="col-md-12 col-xl-4">
+                <div class="block block-rounded">
+                    <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                        <div>
+                            <i class="fa fa-2x fa-trophy text-muted"></i>
+                        </div>
+                        <dl class="ms-3 text-end mb-0">
+                            <dt class="h3 fw-extrabold mb-0">
+                                <?= $currentYearContentData[$currentMonth - 1] ?>
+                            </dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">
+                                New Content This Month
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xl-4">
+                <div class="block block-rounded">
+                    <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                        <div>
+                            <i class="fa fa-2x fa-money-bill-wave text-muted"></i>
+                        </div>
+                        <dl class="ms-3 text-end mb-0">
+                            <dt class="h3 fw-extrabold mb-0">
+                                <?= format_rupiah($incomeThisMonth) ?>
+                            </dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">
+                                Gained From Content Sales This Month
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xl-4">
+                <div class="block block-rounded">
+                    <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                        <div>
+                            <i class="fa fa-2x fa-heart text-muted"></i>
+                        </div>
+                        <dl class="ms-3 text-end mb-0">
+                            <dt class="h3 fw-extrabold mb-0">
+                                <?= $loveThisMonth ?>
+                            </dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">
+                                Loves Obtained From Content This Month
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row item-push">
             <div class="col-xl-6">
                 <!-- Lines Chart -->
                 <div class="block block-rounded">
@@ -61,16 +114,21 @@
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
                             <tbody>
-                                <?php foreach ($topLoved as $key => $value) : ?>
+                                <?php foreach ($topLoved as $key => $value): ?>
                                     <tr>
                                         <td>
-                                            <a href="be_pages_ecom_product_edit.html"><?= $value['contentTitle'] ?></a>
+                                            <a href="be_pages_ecom_product_edit.html">
+                                                <?= $value['contentTitle'] ?>
+                                            </a>
                                         </td>
                                         <td>
-                                            <span class="badge bg-danger"><?= $value['contentStatus'] ?></span>
+                                            <span class="badge bg-danger">
+                                                <?= $value['contentStatus'] ?>
+                                            </span>
                                         </td>
                                         <td class="fw-semibold">
-                                            <i class="text-danger fa fa-heart"></i> <?= $value['contentLike'] ?>
+                                            <i class="text-danger fa fa-heart"></i>
+                                            <?= $value['contentLike'] ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -89,13 +147,17 @@
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
                             <tbody>
-                                <?php foreach ($topPurchased as $key => $value) : ?>
+                                <?php foreach ($topPurchased as $key => $value): ?>
                                     <tr>
                                         <td>
-                                            <a href="be_pages_ecom_product_edit.html"><?= $key ?></a>
+                                            <a href="be_pages_ecom_product_edit.html">
+                                                <?= $key ?>
+                                            </a>
                                         </td>
                                         <td>
-                                            <span class="badge bg-warning">Sold <?= $value ?> Copies</span>
+                                            <span class="badge bg-warning">Sold
+                                                <?= $value ?> Copies
+                                            </span>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -117,7 +179,7 @@
 <script src="<?= base_url() ?>assets/dashboard/js/plugins/chart.js/chart.umd.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         Chart.defaults.color = '#818d96';
         Chart.defaults.font.weight = '600';
         Chart.defaults.scale.grid.color = "rgba(0, 0, 0, .05)";
@@ -143,53 +205,53 @@
         yearlyContentChartData = {
             labels: <?= json_encode($month) ?>,
             datasets: [{
-                    label: 'Last Year',
-                    fill: true,
-                    backgroundColor: 'rgba(171, 227, 125, .5)',
-                    borderColor: 'rgba(171, 227, 125, 1)',
-                    pointBackgroundColor: 'rgba(171, 227, 125, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
-                    data: <?= json_encode($lastYearContentData) ?>,
-                },
-                {
-                    label: 'This Year',
-                    fill: true,
-                    backgroundColor: 'rgba(0, 0, 0, .1)',
-                    borderColor: 'rgba(0, 0, 0, .3)',
-                    pointBackgroundColor: 'rgba(0, 0, 0, .3)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-                    data: <?= json_encode($currentYearContentData) ?>,
-                }
+                label: <?= $currentYear - 1 ?>,
+                fill: true,
+                backgroundColor: 'rgba(171, 227, 125, .5)',
+                borderColor: 'rgba(171, 227, 125, 1)',
+                pointBackgroundColor: 'rgba(171, 227, 125, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+                data: <?= json_encode($lastYearContentData) ?>,
+            },
+            {
+                label: <?= $currentYear ?>,
+                fill: true,
+                backgroundColor: 'rgba(0, 0, 0, .1)',
+                borderColor: 'rgba(0, 0, 0, .3)',
+                pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+                data: <?= json_encode($currentYearContentData) ?>,
+            }
             ]
         };
 
         monthlyContentChartData = {
             datasets: [{
-                    label: 'Last Month',
-                    fill: true,
-                    backgroundColor: 'rgba(171, 227, 125, .5)',
-                    borderColor: 'rgba(171, 227, 125, 1)',
-                    pointBackgroundColor: 'rgba(171, 227, 125, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
-                    data: <?= json_encode($lastMonthContentData) ?>,
-                },
-                {
-                    label: 'This Month',
-                    fill: true,
-                    backgroundColor: 'rgba(0, 0, 0, .1)',
-                    borderColor: 'rgba(0, 0, 0, .3)',
-                    pointBackgroundColor: 'rgba(0, 0, 0, .3)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-                    data: <?= json_encode($currentMonthContentData) ?>,
-                }
+                label: <?= json_encode($month[$currentMonth - 2]) ?>,
+                fill: true,
+                backgroundColor: 'rgba(171, 227, 125, .5)',
+                borderColor: 'rgba(171, 227, 125, 1)',
+                pointBackgroundColor: 'rgba(171, 227, 125, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+                data: <?= json_encode($lastMonthContentData) ?>,
+            },
+            {
+                label: <?= json_encode($month[$currentMonth - 1]) ?>,
+                fill: true,
+                backgroundColor: 'rgba(0, 0, 0, .1)',
+                borderColor: 'rgba(0, 0, 0, .3)',
+                pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+                data: <?= json_encode($currentMonthContentData) ?>,
+            }
             ]
         };
 
@@ -201,7 +263,7 @@
                 maintainAspectRatio: false,
                 tension: .4
             }
-        }, );
+        },);
 
         monthlyContentChart = new Chart(monthlyContentChartCtx, {
             type: 'line',
@@ -211,7 +273,7 @@
                 maintainAspectRatio: false,
                 tension: .4
             }
-        }, );
+        },);
 
     });
 </script>

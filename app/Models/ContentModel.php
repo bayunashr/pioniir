@@ -6,18 +6,18 @@ use CodeIgniter\Model;
 
 class ContentModel extends Model
 {
-    protected $table            = 'Content';
-    protected $primaryKey       = 'contentId';
+    protected $table = 'Content';
+    protected $primaryKey = 'contentId';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ['contentId', 'creatorId', 'contentTitle', 'contentValue', 'contentStatus', 'contentPrice', 'contentPreview', 'contentDownload', 'contentLike'];
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     public function selectAll()
@@ -84,5 +84,14 @@ class ContentModel extends Model
     {
         return $this->where('Content.creatorId', $id)
             ->countAllResults();
+    }
+
+    public function getContentLikeByCreatorTime($id, $month, $year)
+    {
+        return $this->select('Content.contentLike')
+            ->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
+            ->findAll();
     }
 }

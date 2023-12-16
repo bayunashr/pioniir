@@ -82,23 +82,37 @@ class Report extends BaseController
             $purchased[$allContentByCreator[$i]['contentTitle']] = $this->buyModel->getCountBuyCreatorContent($this->creatorData['creatorId'], $allContentByCreator[$i]['contentId']);
         }
         arsort($purchased);
-        $topPurchased = array_slice($purchased, 0, 5);
+        $topPurchased = array_slice($purchased, 0, 10);
         // arrsort gawe ngurut paling gede
         // slice gawe motong
         //isi($purchased);
 
+        // total pendapatan dari konten bulan ini tok
+        $incomeThisMonth = array_column($this->buyModel->getBuyByCreatorTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear), 'contentPrice');
+        $incomeThisMonth = array_sum($incomeThisMonth);
+        //isi($incomeThisMonth);
+        //isi($this->buyModel->getBuyByCreatorMonth($this->creatorData['creatorId'], $this->currentMonth));
+
+        $totalLoveThisMonth = array_column($this->contentModel->getContentLikeByCreatorTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear), 'contentLike');
+        $totalLoveThisMonth = array_sum($totalLoveThisMonth);
+        //isi($totalLoveThisMonth);
+
         $data = [
             'title' => 'Content Report - Pioniir Creator',
-            'user'      => $this->userData,
-            'creator'   => $this->creatorData,
-            'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'user' => $this->userData,
+            'creator' => $this->creatorData,
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             'month' => $this->month,
+            'currentMonth' => $this->currentMonth,
+            'currentYear' => $this->currentYear,
             'currentYearContentData' => $currentYearContentData,
             'lastYearContentData' => $lastYearContentData,
             'currentMonthContentData' => $currentMonthContentData,
             'lastMonthContentData' => $lastMonthContentData,
             'topLoved' => $topLoved,
             'topPurchased' => $topPurchased,
+            'incomeThisMonth' => $incomeThisMonth,
+            'loveThisMonth' => $totalLoveThisMonth,
         ];
         return view('dashboard/creator/contentReport', $data);
     }
@@ -131,9 +145,9 @@ class Report extends BaseController
 
         $data = [
             'title' => 'Post Report - Pioniir Creator',
-            'user'      => $this->userData,
-            'creator'   => $this->creatorData,
-            'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'user' => $this->userData,
+            'creator' => $this->creatorData,
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             'month' => $this->month,
             'currentYearPostData' => $currentYearPostData,
             'lastYearPostData' => $lastYearPostData,

@@ -6,18 +6,18 @@ use CodeIgniter\Model;
 
 class BuyModel extends Model
 {
-    protected $table            = 'Buy';
-    protected $primaryKey       = 'buyId';
+    protected $table = 'Buy';
+    protected $primaryKey = 'buyId';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['userId', 'contentId', 'buyStatus'];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ['userId', 'contentId', 'buyStatus'];
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     public function selectAll()
@@ -68,5 +68,17 @@ class BuyModel extends Model
             ->where('Buy.contentId', $contentId)
             ->where('Buy.buyStatus', 'success')
             ->countAllResults();
+    }
+
+    public function getBuyByCreatorTime($creatorId, $month, $year)
+    {
+        return $this->select('Content.contentPrice')
+            ->join('Content', 'Buy.contentId = Content.contentId')
+            ->join('Creator', 'Content.creatorId = Creator.creatorId')
+            ->where('Creator.creatorId', $creatorId)
+            ->where('MONTH(buyTimestamp)', $month)
+            ->where('YEAR(buyTimestamp)', $year)
+            ->where('Buy.buyStatus', 'success')
+            ->findAll();
     }
 }
