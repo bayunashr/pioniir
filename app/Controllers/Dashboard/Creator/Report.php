@@ -14,7 +14,7 @@ use App\Models\NotificationModel;
 
 class Report extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $buyModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
+    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $buyModel, $subscribeModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
     protected $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     function __construct()
@@ -24,6 +24,7 @@ class Report extends BaseController
         $this->contentModel = new ContentModel();
         $this->postModel = new PostModel();
         $this->buyModel = new BuyModel();
+        $this->subscribeModel = new SubscribeModel();
         $this->notifModel = new NotificationModel();
         $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
@@ -145,7 +146,7 @@ class Report extends BaseController
         //data 10 top love
         $topLoved = $this->postModel->getTopLoved($this->creatorData['creatorId']);
 
-        //total love bula iki
+        //total love bulan iki
         $totalLoveThisMonth = array_column($this->postModel->getPostLikeByCreatorTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear), 'postLike');
         $totalLoveThisMonth = array_sum($totalLoveThisMonth);
 
@@ -169,9 +170,60 @@ class Report extends BaseController
 
     public function subscribe()
     {
+        //isi($this->subscribeModel->getAllSubscriber($this->creatorData['creatorId'], $this->currentMonth - 1, $this->currentYear)->findAll());
+        $totalSub = $this->subscribeModel->getAllSubscriber($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear)->countAllResults();
+        $totalSubLastMonth = $this->subscribeModel->getAllSubscriber($this->creatorData['creatorId'], $this->currentMonth - 1, $this->currentYear)->countAllResults();
+        $diffsub = $totalSub - $totalSubLastMonth;
+        //isi($diffsub);
+
+        $totalSubPerMonth = [];
+        for ($i = 0; $i < sizeof($this->month); $i++) {
+            $temp = $this->subscribeModel->getAllSubscriber($this->creatorData['creatorId'], $i + 1, $this->currentYear)->countAllResults();
+            $totalSubPerMonth[$i] = $temp;
+        }
+        //isi($totalSubPerMonth);
+
+        $totalSubPerMonthLastYear = [];
+        for ($i = 0; $i < sizeof($this->month); $i++) {
+            $temp = $this->subscribeModel->getAllSubscriber($this->creatorData['creatorId'], $i + 1, $this->currentYear - 1)->countAllResults();
+            $totalSubPerMonthLastYear[$i] = $temp;
+        }
+
+        $topSubscribedUser = $this->subscribeModel->getAllSubscriberAllTime($this->creatorData['creatorId']);
+        //isi($this->subscribeModel->getAllSubscriberAllTime($this->creatorData['creatorId']));
+
+        $incomeThisMonth = 0;
+        foreach ($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear) as $item) {
+            $incomeThisMonth += $item['timeSubscribed'] * $item['creatorSubPrice'];
+        }
+        //isi($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear));
+        //isi($incomeThisMonth);
+
+        $data = [
+            'title' => 'Subscribe Report - Pioniir Creator',
+            'user' => $this->userData,
+            'creator' => $this->creatorData,
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'month' => $this->month,
+            'currentYear' => $this->currentYear,
+            'totalSub' => $totalSub,
+            'diffSub' => $diffsub,
+            'totalSubPerMonth' => $totalSubPerMonth,
+            'totalSubPerMonthLastYear' => $totalSubPerMonthLastYear,
+            'topSubscribedUser' => $topSubscribedUser,
+            'incomeThisMonth' => $incomeThisMonth,
+        ];
+        return view('dashboard/creator/subscribeReport', $data);
     }
 
     public function donate()
     {
+        $data = [
+            'title' => 'Subscribe Report - Pioniir Creator',
+            'user' => $this->userData,
+            'creator' => $this->creatorData,
+            'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+        ];
+        return view('dashboard/creator/donateReport', $data);
     }
 }
