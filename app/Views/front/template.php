@@ -12,28 +12,29 @@
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/plugins.css">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/style.css">
    <link rel="stylesheet" href="<?= base_url() ?>assets/front/css/colors/aqua.css">
+   <link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/sweetalert2/sweetalert2.min.css">
    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-JrdkEpErGj3jhkFJ"></script>
    <style>
-      .language-select .dropdown-menu {
-         left: -50% !important;
-      }
+   .language-select .dropdown-menu {
+      left: -50% !important;
+   }
 
-      .creator-nav {
-         background-color: white;
-         color: #333F52;
-         border: 1px solid #333F52;
-      }
+   .creator-nav {
+      background-color: white;
+      color: #333F52;
+      border: 1px solid #333F52;
+   }
 
-      .creator-nav-active {
-         background-color: #333F52 !important;
-         color: white !important;
-         border: 0 !important;
-      }
+   .creator-nav-active {
+      background-color: #333F52 !important;
+      color: white !important;
+      border: 0 !important;
+   }
 
-      .blur-img {
-         backdrop-filter: blur(10px);
-         background-color: transparent;
-      }
+   .blur-img {
+      backdrop-filter: blur(10px);
+      background-color: transparent;
+   }
    </style>
 </head>
 
@@ -54,25 +55,25 @@
                      <ul class="navbar-nav flex-row align-items-center ms-auto">
                         <li class="nav-item"><a class="nav-link" href="<?= base_url('explore') ?>"><i class="uil uil-search"></i></a></li>
                         <?php if (session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) : ?>
-                           <li class="nav-item dropdown language-select">
-                              <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 <img class="avatar w-8" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="" />
-                              </a>
-                              <ul class="dropdown-menu">
-                                 <?php if (count($creator) == 1) : ?>
-                                    <li class="nav-item"><a class="dropdown-item" href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-                                 <?php else : ?>
-                                    <li class="nav-item"><a class="dropdown-item" href="<?= base_url('register/creator') ?>">Jadi Creator</a>
-                                    </li>
-                                 <?php endif; ?>
-                                 <li class="nav-item"><a class="dropdown-item" href="<?= base_url('user/profile/' . session()->get('userName')) ?>">Profile</a></li>
-                                 <li class="nav-item"><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
-                              </ul>
-                           </li>
+                        <li class="nav-item dropdown language-select">
+                           <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <img class="avatar w-8" src="<?= base_url() ?>assets/dashboard/media/avatars/avatar10.jpg" alt="" />
+                           </a>
+                           <ul class="dropdown-menu">
+                              <?php if (count($creator) == 1) : ?>
+                              <li class="nav-item"><a class="dropdown-item" href="<?= base_url('dashboard') ?>">Dashboard</a></li>
+                              <?php else : ?>
+                              <li class="nav-item"><a class="dropdown-item" href="<?= base_url('register/creator') ?>">Jadi Creator</a>
+                              </li>
+                              <?php endif; ?>
+                              <li class="nav-item"><a class="dropdown-item" href="<?= base_url('user/profile') ?>">Profile</a></li>
+                              <li class="nav-item"><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
+                           </ul>
+                        </li>
                         <?php else : ?>
-                           <li class="nav-item">
-                              <a href="<?= base_url('login') ?>" class=" btn btn-sm btn-outline-navy rounded-pill">Get Started</a>
-                           </li>
+                        <li class="nav-item">
+                           <a href="<?= base_url('login') ?>" class=" btn btn-sm btn-outline-navy rounded-pill">Get Started</a>
+                        </li>
                         <?php endif; ?>
                      </ul>
                      <!-- /.navbar-nav -->
@@ -83,17 +84,17 @@
             </div>
             <!-- /.container -->
             <?php if (current_url(true)->getSegment(1) == 'creator' || current_url(true)->getSegment(1) == 'post' || current_url(true)->getSegment(1) == 'content') : ?>
-               <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
-                  <a href="<?= base_url('creator/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'creator' ? 'creator-nav-active' : 'creator-nav' ?>">Home</a>
-                  <a href="<?= base_url('post/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'post' ? 'creator-nav-active' : 'creator-nav' ?>">Post</a>
-                  <a href="<?= base_url('content/' . $creatorData[0]['creatorAlias']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'content' ? 'creator-nav-active' : 'creator-nav' ?>">Content</a>
-               </div>
+            <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
+               <a href="<?= base_url('creator/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'creator' ? 'creator-nav-active' : 'creator-nav' ?>">Home</a>
+               <a href="<?= base_url('post/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'post' ? 'creator-nav-active' : 'creator-nav' ?>">Post</a>
+               <a href="<?= base_url('content/' . $creatorData[0]['creatorAlias']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'content' ? 'creator-nav-active' : 'creator-nav' ?>">Content</a>
+            </div>
             <?php elseif (current_url(true)->getSegment(1) == 'user') : ?>
-               <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
-                  <a href="<?= base_url('user/profile/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'profile' ? 'creator-nav-active' : 'creator-nav' ?>">My Account</a>
-                  <a href="<?= base_url('user/tip/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'tip' ? 'creator-nav-active' : 'creator-nav' ?>">Support Given</a>
-                  <a href="<?= base_url('user/follow/' . $user['userName']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'follow' ? 'creator-nav-active' : 'creator-nav' ?>">Subscribed Creator</a>
-               </div>
+            <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
+               <a href="<?= base_url('user/profile/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'profile' ? 'creator-nav-active' : 'creator-nav' ?>">My Account</a>
+               <a href="<?= base_url('user/tip/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'tip' ? 'creator-nav-active' : 'creator-nav' ?>">Support Given</a>
+               <a href="<?= base_url('user/follow/' . $user['userName']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'follow' ? 'creator-nav-active' : 'creator-nav' ?>">Subscribed Creator</a>
+            </div>
             <?php endif ?>
          </nav>
          <!-- /.navbar -->
