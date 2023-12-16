@@ -39,6 +39,7 @@ $routes->group('/', function ($routes) {
 
     //Perlu filter
     $routes->post('subscribe', 'Midtrans::subscribe');
+    $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1');
 });
 
 // Super Routes Login

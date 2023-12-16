@@ -4,16 +4,20 @@ namespace App\Controllers;
 use App\Models\SubscribeModel;
 use App\Models\CreatorModel;
 use App\Models\DonateModel;
+use App\Models\BuyModel;
+use App\Models\ContentModel;
 use Ramsey\Uuid\Uuid;
 
 class Midtrans extends BaseController
 {
-   protected $subscribeModel, $creatorModel, $donateModel;
+   protected $subscribeModel, $creatorModel, $donateModel, $buyModel, $contentModel;
 
     public function __construct() {
         $this->subscribeModel = new SubscribeModel;
         $this->creatorModel   = new CreatorModel;
-        $this->donateModel   = new DonateModel;
+        $this->donateModel    = new DonateModel;
+        $this->buyModel       = new BuyModel;
+        $this->contentModel   = new ContentModel;
     }
 
     public function subscribe() {      
@@ -58,7 +62,9 @@ class Midtrans extends BaseController
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($snapTransaction);
-        $this->subscribeModel->insert($data);
+        if ($snapToken) {
+            $this->subscribeModel->insert($data);
+        }
 
         return $this->response->setJSON(['snapToken' => $snapToken],200);
     }
@@ -105,60 +111,59 @@ class Midtrans extends BaseController
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($snapTransaction);
-        $this->donateModel->insert($data);
+        if ($snapToken) {
+            $this->donateModel->insert($data);
+        }
 
         return $this->response->setJSON(['snapToken' => $snapToken]);
     }
 
-//   function buyContent() {
-//       $buyModel       = new BuyModel;
-//       $contentModel   = new ContentModel;
-      
-//       \Midtrans\Config::$serverKey = $_ENV['MIDTRANS_SERVER_KEY'];
-//       \Midtrans\Config::$isProduction = false;
-//       \Midtrans\Config::$isSanitized = true;
-//       \Midtrans\Config::$is3ds = true;
+    public function buyContent($contentId) {
+        \Midtrans\Config::$serverKey = $_ENV['MIDTRANS_SERVER_KEY'];
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
 
-//       $contentId  = json_decode($this->request->getBody(), true)['contentId'];
-//       $userId     = json_decode($this->request->getBody(), true)['userId'];
+        $userId     = json_decode($this->request->getBody(), true)['userId'];
 
-//       $id = Uuid::uuid4()->toString();
-//       // Data Insert To Database
-//       $data = [
-//           'buyId'     => $id,
-//           'userId'    => $userId,
-//           'contentId' => $contentId
-//       ];
-      
-//       $content = $contentModel->find($contentId);
+        $id = Uuid::uuid4();
+        $data = [
+            'buyId'     => $id,
+            'userId'    => $userId,
+            'contentId' => $contentId
+        ];
+        
+        $content = $this->contentModel->find($contentId);
 
-//       // Send To Midtrans
-//       $snapTransaction = array(
-//           'transaction_details'   => array(
-//               'order_id'          => $id,
-//               'gross_amount'      => $content['contentPrice'],
-//           ),
-//           'item_details' => array(
-//               array(
-//                   'id'        => $contentId,
-//                   'price'     => $content['contentPrice'],
-//                   'quantity'  => 1,
-//                   'name'      => "Buy Content - ".$content['contentTitle'],
-//               ),
-//           ),
-//           "custom_expiry" => array(
-//               "order_time"=> date('Y-m-d H:i:s'),
-//               "expiry_duration"=> 5,
-//               "unit"=> "minute"
-//           ),
-//           "enabled_payments" => array(
-//               "other_qris"
-//           ),
-//       );
+        // Send To Midtrans
+        $snapTransaction = array(
+            'transaction_details'   => array(
+                'order_id'          => $id,
+                'gross_amount'      => $content['contentPrice'],
+            ),
+            'item_details' => array(
+                array(
+                    'id'        => $contentId,
+                    'price'     => $content['contentPrice'],
+                    'quantity'  => 1,
+                    'name'      => "Buy Content - ".$content['contentTitle'],
+                ),
+            ),
+            "custom_expiry" => array(
+                "order_time"=> date('Y-m-d H:i:s'),
+                "expiry_duration"=> 5,
+                "unit"=> "minute"
+            ),
+            "enabled_payments" => array(
+                "other_qris"
+            ),
+        );
 
-//       $snapToken = \Midtrans\Snap::getSnapToken($snapTransaction);
-//       $buyModel->insert($data);
+        $snapToken = \Midtrans\Snap::getSnapToken($snapTransaction);
+        if ($snapToken) {
+            $this->buyModel->insert($data);
+        }
 
-//       return $this->response->setJSON(['snapToken' => $snapToken]);
-//   }
+        return $this->response->setJSON(['snapToken' => $snapToken]);
+    }
 }

@@ -59,6 +59,13 @@ class BuyModel extends Model
             ->countAllResults();
     }
 
+    public function getDataBuyByIdUser($userId) {
+        return $this->select('Buy.contentId')
+            ->where('userId', $userId)
+            ->where('buyStatus', 'success')
+            ->findAll();
+    }
+
     // return jumlah content yang dibeli berdasarkan creator dan kontennya
     public function getCountBuyCreatorContent($creatorId, $contentId)
     {

@@ -9,11 +9,12 @@ use App\Models\MilestoneModel;
 use App\Models\DonateModel;
 use App\Models\PostModel;
 use App\Models\ContentModel;
+use App\Models\BuyModel;
 use Ramsey\Uuid\Uuid;
 
 class Home extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $subsModel, $socialModel, $milestoneModel, $donateModel, $postModel, $contentModel;
+    protected $userData, $creatorData, $userModel, $creatorModel, $subsModel, $socialModel, $milestoneModel, $donateModel, $postModel, $contentModel, $buyModel;
     function __construct(){
         $this->userModel      = new UserModel();
         $this->creatorModel   = new CreatorModel();
@@ -23,6 +24,7 @@ class Home extends BaseController
         $this->donateModel    = new DonateModel();
         $this->postModel      = new PostModel();
         $this->contentModel   = new ContentModel();
+        $this->buyModel       = new BuyModel();
 
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
@@ -120,8 +122,6 @@ class Home extends BaseController
             'donate'        => $this->donateModel->getDonateByAlias($userName),
             'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId'])
         ];
-
-        //echo json_encode($data['ceksubs']);
         
         return view('front/homeProfile',$data);
     }
@@ -150,9 +150,11 @@ class Home extends BaseController
             'sosmed'        => $this->socialModel->getSocialByAlias($userName),
             'milestone'     => $this->milestoneModel->getMilesByAlias($userName),
             'content'       => $this->contentModel->getContentByAlias($userName),
-            'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId'])
+            'ceksubs'       => $this->subsModel->getStatusSubscribe($userName,$this->userData['userId']),
+            'dataBuy'       => $this->buyModel->getDataBuyByIdUser($this->userData['userId'])
         ];
 
+        // echo json_encode($data['dataBuy']);
         return view('front/contentProfile',$data);
     }
     

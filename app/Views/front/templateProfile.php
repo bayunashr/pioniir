@@ -14,6 +14,8 @@
             </div>
             <?php if(count($ceksubs) >= 1):?>
             <div class="btn btn-sm btn-outline-secondary rounded d-none d-md-block"><i class="uil uil-user-check"></i> &nbsp; Disubscribe (<?= hitungSelisihHari($ceksubs[0]['subTimestamp']) ?> Days Left)</div>
+            <?php elseif((!empty($creator)) && $creatorData[0]['creatorId'] == $creator[0]['creatorId']):?>
+
             <?php else: ?>
             <div class="btn btn-sm btn-green rounded d-none d-md-block" data-bs-toggle="modal" data-bs-target="#modal-subs"><i class="uil uil-user-plus"></i> &nbsp; Subscribe</div>
             <?php endif ?>
@@ -123,10 +125,15 @@
          <div class="modal-body px-sm-10 px-6 py-5">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             <img style="width: 80%;" src="<?= base_url() ?>assets/front/img/ilus2.png" alt="" />
-            <p class="fs-18 text-navy">Content Title</p>
-            <p class="fs-20 text-navy mt-n4"><span class="fw-bolder">Rp. 200.000</span></p>
+            <p class="fs-18 text-navy" id="contentTitle"></p>
+            <p class="fs-20 text-navy mt-n4"><span class="fw-bolder" id="contentPrice"></span></p>
+            <p class="d-none" id="contentId">asd</p>
             <p class="meta">Beli dan nikmati konten dari creator yang anda suka!</p>
-            <a href="#" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Beli</a>
+            <?php if (!(session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail'))) : ?>
+            <a href="<?= base_url('login') ?>" class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2">Beli</a>
+            <?php else: ?>
+            <button class="btn btn-sm btn-green rounded-pill btn-login w-100 mb-2" id="tombolBuy" data-user="<?= $user['userId'] ?>">Beli</button>
+            <?php endif ?>
          </div>
       </div>
    </div>
@@ -140,6 +147,8 @@
 // Donate
 document.getElementById('formDonasi').addEventListener('submit', function(event) {
    event.preventDefault();
+   this.querySelector('[type="submit"]').disabled = true;
+
    const formData = new FormData(this);
 
    fetch('/donate', {
@@ -167,12 +176,20 @@ document.getElementById('formDonasi').addEventListener('submit', function(event)
          } else {
             console.error('Tidak ada token Snap yang diterima dari server');
          }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      })
+      .finally(() => {
+         this.querySelector('[type="submit"]').disabled = false;
       });
 });
 
-// Subscribe
-$(document).on('click', '#tombolSubs', function() {
-   const idCreator = document.getElementById('creatorId').value;;
+
+$(document).on('click', '#tombolSubs', function(event) {
+   $(this).prop('disabled', true);
+
+   const idCreator = document.getElementById('creatorId').value;
    const idUser = document.getElementById('userId').value;
 
    fetch('/subscribe', {
@@ -203,6 +220,74 @@ $(document).on('click', '#tombolSubs', function() {
          } else {
             console.error('Tidak ada token Snap yang diterima dari server');
          }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      })
+      .finally(() => {
+         $(this).prop('disabled', false);
+      });
+
+   event.preventDefault();
+});
+
+// Tombol get data content
+var id = 0;
+
+$(document).on('click', '#tombolDetailBuy', function() {
+   const name = this.getAttribute('data-name');
+   const harga = this.getAttribute('data-harga');
+   id = this.getAttribute('data-id');
+   const formatRupiah = (value) => {
+      const formattedValue = new Intl.NumberFormat('id-ID', {
+         style: 'currency',
+         currency: 'IDR'
+      }).format(value);
+      return formattedValue.split(',')[0];
+   };
+
+   document.getElementById('contentTitle').innerHTML = name;
+   document.getElementById('contentPrice').innerHTML = formatRupiah(harga);
+});
+
+// Tombol Buy Content
+$(document).on('click', '#tombolBuy', function() {
+   $(this).prop('disabled', true);
+   const idUser = this.getAttribute('data-user');
+
+   fetch('/buy/content/' + id, {
+         method: 'POST',
+         body: JSON.stringify({
+            userId: idUser
+         })
+      })
+      .then(response => {
+         if (!response.ok) {
+            throw new Error('Network response was not ok');
+         }
+         return response.json();
+      })
+      .then(data => {
+         const reloadPage = () => location.reload();
+
+         if (data && data.snapToken) {
+            const snapConfig = {
+               onSuccess: reloadPage,
+               onPending: reloadPage,
+               onError: reloadPage,
+               onClose: reloadPage
+            };
+
+            window.snap.pay(data.snapToken, snapConfig);
+         } else {
+            console.error('Tidak ada token Snap yang diterima dari server');
+         }
+      })
+      .catch(error => {
+         console.error('Error:', error);
+      })
+      .finally(() => {
+         $(this).prop('disabled', false);
       });
 });
 </script>
