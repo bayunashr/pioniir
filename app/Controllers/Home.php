@@ -167,7 +167,6 @@ class Home extends BaseController
                         if ($update) {
                             session()->setFlashData('success', 'Berhasil Merubah Password');
                         }else{
-                            // session()->setFlashData('validation',$this->userModel->errors());
                             session()->setFlashData('error', "Gagal Merubah Password");
                         }
                     }else{
@@ -230,10 +229,16 @@ class Home extends BaseController
     }
 
     public function userTip(){
+        $currentPage = $this->request->getVar('page') ? intval($this->request->getVar('page')) : 1;
+
         $data = [
             'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
             'user'          => $this->userData,
+            'dataDonate'    => $this->donateModel->getDonateByIdUser($this->userData['userId'])->paginate(10,'default'),
+            'pager'         => $this->donateModel->pager,
+            'currentPage'   => $currentPage
         ];
+
         return view('front/userTip',$data);
     }
 
