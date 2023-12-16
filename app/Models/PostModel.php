@@ -7,25 +7,25 @@ use CodeIgniter\Model;
 
 class PostModel extends Model
 {
-    protected $table            = 'Post';
-    protected $primaryKey       = 'postId';
+    protected $table = 'Post';
+    protected $primaryKey = 'postId';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['postId', 'creatorId', 'postTitle', 'postValue', 'postStatus', 'postLike'];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ['postId', 'creatorId', 'postTitle', 'postValue', 'postStatus', 'postLike'];
 
     // Dates
     protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    protected $dateFormat = 'datetime';
+    protected $createdField = 'created_at';
+    protected $updatedField = 'updated_at';
+    protected $deletedField = 'deleted_at';
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     public function selectAll()
@@ -62,11 +62,29 @@ class PostModel extends Model
             ->countAllResults();
     }
 
-    public function getPostByAlias($alias) {
+    public function getPostByAlias($alias)
+    {
         return $this->select('Post.*, Creator.creatorAlias AS alias')
             ->where('Creator.creatorAlias', $alias)
             ->where('Post.postStatus', 'publish')
             ->join('Creator', 'Creator.creatorId = Post.creatorId')
+            ->findAll();
+    }
+
+    public function getTopLoved($id)
+    {
+        return $this->select('Post.postTitle, Post.postLike, Post.postStatus')
+            ->where('Post.creatorId', $id)
+            ->orderBy('Post.postLike', 'DESC')
+            ->findAll(10);
+    }
+
+    public function getPostLikeByCreatorTime($id, $month, $year)
+    {
+        return $this->select('Post.postLike')
+            ->where('MONTH(createdAt)', $month)
+            ->where('YEAR(createdAt)', $year)
+            ->where('creatorId', $id)
             ->findAll();
     }
 }

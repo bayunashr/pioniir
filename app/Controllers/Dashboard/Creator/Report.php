@@ -34,8 +34,7 @@ class Report extends BaseController
 
     public function content()
     {
-        // Data for Chart
-
+        // data chart
         $currentYearContentData = [];
         for ($i = 0; $i < sizeof($this->month); $i++) {
             $temp = $this->contentModel->countAllPerMonth($this->creatorData['creatorId'], $i + 1, $this->currentYear);
@@ -60,8 +59,7 @@ class Report extends BaseController
             $lastMonthContentData[$i] = $temp;
         }
 
-        // Data for 10 Top Likes
-
+        // data 10 top love
         $topLoved = $this->contentModel->getTopLoved($this->creatorData['creatorId']);
 
         // jumlah dibeli
@@ -119,6 +117,7 @@ class Report extends BaseController
 
     public function post()
     {
+        //data chart
         $currentYearPostData = [];
         for ($i = 0; $i < sizeof($this->month); $i++) {
             $temp = $this->postModel->countAllPerMonth($this->creatorData['creatorId'], $i + 1, $this->currentYear);
@@ -143,16 +142,27 @@ class Report extends BaseController
             $lastMonthPostData[$i] = $temp;
         }
 
+        //data 10 top love
+        $topLoved = $this->postModel->getTopLoved($this->creatorData['creatorId']);
+
+        //total love bula iki
+        $totalLoveThisMonth = array_column($this->postModel->getPostLikeByCreatorTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear), 'postLike');
+        $totalLoveThisMonth = array_sum($totalLoveThisMonth);
+
         $data = [
             'title' => 'Post Report - Pioniir Creator',
             'user' => $this->userData,
             'creator' => $this->creatorData,
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
             'month' => $this->month,
+            'currentMonth' => $this->currentMonth,
+            'currentYear' => $this->currentYear,
             'currentYearPostData' => $currentYearPostData,
             'lastYearPostData' => $lastYearPostData,
             'currentMonthPostData' => $currentMonthPostData,
             'lastMonthPostData' => $lastMonthPostData,
+            'topLoved' => $topLoved,
+            'loveThisMonth' => $totalLoveThisMonth,
         ];
         return view('dashboard/creator/postReport', $data);
     }

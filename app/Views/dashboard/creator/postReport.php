@@ -10,7 +10,7 @@
                         Post
                     </h1>
                     <h2 class="fs-base lh-base fw-medium text-muted mb-0">
-                        Tons of informational report to showcase your posts.
+                        Tons of informational report about your post.
                     </h2>
                 </div>
             </div>
@@ -19,6 +19,42 @@
     <!-- Page Content -->
     <div class="content">
         <!-- Overview -->
+        <div class="row item-push">
+            <div class="col-md-12 col-xl-6">
+                <div class="block block-rounded">
+                    <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                        <div>
+                            <i class="fa fa-2x fa-trophy text-muted"></i>
+                        </div>
+                        <dl class="ms-3 text-end mb-0">
+                            <dt class="h3 fw-extrabold mb-0">
+                                <?= $currentYearPostData[$currentMonth - 1] ?>
+                            </dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">
+                                New Post This Month
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-xl-6">
+                <div class="block block-rounded">
+                    <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                        <div>
+                            <i class="fa fa-2x fa-heart text-muted"></i>
+                        </div>
+                        <dl class="ms-3 text-end mb-0">
+                            <dt class="h3 fw-extrabold mb-0">
+                                <?= $loveThisMonth ?>
+                            </dt>
+                            <dd class="fs-sm fw-medium text-muted mb-0">
+                                Loves Obtained From Post This Month
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row item-push">
             <div class="col-xl-6">
                 <!-- Lines Chart -->
@@ -52,64 +88,33 @@
             </div>
         </div>
         <div class="row item-push">
-            <div class="col-xl-6">
+            <div class="col-xl-12">
                 <!-- Top Products -->
                 <div class="block block-rounded h-100 mb-0">
                     <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Liked Post</h3>
+                        <h3 class="block-title">Top Loved</h3>
                     </div>
                     <div class="block-content">
                         <table class="table table-borderless table-striped table-vcenter fs-sm">
                             <tbody>
-                                <tr>
-                                    <td class="text-center" style="width: 100px;">
-                                        <a class="fw-semibold" href="be_pages_ecom_product_edit.html">PID.965</a>
-                                    </td>
-                                    <td>
-                                        <a href="be_pages_ecom_product_edit.html">Diablo III</a>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell text-center">
-                                        <div class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- END Top Products -->
-            </div>
-            <div class="col-xl-6">
-                <!-- Top Products -->
-                <div class="block block-rounded h-100 mb-0">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title">Top Purchased Content</h3>
-                    </div>
-                    <div class="block-content">
-                        <table class="table table-borderless table-striped table-vcenter fs-sm">
-                            <tbody>
-                                <tr>
-                                    <td class="text-center" style="width: 100px;">
-                                        <a class="fw-semibold" href="be_pages_ecom_product_edit.html">PID.965</a>
-                                    </td>
-                                    <td>
-                                        <a href="be_pages_ecom_product_edit.html">Diablo III</a>
-                                    </td>
-                                    <td class="d-none d-sm-table-cell text-center">
-                                        <div class="text-warning">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php foreach ($topLoved as $key => $value): ?>
+                                    <tr>
+                                        <td>
+                                            <a href="be_pages_ecom_product_edit.html">
+                                                <?= $value['postTitle'] ?>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-danger">
+                                                <?= $value['postStatus'] ?>
+                                            </span>
+                                        </td>
+                                        <td class="fw-semibold">
+                                            <i class="text-danger fa fa-heart"></i>
+                                            <?= $value['postLike'] ?>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
@@ -128,7 +133,7 @@
 <script src="<?= base_url() ?>assets/dashboard/js/plugins/chart.js/chart.umd.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         Chart.defaults.color = '#818d96';
         Chart.defaults.font.weight = '600';
         Chart.defaults.scale.grid.color = "rgba(0, 0, 0, .05)";
@@ -154,53 +159,53 @@
         yearlyPostChartData = {
             labels: <?= json_encode($month) ?>,
             datasets: [{
-                    label: 'Last Year',
-                    fill: true,
-                    backgroundColor: 'rgba(171, 227, 125, .5)',
-                    borderColor: 'rgba(171, 227, 125, 1)',
-                    pointBackgroundColor: 'rgba(171, 227, 125, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
-                    data: <?= json_encode($lastYearPostData) ?>,
-                },
-                {
-                    label: 'This Year',
-                    fill: true,
-                    backgroundColor: 'rgba(0, 0, 0, .1)',
-                    borderColor: 'rgba(0, 0, 0, .3)',
-                    pointBackgroundColor: 'rgba(0, 0, 0, .3)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-                    data: <?= json_encode($currentYearPostData) ?>,
-                }
+                label: <?= $currentYear - 1 ?>,
+                fill: true,
+                backgroundColor: 'rgba(171, 227, 125, .5)',
+                borderColor: 'rgba(171, 227, 125, 1)',
+                pointBackgroundColor: 'rgba(171, 227, 125, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+                data: <?= json_encode($lastYearPostData) ?>,
+            },
+            {
+                label: <?= $currentYear ?>,
+                fill: true,
+                backgroundColor: 'rgba(0, 0, 0, .1)',
+                borderColor: 'rgba(0, 0, 0, .3)',
+                pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+                data: <?= json_encode($currentYearPostData) ?>,
+            }
             ]
         };
 
         monthlyPostChartData = {
             datasets: [{
-                    label: 'Last Month',
-                    fill: true,
-                    backgroundColor: 'rgba(171, 227, 125, .5)',
-                    borderColor: 'rgba(171, 227, 125, 1)',
-                    pointBackgroundColor: 'rgba(171, 227, 125, 1)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
-                    data: <?= json_encode($lastMonthPostData) ?>,
-                },
-                {
-                    label: 'This Month',
-                    fill: true,
-                    backgroundColor: 'rgba(0, 0, 0, .1)',
-                    borderColor: 'rgba(0, 0, 0, .3)',
-                    pointBackgroundColor: 'rgba(0, 0, 0, .3)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-                    data: <?= json_encode($currentMonthPostData) ?>,
-                }
+                label: <?= json_encode($month[$currentMonth - 2]) ?>,
+                fill: true,
+                backgroundColor: 'rgba(171, 227, 125, .5)',
+                borderColor: 'rgba(171, 227, 125, 1)',
+                pointBackgroundColor: 'rgba(171, 227, 125, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+                data: <?= json_encode($lastMonthPostData) ?>,
+            },
+            {
+                label: <?= json_encode($month[$currentMonth - 1]) ?>,
+                fill: true,
+                backgroundColor: 'rgba(0, 0, 0, .1)',
+                borderColor: 'rgba(0, 0, 0, .3)',
+                pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+                data: <?= json_encode($currentMonthPostData) ?>,
+            }
             ]
         };
 
@@ -212,7 +217,7 @@
                 maintainAspectRatio: false,
                 tension: .4
             }
-        }, );
+        },);
 
         monthlyPostChart = new Chart(monthlyPostChartCtx, {
             type: 'line',
@@ -222,7 +227,7 @@
                 maintainAspectRatio: false,
                 tension: .4
             }
-        }, );
+        },);
 
     });
 </script>
