@@ -11,6 +11,7 @@
         $isFree = ($value['contentPrice'] == null || $value['contentPrice'] == 0);
         $isSubscribed = count($ceksubs) >= 1;
         $isBought = false;
+        $isCreator = ($creator != null && ($creator[0]['creatorId'] == $creatorData[0]['creatorId']));
         foreach ($dataBuy as $key => $data) {
             if ($data['contentId'] == $value['contentId']) {
                 $isBought = true;
@@ -18,10 +19,11 @@
             }
         }
         ?>
+
    <div class="col-sm-4 col-12 mt-5">
       <div class="card shadow-lg lift">
          <!-- Jika free dan Subscribe -->
-         <?php if ($isFree || $isSubscribed) : ?>
+         <?php if ($isFree || $isSubscribed || $isCreator) : ?>
          <a href="#">
             <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;"></div>
          </a>
@@ -64,9 +66,9 @@
          </div>
          <?php endif?>
          <div class="d-flex justify-content-between px-4">
-            <p class="fs-20"><a href="#" class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart.svg" alt=""> <?= $value['contentLike'] ?></a></p>
+            <p class="fs-20"><a href="#" class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart-solid.svg" alt=""> <?= $value['contentLike'] ?></a></p>
             <!-- Jika dia subscribe namun content tidak free -->
-            <?php if((!$isFree) || $isSubscribed):?>
+            <?php if((!$isFree) || $isSubscribed || $isCreator):?>
             <p class="fs-20"><span class="badge bg-green"><?= format_rupiah($value['contentPrice']) ?></span></p>
             <?php else: ?>
             <p class="fs-20"><span class="badge bg-green">Free</span></p>

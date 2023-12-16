@@ -39,4 +39,12 @@ class DonateModel extends Model
             ->orderBy('donateTimestamp', 'desc')
             ->findAll();
     }
+
+    public function getDonateByIdUser($userId) {
+        return $this->select('Donate.donateAmount, Donate.donateDescription, Donate.donateTimestamp, Creator.creatorAlias')
+            ->where('Donate.userId', $userId)
+            ->where('Donate.donateStatus', 'success')
+            ->join('Creator', 'Creator.creatorId = Donate.creatorId')
+            ->orderBy('donateTimestamp', 'desc');
+    }
 }

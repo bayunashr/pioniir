@@ -6,18 +6,18 @@ use CodeIgniter\Model;
 
 class SubscribeModel extends Model
 {
-    protected $table            = 'Subscribe';
-    protected $primaryKey       = 'subId';
+    protected $table = 'Subscribe';
+    protected $primaryKey = 'subId';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['userId', 'creatorId', 'subscribeStatus'];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ['userId', 'creatorId', 'subscribeStatus'];
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     public function selectAll()
@@ -56,7 +56,8 @@ class SubscribeModel extends Model
             ->countAllResults();
     }
 
-    public function CountSubscribeByAlias($alias) {
+    public function CountSubscribeByAlias($alias)
+    {
         return $this->select('Subscribe.*, Creator.creatorAlias AS alias')
             ->where('Creator.creatorAlias', $alias)
             ->where('Subscribe.subscribeStatus', 'success')
@@ -64,13 +65,50 @@ class SubscribeModel extends Model
             ->countAllResults();
     }
 
-    public function getStatusSubscribe($alias,$userId) {
+    public function getStatusSubscribe($alias, $userId)
+    {
         return $this->select('Subscribe.*, Creator.creatorAlias AS alias')
             ->where('Creator.creatorAlias', $alias)
             ->where('Subscribe.userId', $userId)
             ->where('Subscribe.subscribeStatus', 'success')
             ->where("DATEDIFF(NOW(), Subscribe.subTimestamp) <= 30")
             ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+            ->findAll();
+    }
+
+    public function getAllSubscriber($id, $month, $year)
+    {
+        return $this->select('subId, userId, creatorId, MAX(subTimestamp) as latestTimestamp, subscribeStatus')
+            ->where('MONTH(subTimestamp)', $month)
+            ->where('YEAR(subTimestamp)', $year)
+            ->where('creatorId', $id)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->groupBy(['userId', 'creatorId'])
+            ->orderBy('latestTimestamp', 'ASC');
+    }
+
+    public function getAllSubscriberAllTime($id)
+    {
+        return $this->select('Subscribe.userId, COUNT(subId) as timeSubscribed, User.userName')
+            ->join('User', 'User.userId = Subscribe.userId')
+            ->where('creatorId', $id)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->groupBy('userId')
+            ->orderBy('timeSubscribed', 'DESC')
+            ->findAll();
+    }
+
+    public function getAllSubscriberWithMonth($id, $month, $year)
+    {
+        return $this->select('Subscribe.userId, COUNT(subId) as timeSubscribed, User.userName, Creator.creatorSubPrice')
+            ->join('User', 'User.userId = Subscribe.userId')
+            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+            ->where('MONTH(subTimestamp)', $month)
+            ->where('YEAR(subTimestamp)', $year)
+            ->where('Subscribe.creatorId', $id)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->groupBy('userId')
+            ->orderBy('timeSubscribed', 'DESC')
             ->findAll();
     }
 }
