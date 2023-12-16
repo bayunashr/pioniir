@@ -14,10 +14,10 @@
    <!-- /.row -->
 </div>
 <!-- /.container -->
-<figure class="position-absoute" style="bottom: 0; left: 0; z-index: 2;"><img src="<?= base_url() ?>assets/front/img/doodlebackground.webp" alt="" /></figure>
+<figure class="position-relative mt-n10 mt-sm-n15"><img src="<?= base_url() ?>assets/front/img/doodlebackground.webp" alt="" /></figure>
 <!-- /section -->
 <section class="wrapper bg-light">
-   <div class="container py-10 py-md-14">
+   <div class="container pt-11 pt-md-10 pb-1">
       <div class="row gy-10 gy-md-13 gy-lg-0 align-items-center mb-16">
          <div class="col-md-8 col-lg-5 d-flex position-relative mx-auto" data-group="header">
             <div class="img-mask"><img src="<?= base_url() ?>assets/front/img/ilus2.png" alt="" /></div>
@@ -71,7 +71,7 @@
    </div>
 </section>
 
-<div class="container py-16">
+<div class="container py-16 px-sm-1 px-4">
    <h3 class="display-3 mb-11 px-lg-8 px-xl-11 text-center">Pertanyaan umum <span class="text-gradient gradient-6">(FAQ)</span> Pioniir.</h3>
    <div class="row">
       <div class="col-lg-6 mb-0">
@@ -183,7 +183,11 @@
             <img src="<?= base_url() ?>assets/front/img/pioniir.png" class=" svg-inject icon-svg icon-svg-md mb-4" alt="" />
             <h2 class="display-4 mb-3 text-white">Join Our Community</h2>
             <p class="lead fs-lg mb-6 px-xl-10 px-xxl-15 text-white">Jadilah bagian dari revolusi kreativitas! Bergabunglah dengan Pioniir sekarang dan wujudkan ide-ide unik Anda bersama komunitas kreatif kami.</p>
-            <a href="<?=base_url('login')?>" class="btn btn-navy rounded">Join Us</a>
+            <?php if (session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) : ?>
+               <a href="<?=base_url('explore')?>" class="btn btn-navy rounded">Explore</a>
+            <?php else : ?>
+               <a href="<?=base_url('login')?>" class="btn btn-navy rounded">Join Us</a>
+            <?php endif ?>
          </div>
          <!-- /column -->
       </div>
