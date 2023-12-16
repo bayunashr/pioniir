@@ -165,5 +165,21 @@ class Home extends BaseController
         ];
         return view('front/userProfile',$data);
     }
+
+    public function userTip($user){
+        $data = [
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'          => $this->userData,
+        ];
+        return view('front/userTip',$data);
+    }
+
+    public function userFollow($user){
+        $data = [
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'          => $this->userData,
+        ];
+        return view('front/userFollow',$data);
+    }
     
 }

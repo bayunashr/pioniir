@@ -183,7 +183,11 @@
             <img src="<?= base_url() ?>assets/front/img/pioniir.png" class=" svg-inject icon-svg icon-svg-md mb-4" alt="" />
             <h2 class="display-4 mb-3 text-white">Join Our Community</h2>
             <p class="lead fs-lg mb-6 px-xl-10 px-xxl-15 text-white">Jadilah bagian dari revolusi kreativitas! Bergabunglah dengan Pioniir sekarang dan wujudkan ide-ide unik Anda bersama komunitas kreatif kami.</p>
-            <a href="<?=base_url('login')?>" class="btn btn-navy rounded">Join Us</a>
+            <?php if (session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) : ?>
+               <a href="<?=base_url('explore')?>" class="btn btn-navy rounded">Explore</a>
+            <?php else : ?>
+               <a href="<?=base_url('login')?>" class="btn btn-navy rounded">Join Us</a>
+            <?php endif ?>
          </div>
          <!-- /column -->
       </div>
