@@ -93,7 +93,7 @@
          <!-- /.navbar -->
       </header>
       <!-- /header -->
-      <section class="wrapper bg-gray pb-12">
+      <section class="wrapper bg-gray">
          <?= $this->renderSection('content') ?>
          <!-- /section -->
       </section>
