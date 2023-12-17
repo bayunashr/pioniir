@@ -79,6 +79,14 @@ class PostModel extends Model
             ->findAll(10);
     }
 
+    public function getLoved($id)
+    {
+        return $this->select('Post.postTitle, Post.postLike, Post.postStatus')
+            ->where('Post.creatorId', $id)
+            ->orderBy('Post.postLike', 'DESC')
+            ->findAll();
+    }
+
     public function getPostLikeByCreatorTime($id, $month, $year)
     {
         return $this->select('Post.postLike')

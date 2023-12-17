@@ -72,6 +72,14 @@ class ContentModel extends Model
             ->findAll(10);
     }
 
+    public function getLoved($id)
+    {
+        return $this->select('Content.contentTitle, Content.contentLike, Content.contentStatus')
+            ->where('Content.creatorId', $id)
+            ->orderBy('Content.contentLike', 'DESC')
+            ->findAll();
+    }
+
     public function getContentByCreatorId($id)
     {
         return $this->select('Content.contentId, Content.contentTitle, Content.contentStatus')

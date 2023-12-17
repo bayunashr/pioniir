@@ -30,46 +30,66 @@ class Dashboard extends BaseController
         $creatorData = $creatorModel->where('userId', $userData['userId'])->first();
 
         $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $dayMonthMap = [];
         $currentMonth = idate('m');
         $currentYear = idate('Y');
-        $currentDayMonth = idate('t');
 
+        $totalLoves = 0;
+        foreach ($contentModel->getLoved($creatorData['creatorId']) as $item) {
+            $totalLoves += $item['contentLike'];
+        }
+
+        foreach ($postModel->getLoved($creatorData['creatorId']) as $item) {
+            $totalLoves += $item['postLike'];
+        }
+
+        //income dari penjualan konten
+        //$contentIncomeThisMonth = array_column($buyModel->getBuyByCreatorTime($creatorData['creatorId'], $currentMonth, $currentYear), 'contentPrice');
+        //$contentIncomeThisMonth = array_sum($contentIncomeThisMonth);
+        //isi($contentIncomeThisMonth);
+
+        // $subIncomeThisMonth = array_column($subscribeModel->getAllSubscriberWithMonth($creatorData['creatorId'], $currentMonth, $currentYear), 'creatorSubPrice');
+        // $subIncomeThisMonth = array_sum($subIncomeThisMonth);
+        //isi($subIncomeThisMonth);
+
+        // $donateIncomeThisMonth = 0;
+        // foreach ($donateModel->getDonateByTime($creatorData['creatorId'], $currentMonth, $currentYear) as $item) {
+        //     $donateIncomeThisMonth += $item['donateAmount'];
+        // }
+        //isi($donateIncomeThisMonth);
+
+        $income = [];
         for ($i = 0; $i < sizeof($month); $i++) {
-            $dayMonthMap[$month[$i]] = idate('t', mktime(0, 0, 0, $i + 1, 1, 2023));
-        }
-        $dayMonthMap = array_values($dayMonthMap);
+            $contentIncomeThisMonth = 0;
+            $contentIncomeThisMonth = array_column($buyModel->getBuyByCreatorTime($creatorData['creatorId'], $i + 1, $currentYear), 'contentPrice');
+            $contentIncomeThisMonth = array_sum($contentIncomeThisMonth);
 
-        // Daily Chart
-        $chartDataSubD = [];
-        for ($i = 0; $i < $currentDayMonth; $i++) {
-            $temp = $subscribeModel->CountAllByDayAndId($creatorData['creatorId'], $i + 1, $currentMonth, $currentYear);
-            $chartDataSubD[$i] = $temp;
-        }
-        $chartDataSubD = array_values($chartDataSubD);
+            $subIncomeThisMonth = 0;
+            $subIncomeThisMonth = array_column($subscribeModel->getAllSubscriberWithMonth($creatorData['creatorId'], $i + 1, $currentYear), 'creatorSubPrice');
+            $subIncomeThisMonth = array_sum($subIncomeThisMonth);
 
-        // Monthly Chart
-        $chartDataSubM = [];
-        for ($i = 0; $i < sizeof($month); $i++) {
-            $temp = $subscribeModel->CountAllByMonthAndId($creatorData['creatorId'], $i + 1, $currentYear);
-            $chartDataSubM[$month[$i]] = $temp;
+            $donateIncomeThisMonth = 0;
+            foreach ($donateModel->getDonateByTime($creatorData['creatorId'], $i + 1, $currentYear) as $item) {
+                $donateIncomeThisMonth += $item['donateAmount'];
+            }
+
+            $income[$i] = $contentIncomeThisMonth + $subIncomeThisMonth + $donateIncomeThisMonth;
         }
-        $chartDataSubM = array_values($chartDataSubM);
 
         $data = [
             'title' => 'Dashboard - Pioniir Creator',
             'buy' => $buyModel->getCountBuyCreator($creatorData['creatorId']),
             'donate' => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'sub' => $subscribeModel->where('creatorId', $creatorData['creatorId'])->where('subscribeStatus', 'success')->countAllResults(),
+            'sub' => $subscribeModel->getAllSubscriber($creatorData['creatorId'], $currentMonth, $currentYear)->countAllResults(),
             'content' => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
             'post' => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'loves' => $totalLoves,
+            'income' => $income,
             'notif' => $notifModel->selectAllById($creatorData['userId']),
+            'currentMonth' => $currentMonth,
+            'currentYear' => $currentYear,
             'user' => $userData,
             'creator' => $creatorData,
-            'chartMonth' => $month,
-            'currentDayMonth' => $currentDayMonth,
-            'chartDataSubM' => $chartDataSubM,
-            'chartDataSubD' => $chartDataSubD,
+            'month' => $month,
         ];
         return view('dashboard/creator/dashboard', $data);
     }

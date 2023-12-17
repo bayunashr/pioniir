@@ -4,150 +4,142 @@
 <main id="main-container">
    <!-- Page Content -->
    <div class="content">
-      <!-- Overview -->
-      <div class="row items-push">
-         <div class="col-sm-4 col-xxl-3">
-            <!-- Messages -->
-            <div class="block block-rounded d-flex flex-column h-100 mb-0">
-               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl class="mb-0">
-                     <dt class="fs-3 fw-bold"><?= $donate ?></dt>
-                     <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Donasi Diterima</dd>
-                  </dl>
-                  <div class="item item-rounded-lg bg-body-light">
-                     <i class="fa fa-gift fs-3 text-primary"></i>
+      <div class="row item-push">
+         <div class="col-md-12">
+            <div class="block block-rounded">
+               <div class="block-content block-content-full">
+                  <div class="row text-center">
+                     <div class="col-3 border-end">
+                        <div class="py-3">
+                           <div class="item item-circle bg-body-light mx-auto">
+                              <i class="fa fa-2x fa-trophy text-primary"></i>
+                           </div>
+                           <dl class="mb-0">
+                              <dt class="h3 fw-extrabold mt-3 mb-0">
+                                 <?= $content ?>
+                              </dt>
+                              <dd class="fs-sm fw-medium text-muted mb-0">
+                                 Content
+                              </dd>
+                           </dl>
+                        </div>
+                     </div>
+                     <div class="col-3 border-end">
+                        <div class="py-3">
+                           <div class="item item-circle bg-body-light mx-auto">
+                              <i class="fa fa-2x fa-newspaper text-primary"></i>
+                           </div>
+                           <dl class="mb-0">
+                              <dt class="h3 fw-extrabold mt-3 mb-0">
+                                 <?= $content ?>
+                              </dt>
+                              <dd class="fs-sm fw-medium text-muted mb-0">
+                                 Post
+                              </dd>
+                           </dl>
+                        </div>
+                     </div>
+                     <div class="col-3 border-end">
+                        <div class="py-3">
+                           <div class="item item-circle bg-body-light mx-auto">
+                              <i class="fa fa-2x fa-users text-primary"></i>
+                           </div>
+                           <dl class="mb-0">
+                              <dt class="h3 fw-extrabold mt-3 mb-0">
+                                 <?= $sub ?>
+                              </dt>
+                              <dd class="fs-sm fw-medium text-muted mb-0">
+                                 Subscriber
+                              </dd>
+                           </dl>
+                        </div>
+                     </div>
+                     <div class="col-3">
+                        <div class="py-3">
+                           <div class="item item-circle bg-body-light mx-auto">
+                              <i class="fa fa-2x fa-face-kiss-wink-heart text-primary"></i>
+                           </div>
+                           <dl class="mb-0">
+                              <dt class="h3 fw-extrabold mt-3 mb-0">
+                                 <?= $loves ?>
+                              </dt>
+                              <dd class="fs-sm fw-medium text-muted mb-0">
+                                 Loves
+                              </dd>
+                           </dl>
+                        </div>
+                     </div>
                   </div>
                </div>
-               <div class="bg-body-light rounded-bottom">
-                  <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                     <span>Lihat semua donatur</span>
-                     <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-               </div>
             </div>
-            <!-- END Messages -->
-         </div>
-         <div class="col-sm-4 col-xxl-3">
-            <!-- Conversion Rate -->
-            <div class="block block-rounded d-flex flex-column h-100 mb-0">
-               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl class="mb-0">
-                     <dt class="fs-3 fw-bold"><?= $sub ?></dt>
-                     <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Jumlah Subscriber</dd>
-                  </dl>
-                  <div class="item item-rounded-lg bg-body-light">
-                     <i class="fa fa-money-check-dollar fs-3 text-primary"></i>
-                  </div>
-               </div>
-               <div class="bg-body-light rounded-bottom">
-                  <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                     <span>Lihat semua subscriber</span>
-                     <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-               </div>
-            </div>
-            <!-- END Conversion Rate-->
-         </div>
-         <div class="col-sm-4 col-xxl-3">
-            <!-- Conversion Rate -->
-            <div class="block block-rounded d-flex flex-column h-100 mb-0">
-               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl class="mb-0">
-                     <dt class="fs-3 fw-bold"><?= $buy ?></dt>
-                     <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Konten Dibeli</dd>
-                  </dl>
-                  <div class="item item-rounded-lg bg-body-light">
-                     <i class="fa fa-box fs-3 text-primary"></i>
-                  </div>
-               </div>
-               <div class="bg-body-light rounded-bottom">
-                  <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                     <span>Lihat semua buyer</span>
-                     <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-               </div>
-            </div>
-            <!-- END Conversion Rate-->
-         </div>
-         <div class="col-sm-3 col-xxl-3">
-            <!-- Conversion Rate -->
-            <div class="block block-rounded d-flex flex-column h-100 mb-0">
-               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl class="mb-0">
-                     <dt class="fs-3 fw-bold"><?= $content ?></dt>
-                     <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Total Konten</dd>
-                  </dl>
-                  <div class="item item-rounded-lg bg-body-light">
-                     <i class="fa fa-dice-six fs-3 text-primary"></i>
-                  </div>
-               </div>
-               <div class="bg-body-light rounded-bottom">
-                  <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                     <span>Lihat semua konten</span>
-                     <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-               </div>
-            </div>
-            <!-- END Conversion Rate-->
-         </div>
-         <div class="col-sm-3 col-xxl-3">
-            <!-- Conversion Rate -->
-            <div class="block block-rounded d-flex flex-column h-100 mb-0">
-               <div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
-                  <dl class="mb-0">
-                     <dt class="fs-3 fw-bold"><?= $post ?></dt>
-                     <dd class="fs-sm fw-medium fs-sm fw-medium text-muted mb-0">Total Postingan</dd>
-                  </dl>
-                  <div class="item item-rounded-lg bg-body-light">
-                     <i class="fa fa-newspaper fs-3 text-primary"></i>
-                  </div>
-               </div>
-               <div class="bg-body-light rounded-bottom">
-                  <a class="block-content block-content-full block-content-sm fs-sm fw-medium d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                     <span>Lihat semua postingan</span>
-                     <i class="fa fa-arrow-alt-circle-right ms-1 opacity-25 fs-base"></i>
-                  </a>
-               </div>
-            </div>
-            <!-- END Conversion Rate-->
          </div>
       </div>
       <div class="row">
-         <div class="col-xl-6">
-            <!-- Lines Chart -->
+         <div class="col-md-12 col-xl-4">
             <div class="block block-rounded">
-               <div class="block-header block-header-default">
-                  <h3 class="block-title">Monthly Subscriber Overview</h3>
-                  <div class="block-options">
-                     <button type="button" class="btn-block-option" id="toggle-chart">
-                        <i class="si si-refresh"></i> Toggle View
-                     </button>
+               <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                  <div>
+                     <i class="fa fa-2x fa-wallet text-primary"></i>
                   </div>
-               </div>
-               <div class="block-content block-content-full text-center">
-                  <div class="py-3" style="height: 360px">
-                     <!-- Lines Chart Container -->
-                     <canvas id="chartSubM"></canvas>
-                  </div>
+                  <dl class="ms-3 text-end mb-0">
+                     <dt class="h3 fw-extrabold mb-0">
+                        <?= ($creator['creatorBalance'] == 0) ? 'Empty :(' : format_rupiah($creator['creatorBalance']) ?>
+                     </dt>
+                     <dd class="fs-sm fw-medium text-muted mb-0">
+                        My Balance
+                     </dd>
+                  </dl>
                </div>
             </div>
-            <!-- END Lines Chart -->
          </div>
-         <div class="col-xl-6">
+         <div class="col-md-12 col-xl-4">
+            <div class="block block-rounded">
+               <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                  <div>
+                     <i class="fa fa-2x fa-money-bill-wave text-primary"></i>
+                  </div>
+                  <dl class="ms-3 text-end mb-0">
+                     <dt class="h3 fw-extrabold mb-0">
+                        <?= format_rupiah($income[$currentMonth - 1]) ?>
+                     </dt>
+                     <dd class="fs-sm fw-medium text-muted mb-0">
+                        Income This Month
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-12 col-xl-4">
+            <div class="block block-rounded">
+               <div class="block-content block-content-full d-flex align-items-center justify-content-between">
+                  <div>
+                     <i class="fa fa-2x fa-money-bill-1-wave text-primary"></i>
+                  </div>
+                  <dl class="ms-3 text-end mb-0">
+                     <dt class="h3 fw-extrabold mb-0">
+                        <?= format_rupiah($income[$currentMonth - 2]) ?>
+                     </dt>
+                     <dd class="fs-sm fw-medium text-muted mb-0">
+                        Income Last Month
+                     </dd>
+                  </dl>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-xl-12">
             <!-- Lines Chart -->
             <div class="block block-rounded">
                <div class="block-header block-header-default">
-                  <h3 class="block-title">Daily Subscriber Overview</h3>
-                  <div class="block-options">
-                     <button type="button" class="btn-block-option" id="toggle-chart">
-                        <i class="si si-refresh"></i> Toggle View
-                     </button>
-                  </div>
+                  <h3 class="block-title">All Income (Content, Subscribe, & Donate)
+                     <?= $currentYear ?>
+                  </h3>
                </div>
                <div class="block-content block-content-full text-center">
                   <div class="py-3" style="height: 360px">
                      <!-- Lines Chart Container -->
-                     <canvas id="chartSubD"></canvas>
+                     <canvas id="income-chart"></canvas>
                   </div>
                </div>
             </div>
@@ -169,94 +161,55 @@
 <script src="<?= base_url() ?>assets/dashboard/js/pages/be_comp_charts.min.js"></script>
 
 <script>
-   document.addEventListener("DOMContentLoaded", function() {
-
+   document.addEventListener("DOMContentLoaded", function () {
       Chart.defaults.color = '#818d96';
       Chart.defaults.font.weight = '600';
       Chart.defaults.scale.grid.color = "rgba(0, 0, 0, .05)";
       Chart.defaults.scale.grid.zeroLineColor = "rgba(0, 0, 0, .1)";
       Chart.defaults.scale.beginAtZero = true;
+      Chart.defaults.scale.y = {
+         type: 'linear',
+         ticks: {
+            callback: function () {
+               return <?= json_encode($income) ?>
+            }
+         },
+      };
       Chart.defaults.elements.line.borderWidth = 2;
       Chart.defaults.elements.point.radius = 4;
       Chart.defaults.elements.point.hoverRadius = 6;
       Chart.defaults.plugins.tooltip.radius = 3;
       Chart.defaults.plugins.legend.labels.boxWidth = 15;
 
-      const chartDataSubM = {
-         labels: <?= json_encode($chartMonth) ?>,
+      let incomeChartCtx = document.getElementById('income-chart');
+      let incomeChart;
+      let incomeChartData;
+
+      incomeChartData = {
+         labels: <?= json_encode($month) ?>,
          datasets: [{
-            label: 'Subscriber',
+            label: 'Income',
             fill: true,
-            backgroundColor: 'rgba(0, 0, 0, .1)',
-            borderColor: 'rgba(0, 0, 0, .3)',
-            pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+            backgroundColor: 'rgba(171, 227, 125, .5)',
+            borderColor: 'rgba(171, 227, 125, 1)',
+            pointBackgroundColor: 'rgba(171, 227, 125, 1)',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-            data: <?= json_encode($chartDataSubM) ?>
-         }]
+            pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+            data: <?= json_encode($income) ?>,
+         },
+         ]
       };
 
-      const chartConfigSubM = {
+      incomeChart = new Chart(incomeChartCtx, {
          type: 'line',
-         data: chartDataSubM,
+         data: incomeChartData,
          options: {
             responsive: true,
             maintainAspectRatio: false,
-            tension: .4,
-            scales: {
-               y: {
-                  type: 'linear',
-                  ticks: {
-                     stepSize: 1,
-                  },
-               },
-            },
-         },
-      };
-
-      let t = [];
-      for (let i = 1; i <= <?= $currentDayMonth ?>; i++) {
-         t[i] = i;
-      }
-
-      const chartDataSubD = {
-         labels: t,
-         datasets: [{
-            label: 'Subscriber',
-            fill: true,
-            backgroundColor: 'rgba(0, 0, 0, .1)',
-            borderColor: 'rgba(0, 0, 0, .3)',
-            pointBackgroundColor: 'rgba(0, 0, 0, .3)',
-            pointBorderColor: '#fff',
-            pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
-            data: <?= json_encode($chartDataSubD) ?>
-         }]
-      };
-
-      const chartConfigSubD = {
-         type: 'line',
-         data: chartDataSubD,
-         options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            tension: .4,
-            scales: {
-               y: {
-                  type: 'linear',
-                  ticks: {
-                     stepSize: 1,
-                  },
-               },
-            },
-         },
-      };
-
-      const ctxM = document.getElementById('chartSubM');
-      const ctxD = document.getElementById('chartSubD');
-      const chartSubM = new Chart(ctxM, chartConfigSubM);
-      const chartSubD = new Chart(ctxD, chartConfigSubD);
+            tension: .4
+         }
+      },);
    });
 </script>
 <?= $this->endsection() ?>
