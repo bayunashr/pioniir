@@ -20,7 +20,7 @@
         }
         ?>
 
-   <div class="col-sm-4 col-12 mt-5">
+   <div class="col-sm-12 col-md-6 col-lg-4 mt-5">
       <div class="card shadow-lg lift">
          <!-- Jika free dan Subscribe -->
          <?php if ($isFree || $isSubscribed || $isCreator) : ?>
@@ -43,7 +43,7 @@
          </a>
          <?php else:?>
          <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;">
-            <div data-bs-toggle="modal" data-bs-target="#modal-buy" id="tombolDetailBuy" class="rounded-top blur-img d-flex align-items-center justify-content-center text-center text-white fw-bold fs-20 px-sm-1 px-4" data-name="<?= $value['contentTitle'] ?>"
+            <div data-bs-toggle="modal" data-bs-target="#modal-buy" id="tombolDetailBuy" class="rounded-top blur-img d-flex align-items-center justify-content-center text-center text-white fw-bold fs-20 px-sm-2 px-4" data-name="<?= $value['contentTitle'] ?>"
                data-harga="<?= $value['contentPrice'] ?>" data-id="<?= $value['contentId'] ?>" style="height: 150px;cursor:pointer;">
                <span>Beli atau subscribe untuk akses konten ini <i class="uil uil-padlock"></i></span>
             </div>
@@ -55,7 +55,7 @@
          <?php endif;?>
          <?php else: ?>
          <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;">
-            <div data-bs-toggle="modal" data-bs-target="#modal-buy" id="tombolDetailBuy" class="rounded-top blur-img d-flex align-items-center justify-content-center text-center text-white fw-bold fs-20 px-sm-1 px-4" data-name="<?= $value['contentTitle'] ?>"
+            <div data-bs-toggle="modal" data-bs-target="#modal-buy" id="tombolDetailBuy" class="rounded-top blur-img d-flex align-items-center justify-content-center text-center text-white fw-bold fs-20 px-sm-2 px-4" data-name="<?= $value['contentTitle'] ?>"
                data-harga="<?= $value['contentPrice'] ?>" data-id="<?= $value['contentId'] ?>" style="height: 150px;cursor:pointer;">
                <span>Beli atau subscribe untuk akses konten ini <i class="uil uil-padlock"></i></span>
             </div>

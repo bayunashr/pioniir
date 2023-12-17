@@ -1,7 +1,7 @@
 <?= $this->extend('front/template') ?>
 
 <?= $this->section('content') ?>
-<div class="container pt-10 pt-md-10 text-center">
+<div class="container pt-10 pt-md-10 pb-10 text-center">
    <form action="" method="get">
       <div class="input-group input-group-sm mb-4">
          <input id="textInputExample" type="text" class="form-control" name="search" placeholder="Search" aria-describedby="button-addon2">

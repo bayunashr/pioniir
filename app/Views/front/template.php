@@ -90,10 +90,10 @@
                <a href="<?= base_url('content/' . $creatorData[0]['creatorAlias']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(1) == 'content' ? 'creator-nav-active' : 'creator-nav' ?>">Content</a>
             </div>
             <?php elseif (current_url(true)->getSegment(1) == 'user') : ?>
-            <div class="d-block d-sm-none py-3 bg-gray px-3 w-100">
-               <a href="<?= base_url('user/profile/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'profile' ? 'creator-nav-active' : 'creator-nav' ?>">My Account</a>
-               <a href="<?= base_url('user/tip/' . $user['userName']) ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'tip' ? 'creator-nav-active' : 'creator-nav' ?>">Support Given</a>
-               <a href="<?= base_url('user/follow/' . $user['userName']) ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'follow' ? 'creator-nav-active' : 'creator-nav' ?>">Subscribed Creator</a>
+            <div class="d-block d-lg-none d-md-block d-sm-block py-3 bg-gray px-3 px-md-12 w-100">
+               <a href="<?= base_url('user/profile') ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'profile' ? 'creator-nav-active' : 'creator-nav' ?>">My Account</a>
+               <a href="<?= base_url('user/tip') ?>" style="margin-right: 3px; height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'tip' ? 'creator-nav-active' : 'creator-nav' ?>">Support Given</a>
+               <a href="<?= base_url('user/follow') ?>" style="height: 40px;" class="mt-3 btn btn-sm rounded <?= current_url(true)->getSegment(2) == 'follow' ? 'creator-nav-active' : 'creator-nav' ?>">Subscribed</a>
             </div>
             <?php endif ?>
          </nav>

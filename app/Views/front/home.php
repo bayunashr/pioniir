@@ -14,7 +14,7 @@
    <!-- /.row -->
 </div>
 <!-- /.container -->
-<figure class="position-relative mt-n10 mt-sm-n15"><img src="<?= base_url() ?>assets/front/img/doodlebackground.webp" alt="" /></figure>
+<figure class="position-relative mt-n10 mt-md-n12 mt-sm-n15"><img src="<?= base_url() ?>assets/front/img/doodlebackground.webp" alt="" /></figure>
 <!-- /section -->
 <section class="wrapper bg-light">
    <div class="container pt-11 pt-md-10 pb-1">
@@ -40,27 +40,27 @@
          <p class="fw-bolder h1 text-white text-center">How it Works?</p>
       </div>
       <div class="row">
-         <div class="col-sm-4 col-12 mt-6">
+         <div class="col-sm-4 col-md-4 col-12 mt-6">
             <div class="card bg-transparent text-white">
-               <img class="rounded-circle w-22 mx-auto" src="<?= base_url() ?>assets/front/img/works1.webp" alt="" />
+               <img class="rounded-circle w-100 mx-auto" src="<?= base_url() ?>assets/front/img/works1.webp" alt="" />
                <div class="card-body p-4 mt-4 bg-dark bg-opacity-50 rounded">
                   <p class="card-title text-white fw-bolder">1. Unggah Karya di Pioniir</p>
                   <p class="card-text fs-13">Unggah karya terbaikmu untuk dipersembahkan kepada supporter-supporter yang setia menemanimu.</p>
                </div>
             </div>
          </div>
-         <div class="col-sm-4 col-12 mt-6">
+         <div class="col-sm-4 col-md-4 col-12 mt-6">
             <div class="card bg-transparent text-white">
-               <img class="rounded-circle w-22 mx-auto" src="<?= base_url() ?>assets/front/img/works2.webp" alt="" />
+               <img class="rounded-circle w-100 mx-auto" src="<?= base_url() ?>assets/front/img/works2.webp" alt="" />
                <div class="card-body p-4 mt-4 bg-dark bg-opacity-50 rounded">
                   <p class="card-title text-white fw-bolder">2. Raih Dukungan</p>
                   <p class="card-text fs-13">Bagikan link karya atau link pioniir mu di sosial media dan dapatkan dukungan dari supportermu.</p>
                </div>
             </div>
          </div>
-         <div class="col-sm-4 col-12 mt-6">
+         <div class="col-sm-4 col-md-4 col-12 mt-6">
             <div class="card bg-transparent text-white">
-               <img class="rounded-circle w-22 mx-auto" src="<?= base_url() ?>assets/front/img/works3.webp" alt="" />
+               <img class="rounded-circle w-100 mx-auto" src="<?= base_url() ?>assets/front/img/works3.webp" alt="" />
                <div class="card-body p-4 mt-4 bg-dark bg-opacity-50 rounded">
                   <p class="card-title text-white fw-bolder">3. Tarik Dana</p>
                   <p class="card-text fs-13">Tarik dana donasi yang di dapat kan dari supporter-supportermu.</p>

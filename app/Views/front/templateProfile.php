@@ -2,10 +2,10 @@
 
 <?= $this->section('content') ?>
 <!-- /.container -->
-<div class="container">
+<div class="container mb-10">
    <div class="row flex-column-reverse flex-lg-row mt-8 mt-lg-6">
       <div class="col-lg-9 order-lg-2 ">
-         <img class="rounded w-100 d-none d-md-block" src="<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>" alt="">
+         <img class="rounded w-100 d-none d-md-none d-lg-block" src="<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>" alt="">
          <div class="mt-4 d-flex justify-content-between">
             <div class="d-none d-md-block">
                <a href="<?= base_url('creator/' . $creatorData[0]['creatorAlias']) ?>" style="margin-right: 3px;" class="btn btn-sm <?= current_url(true)->getSegment(1) == 'creator' ? 'btn-navy' : 'btn-outline-navy' ?> rounded">Home</a>
@@ -26,7 +26,7 @@
       </div>
       <!-- /column -->
       <aside class="col-lg-3">
-         <div class="wrapper rounded-top d-block d-sm-none" style="height: 120px;background-image:url('<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>');background-position: center;background-size: cover;"></div>
+         <div class="wrapper rounded-top d-block d-sm-block d-md-block d-lg-none" style="height: 120px;background-image:url('<?= base_url() ?>assets/uploads/banner/<?= $creatorData[0]['creatorBanner'] ?>');background-position: center;background-size: cover;"></div>
          <div class="bg-white rounded-bottom p-5 text-center">
             <img class="rounded-circle w-15" src="<?= base_url() ?>assets/uploads/photo_profile/<?= $creatorData[0]['userAvatar'] ?>" alt="" />
             <h4 class="fw-bolder mt-3"><?= $creatorData[0]['creatorAlias'] ?></h4>

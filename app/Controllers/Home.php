@@ -257,5 +257,13 @@ class Home extends BaseController
         ];
         return view('front/content', $data);
     }
+
+    public function postView($userName){
+        $data = [
+            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'          => $this->userData,
+        ];
+        return view('front/post', $data);
+    }
     
 }
