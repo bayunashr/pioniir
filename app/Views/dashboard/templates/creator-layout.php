@@ -237,7 +237,7 @@
                <div class="dropdown d-inline-block ms-2">
                   <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-notifications-dropdown"
                      data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <i class="fa fa-fw fa-bell"></i>
+                     <i class="far fa-fw fa-bell"></i>
                      <?= (empty($notif) ? '' : '<span class="text-primary">•</span>') ?>
                   </button>
                   <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0 border-0 fs-sm"
@@ -246,102 +246,112 @@
                         <h5 class="dropdown-header text-uppercase">Notifications</h5>
                      </div>
                      <ul class="nav-items mb-0">
-                        <?php foreach ($notif as $data => $value): ?>
-                           <?php
-                           switch ($value->notificationType) {
-                              case "bcontent":
-                                 $icon = "fa-circle-xmark text-danger";
-                                 $title = "Kontenmu Terblokir!";
-                                 $text = "Konten " . '"' . esc($value->content_title) . '"' . " diblokir karena " . esc($value->notificationMessage);
-                                 break;
-                              case "ubcontent":
-                                 $icon = "fa-circle-check text-success";
-                                 $title = "Kontenmu Terbuka!";
-                                 $text = "Konten " . '"' . esc($value->content_title) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
-                                 break;
-                              case "bpost":
-                                 $icon = "fa-circle-xmark text-danger";
-                                 $title = "Postinganmu Terblokir!";
-                                 $text = "Post " . '"' . esc($value->post_title) . '"' . " diblokir karena " . esc($value->notificationMessage);
-                                 break;
-                              case "ubpost":
-                                 $icon = "fa-circle-check text-success";
-                                 $title = "Postinganmu Terbuka!";
-                                 $text = "Post " . '"' . esc($value->post_title) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
-                                 break;
-                              case "bcomment":
-                                 $icon = "fa-circle-xmark text-danger";
-                                 $title = "Komentarmu Terblokir!";
-                                 $text = "Komentar " . '"' . esc($value->comment_value) . '"' . " diblokir karena " . esc($value->notificationMessage);
-                                 break;
-                              case "ubcomment":
-                                 $icon = "fa-circle-check text-success";
-                                 $title = "Komentarmu Terbuka!";
-                                 $text = "Komentar " . '"' . esc($value->comment_value) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
-                                 break;
-                              case "buser":
-                                 $icon = "fa-circle-xmark text-danger";
-                                 $title = "Akunmu Terblokir!";
-                                 $text = "Akun " . '"' . esc($value->user_name) . '"' . " diblokir karena " . esc($value->notificationMessage);
-                                 break;
-                              case "ubuser":
-                                 $icon = "fa-circle-check text-success";
-                                 $title = "Akunmu Terbuka!";
-                                 $text = "Akun " . '"' . esc($value->user_name) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
-                                 break;
-                              case "ndonate":
-                                 $icon = "fa-money-bill-1 text-success";
-                                 $title = "Donasi Diterima!";
-                                 $text = "Kamu menerima " . format_rupiah($value->donate_amount) . " dari " . '"' . esc($value->donatur_name) . '"';
-                                 break;
-                              case "nsubscribe":
-                                 $icon = "fa-compact-disc text-primary";
-                                 $title = "Supporter Baru!";
-                                 $text = '"' . esc($value->subscriber_name) . '"' . " mulai mengikuti";
-                                 break;
-                              case "nbuy":
-                                 $icon = "fa-bag-shopping text-warning";
-                                 $title = "Kontenmu Terjual!";
-                                 $text = '"' . esc($value->buyer_name) . '"' . " membeli " . '"' . esc($value->content_buy_title) . '"';
-                                 break;
-                              case "nmilestone":
-                                 $icon = "fa-rocket text-info";
-                                 $title = "Milestone Tercapai!";
-                                 $text = '"' . esc($value->miles_name) . '"' . " sudah mencapai batasnya";
-                                 break;
-                           }
-                           ?>
-                           <li>
-                              <div class="text-dark d-flex py-2">
-                                 <div class="flex-shrink-0 me-2 ms-3">
-                                    <i class="fa fa-fw <?= $icon ?>"></i>
-                                 </div>
-                                 <div class="flex-grow-1 pe-2">
-                                    <div class="fw-semibold">
-                                       <a href="">
-                                          <?= $title ?>
-                                       </a>
-                                    </div>
-                                    <span class="fw-medium">
-                                       <?= $text ?>
-                                    </span><br>
-                                    <span class="fw-medium text-muted">
-                                       <?= $value->createdAt ?> -
-                                    </span>
-                                    <span class="fw-medium text-muted">
-                                       <a
-                                          href="<?= base_url('dashboard/isRead/' . $value->notificationId . '?s=' . uri_string()) ?>">
-                                          Sudah Dibaca
-                                       </a>
-                                    </span>
+                        <?php if (empty($notif)): ?>
+                           <div class="text-dark d-flex py-2 text-center">
+                              <div class="flex-grow-1 pe-2">
+                                 <i class="far fa-fw fa-face-kiss-beam"></i>
+                                 <div class="fw-normal">
+                                    Belum Ada Notifikasi
                                  </div>
                               </div>
-                           </li>
-                        <?php endforeach ?>
+                           <?php else: ?>
+                              <?php foreach ($notif as $data => $value): ?>
+                                 <?php
+                                 switch ($value->notificationType) {
+                                    case "bcontent":
+                                       $icon = "fa-circle-xmark text-danger";
+                                       $title = "Kontenmu Terblokir!";
+                                       $text = "Konten " . '"' . esc($value->content_title) . '"' . " diblokir karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "ubcontent":
+                                       $icon = "fa-circle-check text-success";
+                                       $title = "Kontenmu Terbuka!";
+                                       $text = "Konten " . '"' . esc($value->content_title) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "bpost":
+                                       $icon = "fa-circle-xmark text-danger";
+                                       $title = "Postinganmu Terblokir!";
+                                       $text = "Post " . '"' . esc($value->post_title) . '"' . " diblokir karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "ubpost":
+                                       $icon = "fa-circle-check text-success";
+                                       $title = "Postinganmu Terbuka!";
+                                       $text = "Post " . '"' . esc($value->post_title) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "bcomment":
+                                       $icon = "fa-circle-xmark text-danger";
+                                       $title = "Komentarmu Terblokir!";
+                                       $text = "Komentar " . '"' . esc($value->comment_value) . '"' . " diblokir karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "ubcomment":
+                                       $icon = "fa-circle-check text-success";
+                                       $title = "Komentarmu Terbuka!";
+                                       $text = "Komentar " . '"' . esc($value->comment_value) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "buser":
+                                       $icon = "fa-circle-xmark text-danger";
+                                       $title = "Akunmu Terblokir!";
+                                       $text = "Akun " . '"' . esc($value->user_name) . '"' . " diblokir karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "ubuser":
+                                       $icon = "fa-circle-check text-success";
+                                       $title = "Akunmu Terbuka!";
+                                       $text = "Akun " . '"' . esc($value->user_name) . '"' . " dibuka kembali karena " . esc($value->notificationMessage);
+                                       break;
+                                    case "ndonate":
+                                       $icon = "fa-money-bill-1 text-success";
+                                       $title = "Donasi Diterima!";
+                                       $text = "Kamu menerima " . format_rupiah($value->donate_amount) . " dari " . '"' . esc($value->donatur_name) . '"';
+                                       break;
+                                    case "nsubscribe":
+                                       $icon = "fa-compact-disc text-primary";
+                                       $title = "Supporter Baru!";
+                                       $text = '"' . esc($value->subscriber_name) . '"' . " mulai mengikuti";
+                                       break;
+                                    case "nbuy":
+                                       $icon = "fa-bag-shopping text-warning";
+                                       $title = "Kontenmu Terjual!";
+                                       $text = '"' . esc($value->buyer_name) . '"' . " membeli " . '"' . esc($value->content_buy_title) . '"';
+                                       break;
+                                    case "nmilestone":
+                                       $icon = "fa-rocket text-info";
+                                       $title = "Milestone Tercapai!";
+                                       $text = '"' . esc($value->miles_name) . '"' . " sudah mencapai batasnya";
+                                       break;
+                                 }
+                                 ?>
+                                 <li>
+                                    <div class="text-dark d-flex py-2">
+                                       <div class="flex-shrink-0 me-2 ms-3">
+                                          <i class="fa fa-fw <?= $icon ?>"></i>
+                                       </div>
+                                       <div class="flex-grow-1 pe-2">
+                                          <div class="fw-semibold">
+                                             <a href="">
+                                                <?= $title ?>
+                                             </a>
+                                          </div>
+                                          <span class="fw-medium">
+                                             <?= $text ?>
+                                          </span><br>
+                                          <span class="fw-medium text-muted">
+                                             <?= $value->createdAt ?> -
+                                          </span>
+                                          <span class="fw-medium text-muted">
+                                             <a
+                                                href="<?= base_url('dashboard/isRead/' . $value->notificationId . '?s=' . uri_string()) ?>">
+                                                Sudah Dibaca
+                                             </a>
+                                          </span>
+                                       </div>
+                                    </div>
+                                 </li>
+                              <?php endforeach ?>
+                           <?php endif ?>
                      </ul>
                      <div class="p-2 border-top text-center">
                         <a class="d-inline-block fw-medium" href="javascript:void(0)">
-                           <i class="fa fa-fw fa-list-ul me-1 opacity-50"></i> View Notification
+                           <i class="fa fa-fw fa-list-ul me-1 opacity-50"></i> Notifications History
                         </a>
                      </div>
                   </div>
