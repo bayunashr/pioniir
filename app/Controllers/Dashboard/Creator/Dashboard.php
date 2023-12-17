@@ -71,7 +71,6 @@ class Dashboard extends BaseController
             'chartDataSubM' => $chartDataSubM,
             'chartDataSubD' => $chartDataSubD,
         ];
-
         return view('dashboard/creator/dashboard', $data);
     }
 
