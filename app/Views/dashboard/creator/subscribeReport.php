@@ -165,7 +165,7 @@
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
                 pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
-                data: <?= json_encode($totalSubPerMonthLastYear) ?>,
+                data: [<?= json_encode($totalSubPerMonthLastYear) ?>],
             },
             {
                 label: <?= $currentYear ?>,

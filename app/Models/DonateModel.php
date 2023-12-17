@@ -6,18 +6,18 @@ use CodeIgniter\Model;
 
 class DonateModel extends Model
 {
-    protected $table            = 'Donate';
-    protected $primaryKey       = 'donateId';
+    protected $table = 'Donate';
+    protected $primaryKey = 'donateId';
     protected $useAutoIncrement = false;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = ['userId','creatorId','donateName','donateAmount','donateDescription', 'donateStatus'];
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $protectFields = true;
+    protected $allowedFields = ['userId', 'creatorId', 'donateName', 'donateAmount', 'donateDescription', 'donateStatus'];
 
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
+    protected $validationRules = [];
+    protected $validationMessages = [];
+    protected $skipValidation = false;
     protected $cleanValidationRules = true;
 
     public function selectAll()
@@ -40,11 +40,48 @@ class DonateModel extends Model
             ->findAll();
     }
 
-    public function getDonateByIdUser($userId) {
+    public function getDonateByIdUser($userId)
+    {
         return $this->select('Donate.donateAmount, Donate.donateDescription, Donate.donateTimestamp, Creator.creatorAlias')
             ->where('Donate.userId', $userId)
             ->where('Donate.donateStatus', 'success')
             ->join('Creator', 'Creator.creatorId = Donate.creatorId')
             ->orderBy('donateTimestamp', 'desc');
+    }
+
+    public function getDonateByTime($id, $month, $year)
+    {
+        return $this->select('Donate.donateId, Donate.userId, Donate.creatorId, Donate.donateAmount')
+            ->where('MONTH(donateTimestamp)', $month)
+            ->where('YEAR(donateTimestamp)', $year)
+            ->where('Donate.creatorId', $id)
+            ->where('Donate.donateStatus', 'success')
+            ->findAll();
+    }
+
+    public function getDonateAllTime($id)
+    {
+        return $this->select('Donate.donateId, Donate.userId, Donate.creatorId, Donate.donateAmount')
+            ->where('Donate.creatorId', $id)
+            ->where('Donate.donateStatus', 'success')
+            ->findAll();
+    }
+
+    public function getDonatedUser($id, $month, $year)
+    {
+        return $this->select('Donate.donateName, SUM(donateAmount) as totalDonation')
+            ->where('MONTH(donateTimestamp)', $month)
+            ->where('YEAR(donateTimestamp)', $year)
+            ->where('Donate.creatorId', $id)
+            ->groupBy('Donate.userId')
+            ->orderBy('totalDonation', 'DESC');
+    }
+
+    public function getDonatedUserAllTime($id)
+    {
+        return $this->select('Donate.donateName, SUM(donateAmount) as totalDonation')
+            ->where('Donate.creatorId', $id)
+            ->groupBy('Donate.userId')
+            ->orderBy('totalDonation', 'DESC');
     }
 }

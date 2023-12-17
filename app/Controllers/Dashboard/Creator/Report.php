@@ -14,7 +14,7 @@ use App\Models\NotificationModel;
 
 class Report extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $buyModel, $subscribeModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
+    protected $userData, $creatorData, $userModel, $creatorModel, $contentModel, $postModel, $buyModel, $subscribeModel, $donateModel, $notifModel, $currentYear, $currentMonth, $totalDayOnCurrentMonth;
     protected $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     function __construct()
@@ -25,6 +25,7 @@ class Report extends BaseController
         $this->postModel = new PostModel();
         $this->buyModel = new BuyModel();
         $this->subscribeModel = new SubscribeModel();
+        $this->donateModel = new DonateModel();
         $this->notifModel = new NotificationModel();
         $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
         $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
@@ -218,11 +219,60 @@ class Report extends BaseController
 
     public function donate()
     {
+        // jumlah semua donate amount
+        $incomeAllTime = 0;
+        foreach ($this->donateModel->getDonateAllTime($this->creatorData['creatorId']) as $item) {
+            $incomeAllTime += $item['donateAmount'];
+        }
+
+        // jumlah semua doante amoun bulan iki
+        $incomeThisMonth = 0;
+        foreach ($this->donateModel->getDonateByTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear) as $item) {
+            $incomeThisMonth += $item['donateAmount'];
+        }
+        //isi($this->donateModel->getDonateByTime($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear));
+
+        // top donatur bulan iki
+        $topThisMonth = $this->donateModel->getDonatedUser($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear)->findAll(10);
+        //isi($this->donateModel->getDonatedUser($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear)->first());
+
+        // top donatur alltime
+        $topAllTime = $this->donateModel->getDonatedUserAllTime($this->creatorData['creatorId'])->findAll(10);
+
+        // ambil data total donate bulan januari-des
+        $currentYearDonateData = [];
+        for ($i = 0; $i < sizeof($this->month); $i++) {
+            $thisMonth = 0;
+            foreach ($this->donateModel->getDonateByTime($this->creatorData['creatorId'], $i + 1, $this->currentYear) as $item) {
+                $thisMonth += $item['donateAmount'];
+            }
+            $currentYearDonateData[$i] = $thisMonth;
+        }
+
+        // ambil data total donate bulan januari-des tahun wingi
+        $lastYearDonateData = [];
+        for ($i = 0; $i < sizeof($this->month); $i++) {
+            $thisMonth = 0;
+            foreach ($this->donateModel->getDonateByTime($this->creatorData['creatorId'], $i + 1, $this->currentYear - 1) as $item) {
+                $thisMonth += $item['donateAmount'];
+            }
+            $lastYearDonateData[$i] = $thisMonth;
+        }
+        //isi($this->donateModel->getDonatedUser($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear)->findAll());
+
         $data = [
             'title' => 'Subscribe Report - Pioniir Creator',
             'user' => $this->userData,
             'creator' => $this->creatorData,
             'notif' => $this->notifModel->selectAllById($this->creatorData['userId']),
+            'month' => $this->month,
+            'currentYear' => $this->currentYear,
+            'incomeAllTime' => $incomeAllTime,
+            'incomeThisMonth' => $incomeThisMonth,
+            'topThisMonth' => $topThisMonth,
+            'topAllTime' => $topAllTime,
+            'currentYearDonateData' => $currentYearDonateData,
+            'lastYearDonateData' => $lastYearDonateData,
         ];
         return view('dashboard/creator/donateReport', $data);
     }
