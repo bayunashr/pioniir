@@ -24,7 +24,7 @@
                 <div class="block block-rounded">
                     <div class="block-content block-content-full d-flex align-items-center justify-content-between">
                         <div>
-                            <i class="fa fa-2x fa-trophy text-muted"></i>
+                            <i class="fa fa-2x fa-users text-muted"></i>
                         </div>
                         <dl class="ms-3 text-end mb-0">
                             <dt class="h3 fw-extrabold mb-0">
