@@ -350,7 +350,7 @@
                            <?php endif ?>
                      </ul>
                      <div class="p-2 border-top text-center">
-                        <a class="d-inline-block fw-medium" href="javascript:void(0)">
+                        <a class="d-inline-block fw-medium" href="<?= base_url('dashboard/notif') ?>">
                            <i class="fa fa-fw fa-list-ul me-1 opacity-50"></i> Notifications History
                         </a>
                      </div>

@@ -134,4 +134,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator',
 
     // Creator Donate
     $routes->get('donate', 'Donate::index');
+
+    // Notif History
+    $routes->get('notif', 'Dashboard::notifHistory');
 });
