@@ -29,7 +29,7 @@
                   </tr>
                </thead>
                <tbody>
-                  <?= $no = 1 ?>
+                  <?php $no = 1 ?>
                   <?php foreach ($notifAll as $key => $value): ?>
                      <tr>
                         <td class="text-center fs-sm">
