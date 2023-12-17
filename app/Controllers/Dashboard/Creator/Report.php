@@ -193,10 +193,15 @@ class Report extends BaseController
         $topSubscribedUser = $this->subscribeModel->getAllSubscriberAllTime($this->creatorData['creatorId']);
         //isi($this->subscribeModel->getAllSubscriberAllTime($this->creatorData['creatorId']));
 
-        $incomeThisMonth = 0;
-        foreach ($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear) as $item) {
-            $incomeThisMonth += $item['timeSubscribed'] * $item['creatorSubPrice'];
-        }
+        // issue duplikat user subscribe
+        // $incomeThisMonth = 0;
+        // foreach ($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear) as $item) {
+        //     $incomeThisMonth += $item['timeSubscribed'] * $item['creatorSubPrice'];
+        // }
+
+
+        $incomeThisMonth = array_column($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear), 'creatorSubPrice');
+        $incomeThisMonth = array_sum($incomeThisMonth);
         //isi($this->subscribeModel->getAllSubscriberWithMonth($this->creatorData['creatorId'], $this->currentMonth, $this->currentYear));
         //isi($incomeThisMonth);
 
