@@ -95,7 +95,7 @@ class SubscribeModel extends Model
             ->where('Subscribe.subscribeStatus', 'success')
             ->groupBy('userId')
             ->orderBy('timeSubscribed', 'DESC')
-            ->findAll();
+            ->findAll(8);
     }
 
     public function getAllSubscriberWithMonth($id, $month, $year)
