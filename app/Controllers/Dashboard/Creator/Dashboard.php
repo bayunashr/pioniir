@@ -17,23 +17,22 @@ class Dashboard extends BaseController
 
     public function index()
     {
-        $buyModel       = new BuyModel();
-        $donateModel    = new DonateModel;
+        $buyModel = new BuyModel();
+        $donateModel = new DonateModel;
         $subscribeModel = new SubscribeModel();
-        $contentModel   = new ContentModel();
-        $postModel      = new PostModel();
-        $userModel      = new UserModel;
-        $creatorModel   = new CreatorModel;
-        $notifModel     = new NotificationModel;
+        $contentModel = new ContentModel();
+        $postModel = new PostModel();
+        $userModel = new UserModel;
+        $creatorModel = new CreatorModel;
+        $notifModel = new NotificationModel;
 
-        $userData       = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
-        $creatorData    = $creatorModel->where('userId', $userData['userId'])->first();
+        $userData = $userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
+        $creatorData = $creatorModel->where('userId', $userData['userId'])->first();
 
-        $day            = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        $month          = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        $dayMonthMap    = [];
-        $currentMonth   = idate('m');
-        $currentYear    = idate('Y');
+        $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $dayMonthMap = [];
+        $currentMonth = idate('m');
+        $currentYear = idate('Y');
         $currentDayMonth = idate('t');
 
         for ($i = 0; $i < sizeof($month); $i++) {
@@ -58,15 +57,15 @@ class Dashboard extends BaseController
         $chartDataSubM = array_values($chartDataSubM);
 
         $data = [
-            'title'     => 'Dashboard - Pioniir Creator',
-            'buy'       => $buyModel->getCountBuyCreator($creatorData['creatorId']),
-            'donate'    => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'sub'       => $subscribeModel->where('creatorId', $creatorData['creatorId'])->where('subscribeStatus', 'success')->countAllResults(),
-            'content'   => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'post'      => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'notif'     => $notifModel->selectAllById($creatorData['userId']),
-            'user'      => $userData,
-            'creator'   => $creatorData,
+            'title' => 'Dashboard - Pioniir Creator',
+            'buy' => $buyModel->getCountBuyCreator($creatorData['creatorId']),
+            'donate' => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'sub' => $subscribeModel->where('creatorId', $creatorData['creatorId'])->where('subscribeStatus', 'success')->countAllResults(),
+            'content' => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'post' => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'notif' => $notifModel->selectAllById($creatorData['userId']),
+            'user' => $userData,
+            'creator' => $creatorData,
             'chartMonth' => $month,
             'currentDayMonth' => $currentDayMonth,
             'chartDataSubM' => $chartDataSubM,
@@ -74,5 +73,14 @@ class Dashboard extends BaseController
         ];
 
         return view('dashboard/creator/dashboard', $data);
+    }
+
+    public function notificationIsRead($id)
+    {
+        $notifModel = new NotificationModel;
+        $state = $this->request->getGet('s');
+        $notifModel->update($id, ["isRead" => "yes"]);
+        return redirect()->to(base_url($state));
+        //isi($id);
     }
 }

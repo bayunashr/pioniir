@@ -42,8 +42,8 @@ $routes->group('/', function ($routes) {
     $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1', ['filter' => 'loginfront']);
     $routes->get('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
     $routes->post('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
-    $routes->get('user/tip', 'Home::userTip',['filter' => 'authfront']);
-    $routes->get('user/follow', 'Home::userFollow',['filter' => 'authfront']);
+    $routes->get('user/tip', 'Home::userTip', ['filter' => 'authfront']);
+    $routes->get('user/follow', 'Home::userFollow', ['filter' => 'authfront']);
 });
 
 // Super Routes Login
@@ -75,6 +75,7 @@ $routes->group('admin', ['namespace' => 'App\Controllers\Dashboard\Admin', 'filt
 $routes->group('dashboard', ['namespace' => 'App\Controllers\Dashboard\Creator', 'filter' => 'creatorfilter'], function ($routes) {
     // Creator Dashboard
     $routes->get('/', 'Dashboard::index');
+    $routes->get('isRead/(:segment)', 'Dashboard::notificationIsRead/$1');
 
     // Creator Profile
     $routes->group('profile/creator', function ($routes) {

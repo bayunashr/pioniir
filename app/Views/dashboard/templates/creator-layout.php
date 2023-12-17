@@ -312,28 +312,36 @@
                            }
                            ?>
                            <li>
-                              <a class="text-dark d-flex py-2" href="javascript:void(0)">
+                              <div class="text-dark d-flex py-2">
                                  <div class="flex-shrink-0 me-2 ms-3">
                                     <i class="fa fa-fw <?= $icon ?>"></i>
                                  </div>
                                  <div class="flex-grow-1 pe-2">
                                     <div class="fw-semibold">
-                                       <?= $title ?>
+                                       <a href="">
+                                          <?= $title ?>
+                                       </a>
                                     </div>
                                     <span class="fw-medium">
                                        <?= $text ?>
                                     </span><br>
                                     <span class="fw-medium text-muted">
-                                       <?= format_waktu_lampau($value->createdAt) ?>
+                                       <?= $value->createdAt ?> -
+                                    </span>
+                                    <span class="fw-medium text-muted">
+                                       <a
+                                          href="<?= base_url('dashboard/isRead/' . $value->notificationId . '?s=' . uri_string()) ?>">
+                                          Sudah Dibaca
+                                       </a>
                                     </span>
                                  </div>
-                              </a>
+                              </div>
                            </li>
                         <?php endforeach ?>
                      </ul>
                      <div class="p-2 border-top text-center">
                         <a class="d-inline-block fw-medium" href="javascript:void(0)">
-                           <i class="fa fa-fw fa-arrow-down me-1 opacity-50"></i> Load More..
+                           <i class="fa fa-fw fa-list-ul me-1 opacity-50"></i> View Notification
                         </a>
                      </div>
                   </div>

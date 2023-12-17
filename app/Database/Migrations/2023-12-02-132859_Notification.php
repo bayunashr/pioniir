@@ -16,59 +16,64 @@ class Notification extends Migration
                 'constraint' => 36,
             ],
             'userId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'postId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'contentId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'commentId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'subId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'buyId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'milestoneId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'donateId' => [
-                'type'       => 'CHAR',
+                'type' => 'CHAR',
                 'constraint' => 36,
                 'null' => true,
             ],
             'notificationType' => [
-                'type'       => 'ENUM',
-                'constraint' => ['buser','bpost','bcontent','bcomment','ubuser','ubpost','ubcontent','ubcomment','ndonate', 'nsubscribe', 'nbuy', 'nmilestone'],
+                'type' => 'ENUM',
+                'constraint' => ['buser', 'bpost', 'bcontent', 'bcomment', 'ubuser', 'ubpost', 'ubcontent', 'ubcomment', 'ndonate', 'nsubscribe', 'nbuy', 'nmilestone'],
             ],
             'notificationMessage' => [
                 'type' => 'TEXT',
+            ],
+            'isRead' => [
+                'type' => 'ENUM',
+                'constraint' => ['yes', 'no'],
+                'default' => 'no',
             ],
             'createdAt' => [
                 'type' => 'TIMESTAMP',
                 'default' => new RawSql('CURRENT_TIMESTAMP'),
             ],
             'updatedAt' => [
-                'type'    => 'TIMESTAMP',
-                'null'    => true,
+                'type' => 'TIMESTAMP',
+                'null' => true,
             ],
         ]);
         $this->forge->addPrimaryKey('notificationId');
