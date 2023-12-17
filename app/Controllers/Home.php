@@ -243,10 +243,16 @@ class Home extends BaseController
     }
 
     public function userFollow(){
+        $currentPage = $this->request->getVar('page') ? intval($this->request->getVar('page')) : 1;
+
         $data = [
             'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
             'user'          => $this->userData,
+            'dataSubs'      => $this->subsModel->selectAllByIdUser($this->userData['userId'])->paginate(20),
+            'pager'         => $this->subsModel->pager,
+            'currentPage'   => $currentPage
         ];
+
         return view('front/userFollow',$data);
     }
 

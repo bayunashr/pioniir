@@ -14,6 +14,11 @@
          </tr>
       </thead>
       <tbody>
+         <?php if (empty($dataDonate)) : ?>
+         <tr>
+            <td colspan="5" class="text-center">Data Kosong</td>
+         </tr>
+         <?php else : ?>
          <?php $no = 1 + (10 * ($currentPage - 1)); ?>
          <?php foreach ($dataDonate as $key => $value) : ?>
          <tr>
@@ -24,9 +29,10 @@
             <td><?= date('d F Y', strtotime($value['donateTimestamp'])); ?></td>
          </tr>
          <?php endforeach ?>
+         <?php endif?>
       </tbody>
    </table>
 </div>
 
-<?= $pager->links('default', 'paginate_custom') ?>
+<?= (empty($dataDonate)) ? null : $pager->links('default', 'paginate_custom') ?>
 <?= $this->endsection() ?>

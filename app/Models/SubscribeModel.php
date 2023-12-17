@@ -39,6 +39,17 @@ class SubscribeModel extends Model
             ->findAll();
     }
 
+    public function selectAllByIdUser($userId)
+    {
+        return $this->select('Subscribe.subTimestamp, Creator.creatorAlias, User.userAvatar')
+            ->where('Subscribe.userId', $userId)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->where("DATEDIFF(NOW(), Subscribe.subTimestamp) <= 30")
+            ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
+            ->join('User', 'User.userId = Creator.userId')
+            ->orderBy('subTimestamp', 'desc');
+    }
+
     public function CountAllByMonthAndId($id, $month, $year)
     {
         return $this->where('MONTH(createdAt)', $month)
@@ -95,7 +106,7 @@ class SubscribeModel extends Model
             ->where('Subscribe.subscribeStatus', 'success')
             ->groupBy('userId')
             ->orderBy('timeSubscribed', 'DESC')
-            ->findAll(8);
+            ->findAll();
     }
 
     public function getAllSubscriberWithMonth($id, $month, $year)
