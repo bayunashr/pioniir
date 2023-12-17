@@ -85,12 +85,6 @@ class Dashboard extends BaseController
 
     public function notifHistory()
     {
-        
-        $buyModel = new BuyModel();
-        $donateModel = new DonateModel;
-        $subscribeModel = new SubscribeModel();
-        $contentModel = new ContentModel();
-        $postModel = new PostModel();
         $userModel = new UserModel;
         $creatorModel = new CreatorModel;
         $notifModel = new NotificationModel;
@@ -99,13 +93,9 @@ class Dashboard extends BaseController
         $creatorData = $creatorModel->where('userId', $userData['userId'])->first();
 
         $data = [
-            'title' => 'Dashboard - Pioniir Creator',
-            'buy' => $buyModel->getCountBuyCreator($creatorData['creatorId']),
-            'donate' => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'sub' => $subscribeModel->where('creatorId', $creatorData['creatorId'])->where('subscribeStatus', 'success')->countAllResults(),
-            'content' => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'post' => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'title' => 'Notification - Pioniir Creator',
             'notif' => $notifModel->selectAllById($creatorData['userId']),
+            'notifAll' => $notifModel->selectAll($creatorData['userId']),
             'user' => $userData,
             'creator' => $creatorData,
         ];
