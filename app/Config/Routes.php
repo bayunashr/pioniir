@@ -38,12 +38,16 @@ $routes->group('/', function ($routes) {
     $routes->post('donate', 'Midtrans::donate');
 
     //Perlu filter
-    $routes->post('subscribe', 'Midtrans::subscribe', ['filter' => 'loginfront']);
-    $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1', ['filter' => 'loginfront']);
+    $routes->post('subscribe', 'Midtrans::subscribe', ['filter' => 'authfront']);
+    $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1', ['filter' => 'authfront']);
     $routes->get('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
     $routes->post('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
     $routes->get('user/tip', 'Home::userTip', ['filter' => 'authfront']);
     $routes->get('user/follow', 'Home::userFollow', ['filter' => 'authfront']);
+
+    $routes->post('add/comment/post', 'Home::commentPost');
+    $routes->post('lovepost', 'Home::lovePost');
+    $routes->post('unlovepost', 'Home::unlovePost');
 });
 
 // Super Routes Login

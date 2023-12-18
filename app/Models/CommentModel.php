@@ -37,4 +37,14 @@ class CommentModel extends Model
         ->where('Comment.commentId', $id)
         ->first();
     }
+
+    public function selectAllByPostId($postId) {
+        return $this->select('Comment.*, User.userFullName')
+        ->where('Comment.postId', $postId)
+        ->where('Comment.commentStatus', 'publish')
+        ->join('Post', 'Post.postId = Comment.postId')
+        ->join('User', 'User.userId = Comment.userId')
+        ->orderBy('createdAt', 'desc')
+        ->findAll();
+    }
 }

@@ -10,11 +10,13 @@ use App\Models\DonateModel;
 use App\Models\PostModel;
 use App\Models\ContentModel;
 use App\Models\BuyModel;
+use App\Models\CommentModel;
+use App\Models\LoveModel;
 use Ramsey\Uuid\Uuid;
 
 class Home extends BaseController
 {
-    protected $userData, $creatorData, $userModel, $creatorModel, $subsModel, $socialModel, $milestoneModel, $donateModel, $postModel, $contentModel, $buyModel;
+    protected $userData, $creatorData, $userModel, $creatorModel, $subsModel, $socialModel, $milestoneModel, $donateModel, $postModel, $contentModel, $buyModel, $commentModel, $loveModel;
     function __construct(){
         $this->userModel      = new UserModel();
         $this->creatorModel   = new CreatorModel();
@@ -25,6 +27,8 @@ class Home extends BaseController
         $this->postModel      = new PostModel();
         $this->contentModel   = new ContentModel();
         $this->buyModel       = new BuyModel();
+        $this->commentModel   = new CommentModel();
+        $this->loveModel      = new LoveModel();
 
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
@@ -264,12 +268,66 @@ class Home extends BaseController
         return view('front/content', $data);
     }
 
-    public function postView($userName){
+    public function postView($postId){
         $data = [
-            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
-            'user'          => $this->userData,
+            'creator'   => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'      => $this->userData,
+            'post'      => $this->postModel->selectOneByPostId($postId),
+            'comment'   => $this->commentModel->selectAllByPostId($postId),
+            'cekLove'   => $this->loveModel->selectDataByUserAndPost($this->userData['userId'], $postId),
         ];
+
         return view('front/post', $data);
     }
-    
+
+    public function commentPost() {
+        $data = [
+            'commentId'     => Uuid::uuid4(),
+            'userId'        => $this->userData['userId'],
+            'postId'        => $this->request->getPost('postId'),
+            'commentValue'  => $this->request->getPost('commentValue')
+        ];
+
+        $insert = $this->commentModel->insert($data);
+        if ($insert) {
+            session()->setFlashData('success', 'Berhasil Menambah Komentar');
+        }else{
+            session()->setFlashdata('error', 'Gagal Menambah Komentar');  
+        }
+        return redirect()->to(base_url('view/post/'.$data['postId']));
+    }
+
+    public function lovePost() {
+        $data = [
+            'loveId' => Uuid::uuid4(),
+            'userId' => $this->userData['userId'],
+            'postId' => $this->request->getPost('post_id')
+        ];
+
+        $dataPost = $this->postModel->where('postId', $data['postId'])->first();
+        $insertLove = $this->loveModel->insert($data);
+        $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] + 1)]);
+        if ($insertLove && $updatePost) {
+            $response = ['success' => true];
+        }else{
+            $response = ['success' => false];
+        }
+
+        return $this->response->setJSON($response);
+    }
+
+    public function unlovePost() {
+        $dataLove = $this->loveModel->where('userId', $this->userData['userId'])->where('postId', $this->request->getPost('post_id'))->first();
+        $dataPost = $this->postModel->where('postId', $this->request->getPost('post_id'))->first();
+
+        $deleteLove = $this->loveModel->delete($dataLove['loveId']);
+        $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] - 1)]);
+        if ($deleteLove && $updatePost) {
+            $response = ['success' => true];
+        }else{
+            $response = ['success' => false];
+        }
+
+        return $this->response->setJSON($response);
+    }
 }

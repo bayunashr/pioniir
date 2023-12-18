@@ -38,7 +38,7 @@ class PostModel extends Model
 
     public function selectOneByPostId($id)
     {
-        return $this->select('Post.*, User.userId AS user_id')
+        return $this->select('Post.*, User.userId AS user_id, Creator.creatorAlias')
             ->join('Creator', 'Creator.creatorId = Post.creatorId')
             ->join('User', 'User.userId = Creator.userId')
             ->where('Post.postId', $id)

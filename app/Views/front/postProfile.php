@@ -15,8 +15,8 @@
             <div class="meta mb-2 fs-12"><?= date('d F Y', strtotime($value['createdAt'])); ?></div>
          </div>
          <div class="d-flex justify-content-between px-4">
-            <p class="fs-20"><a href="#" class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart.svg" alt=""> <?= $value['postLike'] ?></a></p>
-            <a href="#" class="btn btn-sm btn-outline-navy rounded btn-login mb-2">See more</a>
+            <p class="fs-20"><a class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart-solid.svg" alt=""> <?= $value['postLike'] ?></a></p>
+            <a href="<?= base_url('view/post/'.$value['postId']) ?>" class="btn btn-sm btn-outline-navy rounded btn-login mb-2">See more</a>
          </div>
       </div>
    </div>

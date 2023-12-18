@@ -12,7 +12,7 @@ class LoveModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['loveId', 'userId', 'contentId', 'postId'];
 
     // Validation
     protected $validationRules      = [];
@@ -28,5 +28,12 @@ class LoveModel extends Model
             ->join('Post', 'Post.postId = Love.postId', 'left')
             ->orderBy('createdAt', 'desc')
             ->findAll();
+    }
+
+    public function selectDataByUserAndPost($userId, $postId) {
+        return $this->select('Love.*')
+        ->where('Love.postId', $postId)
+        ->where('Love.userId', $userId)
+        ->first();
     }
 }
