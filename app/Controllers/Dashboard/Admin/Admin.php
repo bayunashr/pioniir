@@ -42,18 +42,18 @@ class Admin extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Dashboard - Pioniir Admin',
-            'donate' => $this->donateModel->countAllResults(),
-            'user' => $this->userModel->countAllResults(),
-            'creator' => $this->creatorModel->countAllResults(),
-            'content' => $this->contentModel->countAllResults(),
-            'post' => $this->postModel->countAllResults(),
-            'comment' => $this->commentModel->countAllResults(),
-            'love' => $this->loveModel->countAllResults(),
-            'sub' => $this->subscribeModel->countAllResults(),
-            'buy' => $this->buyModel->countAllResults(),
-            'miles' => $this->milestoneModel->countAllResults(),
-            'wd' => $this->withdrawModel->countAllResults()
+            'title'     => 'Dashboard - Pioniir Admin',
+            'donate'    => count($this->donateModel->selectAll()),
+            'user'      => $this->userModel->countAllResults(),
+            'creator'   => $this->creatorModel->countAllResults(),
+            'content'   => $this->contentModel->countAllResults(),
+            'post'      => $this->postModel->countAllResults(),
+            'comment'   => $this->commentModel->countAllResults(),
+            'love'      => $this->loveModel->countAllResults(),
+            'sub'       => count($this->subscribeModel->selectAll()),
+            'buy'       => count($this->buyModel->selectAll()),
+            'miles'     => $this->milestoneModel->countAllResults(),
+            'wd'        => $this->withdrawModel->countAllResults()
         ];
 
         return view('dashboard/admin/dashboard', $data);
@@ -67,7 +67,7 @@ class Admin extends BaseController
             if (password_verify($this->request->getPost('password'), $adminData['adminPassword'])){
                 session()->set([
                     'loginAdmin'    => true,
-                    'adminName'      => $adminData['adminName'],
+                    'adminName'     => $adminData['adminName'],
                 ]);
                 return redirect()->to(base_url('admin'));
                 exit;
