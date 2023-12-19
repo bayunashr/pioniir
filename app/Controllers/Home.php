@@ -94,7 +94,7 @@ class Home extends BaseController
             $data = [
                 'creatorId'         => Uuid::uuid4(),
                 'userId'            => $this->userData['userId'],
-                'creatorAlias'      => str_replace(' ', '', $this->request->getPost('creatorAlias')),
+                'creatorAlias'      => strip_tags(str_replace(' ', '', $this->request->getPost('creatorAlias'))),
                 'creatorTag'        => $this->request->getPost('creatorTag'),
                 'creatorDescription'=> $this->request->getPost('creatorDescription'),
                 'creatorBanner'     => 'bannercreator.png'

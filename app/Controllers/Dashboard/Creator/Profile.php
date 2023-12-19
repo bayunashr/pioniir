@@ -36,14 +36,14 @@ class Profile extends BaseController
                     session()->setFlashData('error', 'Gagal Mengubah Harga Subscription');
                 }
             }else{
-                if ($this->request->getPost('old_alias') != $this->request->getPost('alias')) {
-                    $data['creatorAlias'] = str_replace(' ', '', $this->request->getPost('alias'));
-                }
+                $data = [];
 
-                $data = [
-                    'creatorDescription'=> $this->request->getPost('description'),
-                    'creatorTag'        => implode(',', $this->request->getPost('creatorTag'))
-                ];
+                if ($this->request->getPost('old_alias') != $this->request->getPost('alias')) {
+                    $data['creatorAlias'] = strip_tags(str_replace(' ', '', $this->request->getPost('alias')));
+                }
+                $data['creatorDescription'] = $this->request->getPost('description');
+                $data['creatorTag'] = implode(',', $this->request->getPost('creatorTag'));
+                
                 $update = $this->creatorModel->update($this->creatorData['creatorId'], $data);
                 if ($update) {
                     session()->setFlashData('success', 'Berhasil Mengubah Profile');
@@ -51,9 +51,8 @@ class Profile extends BaseController
                     session()->setFlashData('error', 'Gagal Mengubah Profile');
                 }
 
-                print_r($this->request->getPost());
             }
-            //return redirect()->to(base_url('dashboard/profile/creator')); 
+            return redirect()->to(base_url('dashboard/profile/creator')); 
         } else {
             $data = [
                 'title'     => 'Dashboard - Pioniir Creator',
