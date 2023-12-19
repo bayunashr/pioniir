@@ -36,4 +36,11 @@ class LoveModel extends Model
         ->where('Love.userId', $userId)
         ->first();
     }
+
+    public function selectDataByUserAndContent($userId, $contentId) {
+        return $this->select('Love.*')
+        ->where('Love.contentId', $contentId)
+        ->where('Love.userId', $userId)
+        ->first();
+    }
 }

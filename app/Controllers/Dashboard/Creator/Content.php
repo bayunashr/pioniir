@@ -102,10 +102,9 @@ class Content extends BaseController
                 $data['contentPreview'] = $this->request->getPost('contentPreview');
             }
             $data = [
-                'contentId'         => Uuid::uuid4(),
                 'creatorId'         => $this->creatorData['creatorId'],
                 'contentTitle'      => $this->request->getPost('contentTitle'),
-                'contentValue'      => htmlspecialchars($this->request->getPost('postValue')),
+                'contentValue'      => $this->request->getPost('postValue'),
                 'contentStatus'     => $this->request->getPost('postStatus'),
                 'contentPrice'      => $this->request->getPost('contentPrice'),
                 'contentDownload'   => $this->request->getPost('contentDownload'),

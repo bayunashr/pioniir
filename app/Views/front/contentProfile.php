@@ -24,20 +24,20 @@
       <div class="card shadow-lg lift">
          <!-- Jika free dan Subscribe -->
          <?php if ($isFree || $isSubscribed || $isCreator) : ?>
-         <a href="#">
+         <a href="<?= base_url('view/content/'.$value['contentId']) ?>">
             <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;"></div>
          </a>
-         <a href="#" class="card-body px-4 py-4">
+         <a href="<?= base_url('view/content/'.$value['contentId']) ?>" class="card-body px-4 py-4">
             <h5 class="mb-1"><?= $value['contentTitle'] ?></h5>
             <div class="meta mb-2 fs-12"><?= date('d F Y', strtotime($value['createdAt'])); ?></div>
          </a>
          <!-- Buy content -->
          <?php elseif ((!$isFree) && count($dataBuy) >= 1):?>
          <?php if ($isBought):  ?>
-         <a href="#">
+         <a href="<?= base_url('view/content/'.$value['contentId']) ?>">
             <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;"></div>
          </a>
-         <a href="#" class="card-body px-4 py-4">
+         <a href="<?= base_url('view/content/'.$value['contentId']) ?>" class="card-body px-4 py-4">
             <h5 class="mb-1"><?= $value['contentTitle'] ?></h5>
             <div class="meta mb-2 fs-12"><?= date('d F Y', strtotime($value['createdAt'])); ?></div>
          </a>
@@ -66,7 +66,7 @@
          </div>
          <?php endif?>
          <div class="d-flex justify-content-between px-4">
-            <p class="fs-20"><a href="#" class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart-solid.svg" alt=""> <?= $value['contentLike'] ?></a></p>
+            <p class="fs-20"><a class="link-navy"><img src="<?= base_url() ?>assets/front/img/icons/social/heart-solid.svg" alt=""> <?= $value['contentLike'] ?></a></p>
             <!-- Jika dia subscribe namun content tidak free -->
             <?php if((!$isFree) || $isSubscribed || $isCreator):?>
             <p class="fs-20"><span class="badge bg-green"><?= format_rupiah($value['contentPrice']) ?></span></p>

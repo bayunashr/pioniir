@@ -158,6 +158,7 @@ class Home extends BaseController
             'dataBuy'       => $this->buyModel->getDataBuyByIdUser($this->userData['userId'])
         ];
 
+        //echo json_encode($data['content']);
         return view('front/contentProfile',$data);
     }
     
@@ -260,10 +261,13 @@ class Home extends BaseController
         return view('front/userFollow',$data);
     }
 
-    public function contentView($userName){
+    public function contentView($contentId){
         $data = [
-            'creator'       => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
-            'user'          => $this->userData,
+            'creator'    => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+            'user'       => $this->userData,
+            'content'    => $this->contentModel->selectOneByContentId($contentId),
+            'comment'    => $this->commentModel->selectAllByContentId($contentId),
+            'cekLove'    => $this->loveModel->selectDataByUserAndContent($this->userData['userId'], $contentId),
         ];
         return view('front/content', $data);
     }
@@ -280,52 +284,99 @@ class Home extends BaseController
         return view('front/post', $data);
     }
 
-    public function commentPost() {
-        $data = [
-            'commentId'     => Uuid::uuid4(),
-            'userId'        => $this->userData['userId'],
-            'postId'        => $this->request->getPost('postId'),
-            'commentValue'  => $this->request->getPost('commentValue')
-        ];
-
-        $insert = $this->commentModel->insert($data);
-        if ($insert) {
-            session()->setFlashData('success', 'Berhasil Menambah Komentar');
-        }else{
-            session()->setFlashdata('error', 'Gagal Menambah Komentar');  
+    public function addComment() {
+        if ($this->request->getPost('postId')) {
+            $data = [
+                'commentId'     => Uuid::uuid4(),
+                'userId'        => $this->userData['userId'],
+                'postId'        => $this->request->getPost('postId'),
+                'commentValue'  => $this->request->getPost('commentValue')
+            ];
+    
+            $insert = $this->commentModel->insert($data);
+            if ($insert) {
+                session()->setFlashData('success', 'Berhasil Menambah Komentar');
+            }else{
+                session()->setFlashdata('error', 'Gagal Menambah Komentar');  
+            }
+            return redirect()->to(base_url('view/post/'.$data['postId']));
+        }else if($this->request->getPost('contentId')){
+            $data = [
+                'commentId'     => Uuid::uuid4(),
+                'userId'        => $this->userData['userId'],
+                'contentId'     => $this->request->getPost('contentId'),
+                'commentValue'  => $this->request->getPost('commentValue')
+            ];
+    
+            $insert = $this->commentModel->insert($data);
+            if ($insert) {
+                session()->setFlashData('success', 'Berhasil Menambah Komentar');
+            }else{
+                session()->setFlashdata('error', 'Gagal Menambah Komentar');  
+            }
+            return redirect()->to(base_url('view/content/'.$data['contentId']));
         }
-        return redirect()->to(base_url('view/post/'.$data['postId']));
     }
 
-    public function lovePost() {
-        $data = [
-            'loveId' => Uuid::uuid4(),
-            'userId' => $this->userData['userId'],
-            'postId' => $this->request->getPost('post_id')
-        ];
-
-        $dataPost = $this->postModel->where('postId', $data['postId'])->first();
-        $insertLove = $this->loveModel->insert($data);
-        $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] + 1)]);
-        if ($insertLove && $updatePost) {
-            $response = ['success' => true];
-        }else{
-            $response = ['success' => false];
+    public function love() {
+        if ($this->request->getPost('post_id')) {
+            $data = [
+                'loveId' => Uuid::uuid4(),
+                'userId' => $this->userData['userId'],
+                'postId' => $this->request->getPost('post_id')
+            ];
+    
+            $dataPost = $this->postModel->where('postId', $data['postId'])->first();
+            $insertLove = $this->loveModel->insert($data);
+            $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] + 1)]);
+            if ($insertLove && $updatePost) {
+                $response = ['success' => true];
+            }else{
+                $response = ['success' => false];
+            }
+        }elseif ($this->request->getPost('content_id')) {
+            $data = [
+                'loveId'    => Uuid::uuid4(),
+                'userId'    => $this->userData['userId'],
+                'contentId' => $this->request->getPost('content_id')
+            ];
+    
+            $dataContent    = $this->contentModel->where('contentId', $data['contentId'])->first();
+            $insertLove     = $this->loveModel->insert($data);
+            $updateContent  = $this->contentModel->update($dataContent['contentId'], ['contentLike' => ($dataContent['contentLike'] + 1)]);
+            if ($insertLove && $updateContent) {
+                $response = ['success' => true];
+            }else{
+                $response = ['success' => false];
+            }
         }
 
         return $this->response->setJSON($response);
     }
 
-    public function unlovePost() {
-        $dataLove = $this->loveModel->where('userId', $this->userData['userId'])->where('postId', $this->request->getPost('post_id'))->first();
-        $dataPost = $this->postModel->where('postId', $this->request->getPost('post_id'))->first();
+    public function unlove() {
+        if ($this->request->getPost('post_id')) {
+            $dataLove = $this->loveModel->where('userId', $this->userData['userId'])->where('postId', $this->request->getPost('post_id'))->first();
+            $dataPost = $this->postModel->where('postId', $this->request->getPost('post_id'))->first();
 
-        $deleteLove = $this->loveModel->delete($dataLove['loveId']);
-        $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] - 1)]);
-        if ($deleteLove && $updatePost) {
-            $response = ['success' => true];
-        }else{
-            $response = ['success' => false];
+            $deleteLove = $this->loveModel->delete($dataLove['loveId']);
+            $updatePost = $this->postModel->update($dataPost['postId'], ['postLike' => ($dataPost['postLike'] - 1)]);
+            if ($deleteLove && $updatePost) {
+                $response = ['success' => true];
+            }else{
+                $response = ['success' => false];
+            }
+        }elseif ($this->request->getPost('content_id')) {
+            $dataLove       = $this->loveModel->where('userId', $this->userData['userId'])->where('contentId', $this->request->getPost('content_id'))->first();
+            $dataContent    = $this->contentModel->where('contentId', $this->request->getPost('content_id'))->first();
+
+            $deleteLove     = $this->loveModel->delete($dataLove['loveId']);
+            $updateContent  = $this->contentModel->update($dataContent['contentId'], ['contentLike' => ($dataContent['contentLike'] - 1)]);
+            if ($deleteLove && $updateContent) {
+                $response = ['success' => true];
+            }else{
+                $response = ['success' => false];
+            }
         }
 
         return $this->response->setJSON($response);

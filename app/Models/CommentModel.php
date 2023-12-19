@@ -47,4 +47,14 @@ class CommentModel extends Model
         ->orderBy('createdAt', 'desc')
         ->findAll();
     }
+
+    public function selectAllByContentId($contentId) {
+        return $this->select('Comment.*, User.userFullName')
+        ->where('Comment.contentId', $contentId)
+        ->where('Comment.commentStatus', 'publish')
+        ->join('Content', 'Content.contentId = Comment.contentId')
+        ->join('User', 'User.userId = Comment.userId')
+        ->orderBy('createdAt', 'desc')
+        ->findAll();
+    }
 }

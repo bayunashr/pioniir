@@ -30,11 +30,7 @@
                </div>
             </div>
             <?php if (session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) : ?>
-            <?php if($cekLove == null):?>
-            <button class="btn btn-sm btn-outline-red rounded-pill btn-icon btn-icon-start love-button" data-post-id="<?= $post['postId'] ?>" data-love-status="love"><i class="uil uil-heart"></i> Loves</button>
-            <?php else: ?>
-            <button class="btn btn-sm btn-red rounded-pill btn-icon btn-icon-start love-button" data-post-id="<?= $post['postId'] ?>" data-love-status="unlove"><i class="uil uil-heart"></i> Loves</button>
-            <?php endif?>
+            <button class="btn btn-sm <?= ($cekLove == null) ? 'btn-outline-red' : 'btn-red' ?>  rounded-pill btn-icon btn-icon-start love-button" data-post-id="<?= $post['postId'] ?>" data-love-status="<?= ($cekLove == null) ? 'love' : 'unlove' ?>"><i class="uil uil-heart"></i> Loves</button>
             <?php endif?>
          </div>
          <hr class="mt-n1 mb-n1">
@@ -45,12 +41,10 @@
                <div>
                   <h6 class="comment-author mb-n1"><a href="#" class="link-dark"><?= esc($user['userFullName']) ?></a></h6>
                   <p class="post-meta">@<?= esc($user['userName']) ?></p>
-                  <!-- /.post-meta -->
                </div>
-               <!-- /div -->
             </div>
          </div>
-         <form action="<?= base_url('add/comment/post') ?>" method="post">
+         <form action="<?= base_url('add/comment') ?>" method="post">
             <div class="form-floating mb-4">
                <textarea id="comment" name="commentValue" class="form-control" placeholder="Tulis Komentar" style="height: 200px" required></textarea>
                <label for="comment">Tulis Komentar</label>
@@ -77,7 +71,7 @@
                         <!-- /div -->
                      </div>
                   </div>
-                  <p><?= $value['commentValue'] ?></p>
+                  <p><?= esc($value['commentValue']) ?></p>
                </li>
                <?php endforeach?>
             </ol>
@@ -128,7 +122,7 @@ $(document).on('click', '.love-button', function() {
    if (loveStatus === 'love') {
       $.ajax({
          type: 'POST',
-         url: '<?= base_url() ?>lovepost',
+         url: '<?= base_url() ?>love',
          data: {
             post_id: postId
          },
@@ -147,7 +141,7 @@ $(document).on('click', '.love-button', function() {
    } else if (loveStatus === 'unlove') {
       $.ajax({
          type: 'POST',
-         url: '<?= base_url() ?>unlovepost',
+         url: '<?= base_url() ?>unlove',
          data: {
             post_id: postId
          },

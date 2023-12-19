@@ -45,9 +45,9 @@ $routes->group('/', function ($routes) {
     $routes->get('user/tip', 'Home::userTip', ['filter' => 'authfront']);
     $routes->get('user/follow', 'Home::userFollow', ['filter' => 'authfront']);
 
-    $routes->post('add/comment/post', 'Home::commentPost');
-    $routes->post('lovepost', 'Home::lovePost');
-    $routes->post('unlovepost', 'Home::unlovePost');
+    $routes->post('add/comment', 'Home::addComment');
+    $routes->post('love', 'Home::love');
+    $routes->post('unlove', 'Home::unlove');
 });
 
 // Super Routes Login

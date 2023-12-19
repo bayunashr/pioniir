@@ -30,7 +30,7 @@ class ContentModel extends Model
 
     public function selectOneByContentId($id)
     {
-        return $this->select('Content.*, User.userId AS user_id')
+        return $this->select('Content.*, User.userId AS user_id, Creator.creatorAlias')
             ->join('Creator', 'Creator.creatorId = Content.creatorId')
             ->join('User', 'User.userId = Creator.userId')
             ->where('Content.contentId', $id)
