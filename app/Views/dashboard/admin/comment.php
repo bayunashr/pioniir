@@ -37,15 +37,21 @@
                      <td class="d-none fw-semibold fs-sm"><?= $value['commentId'] ?></td>
                      <td class="fw-semibold fs-sm"><?= esc($value['user_name']) ?></td>
                      <td>
-                        <a href="<?= base_url() ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= (($value['content_title'] == '') ? "bg-info-light text-info" : "bg-success-light text-success") ?>">
-                              <?= ($value['content_title'] == '') ? "Post - ".esc($value['post_title']) : "Content - ".esc($value['content_title']) ?>
+                        <?php if($value['content_title'] == '') : ?>
+                        <a href="<?= base_url('view/post/'.$value['postId']) ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info">
+                              Post - <?= esc($value['post_title']) ?>
                            </span></a>
+                        <?php else : ?>
+                        <a href="<?= base_url('view/content/'.$value['contentId']) ?>"><span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success">
+                              Content - <?= esc($value['content_title']) ?>
+                           </span></a>
+                        <?php endif?>
                      </td>
                      <td class="fs-sm">
                         <?= esc($value['commentValue']) ?>
                      </td>
                      <td class="text-center">
-                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"><?= $value['commentStatus'] ?></span>
+                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= $value['commentStatus'] == 'publish' ? 'bg-success-light text-success' : 'bg-danger-light text-danger' ?> "><?= $value['commentStatus'] ?></span>
                      </td>
                      <td class="text-center">
                         <?php if($value['commentStatus'] == 'ban') : ?>

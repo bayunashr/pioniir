@@ -42,7 +42,7 @@
                      </td>
                      <td class="text-center">
                         <span
-                           class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= $value['milestoneStatus'] == 'publish' ? 'bg-success-light text-success' : ($value['milestoneStatus'] == 'archive' ? 'bg-info-light text-info' : 'bg-warning-light text-warning') ?>"><?= $value['milestoneStatus'] ?></span>
+                           class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= $value['milestoneStatus'] == 'publish' ? 'bg-success-light text-success' : ($value['milestoneStatus'] == 'archive' ? 'bg-info-light text-info' : ($value['milestoneStatus'] == 'ended' ? 'bg-danger-light text-danger' : 'bg-warning-light text-warning')) ?>"><?= $value['milestoneStatus'] ?></span>
                      </td>
                   </tr>
                   <?php endforeach ?>

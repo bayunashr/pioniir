@@ -41,10 +41,11 @@
                         <?= esc($value['postTitle']) ?>
                      </td>
                      <td class="fs-sm">
-                        <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Post" data-bs-content='<?= $value['postValue'] ?>'><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                        <a href="<?= base_url('view/post/'.$value['postId']) ?>" class="btn btn-alt-primary w-100"><i class="nav-main-link-icon si si-eye"></i> View</a>
                      </td>
                      <td class="text-center">
-                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"><?= $value['postStatus'] ?></span>
+                        <span
+                           class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= $value['postStatus'] == 'publish' ? 'bg-success-light text-success' : ($value['postStatus'] == 'archive' ? 'bg-info-light text-info' : ($value['postStatus'] == 'ban' ? 'bg-danger-light text-danger' : 'bg-warning-light text-warning')) ?>"><?= $value['postStatus'] ?></span>
                      </td>
                      <td class="fs-sm">
                         <?= $value['postLike'] ?>
