@@ -25,8 +25,6 @@
                      <th style="width: 10%;">Alias</th>
                      <th style="width: 25%;">Tag</th>
                      <th style="width: 15%;">Sub Price</th>
-                     <th style="width: 15%;">Description</th>
-                     <th style="width: 10%;">Banner</th>
                      <th style="width: 10%;">Balance</th>
                   </tr>
                </thead>
@@ -40,13 +38,6 @@
                      <td class="fs-sm"><?= esc($value['creatorAlias']) ?></td>
                      <td class="fs-sm"><?= $value['creatorTag'] ?></td>
                      <td class="fs-sm"><?= format_rupiah($value['creatorSubPrice']) ?></td>
-                     <td class="fs-sm">
-                        <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-placement="left" title="Description" data-bs-content="<?= $value['creatorDescription'] ?>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
-                     </td>
-                     <td class="fs-sm">
-                        <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="left" title="Banner"
-                           data-bs-content="<div class='text-center'><img class='w-100' src='<?= base_url() ?>assets/dashboard/media/photos/photo32.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
-                     </td>
                      <td class="fs-sm text-center">
                         <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-info-light text-info"><?= $value['creatorBalance'] ?></span>
                      </td>

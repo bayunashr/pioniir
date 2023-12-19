@@ -41,10 +41,10 @@
                      <td class="fs-sm"><?= esc($value['userEmail']) ?></td>
                      <td class="fs-sm">
                         <button type="button" class="btn btn-alt-primary w-100" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top" title="Avatar"
-                           data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url() ?>assets/dashboard/media/avatars/avatar16.jpg' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
+                           data-bs-content="<div class='text-center'><img class='img-avatar' src='<?= base_url() ?>assets/uploads/photo_profile/<?= $value['userAvatar'] ?>' alt=''></div>"><i class="nav-main-link-icon si si-magnifier-add"></i></button>
                      </td>
                      <td>
-                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-danger-light text-danger"><?= $value['userStatus'] ?></span>
+                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill <?= $value['userStatus'] == 'active' ? 'bg-success-light text-success' : 'bg-danger-light text-danger'?>"><?= $value['userStatus'] ?></span>
                      </td>
                      <td>
                         <?php if($value['userStatus'] == 'ban') : ?>
