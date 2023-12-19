@@ -76,20 +76,20 @@ class Dashboard extends BaseController
         }
 
         $data = [
-            'title' => 'Dashboard - Pioniir Creator',
-            'buy' => $buyModel->getCountBuyCreator($creatorData['creatorId']),
-            'donate' => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'sub' => $subscribeModel->getAllSubscriber($creatorData['creatorId'], $currentMonth, $currentYear)->countAllResults(),
-            'content' => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'post' => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
-            'loves' => $totalLoves,
-            'income' => $income,
-            'notif' => $notifModel->selectAllById($creatorData['userId']),
-            'currentMonth' => $currentMonth,
-            'currentYear' => $currentYear,
-            'user' => $userData,
-            'creator' => $creatorData,
-            'month' => $month,
+            'title'     => 'Dashboard - Pioniir Creator',
+            'buy'       => $buyModel->getCountBuyCreator($creatorData['creatorId']),
+            'donate'    => $donateModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'sub'       => $subscribeModel->selectActiveByIdCreator($creatorData['creatorId'])->countAllResults(),
+            'content'   => $contentModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'post'      => $postModel->where('creatorId', $creatorData['creatorId'])->countAllResults(),
+            'loves'     => $totalLoves,
+            'income'    => $income,
+            'notif'     => $notifModel->selectAllById($creatorData['userId']),
+            'currentMonth'  => $currentMonth,
+            'currentYear'   => $currentYear,
+            'user'      => $userData,
+            'creator'   => $creatorData,
+            'month'     => $month,
         ];
         return view('dashboard/creator/dashboard', $data);
     }

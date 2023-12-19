@@ -25,7 +25,7 @@ class FrontFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!(session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail'))) {
+        if (!(session()->has('loginUser') && session()->has('userName') && session()->has('userFullName') && session()->has('userEmail')) && !session()->get('loginAdmin')) {
             return redirect()->to(base_url());
         } 
     }

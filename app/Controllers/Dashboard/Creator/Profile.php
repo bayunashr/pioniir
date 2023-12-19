@@ -61,7 +61,7 @@ class Profile extends BaseController
                 'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
                 'social'    => $this->socialModel->selectAllById($this->creatorData['creatorId']),
                 'option'    => $options,
-                'subs'      => $this->subsModel->selectAllByIdAndMonth($this->creatorData['creatorId'], idate('m'), idate('Y'))->findAll()
+                'subs'      => $this->subsModel->selectActiveByIdCreator($this->creatorData['creatorId'])->findAll()
             ];
 
             return view('dashboard/creator/profileCreator', $data);

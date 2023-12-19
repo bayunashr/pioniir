@@ -140,6 +140,10 @@ class Auth extends BaseController
     }
 
     public function logout() {
+        unset($_SESSION['loginUser']);
+        unset($_SESSION['userName']);
+        unset($_SESSION['userFullName']);
+        unset($_SESSION['userEmail']);
         session()->remove('loginUser');
         session()->remove('userName');
         session()->remove('userFullName');

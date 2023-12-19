@@ -41,12 +41,12 @@ $routes->group('/', function ($routes) {
     $routes->post('add/comment', 'Home::addComment', ['filter' => 'authfront']);
     $routes->post('love', 'Home::love', ['filter' => 'authfront']);
     $routes->post('unlove', 'Home::unlove', ['filter' => 'authfront']);
+    $routes->get('view/content/(:any)', 'Home::contentView/$1', ['filter' => 'authfront']);
+    $routes->get('view/post/(:any)', 'Home::postView/$1', ['filter' => 'authfront']);
 
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
     $routes->get('post/(:any)', 'Home::profilPost/$1');
     $routes->get('content/(:any)', 'Home::profilContent/$1');
-    $routes->get('view/content/(:any)', 'Home::contentView/$1');
-    $routes->get('view/post/(:any)', 'Home::postView/$1');
     $routes->post('donate', 'Midtrans::donate');
     $routes->get('logout', 'Auth::logout');
 });

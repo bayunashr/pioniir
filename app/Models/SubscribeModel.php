@@ -40,16 +40,15 @@ class SubscribeModel extends Model
             ->findAll();
     }
 
-    public function selectAllByIdAndMonth($id, $month, $year)
+    public function selectActiveByIdCreator($id)
     {
-        return $this->select('Subscribe.subId, MAX(Subscribe.subTimestamp) as latestTimestamp, User.userFullName AS name_user, User.userEmail AS email_user')
-            ->where('MONTH(subTimestamp)', $month)
-            ->where('YEAR(subTimestamp)', $year)
+        return $this->select('Subscribe.subId, User.userFullName AS name_user, User.userEmail AS email_user')
             ->where('Subscribe.creatorId', $id)
+            ->where("DATEDIFF(NOW(), Subscribe.subTimestamp) <= 30")
             ->where('Subscribe.subscribeStatus', 'success')
             ->join('User', 'User.userId = Subscribe.userId')
             ->groupBy(['Subscribe.userId', 'Subscribe.creatorId'])
-            ->orderBy('latestTimestamp', 'ASC');
+            ->orderBy('Subscribe.subTimestamp', 'DESC');
     }
 
     public function selectAllByIdUser($userId)
@@ -84,6 +83,7 @@ class SubscribeModel extends Model
     {
         return $this->select('Subscribe.*, Creator.creatorAlias AS alias')
             ->where('Creator.creatorAlias', $alias)
+            ->where("DATEDIFF(NOW(), Subscribe.subTimestamp) <= 30")
             ->where('Subscribe.subscribeStatus', 'success')
             ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
             ->countAllResults();

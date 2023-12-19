@@ -33,10 +33,10 @@ class Home extends BaseController
         if (session()->has('userEmail')) {
             $this->userData = $this->userModel->where('userEmail', session()->get('userEmail'))->where('userName', session()->get('userName'))->first();
             $this->creatorData = $this->creatorModel->where('userId', $this->userData['userId'])->first();
-            $this->creatorData['creatorId'] = ($this->creatorData == null) ? '00000000-00000000-00000000-00000000' : $this->creatorData['creatorId'];
+            $this->creatorData['creatorId'] = $this->creatorData['creatorId'];
         }else{
-            $this->userData['userId'] = 0;
-            $this->creatorData['creatorId'] = 0;
+            $this->userData['userId'] = null;
+            $this->creatorData['creatorId'] = null;
         }     
     }
 
@@ -52,7 +52,7 @@ class Home extends BaseController
         
         $arrayOption = ['Animation','Art','Blogging','Comics And Cartoons','Commissions','Cosplay','Dance And Theatre','Design','Drawing And Painting','Education','Food And Drink','Fundraising','Gaming','Health And Fitness','Lifestyle','Money','Music','News','Photography','Podcast','Science And Tech','Social','Software','Streaming','Translator','Video And Film','Writing'];
         $options = array_map('strtolower', $arrayOption);
-        $tagExist = $this->creatorModel->whereNotIn('creatorId', [$this->creatorData['creatorId']])->findAll();
+        $tagExist = $this->creatorModel->findAll();
         $uniqueTags = [];
 
         foreach ($tagExist as $creator) {
@@ -158,7 +158,6 @@ class Home extends BaseController
             'dataBuy'       => $this->buyModel->getDataBuyByIdUser($this->userData['userId'])
         ];
 
-        //echo json_encode($data['content']);
         return view('front/contentProfile',$data);
     }
     

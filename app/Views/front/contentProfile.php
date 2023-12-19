@@ -23,7 +23,17 @@
    <div class="col-sm-12 col-md-6 col-lg-4 mt-5">
       <div class="card shadow-lg lift">
          <!-- Jika free dan Subscribe -->
-         <?php if ($isFree || $isSubscribed || $isCreator) : ?>
+         <?php if ($isFree && $user['userId'] == null) : ?>
+         <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;">
+            <a href="<?= base_url('login') ?>" class="rounded-top blur-img d-flex align-items-center justify-content-center text-center text-white fw-bold fs-20 px-sm-2 px-4" style="height: 150px;cursor:pointer;">
+               <span>Login Untuk Akses Konten Ini <i class="uil uil-padlock"></i></span>
+            </a>
+         </div>
+         <div class="card-body px-4 py-4">
+            <h5 class="mb-1"><?= $value['contentTitle'] ?></h5>
+            <div class="meta mb-2 fs-12"><?= date('d F Y', strtotime($value['createdAt'])); ?></div>
+         </div>
+         <?php elseif ($isFree || $isSubscribed || $isCreator) : ?>
          <a href="<?= base_url('view/content/'.$value['contentId']) ?>">
             <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/uploads/thumbnail/<?= $value['contentPreview'] ?>');background-position: center;background-size: cover;"></div>
          </a>
