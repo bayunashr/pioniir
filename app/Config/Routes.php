@@ -42,7 +42,7 @@ $routes->group('/', function ($routes) {
     $routes->post('love', 'Home::love', ['filter' => 'authfront']);
     $routes->post('unlove', 'Home::unlove', ['filter' => 'authfront']);
     $routes->get('view/content/(:any)', 'Home::contentView/$1', ['filter' => 'authfront']);
-    $routes->get('view/post/(:any)', 'Home::postView/$1', ['filter' => 'authfront']);
+    $routes->get('view/post/(:any)', 'Home::postView/$1');
 
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
     $routes->get('post/(:any)', 'Home::profilPost/$1');
