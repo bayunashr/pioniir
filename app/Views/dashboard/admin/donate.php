@@ -2,12 +2,9 @@
 
 <?= $this->section('header-addons') ?>
 <!-- Page JS Plugins CSS -->
-<link rel="stylesheet"
-   href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
-<link rel="stylesheet"
-   href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
-<link rel="stylesheet"
-   href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-bs5/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-buttons-bs5/css/buttons.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/dashboard/js/plugins/datatables-responsive-bs5/css/responsive.bootstrap5.min.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -25,39 +22,43 @@
                   <tr>
                      <th class="text-center" style="width: 5%;">NO</th>
                      <th class="d-none" style="width: 15%;">ID</th>
-                     <th style="width: 15%;">Supporter</th>
-                     <th style="width: 15%;">Recipient</th>
-                     <th style="width: 15%;">Name</th>
+                     <th style="width: 10%;">Supporter</th>
+                     <th style="width: 10%;">Recipient</th>
+                     <th style="width: 10%;">Name</th>
                      <th style="width: 10%;">Amount</th>
+                     <th style="width: 15%;">Timestamp</th>
                      <th style="width: 40%;">Description</th>
                   </tr>
                </thead>
                <tbody>
                   <?php $no = 1; ?>
                   <?php foreach ($donate as $data => $value): ?>
-                     <tr>
-                        <td class="text-center fs-sm">
-                           <?= $no++ ?>
-                        </td>
-                        <td class="d-none fw-semibold fs-sm">
-                           <?= $value['donateId'] ?>
-                        </td>
-                        <td class="fw-semibold fs-sm">
-                           <?= esc($value['user_username']) ?>
-                        </td>
-                        <td class="fs-sm">
-                           <?= esc($value['creator_name']) ?>
-                        </td>
-                        <td class="fs-sm">
-                           <?= esc($value['donateName']) ?>
-                        </td>
-                        <td class="fs-sm">
-                           <?= format_rupiah($value['donateAmount']) ?>
-                        </td>
-                        <td class="fs-sm">
-                           <?= esc($value['donateDescription']) ?>
-                        </td>
-                     </tr>
+                  <tr>
+                     <td class="text-center fs-sm">
+                        <?= $no++ ?>
+                     </td>
+                     <td class="d-none fw-semibold fs-sm">
+                        <?= $value['donateId'] ?>
+                     </td>
+                     <td class="fw-semibold fs-sm">
+                        <?= esc($value['user_username']) ?>
+                     </td>
+                     <td class="fs-sm">
+                        <?= esc($value['creator_name']) ?>
+                     </td>
+                     <td class="fs-sm">
+                        <?= esc($value['donateName']) ?>
+                     </td>
+                     <td class="fs-sm">
+                        <?= format_rupiah($value['donateAmount']) ?>
+                     </td>
+                     <td class="fs-sm">
+                        <?= format_date($value['donateTimestamp']) ?>
+                     </td>
+                     <td class="fs-sm">
+                        <?= esc($value['donateDescription']) ?>
+                     </td>
+                  </tr>
                   <?php endforeach; ?>
                </tbody>
             </table>

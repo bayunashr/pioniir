@@ -38,10 +38,10 @@
                         <?= format_rupiah($value['withdrawAmount']) ?>
                      </td>
                      <td class="fs-sm">
-                        <?= $value['withdrawTimestamp'] ?>
+                        <?= format_date($value['withdrawTimestamp']) ?>
                      </td>
                      <td>
-                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-warning-light text-warning"><?= $value['withdrawStatus'] ?></span>
+                        <span class="fs-xs fw-semibold d-inline-block py-1 px-3 rounded-pill bg-success-light text-success"><?= $value['withdrawStatus'] ?></span>
                      </td>
                   </tr>
                   <?php endforeach ?>

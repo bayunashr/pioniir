@@ -21,8 +21,8 @@
                   <tr>
                      <th class="text-center" style="width: 5%;">NO</th>
                      <th class="d-none" style="width: 15%;">ID</th>
-                     <th style="width: 20%;">Supporter</th>
-                     <th style="width: 20%;">Recipient</th>
+                     <th style="width: 20%;">User</th>
+                     <th style="width: 20%;">Creator</th>
                      <th style="width: 30%;">Timestamp</th>
                      <th style="width: 25%;">Remaining</th>
                   </tr>
@@ -38,10 +38,10 @@
                         <?= esc($value['creator_name']) ?>
                      </td>
                      <td class="fs-sm">
-                        <?= $value['createdAt'] ?>
+                        <?= format_date($value['subTimestamp']) ?>
                      </td>
                      <td class="fs-sm">
-                        <?= format_hari_sub($value['createdAt']) ?>
+                        <?= format_hari_sub($value['subTimestamp']) ?>
                      </td>
                   </tr>
                   <?php endforeach ?>

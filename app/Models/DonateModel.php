@@ -23,6 +23,7 @@ class DonateModel extends Model
     public function selectAll()
     {
         return $this->select('Donate.*, User.userName AS user_username, Creator.creatorAlias AS creator_name')
+            ->where('donateStatus', 'success')
             ->join('User', 'User.userId = Donate.userId')
             ->join('Creator', 'Creator.creatorId = Donate.creatorId')
             ->orderBy('donateTimestamp', 'desc')

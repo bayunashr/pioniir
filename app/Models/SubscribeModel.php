@@ -23,9 +23,10 @@ class SubscribeModel extends Model
     public function selectAll()
     {
         return $this->select('Subscribe.*, User.userName AS user_name, Creator.creatorAlias AS creator_name')
+            ->where('Subscribe.subscribeStatus', 'success')
             ->join('User', 'User.userId = Subscribe.userId')
             ->join('Creator', 'Creator.creatorId = Subscribe.creatorId')
-            ->orderBy('createdAt', 'desc')
+            ->orderBy('subTimestamp', 'desc')
             ->findAll();
     }
 

@@ -23,6 +23,7 @@ class WithdrawModel extends Model
     public function selectAll()
     {
         return $this->select('Withdraw.*, Creator.creatorAlias AS creator_name')
+            ->where('withdrawStatus', 'success')
             ->join('Creator', 'Creator.creatorId = Withdraw.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();

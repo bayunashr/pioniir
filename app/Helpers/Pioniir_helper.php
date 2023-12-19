@@ -7,9 +7,16 @@ function format_rupiah($angka)
 
 function format_hari_sub($date)
 {
-    $start = new DateTime($date);
-    $exp = clone $start;
-    return $start->diff($exp->modify('+30 days'))->days . ' Hari Tersisa';
+    $currentDate = new DateTime('now');
+    $givenDate = new DateTime($date);
+    $givenDate->modify('+30 days');
+    $interval = $currentDate->diff($givenDate);
+
+    if ($givenDate < $currentDate) {
+        return 'Expired';
+    } else {
+        return $interval->format('%a Hari Tersisa');
+    }
 }
 
 function format_persen_miles($nilai, $target)
@@ -33,7 +40,7 @@ function format_waktu_lampau($time)
 
 function format_date($waktu_awal)
 {
-    return date('H:i:s d F Y', strtotime($waktu_awal));
+    return date("d F Y, H:i:s", strtotime($waktu_awal));
 }
 
 function potongString($kalimat)

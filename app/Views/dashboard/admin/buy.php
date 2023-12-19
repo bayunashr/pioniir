@@ -22,6 +22,7 @@
                      <th class="text-center" style="width: 5%;">NO</th>
                      <th class="d-none" style="width: 15%;">ID</th>
                      <th style="width: 25%;">Buyer</th>
+                     <th style="width: 25%;">Creator</th>
                      <th style="width: 25%;">Content</th>
                      <th style="width: 25%;">Timestamp</th>
                   </tr>
@@ -33,11 +34,12 @@
                      <td class="text-center fs-sm"><?= $no++; ?></td>
                      <td class="d-none fw-semibold fs-sm"><?= $value['buyId'] ?></td>
                      <td class="fw-semibold fs-sm"><?= esc($value['user_name']) ?></td>
+                     <td class="fw-semibold fs-sm"><?= esc($value['creatorAlias']) ?></td>
                      <td class="fs-sm">
                         <?= esc($value['content_title']) ?>
                      </td>
                      <td class="fs-sm">
-                        <?= $value['createdAt'] ?>
+                        <?= format_date($value['buyTimestamp']) ?>
                      </td>
                   </tr>
                   <?php endforeach ?>

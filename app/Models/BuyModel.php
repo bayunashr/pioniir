@@ -22,9 +22,11 @@ class BuyModel extends Model
 
     public function selectAll()
     {
-        return $this->select('Buy.*, User.userName AS user_name, Content.contentTitle AS content_title')
+        return $this->select('Buy.*, User.userName AS user_name, Content.contentTitle AS content_title, Creator.creatorAlias')
+            ->where('Buy.buyStatus', 'success')
             ->join('User', 'User.userId = Buy.userId')
             ->join('Content', 'Content.contentId = Buy.contentId')
+            ->join('Creator', 'Creator.creatorId = Content.creatorId')
             ->orderBy('createdAt', 'desc')
             ->findAll();
     }
