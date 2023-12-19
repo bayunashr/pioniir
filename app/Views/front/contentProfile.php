@@ -25,7 +25,7 @@
          <!-- Jika free dan Subscribe -->
          <?php if ($isFree || $isSubscribed || $isCreator) : ?>
          <a href="<?= base_url('view/content/'.$value['contentId']) ?>">
-            <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;"></div>
+            <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/uploads/thumbnail/<?= $value['contentPreview'] ?>');background-position: center;background-size: cover;"></div>
          </a>
          <a href="<?= base_url('view/content/'.$value['contentId']) ?>" class="card-body px-4 py-4">
             <h5 class="mb-1"><?= $value['contentTitle'] ?></h5>
@@ -35,7 +35,7 @@
          <?php elseif ((!$isFree) && count($dataBuy) >= 1):?>
          <?php if ($isBought):  ?>
          <a href="<?= base_url('view/content/'.$value['contentId']) ?>">
-            <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/front/img/content.png');background-position: center;background-size: cover;"></div>
+            <div class="wrapper rounded-top" style="height: 150px;background-image:url('<?= base_url() ?>assets/uploads/thumbnail/<?= $value['contentPreview'] ?>');background-position: center;background-size: cover;"></div>
          </a>
          <a href="<?= base_url('view/content/'.$value['contentId']) ?>" class="card-body px-4 py-4">
             <h5 class="mb-1"><?= $value['contentTitle'] ?></h5>
