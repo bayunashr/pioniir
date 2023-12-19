@@ -261,14 +261,21 @@ class Home extends BaseController
     }
 
     public function contentView($contentId){
-        $data = [
-            'creator'    => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
-            'user'       => $this->userData,
-            'content'    => $this->contentModel->selectOneByContentId($contentId),
-            'comment'    => $this->commentModel->selectAllByContentId($contentId),
-            'cekLove'    => $this->loveModel->selectDataByUserAndContent($this->userData['userId'], $contentId),
-        ];
-        return view('front/content', $data);
+        $dataContent = $this->contentModel->selectOneByContentId($contentId);
+        $isCreator = ($this->creatorData['creatorId'] == $dataContent['creatorId']);
+        $cekBeli = $this->buyModel->where('userId',$this->userData['userId'])->where('contentId', $contentId)->where('buyStatus', 'success')->first();
+        if ($dataContent['contentPrice'] > 0 && $cekBeli == NULL && !$isCreator && !session()->get('loginAdmin')) {
+            return redirect()->to(base_url());
+        }else{
+            $data = [
+                'creator'    => $this->creatorModel->where('userId', $this->userData['userId'])->findAll(),
+                'user'       => $this->userData,
+                'content'    => $dataContent,
+                'comment'    => $this->commentModel->selectAllByContentId($contentId),
+                'cekLove'    => $this->loveModel->selectDataByUserAndContent($this->userData['userId'], $contentId),
+            ];
+            return view('front/content', $data);
+        }
     }
 
     public function postView($postId){
