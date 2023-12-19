@@ -41,21 +41,57 @@ class Admin extends BaseController
 
     public function index()
     {
-        $data = [
-            'title'     => 'Dashboard - Pioniir Admin',
-            'donate'    => count($this->donateModel->selectAll()),
-            'user'      => $this->userModel->countAllResults(),
-            'creator'   => $this->creatorModel->countAllResults(),
-            'content'   => $this->contentModel->countAllResults(),
-            'post'      => $this->postModel->countAllResults(),
-            'comment'   => $this->commentModel->countAllResults(),
-            'love'      => $this->loveModel->countAllResults(),
-            'sub'       => count($this->subscribeModel->selectAll()),
-            'buy'       => count($this->buyModel->selectAll()),
-            'miles'     => $this->milestoneModel->countAllResults(),
-            'wd'        => $this->withdrawModel->countAllResults()
-        ];
+        $month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        $currentMonth = idate('m');
+        $currentYear = idate('Y');
 
+        $wd = [];
+        $tax = [];
+        $taxSum = [];
+        for ($i = 0; $i < sizeof($month); $i++) {
+            $wdThisMonth = 0;
+            $wdThisMonth = array_column($this->withdrawModel->getByMonth($i + 1, $currentYear), 'withdrawAmount');
+            $wdThisMonth = array_sum($wdThisMonth);
+
+            $wd[$i] = $wdThisMonth;
+
+            $taxThisMonth = 0;
+            $taxThisMonth = array_column($this->withdrawModel->getByMonth($i + 1, $currentYear), 'withdrawAmount');
+            
+            if(empty($taxThisMonth)){
+                $tax[$i] = 0;
+            }else{
+                for ($j=0; $j<sizeof($taxThisMonth); $j++){
+                    $tax[$i][$j] = $taxThisMonth[$j] * 0.03;
+                }
+                if($tax != 0){
+                    $taxSum[$i] = array_sum($tax[$i]);
+                }
+            }
+            if(empty($taxSum[$i])){
+                $taxSum[$i] = 0;
+            }
+        }
+
+        $data = [
+            'title' => 'Dashboard - Pioniir Admin',
+            'donate' => $this->donateModel->countAllResults(),
+            'user' => $this->userModel->countAllResults(),
+            'creator' => $this->creatorModel->countAllResults(),
+            'content' => $this->contentModel->countAllResults(),
+            'post' => $this->postModel->countAllResults(),
+            'comment' => $this->commentModel->countAllResults(),
+            'love' => $this->loveModel->countAllResults(),
+            'sub' => $this->subscribeModel->countAllResults(),
+            'buy' => $this->buyModel->countAllResults(),
+            'miles' => $this->milestoneModel->countAllResults(),
+            'wd' => $this->withdrawModel->countAllResults(),
+            'month' => $month,
+            'currentMonth' => $currentMonth,
+            'currentYear' => $currentYear,
+            'wdw' => $wd,
+            'tax' => $taxSum,
+        ];
         return view('dashboard/admin/dashboard', $data);
     }
 

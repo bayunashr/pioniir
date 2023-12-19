@@ -196,6 +196,23 @@
             <!-- END Conversion Rate-->
          </div>
       </div>
+      <div class="row item-push">
+            <div class="col-xl-12">
+                <!-- Lines Chart -->
+                <div class="block block-rounded">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Withdraw & Taxes <?= $currentYear ?></h3>
+                    </div>
+                    <div class="block-content block-content-full text-center">
+                        <div class="py-3" style="height: 360px">
+                            <!-- Lines Chart Container -->
+                            <canvas id="wd-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Lines Chart -->
+            </div>
+        </div>
       <!-- END Overview -->
    </div>
    <!-- END Page Content -->
@@ -207,4 +224,68 @@
 
 <!-- Page JS Code -->
 <script src="<?= base_url() ?>assets/dashboard/js/pages/be_pages_dashboard.min.js"></script>
+<script src="<?= base_url() ?>assets/dashboard/js/plugins/chart.js/chart.umd.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Chart.defaults.color = '#818d96';
+        Chart.defaults.font.weight = '600';
+        Chart.defaults.scale.grid.color = "rgba(0, 0, 0, .05)";
+        Chart.defaults.scale.grid.zeroLineColor = "rgba(0, 0, 0, .1)";
+        Chart.defaults.scale.beginAtZero = true;
+        Chart.defaults.scale.y = {
+            type: 'linear',
+            ticks: {
+                callback: function () {
+                    return <?= json_encode($wdw) ?>
+                }
+            },
+        };
+        Chart.defaults.elements.line.borderWidth = 2;
+        Chart.defaults.elements.point.radius = 4;
+        Chart.defaults.elements.point.hoverRadius = 6;
+        Chart.defaults.plugins.tooltip.radius = 3;
+        Chart.defaults.plugins.legend.labels.boxWidth = 15;
+
+        let wdChartCtx = document.getElementById('wd-chart');
+        let wdChart;
+        let wdChartData;
+
+        wdChartData = {
+            labels: <?= json_encode($month) ?>,
+            datasets: [{
+                label: "Withdraw",
+                fill: true,
+                backgroundColor: 'rgba(171, 227, 125, .5)',
+                borderColor: 'rgba(171, 227, 125, 1)',
+                pointBackgroundColor: 'rgba(171, 227, 125, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(171, 227, 125, 1)',
+                data: <?= json_encode($wdw) ?>,
+            },
+            {
+                label: "Tax",
+                fill: true,
+                backgroundColor: 'rgba(0, 0, 0, .1)',
+                borderColor: 'rgba(0, 0, 0, .3)',
+                pointBackgroundColor: 'rgba(0, 0, 0, .3)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(0, 0, 0, .3)',
+                data: <?= json_encode($tax) ?>,
+            }
+            ]
+        };
+
+        wdChart = new Chart(wdChartCtx, {
+            type: 'line',
+            data: wdChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                tension: .4
+            }
+        },);
+    });
+</script>
 <?= $this->endsection() ?>
