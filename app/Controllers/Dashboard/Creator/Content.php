@@ -41,11 +41,12 @@ class Content extends BaseController
         $folderPath = '../public/assets/uploads/thumbnail/';
         if ($id != null) {
             $contentData = $this->contentModel->find($id);
-            $folderPath .= $contentData['contentPreview'];
-            if (file_exists($folderPath)) {
-                    unlink($folderPath);
+            $filePath = $folderPath . $contentData['contentPreview'];
+            if (file_exists($filePath) && $contentData['contentPreview'] !== 'content.png') {
+                    unlink($filePath);
                 }
             }
+
         $image_parts = explode(";base64,", $base64);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -96,12 +97,8 @@ class Content extends BaseController
     public function edit($id)
     {
         if ($this->request->getPost()) {
-            if ($this->request->getPost('contentPreviewNew')!== null && !empty($this->request->getPost('contentPreviewNew'))) {
-                $data['contentPreview'] = $this->convertImage($this->request->getPost('contentPreviewNew'),$id);
-            }else{
-                $data['contentPreview'] = $this->request->getPost('contentPreview');
-            }
             $data = [
+                'contentPreview'    => ($this->request->getPost('contentPreviewNew')!== null && !empty($this->request->getPost('contentPreviewNew'))) ? $this->convertImage($this->request->getPost('contentPreviewNew'),$id) : $data['contentPreview'] = $this->request->getPost('contentPreview'),
                 'creatorId'         => $this->creatorData['creatorId'],
                 'contentTitle'      => $this->request->getPost('contentTitle'),
                 'contentValue'      => $this->request->getPost('postValue'),
@@ -115,6 +112,7 @@ class Content extends BaseController
             }else{
                 session()->setFlashData('error', 'Gagal Mengubah Data Konten');
             }
+
             return redirect()->to(base_url('dashboard/content'));
         } else {
             $data = [
