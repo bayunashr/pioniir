@@ -29,25 +29,26 @@ $routes->group('/', function ($routes) {
         $routes->post('', 'Home::registerCreator');
     });
 
-    $routes->get('logout', 'Auth::logout');
+    $routes->group('user', ['filter' => 'authfront'], function ($routes) {
+        $routes->get('profile', 'Home::userProfile');
+        $routes->post('profile', 'Home::userProfile');
+        $routes->get('tip', 'Home::userTip');
+        $routes->get('follow', 'Home::userFollow');
+    });
+
+    $routes->post('subscribe', 'Midtrans::subscribe', ['filter' => 'authfront']);
+    $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1', ['filter' => 'authfront']);
+    $routes->post('add/comment', 'Home::addComment', ['filter' => 'authfront']);
+    $routes->post('love', 'Home::love', ['filter' => 'authfront']);
+    $routes->post('unlove', 'Home::unlove', ['filter' => 'authfront']);
+
     $routes->get('creator/(:any)', 'Home::profilPage/$1');
     $routes->get('post/(:any)', 'Home::profilPost/$1');
     $routes->get('content/(:any)', 'Home::profilContent/$1');
     $routes->get('view/content/(:any)', 'Home::contentView/$1');
     $routes->get('view/post/(:any)', 'Home::postView/$1');
     $routes->post('donate', 'Midtrans::donate');
-
-    //Perlu filter
-    $routes->post('subscribe', 'Midtrans::subscribe', ['filter' => 'authfront']);
-    $routes->post('buy/content/(:segment)', 'Midtrans::buyContent/$1', ['filter' => 'authfront']);
-    $routes->get('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
-    $routes->post('user/profile', 'Home::userProfile', ['filter' => 'authfront']);
-    $routes->get('user/tip', 'Home::userTip', ['filter' => 'authfront']);
-    $routes->get('user/follow', 'Home::userFollow', ['filter' => 'authfront']);
-
-    $routes->post('add/comment', 'Home::addComment');
-    $routes->post('love', 'Home::love');
-    $routes->post('unlove', 'Home::unlove');
+    $routes->get('logout', 'Auth::logout');
 });
 
 // Super Routes Login

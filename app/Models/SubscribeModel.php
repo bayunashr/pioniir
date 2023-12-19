@@ -39,6 +39,18 @@ class SubscribeModel extends Model
             ->findAll();
     }
 
+    public function selectAllByIdAndMonth($id, $month, $year)
+    {
+        return $this->select('Subscribe.subId, MAX(Subscribe.subTimestamp) as latestTimestamp, User.userFullName AS name_user, User.userEmail AS email_user')
+            ->where('MONTH(subTimestamp)', $month)
+            ->where('YEAR(subTimestamp)', $year)
+            ->where('Subscribe.creatorId', $id)
+            ->where('Subscribe.subscribeStatus', 'success')
+            ->join('User', 'User.userId = Subscribe.userId')
+            ->groupBy(['Subscribe.userId', 'Subscribe.creatorId'])
+            ->orderBy('latestTimestamp', 'ASC');
+    }
+
     public function selectAllByIdUser($userId)
     {
         return $this->select('Subscribe.subTimestamp, Creator.creatorAlias, User.userAvatar')

@@ -50,8 +50,10 @@ class Profile extends BaseController
                 } else {
                     session()->setFlashData('error', 'Gagal Mengubah Profile');
                 }
+
+                print_r($this->request->getPost());
             }
-            return redirect()->to(base_url('dashboard/profile/creator')); 
+            //return redirect()->to(base_url('dashboard/profile/creator')); 
         } else {
             $data = [
                 'title'     => 'Dashboard - Pioniir Creator',
@@ -60,7 +62,7 @@ class Profile extends BaseController
                 'notif'     => $this->notifModel->selectAllById($this->creatorData['userId']),
                 'social'    => $this->socialModel->selectAllById($this->creatorData['creatorId']),
                 'option'    => $options,
-                'subs'      => $this->subsModel->selectAllById($this->creatorData['creatorId'])
+                'subs'      => $this->subsModel->selectAllByIdAndMonth($this->creatorData['creatorId'], idate('m'), idate('Y'))->findAll()
             ];
 
             return view('dashboard/creator/profileCreator', $data);
