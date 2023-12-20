@@ -261,7 +261,11 @@ class Home extends BaseController
 
     public function contentView($contentId){
         $dataContent = $this->contentModel->selectOneByContentId($contentId);
-        $isCreator = ($this->creatorData['creatorId'] == $dataContent['creatorId']);
+        if ($this->creatorData != '') {
+            $isCreator = ($this->creatorData['creatorId'] == $dataContent['creatorId']);
+        } else {
+            $isCreator = '';
+        }
         $cekBeli = $this->buyModel->where('userId',$this->userData['userId'])->where('contentId', $contentId)->where('buyStatus', 'success')->first();
         if ($dataContent['contentPrice'] > 0 && $cekBeli == NULL && !$isCreator && !session()->get('loginAdmin')) {
             return redirect()->to(base_url());

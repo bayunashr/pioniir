@@ -62,7 +62,11 @@
                         </div>
                         <dl class="ms-3 text-end mb-0">
                             <dt class="h3 fw-extrabold mb-0">
-                                <?= $topThisMonth[0]['donateName'] ?>
+                                <?php if(empty($topThisMonth)) : ?>
+                                    Belum ada donatur    
+                                <?php else : ?>
+                                    <?= $topThisMonth[0]['donateName'] ?>
+                                <?php endif ?>
                             </dt>
                             <dd class="fs-sm fw-medium text-muted mb-0">
                                 Is Your Sugar Daddy
@@ -79,7 +83,11 @@
                         </div>
                         <dl class="ms-3 text-end mb-0">
                             <dt class="h3 fw-extrabold mb-0">
-                                <?= $topAllTime[0]['donateName'] ?>
+                                 <?php if(empty($topThisMonth)) : ?>
+                                    Belum ada donatur    
+                                <?php else : ?>
+                                    <?= $topAllTime[0]['donateName'] ?>
+                                <?php endif ?>
                             </dt>
                             <dd class="fs-sm fw-medium text-muted mb-0">
                                 Is Your Real Sugar Daddy
