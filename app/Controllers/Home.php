@@ -267,7 +267,7 @@ class Home extends BaseController
             $isCreator = '';
         }
         $cekBeli = $this->buyModel->where('userId',$this->userData['userId'])->where('contentId', $contentId)->where('buyStatus', 'success')->first();
-        if ($dataContent['contentPrice'] > 0 && $cekBeli == NULL && !$isCreator && !session()->get('loginAdmin')) {
+        if ($dataContent['contentPrice'] > 0 && $cekBeli == NULL && $isCreator != '' && !session()->get('loginAdmin')) {
             return redirect()->to(base_url());
         }else{
             $data = [

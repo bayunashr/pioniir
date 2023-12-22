@@ -531,11 +531,11 @@
          <!-- Side Header -->
          <div class="content-header">
             <!-- Logo -->
-            <a class="fw-semibold text-dual" href="index.html">
+            <a class="fw-semibold text-dual" href="<?= base_url() ?>">
                <span class="smini-visible">
                   <i class="fa fa-circle-notch text-primary"></i>
                </span>
-               <span class="smini-hide fs-5 tracking-wider">OneUI</span>
+               <span class="smini-hide fs-5 tracking-wider">Pioniir</span>
             </a>
             <!-- END Logo -->
 

@@ -59,7 +59,6 @@
                            <a href="<?= $link ?>" class="btn rounded-pill w-100 mb-2 btn-outline-danger"><i class="uil uil-google"></i> &nbsp; Sign In With Gmail</a>
                         </form>
                         <!-- /form -->
-                        <p class="mb-1"><a href="#" class="hover link-navy">Forgot Password?</a></p>
                         <p class="mb-0">Don't have an account? <a href="<?= base_url('register') ?>" class="hover link-navy">Sign up</a></p>
                      </div>
                      <!--/.card-body -->
